@@ -52,6 +52,7 @@ public static class MapCalculation
     
     public static int GetCardId(Vector2Int position, int width)
     {
+        if(position.y < 0 || position.y >= width) return -1;
         return position.x * width + position.y;
     }
     

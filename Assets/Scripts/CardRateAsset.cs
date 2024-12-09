@@ -51,6 +51,7 @@ public class EachCardInfo
 
 public enum CardType
 {
+    First,
     Normal,
     Bomb,
 }

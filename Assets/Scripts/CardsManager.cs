@@ -35,9 +35,9 @@ public class CardsManager : MonoBehaviour
                 var randomCard = cardRate.GetRandomCard();
                 
                 // タイルカードを生成
-                var tileCard = Instantiate(randomCard, tileVector, tileQuaternion);
+                var tileCard = Instantiate(randomCard.cardPrefab, tileVector, tileQuaternion);
                 // タイルカードを初期化
-                tileCard.Initialize(cardId, randomCard.CardType);
+                tileCard.Initialize(cardId, randomCard.cardType);
                 // タイルカードをこのスクリプトがアタッチされているオブジェクトの子にする
                 tileCard.transform.SetParent(transform);
                 // タイルカードを配列に格納

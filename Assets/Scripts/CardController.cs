@@ -28,8 +28,9 @@ public class CardController : MonoBehaviour
 
     // 余りこの辺は持たせたくはないが今回は分かりやすさを重視ということで
     private int _cardId;
-    public CardType CardType { get; private set; }
-    public void Initialize(int cardId, CardType type) // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッドを作る
+    public CardType CardType { get; private set; } // getはpublic、setはprivate
+    // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッド
+    public void Initialize(int cardId, CardType type) 
     {
         _cardId = cardId;
         CardType = type;

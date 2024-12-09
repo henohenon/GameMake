@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5822aa50049234c9548eb3810bf918, type: 3}
   m_Name: CardRateData
   m_EditorClassIdentifier: 
-  cardRates:
+  cardInfos:
   - cardPrefab: {fileID: 3287875108102595959, guid: c97752b3067d98943b095621d821cbbc,
       type: 3}
     rate: 2

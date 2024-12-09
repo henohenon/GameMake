@@ -21,3 +21,4 @@ MonoBehaviour:
       type: 3}
     rate: 8
     cardType: 0
+  _defaultCard: 1

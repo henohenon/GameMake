@@ -2,19 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour//へのへのさん
 {
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float rotateSpeed;
-    
+    [SerializeField]
+    private InputActionReference space;
+    [SerializeField]
+    private AudioManager audioManager;
+
     private Rigidbody _rb;
     
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        space.action.performed += _ => audioManager.SetSE1(); //キャンセルとかもある
+        space.action.Enable();
     }
     
     private void Update()

@@ -9,9 +9,13 @@ public class CardsManager : MonoBehaviour
     private CardRateAsset cardRate;
     [SerializeField]
     private int length = 9;
+    /* へのへのさんのスクリプトを自分に変換
     [SerializeField]
     private PlayerController playerController;
-    
+    */
+    [SerializeField]
+    private MovePlayer movePlayer;
+
     private CardController[] _tileCards;
     
     // Start is called before the first frame update
@@ -52,10 +56,10 @@ public class CardsManager : MonoBehaviour
                     if (tileCard.CardType == CardType.Bomb)
                     {
                         Debug.Log("Game Over");
-                        var playerPos = playerController.transform.position;
+                        var playerPos = movePlayer.transform.position;
                         var cardPos = tileCard.transform.position;
                         var direction = (playerPos - cardPos).normalized;
-                        playerController.Impact(direction);
+                        movePlayer.Impact(direction);
                     }
                     else
                     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenerateTileCards : MonoBehaviour
 {
     [SerializeField]
-    private GameObject tileCardPrefab;
+    private CardRateAsset cardRate;
     [SerializeField]
     private int length = 9;
     
@@ -22,9 +22,13 @@ public class GenerateTileCards : MonoBehaviour
                 var tileX = x - length / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
                 var tileZ = z - length / 2;
                 var tileVector = new Vector3(tileX, 0, tileZ);
+                
                 var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
+                
+                var randomCard = cardRate.GetRandomCard(); // ランダムなカードを取得
+                
                 // タイルカードを生成
-                GameObject tileCard = Instantiate(tileCardPrefab, tileVector, tileQuaternion); 
+                GameObject tileCard = Instantiate(randomCard, tileVector, tileQuaternion); 
             }
         }
     }

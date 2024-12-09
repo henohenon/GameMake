@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5822aa50049234c9548eb3810bf918, type: 3}
+  m_Name: CardRateData
+  m_EditorClassIdentifier: 
+  cardRates:
+  - cardPrefab: {fileID: 6943706572869692677, guid: c97752b3067d98943b095621d821cbbc,
+      type: 3}
+    rate: 2
+  - cardPrefab: {fileID: 2159426325771876638, guid: ffac905825482a247aaec95c6988a1cb,
+      type: 3}
+    rate: 8

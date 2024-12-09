@@ -37,9 +37,14 @@ public class PlayerController : MonoBehaviour
             // 自分の位置から下方向に2のRayを飛ばす
             if(Physics.Raycast(transform.position, -transform.up, out hit, 2))
             {
-                // 当たったやつをxxする
+                // Rayが当たったオブジェクトを取得
                 var hitObject = hit.collider.gameObject;
-                Destroy(hitObject);
+                // カードコントローラーがアタッチされていたら
+                if (hitObject.TryGetComponent<CardController>(out var cardController))
+                {
+                    // カードを回転させる
+                    cardController.FlipCard();
+                }
             }
         }
     }

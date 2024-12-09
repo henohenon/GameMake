@@ -44,4 +44,11 @@ public class EachCardRate
 {
     public GameObject cardPrefab;
     public int rate;
+    public CardType cardType;
+}
+
+public enum CardType
+{
+    Normal,
+    Bomb,
 }

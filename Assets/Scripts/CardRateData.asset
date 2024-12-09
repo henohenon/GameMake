@@ -16,6 +16,8 @@ MonoBehaviour:
   - cardPrefab: {fileID: 6943706572869692677, guid: c97752b3067d98943b095621d821cbbc,
       type: 3}
     rate: 2
+    cardType: 1
   - cardPrefab: {fileID: 2159426325771876638, guid: ffac905825482a247aaec95c6988a1cb,
       type: 3}
     rate: 8
+    cardType: 0

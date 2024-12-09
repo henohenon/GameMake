@@ -19,6 +19,13 @@ public class CardController : MonoBehaviour
         // カードの色を裏面の色にする
         _meshRenderer.material.color = _backColor;
     }
+
+    // 余りこの辺は持たせたくはないが今回は分かりやすさを重視ということで
+    private int _cardId;
+    public void Initialize(int cardId) // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッドを作る
+    {
+        _cardId = cardId;
+    }
     
     public void FlipCard()
     {

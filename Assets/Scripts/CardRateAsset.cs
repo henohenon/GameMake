@@ -10,7 +10,7 @@ public class CardRateAsset : ScriptableObject
     [NonSerialized] // シリアライズ(保存)しない
     private int _rateSum = -1;
 
-    public GameObject GetRandomCard()
+    public CardController GetRandomCard()
     {
         if (_rateSum == -1) // 初回のみrateSumを計算する(rateに-入れられたらバグる☆)
         {
@@ -42,7 +42,7 @@ public class CardRateAsset : ScriptableObject
 [Serializable] // クラスはserializableをつけるとインスペクターでいじれるようになる(シリアル化可能な変数で構成されている場合に限る)
 public class EachCardRate
 {
-    public GameObject cardPrefab;
+    public CardController cardPrefab;
     public int rate;
     public CardType cardType;
 }

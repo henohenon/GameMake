@@ -14,7 +14,9 @@ public class CardController : MonoBehaviour
     private MeshRenderer _meshRenderer;
     private bool _isFlipped = false;
     
-    private Subject<int> _onFlipped = new Subject<int>();
+    // カードが裏返されたときのイベント
+    private Subject<int> _onFlipped = new ();
+    // 購買のみを公開
     public Observable<int> OnFlipped => _onFlipped;
     
     private void Start()
@@ -26,9 +28,11 @@ public class CardController : MonoBehaviour
 
     // 余りこの辺は持たせたくはないが今回は分かりやすさを重視ということで
     private int _cardId;
-    public void Initialize(int cardId) // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッドを作る
+    public CardType CardType { get; private set; }
+    public void Initialize(int cardId, CardType type) // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッドを作る
     {
         _cardId = cardId;
+        CardType = type;
     }
     
     public void FlipCard()

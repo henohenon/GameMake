@@ -28,7 +28,9 @@ public class GenerateTileCards : MonoBehaviour
                 var randomCard = cardRate.GetRandomCard(); // ランダムなカードを取得
                 
                 // タイルカードを生成
-                GameObject tileCard = Instantiate(randomCard, tileVector, tileQuaternion); 
+                var tileCard = Instantiate(randomCard, tileVector, tileQuaternion); 
+                // タイルカードをこのスクリプトがアタッチされているオブジェクトの子にする
+                tileCard.transform.SetParent(transform);
             }
         }
     }

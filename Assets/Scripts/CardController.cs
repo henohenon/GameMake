@@ -11,6 +11,9 @@ public class CardController : MonoBehaviour
     [SerializeField]
     private Color _backColor;
     
+    [SerializeField]
+    private TextMesh _textMesh;
+    
     private MeshRenderer _meshRenderer;
     private bool _isFlipped = false;
     
@@ -24,6 +27,7 @@ public class CardController : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
         // カードの色を裏面の色にする
         _meshRenderer.material.color = _backColor;
+        _textMesh.text = "";
     }
 
     // 余りこの辺は持たせたくはないが今回は分かりやすさを重視ということで
@@ -48,5 +52,10 @@ public class CardController : MonoBehaviour
         
         // イベントを発行
         _onFlipped.OnNext(_cardId);
+    }
+    
+    public void SetText(string text)
+    {
+        _textMesh.text = text;
     }
 }

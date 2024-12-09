@@ -10,6 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float rotateSpeed;
     
+    private Rigidbody _rb;
+    
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+    
     private void Update()
     {
         // キー入力を取得
@@ -27,9 +34,8 @@ public class PlayerController : MonoBehaviour
         rotation *= rotateSpeed * Time.deltaTime;
         
         // 移動と回転
-        transform.position += movement;
-        transform.Rotate(rotation);
-        
+        _rb.position += movement;
+        _rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotation));        
         // スペースキーを押したら
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -47,5 +53,12 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+    
+    public void Impact(Vector3 direction)
+    {
+        _rb.AddForce(direction * 10, ForceMode.Impulse);
+        Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
+        _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
     }
 }

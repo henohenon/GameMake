@@ -9,6 +9,8 @@ public class CardsManager : MonoBehaviour
     private CardRateAsset cardRate;
     [SerializeField]
     private int length = 9;
+    [SerializeField]
+    private PlayerController playerController;
     
     private CardController[] _tileCards;
     
@@ -44,27 +46,35 @@ public class CardsManager : MonoBehaviour
                 _tileCards[cardId] = tileCard;
 
                 // タイルカードが裏返されたときのイベントを購読
-                tileCard.OnFlipped.Subscribe(cardId =>
+                tileCard.OnFlipped.Subscribe(_ =>
                 {
                     // タイルカードが爆弾の場合はゲームオーバー
-                    if (_tileCards[cardId].CardType == CardType.Bomb)
+                    if (tileCard.CardType == CardType.Bomb)
                     {
                         Debug.Log("Game Over");
+                        var playerPos = playerController.transform.position;
+                        var cardPos = tileCard.transform.position;
+                        var direction = (playerPos - cardPos).normalized;
+                        playerController.Impact(direction);
                     }
                     else
                     {
                         // タイルカードが爆弾でない場合は周囲の爆弾の数を取得
                         var sum = GetCardAroundBombSum(cardId);
-                        Debug.Log(sum);
 
                         // 周囲に爆弾がない場合は周囲のタイルカードを裏返す
                         if (sum == 0)
                         {
-                            var aroundCards = GetAroundCardIds(cardId);
+                            var aroundCards = GetAroundCardIds(cardId); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                             foreach (var aroundCardId in aroundCards)
                             {
                                 _tileCards[aroundCardId].FlipCard();
                             }
+                        }
+                        else
+                        {
+                            // 周囲に爆弾がある場合は周囲の爆弾の数を表示
+                            tileCard.SetText(sum.ToString());
                         }
                     }
                 });
@@ -104,9 +114,14 @@ public class CardsManager : MonoBehaviour
         var aroundCardIds = new List<int>();
         foreach (var aroundPosition in aroundPositions)
         {
-            var aroundCardId = GetCardId(aroundPosition);
             // タイルカードが存在しない場合はスキップ
-            if (aroundCardId < 0 || aroundCardId >= _tileCards.Length) continue;
+            if (aroundPosition.x < 0 || aroundPosition.x >= length || aroundPosition.y < 0 || aroundPosition.y >= length)
+            {
+                continue;
+            }
+            // タイルカードのIDを取得
+            var aroundCardId = GetCardId(aroundPosition);
+            // 周囲のタイルカードのIDを追加
             aroundCardIds.Add(aroundCardId);
         }
         return aroundCardIds;

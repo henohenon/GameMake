@@ -63,29 +63,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstBlock
       objectReference: {fileID: 0}
-    - target: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
-        type: 3}
-      propertyPath: _textMesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
-        type: 3}
-      propertyPath: _backColor.b
-      value: 0.8490566
-      objectReference: {fileID: 0}
-    - target: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
-        type: 3}
-      propertyPath: _backColor.g
-      value: 0.8490566
-      objectReference: {fileID: 0}
-    - target: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
-        type: 3}
-      propertyPath: _backColor.r
-      value: 0.8490566
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1079023892109143084, guid: ffac905825482a247aaec95c6988a1cb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffac905825482a247aaec95c6988a1cb, type: 3}

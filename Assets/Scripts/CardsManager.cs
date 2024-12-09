@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
 public class CardsManager : MonoBehaviour
 {
+    [SerializeField]
+    private CardRateAsset firstAsset;
     [SerializeField]
     private CardRateAsset cardRate;
     [SerializeField]
@@ -18,16 +21,27 @@ public class CardsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // タイルカードの配列を生成
         _tileCards = new CardController[length * length];
+        CreateMaps(firstAsset, Vector2Int.zero);
+    }
 
-        var startPos = Vector2Int.zero;
-        _squareMap = new SquareMap(cardRate, startPos, length, length);
+    private void CreateMaps(CardRateAsset asset, Vector2Int startPos)
+    {
+        // タイルカードの配列を生成
+        foreach (var tile in _tileCards)
+        {
+            if (tile != null)
+            {
+                Destroy(tile.gameObject);
+            }
+        }
+        
+        _squareMap = new SquareMap(asset, startPos, length, length);
 
         for (int i = 0; i < _squareMap.Map.Length; i ++)
         {
             // カード情報を取得
-            var cardInfo = cardRate.cardInfos[_squareMap.Map[i]];
+            var cardInfo = asset.cardInfos[_squareMap.Map[i]];
             // タイルカードの座標を計算
             var cardPos = MapCalculation.GetCardPosition(i, length); // タイルカードの座標を取得
             var tileX = cardPos.x - _squareMap.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
@@ -43,11 +57,25 @@ public class CardsManager : MonoBehaviour
             tileCard.transform.SetParent(transform);
             // タイルカードを配列に格納
             _tileCards[i] = tileCard;
-
             
             // タイルカードが裏返されたときのイベントを購読
-            tileCard.OnFlipped.Subscribe(OnCardFlipped);
+            if (cardInfo.cardType == CardType.First)
+            {
+                tileCard.OnFlipped.Subscribe(OnFirstFlipped);
+            }
+            else
+            {
+                tileCard.OnFlipped.Subscribe(OnCardFlipped);
+            }
         }
+    }
+
+    private async void OnFirstFlipped(int cardId)
+    {
+        var cardPos = MapCalculation.GetCardPosition(cardId, length);
+        CreateMaps(cardRate, cardPos);
+        await UniTask.DelayFrame(1);
+        _tileCards[cardId].FlipCard();
     }
     
     private void OnCardFlipped(int cardId)
@@ -84,16 +112,17 @@ public class CardsManager : MonoBehaviour
         }
     }
     
-    
     private int GetCardAroundBombSum(int cardId)
     {
         var sum = 0;
         
         // 周囲のタイルカードのIDを取得
         var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length);
+            Debug.Log("cards:"+ _tileCards.Length);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {
+            Debug.Log(aroundCardId);
             // タイルカードが爆弾の場合は加算
             if (_tileCards[aroundCardId].CardType == CardType.Bomb)
             {

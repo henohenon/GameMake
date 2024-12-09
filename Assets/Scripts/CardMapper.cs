@@ -77,7 +77,7 @@ public static class MapCalculation
         {
             // タイルカードのIDを取得
             var aroundCardId = GetCardId(aroundPosition, width);
-            if(aroundCardId <= 0 || aroundCardId > length) continue;
+            if(aroundCardId < 0 || aroundCardId >= length) continue;
             // 周囲のタイルカードのIDを追加
             aroundCardIds.Add(aroundCardId);
         }

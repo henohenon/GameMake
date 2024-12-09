@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using R3;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))] // メッシュレンダラーを必須にする
 public class CardController : MonoBehaviour
 {
     [SerializeField]
@@ -36,6 +35,7 @@ public class CardController : MonoBehaviour
     // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッド
     public void Initialize(int cardId, CardType type) 
     {
+        gameObject.name = $"Card_{cardId}";
         _cardId = cardId;
         CardType = type;
     }

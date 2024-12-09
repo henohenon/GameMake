@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour//へのへのさん
     
     public void Impact(Vector3 direction)
     {
+        //ここに爆発のSEを入れたい
+        audioManager.SetSE2();
+        Debug.Log("Impact");
+        //ここに爆発のSEを入れたい
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);

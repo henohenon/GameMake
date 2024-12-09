@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 
     //SE‰¹
     [SerializeField] AudioClip SE1;
+    [SerializeField] AudioClip SE2;
 
     // AudioSource‚ð’Ç‰Á
     [SerializeField]
@@ -20,26 +21,30 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         //BGM
-        //audioMixer.GetFloat("BGM", out float bgmVolume);
-        //BGMSlider.value = bgmVolume;
+        audioMixer.GetFloat("BGM", out float bgmVolume);
+        BGMSlider.value = bgmVolume;
         //SE
-        //audioMixer.GetFloat("SE", out float seVolume);
-        //SESlider.value = seVolume;
+        audioMixer.GetFloat("SE", out float seVolume);
+        SESlider.value = seVolume;
     }
-    /*
+    
     public void SetBGM(float volume)
     {
         audioMixer.SetFloat("BGM", volume);
     }
-    */
-    /*
+    
+    
     public void SetSE(float volume)
     {
         audioMixer.SetFloat("SE", volume);
     }
-    */
+    
     public void SetSE1()
     {
         _audioSource.PlayOneShot(SE1);
+    }
+    public void SetSE2()
+    {
+        _audioSource.PlayOneShot(SE2);
     }
 }

@@ -74,14 +74,12 @@ public class CardsManager : MonoBehaviour
         return position.x * length + position.y;
     }
 
-    private int GetCardAroundBombSum(int cardId)
+    private List<int> GetAroundCardIds(int cardId)
     {
-        var sum = 0;
-        
         // 指定のタイルカードの座標を取得
         var position = GetCardPosition(cardId);
         // 指定のタイルカードの周囲の座標の一覧を作成
-        var aroundPositions = new Vector2Int[]
+        var aroundPositions = new []
         {
             position + Vector2Int.up,
             position + Vector2Int.down,
@@ -92,14 +90,27 @@ public class CardsManager : MonoBehaviour
             position + Vector2Int.down + Vector2Int.right,
             position + Vector2Int.down + Vector2Int.left
         };
-
-        // 周囲のタイルカードを調べる
+        // 周囲のタイルカードのIDを取得
+        var aroundCardIds = new List<int>();
         foreach (var aroundPosition in aroundPositions)
         {
-            // タイルカードのIDを取得
             var aroundCardId = GetCardId(aroundPosition);
             // タイルカードが存在しない場合はスキップ
             if (aroundCardId < 0 || aroundCardId >= _tileCards.Length) continue;
+            aroundCardIds.Add(aroundCardId);
+        }
+        return aroundCardIds;
+    }
+    
+    private int GetCardAroundBombSum(int cardId)
+    {
+        var sum = 0;
+        
+        // 周囲のタイルカードのIDを取得
+        var aroundCards = GetAroundCardIds(cardId);
+        // 周囲のタイルカードを調べる
+        foreach (var aroundCardId in aroundCards)
+        {
             // タイルカードが爆弾の場合は加算
             if (_tileCards[aroundCardId].CardType == CardType.Bomb)
             {

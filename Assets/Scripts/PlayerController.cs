@@ -2,19 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour//へのへのさん
 {
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float rotateSpeed;
-    
+    [SerializeField]
+    private InputActionReference space;
+    [SerializeField]
+    private AudioManager audioManager;
+
     private Rigidbody _rb;
     
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        space.action.performed += _ => audioManager.SetSE1(); //キャンセルとかもある
+        space.action.Enable();
     }
     
     private void Update()
@@ -57,6 +64,10 @@ public class PlayerController : MonoBehaviour
     
     public void Impact(Vector3 direction)
     {
+        //ここに爆発のSEを入れたい
+        audioManager.SetSE2();
+        Debug.Log("Impact");
+        //ここに爆発のSEを入れたい
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);

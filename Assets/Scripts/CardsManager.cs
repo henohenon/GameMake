@@ -14,7 +14,7 @@ public class CardsManager : MonoBehaviour
     private int length = 9; // 一片の長さ。length*lengthのマスが生成される
     [SerializeField]
     private PlayerController playerController;
-    
+
     private CardController[] _tileCards;
     private SquareMap _squareMap;
     

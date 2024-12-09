@@ -7,6 +7,7 @@ using UnityEngine;
 public class CardRateAsset : ScriptableObject
 {
     public EachCardRate[] cardRates;
+    [NonSerialized] // シリアライズ(保存)しない
     private int _rateSum = -1;
 
     public GameObject GetRandomCard()

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using R3;
 using UnityEngine;
 
-public class GenerateTileCards : MonoBehaviour
+public class CardsManager : MonoBehaviour
 {
     [SerializeField]
     private CardRateAsset cardRate;
@@ -41,6 +42,12 @@ public class GenerateTileCards : MonoBehaviour
                 tileCard.transform.SetParent(transform);
                 // タイルカードを配列に格納
                 _tileCards[cardId] = tileCard;
+
+                // タイルカードが裏返されたときのイベントを購読
+                tileCard.OnFlipped.Subscribe(cardId =>
+                {
+                    Debug.Log($"Card {cardId} is flipped!");
+                });
             }
         }
     }

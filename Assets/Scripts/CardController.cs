@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using R3;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))] // メッシュレンダラーを必須にする
@@ -12,6 +13,9 @@ public class CardController : MonoBehaviour
     
     private MeshRenderer _meshRenderer;
     private bool _isFlipped = false;
+    
+    private Subject<int> _onFlipped = new Subject<int>();
+    public Observable<int> OnFlipped => _onFlipped;
     
     private void Start()
     {
@@ -36,5 +40,8 @@ public class CardController : MonoBehaviour
         transform.Rotate(180, 0, 0);
         // カードの色を変える
         _meshRenderer.material.color = _frontColor;
+        
+        // イベントを発行
+        _onFlipped.OnNext(_cardId);
     }
 }

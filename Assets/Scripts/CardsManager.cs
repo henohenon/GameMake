@@ -56,6 +56,16 @@ public class CardsManager : MonoBehaviour
                         // タイルカードが爆弾でない場合は周囲の爆弾の数を取得
                         var sum = GetCardAroundBombSum(cardId);
                         Debug.Log(sum);
+
+                        // 周囲に爆弾がない場合は周囲のタイルカードを裏返す
+                        if (sum == 0)
+                        {
+                            var aroundCards = GetAroundCardIds(cardId);
+                            foreach (var aroundCardId in aroundCards)
+                            {
+                                _tileCards[aroundCardId].FlipCard();
+                            }
+                        }
                     }
                 });
             }

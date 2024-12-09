@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 5;
+    private float moveSpeed;
     [SerializeField]
-    private float rotateSpeed = 180;
+    private float rotateSpeed;
     
     private void Update()
     {

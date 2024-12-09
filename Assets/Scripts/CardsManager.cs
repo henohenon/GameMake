@@ -8,7 +8,7 @@ public class CardsManager : MonoBehaviour
     [SerializeField]
     private CardRateAsset cardRate;
     [SerializeField]
-    private int length = 9;
+    private int length = 9; // 一片の長さ。length*lengthのマスが生成される
     [SerializeField]
     private PlayerController playerController;
     
@@ -29,7 +29,7 @@ public class CardsManager : MonoBehaviour
             // カード情報を取得
             var cardInfo = cardRate.cardInfos[_squareMap.Map[i]];
             // タイルカードの座標を計算
-            var cardPos = _squareMap.GetCardPosition(i); // タイルカードの座標を取得
+            var cardPos = MapCalculation.GetCardPosition(i, length); // タイルカードの座標を取得
             var tileX = cardPos.x - _squareMap.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
             var tileZ = cardPos.y - _squareMap.Height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
@@ -49,7 +49,7 @@ public class CardsManager : MonoBehaviour
             tileCard.OnFlipped.Subscribe(OnCardFlipped);
         }
     }
-
+    
     private void OnCardFlipped(int cardId)
     {
         var tileCard = _tileCards[cardId];
@@ -70,7 +70,7 @@ public class CardsManager : MonoBehaviour
             // 周囲に爆弾がない場合は周囲のタイルカードを裏返す
             if (sum == 0)
             {
-                var aroundCards = _squareMap.GetAroundCardIds(cardId); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
+                var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                 foreach (var aroundCardId in aroundCards)
                 {
                     _tileCards[aroundCardId].FlipCard();
@@ -90,7 +90,7 @@ public class CardsManager : MonoBehaviour
         var sum = 0;
         
         // 周囲のタイルカードのIDを取得
-        var aroundCards = _squareMap.GetAroundCardIds(cardId);
+        var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+//using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour//へのへのさん
@@ -45,15 +45,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // 移動方向を計算
         //var movement = transform.forward * vertical; // 正面に対して前後の入力
         var movement = (transform.forward * vertical) + (transform.right * horizontal); // 正面に対して前後の入力
-        //var movement = new Vector3(horizontal, 0, vertical); // 正面に対して前後の入力 aさんのやつ
-
-
-        // 回転方向を計算
-        //var rotation = Vector3.up * horizontal; // 上方向に対して左右の入力
 
         // スピードとフレームの経過時間をかける
         movement *= moveSpeed * Time.deltaTime;
-        //rotation *= rotateSpeed * Time.deltaTime;
 
         // 移動と回転
         //_rb.position += movement;

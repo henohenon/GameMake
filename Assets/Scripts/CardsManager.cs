@@ -24,6 +24,10 @@ public class CardsManager : MonoBehaviour
         _tileCards = new CardController[length * length];
         CreateMaps(firstAsset, Vector2Int.zero);
     }
+    void Update()
+    {
+        CheckForOnlyBombs();
+    }
 
     private void CreateMaps(CardRateAsset asset, Vector2Int startPos)
     {
@@ -84,7 +88,7 @@ public class CardsManager : MonoBehaviour
         // タイルカードが爆弾の場合はゲームオーバー
         if (tileCard.CardType == CardType.Bomb)
         {
-            Debug.Log("Game Over");
+            //Debug.Log("Game Over");
             var playerPos = playerController.transform.position;
             var cardPos = tileCard.transform.position;
             var direction = (playerPos - cardPos).normalized;
@@ -118,11 +122,11 @@ public class CardsManager : MonoBehaviour
         
         // 周囲のタイルカードのIDを取得
         var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length);
-            Debug.Log("cards:"+ _tileCards.Length);
+            //Debug.Log("cards:"+ _tileCards.Length);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {
-            Debug.Log(aroundCardId);
+            //Debug.Log(aroundCardId);
             // タイルカードが爆弾の場合は加算
             if (_tileCards[aroundCardId].CardType == CardType.Bomb)
             {
@@ -132,4 +136,22 @@ public class CardsManager : MonoBehaviour
 
         return sum;
     }
+    private void CheckForOnlyBombs()
+{
+    bool onlyBombs = true;
+    foreach (var tileCard in _tileCards)
+    {
+        if (tileCard.CardType != CardType.Bomb)
+        {
+            onlyBombs = false;
+            break;
+        }
+    }
+
+    if (onlyBombs)
+    {
+        Debug.Log("Clear! All cards are bombs.");
+        // クリア処理をここに追加
+    }
+}
 }

@@ -2,11 +2,11 @@
     "name": "New Controls",
     "maps": [
         {
-            "name": "New action map",
+            "name": "Space",
             "id": "a1aa70a7-dcd6-4c88-9498-37ef33703369",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Space",
                     "type": "Button",
                     "id": "bb5e86ed-10de-4afa-b11e-2fc46d8753f8",
                     "expectedControlType": "",
@@ -20,6 +20,62 @@
                     "name": "",
                     "id": "2dcb9972-72b2-4d71-85c9-683da4608ab3",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "3",
+            "id": "ef35cdb2-f806-42a7-bd03-9775282670ec",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "f73766c4-2a10-4347-8f58-9d750db42230",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "029deb3e-dfec-428d-b4ee-b372a1f09404",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "4",
+            "id": "bee16fd0-a66a-4f57-872b-ebfbcfb53e71",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "ce16965a-d136-486e-b3f0-d6d33fccdeb5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9dd32ad3-a322-4016-b7ed-104bdaa7dcc0",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -12,6 +12,7 @@ public class SquareMap
     
     public int[] Map => _map;
 
+    // コンストラクタ
     public SquareMap(CardRateAsset cardRateAsset, Vector2Int start, int width, int height)
     {
         CardRateAsset = cardRateAsset;
@@ -25,16 +26,21 @@ public class SquareMap
 
     private void GenerateMap(Vector2Int start)
     {
+        // スタート地点のカードIDを取得
         var startId = MapCalculation.GetCardId(start, Width);
-        var aroundCardIds = MapCalculation.GetAroundCardIds(startId, Width, _map.Length);
+        
+        // マップを生成
         for (var i = 0; i < _map.Length; i++)
         {
-            if (i == startId || aroundCardIds.Contains(i))
+            // スタート地点のカードIDの場合
+            if (i == startId)
             {
+                // デフォルトのカードを設定
                 _map[i] = CardRateAsset._defaultCard;
             }
             else
             {
+                // ランダムなカードを設定
                 _map[i] = CardRateAsset.GetRandomIndex();
             }
         }

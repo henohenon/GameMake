@@ -21,7 +21,9 @@ public class CardsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // タイルカードの配列指定の長さで初期化
         _tileCards = new CardController[length * length];
+        // 開始位置判定用のタイルカードを生成
         CreateMaps(firstAsset, Vector2Int.zero);
     }
 
@@ -35,10 +37,12 @@ public class CardsManager : MonoBehaviour
                 Destroy(tile.gameObject);
             }
         }
-
+        
+        // アセットと開始位置、長さを指定してMapを生成
         _squareMap = new SquareMap(asset, startPos, length, length);
 
-        for (int i = 0; i < _squareMap.Map.Length; i++)
+        // マップのデータに沿ってタイルカードプレファブのインスタンスを生成
+        for (int i = 0; i < _squareMap.Map.Length; i ++)
         {
             // カード情報を取得
             var cardInfo = asset.cardInfos[_squareMap.Map[i]];
@@ -57,34 +61,44 @@ public class CardsManager : MonoBehaviour
             tileCard.transform.SetParent(transform);
             // タイルカードを配列に格納
             _tileCards[i] = tileCard;
-
-            // タイルカードが裏返されたときのイベントを購読
+            
+            // 最初の位置選択の場合
             if (cardInfo.cardType == CardType.First)
             {
+                // タイルカードが裏返されたときのイベントを購読し、初期位置選択時の処理を実行
                 tileCard.OnFlipped.Subscribe(OnFirstFlipped);
             }
             else
             {
+                // タイルカードが裏返されたときのイベントを購読し、(本番)タイルカードが裏返されたときの処理を実行
                 tileCard.OnFlipped.Subscribe(OnCardFlipped);
             }
         }
     }
 
+    // タイルカードが裏返されたときの処理
     private async void OnFirstFlipped(int cardId)
     {
+        // 選択されたカードから初期位置を取得
         var cardPos = MapCalculation.GetCardPosition(cardId, length);
+        // 本番タイルカードを生成
         CreateMaps(cardRate, cardPos);
+        // カードインスタンスのStartメソッドが呼ばれるのを待つため、1フレーム待機(Startをなくしたほうがきれいではある)
         await UniTask.DelayFrame(1);
+        // 初期位置(選択された)のカードを裏返す
         _tileCards[cardId].FlipCard();
     }
-
+    
+    // タイルカードが裏返されたときの処理
     private void OnCardFlipped(int cardId)
     {
+        // カードのインスタンスをキャッシュ的な感じで取得
         var tileCard = _tileCards[cardId];
         // タイルカードが爆弾の場合はゲームオーバー
         if (tileCard.CardType == CardType.Bomb)
         {
             //Debug.Log("Game Over");
+            // プレイヤーの位置とタイルカードの位置から方向を計算し、プレイヤーに衝撃を与える
             var playerPos = playerController.transform.position;
             var cardPos = tileCard.transform.position;
             var direction = (playerPos - cardPos).normalized;
@@ -95,9 +109,10 @@ public class CardsManager : MonoBehaviour
             // タイルカードが爆弾でない場合は周囲の爆弾の数を取得
             var sum = GetCardAroundBombSum(cardId);
 
-            // 周囲に爆弾がない場合は周囲のタイルカードを裏返す
+            // 周囲に爆弾がない場合
             if (sum == 0)
             {
+                // 周囲のタイルカードを裏返す
                 var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                 foreach (var aroundCardId in aroundCards)
                 {
@@ -113,14 +128,14 @@ public class CardsManager : MonoBehaviour
         // 残りのタイルがすべてボムかどうかをチェック
         Debug.Log("a");
     }
-
+    
+    // タイルカードの周囲の爆弾の数を取得
     private int GetCardAroundBombSum(int cardId)
     {
         var sum = 0;
 
         // 周囲のタイルカードのIDを取得
         var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length);
-        //Debug.Log("cards:"+ _tileCards.Length);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {
@@ -134,4 +149,22 @@ public class CardsManager : MonoBehaviour
 
         return sum;
     }
+    private void CheckForOnlyBombs()
+{
+    bool onlyBombs = true;
+    foreach (var tileCard in _tileCards)
+    {
+        if (tileCard.CardType != CardType.Bomb)
+        {
+            onlyBombs = false;
+            break;
+        }
+    }
+
+    if (onlyBombs)
+    {
+        Debug.Log("Clear! All cards are bombs.");
+        // クリア処理をここに追加
+    }
+}
 }

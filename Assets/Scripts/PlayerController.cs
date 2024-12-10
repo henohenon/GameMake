@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour//へのへのさん
 {
@@ -15,13 +17,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private AudioManager audioManager;
     [SerializeField]
-    private InputActionReference tree;
-    [SerializeField]
-    private InputActionReference four;
-    [SerializeField] 
-    private Camera subcamera;
-    [SerializeField]
-    private Transform alternateTarget; // 別のオブジェクトの参照を追加
+    private InputActionReference CameraAction;
+
 
     private Rigidbody _rb;
 
@@ -31,10 +28,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
         space.action.performed += _ => audioManager.SetSE1(); //キャンセルとかもある
         space.action.Enable();
 
-        tree.action.performed += _ => rotcam1(); //キャンセルとかもある
-        tree.action.Enable();
-        four.action.performed += _ => rotcam2(); //キャンセルとかもある
-        four.action.Enable();
+        CameraAction.action.performed += RotCam; //キャンセルとかもある
+        CameraAction.action.Enable();
     }
 
     private void Update()
@@ -44,7 +39,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
         var vertical = Input.GetAxis("Vertical");
 
         // 移動方向を計算
-        var movement = transform.forward * vertical; // 正面に対して前後の入力
+        //var movement = transform.forward * vertical; // 正面に対して前後の入力
+        var movement = new Vector3(horizontal, 0, vertical); // 正面に対して前後の入力
+
 
         // 回転方向を計算
         var rotation = Vector3.up * horizontal; // 上方向に対して左右の入力
@@ -54,7 +51,10 @@ public class PlayerController : MonoBehaviour//へのへのさん
         rotation *= rotateSpeed * Time.deltaTime;
 
         // 移動と回転
-        _rb.position += movement;
+        //_rb.position += movement;
+        _rb.position = new Vector3(_rb.position.x + movement.x, _rb.position.y, _rb.position.z + movement.z);
+        //_rb.MoveRotation(_rb.rotation * Quaternion.Euler(inputMove.x, inputMove.y, 0f));
+
         _rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotation));
         // スペースキーを押したら
         if (Input.GetKeyDown(KeyCode.Space))
@@ -84,24 +84,16 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
-        // カメラのターゲットを変更
-        ChangeCameraTarget(alternateTarget);
     }
-        private void ChangeCameraTarget(Transform newTarget)
+    void RotCam(InputAction.CallbackContext context)
     {
-        // カメラのターゲットを新しいターゲットに変更
-        subcamera.transform.parent = newTarget;
-        subcamera.transform.localPosition = Vector3.zero;
-        subcamera.transform.localRotation = Quaternion.identity;
-    }
-
-    void rotcam1()
-    {
+        // performed、canceledコールバックを受け取る
+        if (context.started) return;
         Debug.Log("rotcam1");
-    }
-    void rotcam2()
-    {
-        Debug.Log("rotcam2");
+        // Moveアクションの入力取得
+        var inputMove = context.ReadValue<Vector2>();
+        //Debug.Log(inputMove);
+        _rb.MoveRotation(_rb.rotation * Quaternion.Euler(inputMove.x, inputMove.y, 0f));
     }
 }
 

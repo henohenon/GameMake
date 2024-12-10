@@ -2,7 +2,7 @@
     "name": "New Controls",
     "maps": [
         {
-            "name": "Space",
+            "name": "Player",
             "id": "a1aa70a7-dcd6-4c88-9498-37ef33703369",
             "actions": [
                 {
@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Camera",
+                    "type": "Value",
+                    "id": "ebf2d6ea-6b1e-491f-a00c-c2f23864a1da",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -26,60 +35,15 @@
                     "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "3",
-            "id": "ef35cdb2-f806-42a7-bd03-9775282670ec",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "f73766c4-2a10-4347-8f58-9d750db42230",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "029deb3e-dfec-428d-b4ee-b372a1f09404",
-                    "path": "<Keyboard>/3",
+                    "id": "26fbdd04-508f-47ea-83ff-92493a5c1874",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "4",
-            "id": "bee16fd0-a66a-4f57-872b-ebfbcfb53e71",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "ce16965a-d136-486e-b3f0-d6d33fccdeb5",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "9dd32ad3-a322-4016-b7ed-104bdaa7dcc0",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -17,16 +17,12 @@ public class CardsManager : MonoBehaviour
 
     private CardController[] _tileCards;
     private SquareMap _squareMap;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         _tileCards = new CardController[length * length];
         CreateMaps(firstAsset, Vector2Int.zero);
-    }
-    void Update()
-    {
-        CheckForOnlyBombs();
     }
 
     private void CreateMaps(CardRateAsset asset, Vector2Int startPos)
@@ -39,10 +35,10 @@ public class CardsManager : MonoBehaviour
                 Destroy(tile.gameObject);
             }
         }
-        
+
         _squareMap = new SquareMap(asset, startPos, length, length);
 
-        for (int i = 0; i < _squareMap.Map.Length; i ++)
+        for (int i = 0; i < _squareMap.Map.Length; i++)
         {
             // カード情報を取得
             var cardInfo = asset.cardInfos[_squareMap.Map[i]];
@@ -61,7 +57,7 @@ public class CardsManager : MonoBehaviour
             tileCard.transform.SetParent(transform);
             // タイルカードを配列に格納
             _tileCards[i] = tileCard;
-            
+
             // タイルカードが裏返されたときのイベントを購読
             if (cardInfo.cardType == CardType.First)
             {
@@ -81,7 +77,7 @@ public class CardsManager : MonoBehaviour
         await UniTask.DelayFrame(1);
         _tileCards[cardId].FlipCard();
     }
-    
+
     private void OnCardFlipped(int cardId)
     {
         var tileCard = _tileCards[cardId];
@@ -114,15 +110,17 @@ public class CardsManager : MonoBehaviour
                 tileCard.SetText(sum.ToString());
             }
         }
+        // 残りのタイルがすべてボムかどうかをチェック
+        Debug.Log("a");
     }
-    
+
     private int GetCardAroundBombSum(int cardId)
     {
         var sum = 0;
-        
+
         // 周囲のタイルカードのIDを取得
         var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length);
-            //Debug.Log("cards:"+ _tileCards.Length);
+        //Debug.Log("cards:"+ _tileCards.Length);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {
@@ -136,22 +134,4 @@ public class CardsManager : MonoBehaviour
 
         return sum;
     }
-    private void CheckForOnlyBombs()
-{
-    bool onlyBombs = true;
-    foreach (var tileCard in _tileCards)
-    {
-        if (tileCard.CardType != CardType.Bomb)
-        {
-            onlyBombs = false;
-            break;
-        }
-    }
-
-    if (onlyBombs)
-    {
-        Debug.Log("Clear! All cards are bombs.");
-        // クリア処理をここに追加
-    }
-}
 }

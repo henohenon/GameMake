@@ -381,11 +381,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 214787f575e834c4aac91bc49e8c5570, type: 2}
-  BGMSlider: {fileID: 1026111987}
-  SESlider: {fileID: 1589629847}
-  SE1: {fileID: 8300000, guid: da4823859564f5c4e993ccbef243db5f, type: 3}
-  SE2: {fileID: 8300000, guid: 95bda2b9152538e448181381bca9c746, type: 3}
-  _audioSource: {fileID: 1856347873}
+  bgmSlider: {fileID: 1026111987}
+  seSlider: {fileID: 1589629847}
+  flipSound: {fileID: 8300000, guid: da4823859564f5c4e993ccbef243db5f, type: 3}
+  explosionSound: {fileID: 8300000, guid: 95bda2b9152538e448181381bca9c746, type: 3}
+  audioSource: {fileID: 1856347873}
 --- !u!4 &120220427
 Transform:
   m_ObjectHideFlags: 0
@@ -1630,7 +1630,7 @@ GameObject:
   - component: {fileID: 1026111986}
   - component: {fileID: 1026111987}
   m_Layer: 5
-  m_Name: BGM
+  m_Name: BGM Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2082,7 +2082,7 @@ GameObject:
   - component: {fileID: 1589629846}
   - component: {fileID: 1589629847}
   m_Layer: 5
-  m_Name: SE
+  m_Name: SE Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

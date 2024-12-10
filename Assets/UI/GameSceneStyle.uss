@@ -1,0 +1,25 @@
+:root {
+    --tile-size: 20px;
+}
+
+.tile{
+    background-color: antiquewhite;
+    border-color: darkgray;
+    border-width: 1px;
+    border-radius: 3px;
+    width: var(--tile-size);
+    height: var(--tile-size);
+}
+
+#TileTemplate.red .tile{
+    background-color: tomato;
+}
+
+#TileContainer{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 180px;
+    height: 180px;
+}

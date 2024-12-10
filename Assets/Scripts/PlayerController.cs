@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private AudioManager audioManager;
     [SerializeField]
     private InputActionReference CameraAction;
+    [SerializeField]
+    private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
+
 
 
     private Rigidbody _rb;
@@ -25,6 +28,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _rb.position = new Vector3(0, 0.5f, 0);
+        _rb.rotation = Quaternion.Euler(0, 0.5f, 0);
         space.action.performed += _ => audioManager.SetSE1(); //キャンセルとかもある
         space.action.Enable();
 
@@ -35,27 +40,28 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private void Update()
     {
         // キー入力を取得
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
+        var horizontal = Input.GetAxis("Horizontal");//左右の入力
+        var vertical = Input.GetAxis("Vertical");//前後の入力
 
         // 移動方向を計算
         //var movement = transform.forward * vertical; // 正面に対して前後の入力
-        var movement = new Vector3(horizontal, 0, vertical); // 正面に対して前後の入力
+        var movement = (transform.forward * vertical) + (transform.right * horizontal); // 正面に対して前後の入力
+        //var movement = new Vector3(horizontal, 0, vertical); // 正面に対して前後の入力 aさんのやつ
 
 
         // 回転方向を計算
-        var rotation = Vector3.up * horizontal; // 上方向に対して左右の入力
+        //var rotation = Vector3.up * horizontal; // 上方向に対して左右の入力
 
         // スピードとフレームの経過時間をかける
         movement *= moveSpeed * Time.deltaTime;
-        rotation *= rotateSpeed * Time.deltaTime;
+        //rotation *= rotateSpeed * Time.deltaTime;
 
         // 移動と回転
         //_rb.position += movement;
         _rb.position = new Vector3(_rb.position.x + movement.x, _rb.position.y, _rb.position.z + movement.z);
         //_rb.MoveRotation(_rb.rotation * Quaternion.Euler(inputMove.x, inputMove.y, 0f));
 
-        _rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotation));
+        //_rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotation));
         // スペースキーを押したら
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -87,13 +93,18 @@ public class PlayerController : MonoBehaviour//へのへのさん
     }
     void RotCam(InputAction.CallbackContext context)
     {
+        
         // performed、canceledコールバックを受け取る
         if (context.started) return;
-        Debug.Log("rotcam1");
-        // Moveアクションの入力取得
-        var inputMove = context.ReadValue<Vector2>();
-        //Debug.Log(inputMove);
-        _rb.MoveRotation(_rb.rotation * Quaternion.Euler(inputMove.x, inputMove.y, 0f));
+        //Debug.Log("rotcam1");
+        if (Mouse.current.leftButton.isPressed)
+        {
+            // Moveアクションの入力取得
+            var inputMove = context.ReadValue<Vector2>();
+            var swappedInputMove = new Vector2(inputMove.y, -inputMove.x);
+            //Debug.Log(inputMove);
+            _rb.MoveRotation(_rb.rotation * Quaternion.Euler(swappedInputMove.x * cameraRotationSpeed, swappedInputMove.y * cameraRotationSpeed, 0f));
+        }
     }
 }
 

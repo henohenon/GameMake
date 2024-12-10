@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     {
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
-        space.action.performed += _ => audioManager.SetSE1(); //キャンセルとかもある
+        space.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
         space.action.Enable();
 
         CameraAction.action.performed += RotCam; //キャンセルとかもある
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
 
     public void Impact(Vector3 direction)
     {
-        audioManager.SetSE2();
+        audioManager.PlayExplosionEffect();
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);

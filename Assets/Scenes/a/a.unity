@@ -1233,7 +1233,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 120220426}
           m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-          m_MethodName: SetSE1
+          m_MethodName: PlayFlipCardEffect
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1711,7 +1711,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 120220426}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SetBGM
+        m_MethodName: SetBgmVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2163,7 +2163,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 120220426}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SetSE
+        m_MethodName: SetSoundEffectVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

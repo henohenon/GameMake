@@ -1,5 +1,6 @@
 using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
@@ -8,43 +9,43 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
 
     //それぞれのスライダーを入れるとこです。。
-    [SerializeField] Slider BGMSlider;
-    [SerializeField] Slider SESlider;
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider seSlider;
 
     //SE音
-    [SerializeField] AudioClip SE1;
-    [SerializeField] AudioClip SE2;
+    [SerializeField] private AudioClip flipSound;
+    [SerializeField] private AudioClip explosionSound;
 
     // AudioSourceを追加
     [SerializeField]
-    private AudioSource _audioSource;
+    private AudioSource audioSource;
     private void Start()
     {
         //BGM
         audioMixer.GetFloat("BGM", out float bgmVolume);
-        BGMSlider.value = bgmVolume;
+        bgmSlider.value = bgmVolume;
         //SE
         audioMixer.GetFloat("SE", out float seVolume);
-        SESlider.value = seVolume;
+        seSlider.value = seVolume;
     }
     
-    public void SetBGM(float volume)
+    public void SetBgmVolume(float volume)
     {
         audioMixer.SetFloat("BGM", volume);
     }
     
     
-    public void SetSE(float volume)
+    public void SetSeVolume(float volume)
     {
         audioMixer.SetFloat("SE", volume);
     }
     
-    public void SetSE1()
+    public void PlayFlipCardEffect()
     {
-        _audioSource.PlayOneShot(SE1);
+        audioSource.PlayOneShot(flipSound);
     }
-    public void SetSE2()
+    public void PlayExplosionEffect()
     {
-        _audioSource.PlayOneShot(SE2);
+        audioSource.PlayOneShot(explosionSound);
     }
 }

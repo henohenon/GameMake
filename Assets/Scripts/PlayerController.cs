@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.position = new Vector3(0, 0.5f, 0);
-        _rb.rotation = Quaternion.Euler(0, 0.5f, 0);
+        _rb.position = new Vector3(0, 1f, 0);
         space.action.performed += _ => audioManager.SetSE1(); //キャンセルとかもある
         space.action.Enable();
 
@@ -59,9 +58,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // 移動と回転
         //_rb.position += movement;
         _rb.position = new Vector3(_rb.position.x + movement.x, _rb.position.y, _rb.position.z + movement.z);
-        //_rb.MoveRotation(_rb.rotation * Quaternion.Euler(inputMove.x, inputMove.y, 0f));
 
-        //_rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotation));
+
         // スペースキーを押したら
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -79,6 +77,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
                 }
             }
         }
+        var rotation = _rb.rotation.eulerAngles;
+        rotation.z = 0;
+        _rb.rotation = Quaternion.Euler(rotation);
     }
 
     public void Impact(Vector3 direction)
@@ -101,9 +102,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
         {
             // Moveアクションの入力取得
             var inputMove = context.ReadValue<Vector2>();
-            var swappedInputMove = new Vector2(inputMove.y, -inputMove.x);
+            var swappedInputMove = new Vector2(-inputMove.y, inputMove.x);
             //Debug.Log(inputMove);
-            _rb.MoveRotation(_rb.rotation * Quaternion.Euler(swappedInputMove.x * cameraRotationSpeed, swappedInputMove.y * cameraRotationSpeed, 0f));
+            _rb.MoveRotation(_rb.rotation * Quaternion.Euler(swappedInputMove.x * cameraRotationSpeed, swappedInputMove.y * cameraRotationSpeed, 0));
         }
     }
 }

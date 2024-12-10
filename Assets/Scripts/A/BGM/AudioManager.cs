@@ -4,18 +4,18 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-    //Audioƒ~ƒLƒT[‚ğ“ü‚ê‚é‚Æ‚±‚Å‚·
+    //AudioãƒŸã‚­ã‚µãƒ¼ã‚’å…¥ã‚Œã‚‹ã¨ã“ã§ã™
     [SerializeField] AudioMixer audioMixer;
 
-    //‚»‚ê‚¼‚ê‚ÌƒXƒ‰ƒCƒ_[‚ğ“ü‚ê‚é‚Æ‚±‚Å‚·BB
+    //ãã‚Œãã‚Œã®ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’å…¥ã‚Œã‚‹ã¨ã“ã§ã™ã€‚ã€‚
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SESlider;
 
-    //SE‰¹
+    //SEéŸ³
     [SerializeField] AudioClip SE1;
     [SerializeField] AudioClip SE2;
 
-    // AudioSource‚ğ’Ç‰Á
+    // AudioSourceã‚’è¿½åŠ 
     [SerializeField]
     private AudioSource _audioSource;
     private void Start()

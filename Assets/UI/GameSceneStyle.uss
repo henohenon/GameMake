@@ -11,7 +11,7 @@
     height: var(--tile-size);
 }
 
-#TileTemplate.red .tile{
+.red .tile{
     background-color: tomato;
 }
 

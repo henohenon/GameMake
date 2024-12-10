@@ -264,6 +264,7 @@ MonoBehaviour:
   cardRate: {fileID: 11400000, guid: 9c1147d54d376634aa78f217fbc52aa9, type: 2}
   length: 9
   playerController: {fileID: 1856347866}
+  uiManager: {fileID: 1328982679}
 --- !u!64 &58930929
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -381,8 +382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 214787f575e834c4aac91bc49e8c5570, type: 2}
-  bgmSlider: {fileID: 0}
-  seSlider: {fileID: 0}
   flipSound: {fileID: 8300000, guid: da4823859564f5c4e993ccbef243db5f, type: 3}
   explosionSound: {fileID: 8300000, guid: 95bda2b9152538e448181381bca9c746, type: 3}
   audioSource: {fileID: 1856347873}
@@ -984,6 +983,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189a64b2c36232249941f3240667febd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiDocument: {fileID: 1328982677}
+  tileAsset: {fileID: 9197481963319205126, guid: ddc9c06db8a2b8747a56b4d3cabaed0d,
+    type: 3}
 --- !u!1 &1410687072
 GameObject:
   m_ObjectHideFlags: 0

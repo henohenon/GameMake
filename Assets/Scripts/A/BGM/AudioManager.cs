@@ -9,8 +9,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
 
     //それぞれのスライダーを入れるとこです。。
-    [SerializeField] private Slider bgmSlider;
-    [SerializeField] private Slider seSlider;
+    //[SerializeField] private Slider bgmSlider;
+    //[SerializeField] private Slider seSlider;
 
     //SE音
     [SerializeField] private AudioClip flipSound;
@@ -23,10 +23,10 @@ public class AudioManager : MonoBehaviour
     {
         //BGM
         audioMixer.GetFloat("BGM", out float bgmVolume);
-        bgmSlider.value = bgmVolume;
+        //bgmSlider.value = bgmVolume;
         //SE
         audioMixer.GetFloat("SE", out float seVolume);
-        seSlider.value = seVolume;
+        //seSlider.value = seVolume;
     }
     
     public void SetBgmVolume(float volume)

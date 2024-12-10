@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class SquareMap
 {
-    public readonly CardRateAsset CardRateAsset;
+    public readonly CardRateAsset Asset;
     public readonly int Width;
     public readonly int Height;
     private readonly int[] _map;
@@ -13,9 +13,9 @@ public class SquareMap
     public int[] Map => _map;
 
     // コンストラクタ
-    public SquareMap(CardRateAsset cardRateAsset, Vector2Int start, int width, int height)
+    public SquareMap(CardRateAsset asset, Vector2Int start, int width, int height)
     {
-        CardRateAsset = cardRateAsset;
+        Asset = asset;
         Width = width;
         Height = height;
         
@@ -36,12 +36,12 @@ public class SquareMap
             if (i == startId)
             {
                 // デフォルトのカードを設定
-                _map[i] = CardRateAsset._defaultCard;
+                _map[i] = Asset._defaultCard;
             }
             else
             {
                 // ランダムなカードを設定
-                _map[i] = CardRateAsset.GetRandomIndex();
+                _map[i] = Asset.GetRandomIndex();
             }
         }
     }

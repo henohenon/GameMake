@@ -14,6 +14,8 @@ public class CardsManager : MonoBehaviour
     private int length = 9; // 一片の長さ。length*lengthのマスが生成される
     [SerializeField]
     private PlayerController playerController;
+    [SerializeField]
+    private UIManager uiManager;
 
     private CardController[] _tileCards;
     private SquareMap _squareMap;
@@ -40,6 +42,7 @@ public class CardsManager : MonoBehaviour
         
         // アセットと開始位置、長さを指定してMapを生成
         _squareMap = new SquareMap(asset, startPos, length, length);
+        uiManager.WriteMap(_squareMap);
 
         // マップのデータに沿ってタイルカードプレファブのインスタンスを生成
         for (int i = 0; i < _squareMap.Map.Length; i ++)

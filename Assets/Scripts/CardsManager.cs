@@ -18,7 +18,7 @@ public class CardsManager : MonoBehaviour
     private UIManager uiManager;
 
     private CardController[] _tileCards;
-    private SquareMap _squareMap;
+    private SquareTileMap _squareTileMap;
 
     // Start is called before the first frame update
     void Start()
@@ -41,18 +41,19 @@ public class CardsManager : MonoBehaviour
         }
         
         // アセットと開始位置、長さを指定してMapを生成
-        _squareMap = new SquareMap(asset, startPos, length, length);
-        uiManager.WriteMap(_squareMap);
+        _squareTileMap = new SquareTileMap(asset, startPos, length, length);
+        // マップをUIに書き込む
+        uiManager.WriteMap(_squareTileMap);
 
         // マップのデータに沿ってタイルカードプレファブのインスタンスを生成
-        for (int i = 0; i < _squareMap.Map.Length; i ++)
+        for (int i = 0; i < _squareTileMap.Map.Length; i ++)
         {
             // カード情報を取得
-            var cardInfo = asset.cardInfos[_squareMap.Map[i]];
+            var cardInfo = asset.cardInfos[_squareTileMap.Map[i]];
             // タイルカードの座標を計算
-            var cardPos = MapCalculation.GetCardPosition(i, length); // タイルカードの座標を取得
-            var tileX = cardPos.x - _squareMap.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
-            var tileZ = cardPos.y - _squareMap.Height / 2;
+            var cardPos = MapTileCalc.GetCardPosition(i, length); // タイルカードの座標を取得
+            var tileX = cardPos.x - _squareTileMap.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
+            var tileZ = cardPos.y - _squareTileMap.Height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
 
@@ -83,7 +84,7 @@ public class CardsManager : MonoBehaviour
     private async void OnFirstFlipped(int cardId)
     {
         // 選択されたカードから初期位置を取得
-        var cardPos = MapCalculation.GetCardPosition(cardId, length);
+        var cardPos = MapTileCalc.GetCardPosition(cardId, length);
         // 本番タイルカードを生成
         CreateMaps(cardRate, cardPos);
         // カードインスタンスのStartメソッドが呼ばれるのを待つため、1フレーム待機(Startをなくしたほうがきれいではある)
@@ -116,7 +117,7 @@ public class CardsManager : MonoBehaviour
             if (sum == 0)
             {
                 // 周囲のタイルカードを裏返す
-                var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
+                var aroundCards = MapTileCalc.GetAroundCardIds(cardId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                 foreach (var aroundCardId in aroundCards)
                 {
                     _tileCards[aroundCardId].FlipCard();
@@ -138,7 +139,7 @@ public class CardsManager : MonoBehaviour
         var sum = 0;
 
         // 周囲のタイルカードのIDを取得
-        var aroundCards = MapCalculation.GetAroundCardIds(cardId, length, length * length);
+        var aroundCards = MapTileCalc.GetAroundCardIds(cardId, length, length * length);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class SquareMap
+public class SquareTileMap
 {
     public readonly CardRateAsset Asset;
     public readonly int Width;
@@ -13,7 +13,7 @@ public class SquareMap
     public int[] Map => _map;
 
     // コンストラクタ
-    public SquareMap(CardRateAsset asset, Vector2Int start, int width, int height)
+    public SquareTileMap(CardRateAsset asset, Vector2Int start, int width, int height)
     {
         Asset = asset;
         Width = width;
@@ -27,7 +27,7 @@ public class SquareMap
     private void GenerateMap(Vector2Int start)
     {
         // スタート地点のカードIDを取得
-        var startId = MapCalculation.GetCardId(start, Width);
+        var startId = MapTileCalc.GetCardId(start, Width);
         
         // マップを生成
         for (var i = 0; i < _map.Length; i++)
@@ -47,7 +47,7 @@ public class SquareMap
     }
 }
 
-public static class MapCalculation
+public static class MapTileCalc
 {
     public static Vector2Int GetCardPosition(int cardId, int width)
     {

@@ -51,15 +51,60 @@ public static class MapCalculation
 {
     public static Vector2Int GetCardPosition(int cardId, int width)
     {
-        var x = cardId / width;
-        var y = cardId % width;
+        var x = cardId % width;
+        var y = cardId / width;
         return new Vector2Int(x, y);
     }
     
     public static int GetCardId(Vector2Int position, int width)
     {
-        if(position.y < 0 || position.y >= width) return -1;
-        return position.x * width + position.y;
+        return position.y * width + position.x;
+    }
+    
+    public static Vector2Int GetInvertXPosition(Vector2Int position, int width)
+    {
+        return new Vector2Int(width - position.x - 1, position.y);
+    }
+    
+    public static int GetInvertXId(Vector2Int position, int height)
+    {
+        var invertPosition = GetInvertXPosition(position, height);
+        return GetCardId(invertPosition, height);
+    }
+    
+    public static Vector2Int GetInvertXPosition(int cardId, int width)
+    {
+        var cardPosition = GetCardPosition(cardId, width);
+        return GetInvertXPosition(cardPosition, width);
+    }
+
+    public static int GetInvertXId(int cardId, int width)
+    {
+        var cardPosition = GetCardPosition(cardId, width);
+        return GetInvertXId(cardPosition, width);
+    }
+    
+    
+    public static Vector2Int GetInvertYPosition(Vector2Int position, int height)
+    {
+        return new Vector2Int(position.x, height - position.y - 1);
+    }
+    
+    public static int GetInvertYId(Vector2Int position, int width)
+    {
+        var invertPosition = GetInvertYPosition(position, width);
+        return GetCardId(invertPosition, width);
+    }
+    
+    public static Vector2Int GetInvertYPosition(int cardId, int width, int height)
+    {
+        return GetInvertYPosition(GetCardPosition(cardId, width), height);
+    }
+
+    public static int GetInvertYId(int cardId, int width)
+    {
+        var cardPosition = GetCardPosition(cardId, width);
+        return GetInvertYId(cardPosition, width);
     }
     
     public static List<int> GetAroundCardIds(int cardId, int width, int length)

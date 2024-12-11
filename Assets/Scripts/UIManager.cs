@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
         _root = uiDocument.rootVisualElement;
     }
 
-    public void WriteMap(SquareMap map)
+    public void WriteMap(SquareMap map, bool leftToRight = true, bool topToBottom = false)
     {
         var tileTemplate = _root.Q<VisualElement>("TileContainer");
         tileTemplate.Clear();
@@ -24,8 +24,16 @@ public class UIManager : MonoBehaviour
         {
             var tile = tileAsset.CloneTree();
             tile.name = $"Tile_{i}";
-            Debug.Log(map.Asset.cardInfos[map.Map[i]].cardType);
-            var tileInfo = map.Asset.cardInfos[map.Map[i]];
+            var cardIndex = i;
+            if (!leftToRight)
+            {
+                cardIndex = MapCalculation.GetInvertXId(cardIndex, map.Width);
+            }
+            if (!topToBottom)
+            {
+                cardIndex = MapCalculation.GetInvertYId(cardIndex, map.Height);
+            }
+            var tileInfo = map.Asset.cardInfos[map.Map[cardIndex]];
             tileTemplate.Add(tile);
             if (tileInfo.cardType == CardType.Bomb)
             {

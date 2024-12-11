@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
         _root = uiDocument.rootVisualElement;
     }
     
-    public void WriteMap(SquareTileMap tileMap, bool rightToLeft = true, bool bottomToTop = false)
+    public void WriteMap(SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
     {
         // タイル一覧を入れるやつを取得
         var tileContainer = _root.Q<VisualElement>("TileContainer");

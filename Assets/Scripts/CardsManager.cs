@@ -107,6 +107,7 @@ public class CardsManager : MonoBehaviour
             var cardPos = tileCard.transform.position;
             var direction = (playerPos - cardPos).normalized;
             playerController.Impact(direction);
+            Debug.Log("if");
         }
         else
         {
@@ -122,15 +123,16 @@ public class CardsManager : MonoBehaviour
                 {
                     _tileCards[aroundCardId].FlipCard();
                 }
+                Debug.Log("else if");
             }
             else
             {
                 // 周囲に爆弾がある場合は周囲の爆弾の数を表示
                 tileCard.SetText(sum.ToString());
+                Debug.Log("else else");
             }
         }
-        // 残りのタイルがすべてボムかどうかをチェック
-        Debug.Log("a");
+        //CheckForOnlyBombs();
     }
     
     // タイルカードの周囲の爆弾の数を取得
@@ -153,22 +155,14 @@ public class CardsManager : MonoBehaviour
 
         return sum;
     }
+    /*
     private void CheckForOnlyBombs()
 {
-    bool onlyBombs = true;
-    foreach (var tileCard in _tileCards)
-    {
-        if (tileCard.CardType != CardType.Bomb)
-        {
-            onlyBombs = false;
-            break;
-        }
-    }
-
     if (onlyBombs)
     {
         Debug.Log("Clear! All cards are bombs.");
         // クリア処理をここに追加
     }
 }
+    */
 }

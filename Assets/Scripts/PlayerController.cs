@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 //using static UnityEditor.Searcher.SearcherWindow.Alignment;
@@ -13,7 +14,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private float rotateSpeed;
     [SerializeField]
-    private InputActionReference space;
+    private InputActionReference space;//スペースキーでカードを裏返す処理
     [SerializeField]
     private AudioManager audioManager;
     [SerializeField]
@@ -51,13 +52,18 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // 移動と回転
         _rb.position = new Vector3(_rb.position.x + movement.x, _rb.position.y, _rb.position.z + movement.z);
 
+        // Frame update example: Draws a 10 meter long green line from the position for 1 frame.
 
+            Vector3 down = Vector3.down * 2;//下方向にRayを飛ばす
+        Debug.DrawRay(transform.position, down, Color.red);
+        
         // スペースキーを押したら TODO: InputSystemに変更
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            
             RaycastHit hit;
             // 自分の位置から下方向に2のRayを飛ばす TODO: Raycastの方向を変更
-            if (Physics.Raycast(transform.position, -transform.up, out hit, 2))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 2)) // direction(向き)をに-↑変更最大２まで
             {
                 // Rayが当たったオブジェクトを取得
                 var hitObject = hit.collider.gameObject;

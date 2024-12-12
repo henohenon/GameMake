@@ -142,10 +142,10 @@ public class CardsManager : MonoBehaviour
 
         // 周囲のタイルカードのIDを取得
         var aroundCards = MapTileCalc.GetAroundCardIds(cardId, length, length * length);
+        Debug.Log(aroundCards);
         // 周囲のタイルカードを調べる
         foreach (var aroundCardId in aroundCards)
         {
-            //Debug.Log(aroundCardId);
             // タイルカードが爆弾の場合は加算
             if (_tileCards[aroundCardId].CardType == CardType.Bomb)
             {

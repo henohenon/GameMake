@@ -15,9 +15,14 @@
     background-color: tomato;
 }
 
-.tile-container{
+.tile-map{
     flex-direction: row;
     flex-wrap: wrap;
     width: 180px;
     height: 180px;
+    margin: 10px
+}
+#tile-maps-container{
+    flex-wrap: wrap;
+    flex-direction: row;
 }

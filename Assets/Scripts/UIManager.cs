@@ -19,19 +19,17 @@ public class UIManager : MonoBehaviour
     
     public void ClearMaps()
     {
-        var containers = _root.Query<VisualElement>().Class("tile-container").ToList();
-        foreach (var container in containers)
-        {
-            container.RemoveFromHierarchy();
-        }
+        var tileMapsContainer = _root.Q<VisualElement>("tile-maps-container");
+        tileMapsContainer.Clear();
     }
     
     public void WriteMap(SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
     {
         // タイルコンテナーを生成
+        var tileMapsContainer = _root.Q<VisualElement>("tile-maps-container");
         var tileContainer = new VisualElement();
-        _root.Add(tileContainer);
-        tileContainer.AddToClassList("tile-container");
+        tileMapsContainer.Add(tileContainer);
+        tileContainer.AddToClassList("tile-map");
         // マップのデータに沿ってタイルを生成
         for (int i = 0; i < tileMap.Map.Length; i++)
         {

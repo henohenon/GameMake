@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class CardsManager : MonoBehaviour
         _tileCards = new CardController[length * length];
         // 開始位置判定用のタイルカードを生成
         CreateMaps(firstAsset, Vector2Int.zero);
+        // マップをUIに書き込む
+        uiManager.WriteMap(_squareTileMap);
     }
 
     private void CreateMaps(CardRateAsset asset, Vector2Int startPos)
@@ -42,9 +45,7 @@ public class CardsManager : MonoBehaviour
         
         // アセットと開始位置、長さを指定してMapを生成
         _squareTileMap = new SquareTileMap(asset, startPos, length, length);
-        // マップをUIに書き込む
-        uiManager.WriteMap(_squareTileMap, false, true);
-
+        
         // マップのデータに沿ってタイルカードプレファブのインスタンスを生成
         for (int i = 0; i < _squareTileMap.Map.Length; i ++)
         {
@@ -85,10 +86,27 @@ public class CardsManager : MonoBehaviour
     {
         // 選択されたカードから初期位置を取得
         var cardPos = MapTileCalc.GetCardPosition(cardId, length);
-        // タイルマップのUIをクリア
-        uiManager.ClearMaps();
         // 本番タイルカードを生成
         CreateMaps(cardRate, cardPos);
+        
+        // タイルマップのUIをクリア
+        uiManager.ClearMaps();
+        // タイルマップの配列を作成
+        var maps = new SquareTileMap[]
+        {
+            _squareTileMap,
+            new (cardRate, cardPos, length, length),
+            new (cardRate, cardPos, length, length)
+        };
+        // タイルマップをシャッフル
+        var shuffledMaps = maps.OrderBy(m => Random.value).ToArray();
+        
+        // タイルマップをUIに書き込む
+        foreach (var map in shuffledMaps)
+        {
+            uiManager.WriteMap(map);
+        }
+
         // カードインスタンスのStartメソッドが呼ばれるのを待つため、1フレーム待機(Startをなくしたほうがきれいではある)
         await UniTask.DelayFrame(1);
         // 初期位置(選択された)のカードを裏返す

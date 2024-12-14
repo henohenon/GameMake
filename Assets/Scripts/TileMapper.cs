@@ -127,8 +127,12 @@ public static class MapTileCalc
         var aroundCardIds = new List<int>();
         foreach (var aroundPosition in aroundPositions)
         {
+            // タイルカードの座標が範囲外の場合はスキップ
+            if(aroundPosition.x < 0 || aroundPosition.x >= width) continue;
+            if(aroundPosition.y < 0 || aroundPosition.y >= length / width) continue;
             // タイルカードのIDを取得
             var aroundCardId = GetCardId(aroundPosition, width);
+            // タイルカードのIDが範囲外の場合はスキップ
             if(aroundCardId < 0 || aroundCardId >= length) continue;
             // 周囲のタイルカードのIDを追加
             aroundCardIds.Add(aroundCardId);

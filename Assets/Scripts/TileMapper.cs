@@ -51,8 +51,8 @@ public static class MapTileCalc
 {
     public static Vector2Int GetCardPosition(int cardId, int width)
     {
-        var x = cardId % width;
-        var y = cardId / width;
+        var x = cardId % width;// 余りを求める
+        var y = cardId / width;// 商を求める
         return new Vector2Int(x, y);
     }
     

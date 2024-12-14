@@ -18,10 +18,8 @@ public class UIManager : MonoBehaviour
     
     public void WriteMap(SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
     {
-        // タイルコンテナーを生成
-        var tileContainer = new VisualElement();
-        _root.Add(tileContainer);
-        tileContainer.AddToClassList("tile-container");
+        // タイル一覧を入れるやつを取得
+        var tileContainer = _root.Q<VisualElement>("TileContainer");
         // 既存のタイルを全削除
         tileContainer.Clear();
         // マップのデータに沿ってタイルを生成

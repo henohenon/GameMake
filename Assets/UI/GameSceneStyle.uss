@@ -15,7 +15,7 @@
     background-color: tomato;
 }
 
-#TileContainer{
+.tile-container{
     flex-direction: row;
     flex-wrap: wrap;
     width: 180px;

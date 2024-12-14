@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,14 +17,21 @@ public class UIManager : MonoBehaviour
         _root = uiDocument.rootVisualElement;
     }
     
+    public void ClearMaps()
+    {
+        var containers = _root.Query<VisualElement>().Class("tile-container").ToList();
+        foreach (var container in containers)
+        {
+            container.RemoveFromHierarchy();
+        }
+    }
+    
     public void WriteMap(SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
     {
         // タイルコンテナーを生成
         var tileContainer = new VisualElement();
         _root.Add(tileContainer);
         tileContainer.AddToClassList("tile-container");
-        // 既存のタイルを全削除
-        tileContainer.Clear();
         // マップのデータに沿ってタイルを生成
         for (int i = 0; i < tileMap.Map.Length; i++)
         {

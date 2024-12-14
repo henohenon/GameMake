@@ -43,7 +43,7 @@ public class CardsManager : MonoBehaviour
         // アセットと開始位置、長さを指定してMapを生成
         _squareTileMap = new SquareTileMap(asset, startPos, length, length);
         // マップをUIに書き込む
-        uiManager.WriteMap(_squareTileMap);
+        uiManager.WriteMap(_squareTileMap, false, true);
 
         // マップのデータに沿ってタイルカードプレファブのインスタンスを生成
         for (int i = 0; i < _squareTileMap.Map.Length; i ++)
@@ -85,6 +85,8 @@ public class CardsManager : MonoBehaviour
     {
         // 選択されたカードから初期位置を取得
         var cardPos = MapTileCalc.GetCardPosition(cardId, length);
+        // タイルマップのUIをクリア
+        uiManager.ClearMaps();
         // 本番タイルカードを生成
         CreateMaps(cardRate, cardPos);
         // カードインスタンスのStartメソッドが呼ばれるのを待つため、1フレーム待機(Startをなくしたほうがきれいではある)

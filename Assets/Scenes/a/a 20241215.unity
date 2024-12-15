@@ -415,7 +415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &356477002
 Transform:
   m_ObjectHideFlags: 0
@@ -433,7 +433,6 @@ Transform:
   - {fileID: 58271116}
   - {fileID: 462511148}
   - {fileID: 1128988630}
-  - {fileID: 457218541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
@@ -582,11 +581,11 @@ Transform:
   m_GameObject: {fileID: 457218540}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 6.06, y: 18.43, z: -0.83}
-  m_LocalScale: {x: 2.1062799, y: 1.4007, z: 1.4006999}
+  m_LocalPosition: {x: 0.44876337, y: 4.1901684, z: 0.97007436}
+  m_LocalScale: {x: 2.1062803, y: 1.4007, z: 1.4007001}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 356477002}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!64 &457218542
 MeshCollider:
@@ -1133,6 +1132,7 @@ MonoBehaviour:
   CameraAction: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   cameraRotationSpeed: 0.1
+  GameOverUI: {fileID: 0}
 --- !u!114 &1856347867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1384,5 +1384,6 @@ SceneRoots:
   - {fileID: 58930932}
   - {fileID: 1856347870}
   - {fileID: 120220427}
+  - {fileID: 457218541}
   - {fileID: 356477002}
   - {fileID: 1328982678}

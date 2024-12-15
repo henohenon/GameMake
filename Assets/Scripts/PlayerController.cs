@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
 
+    //あ　ゲームオーバー用のUI
+    public GameObject GameOverUI;
+
 
 
     private Rigidbody _rb;
@@ -83,6 +86,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
+        //3秒後にゲームオーバー画面の表示
+        Invoke("GameOver", 3.0f);　// 関数GameOverを3秒後に実行
     }
     void RotCam(InputAction.CallbackContext context)
     {
@@ -104,6 +109,12 @@ public class PlayerController : MonoBehaviour//へのへのさん
             // カメラの回転を適用
             _rb.MoveRotation(Quaternion.Euler(nextRotation));
         }
+    }
+    void GameOver()
+    {
+        // ゲームオーバー画面を表示
+        //GameOverUI.SetActive(true);
+        Debug.Log("GameOver");
     }
 }
 

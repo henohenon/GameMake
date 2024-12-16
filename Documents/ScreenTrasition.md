@@ -6,12 +6,16 @@ style mainMenu fill: #fff, stroke: #fff, color: #fff
         メインメニュー
     end
     メインメニュー<-->マップ情報入力
-    メインメニュー<-->一人称パズル画面
-    subgraph introductionPlayer [指示プレイヤー画面]
-        マップ情報入力-->マップ情報画面
+    メインメニュー<-->一人称パズル
+    subgraph introductionPlayer [指示プレイヤー]
+        マップ情報入力-->指示pdf画面
     end
-    subgraph playPlayer [操作プレイヤー画面]
-        一人称パズル画面
+    subgraph playPlayer [操作プレイヤー]
+        一人称パズル
+        一人称パズル-->クリアクリア
+        一人称パズル-->ゲームオーバー
     end
-    マップ情報画面-->メインメニュー
+    クリアクリア-->メインメニュー
+    ゲームオーバー-->メインメニュー
+    指示pdf画面-->メインメニュー
 ```

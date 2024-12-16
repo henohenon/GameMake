@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/a/GameOver.uss?fileID=7433441132597879392&amp;guid=c97bbd8952848e443ae4ef1941c2251f&amp;type=3#GameOver" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; width: 100%; height: 100%;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; border-top-width: 150px; border-right-width: 150px; border-bottom-width: 150px; border-left-width: 150px; background-image: none; -unity-text-align: middle-center; background-color: rgba(0, 0, 0, 0);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.72);">
+                    <ui:VisualElement style="flex-grow: 1;">
+                        <ui:Label tabindex="-1" text="Game Over" parse-escape-sequences="true" display-tooltip-when-elided="true" style="height: 100%; width: 100%; color: rgb(255, 255, 255); font-size: 100px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; height: 20%; border-top-width: 100px; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-top-left-radius: 0; border-bottom-right-radius: 0; justify-content: flex-start; align-self: auto;">
+                        <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="Restart" class="GameOver" />
+                        <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="Exit" class="GameOver" style="margin-top: 5%;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

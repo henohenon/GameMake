@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene Kitamura.unity
     guid: edded6247941fad4ab007bdd5c7989e8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/a/a.unity
     guid: 99c874f006f173c42918ff2528a55650
+  - enabled: 1
+    path: Assets/Scenes/a/a 20241215.unity
+    guid: b8a771486119c914c922fe5a3e9b1cb7
   m_configObjects: {}

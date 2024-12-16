@@ -1,0 +1,14 @@
+.GameOver {
+    margin-top: 0;
+    width: 50%;
+    height: auto;
+    -unity-text-align: middle-center;
+    align-self: center;
+    font-size: 50px;
+    transition-property: scale;
+    transition-duration: 0.2s;
+}
+
+.GameOver:hover {
+    scale: 1.2 1.2;
+}

@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using UIButton = UnityEngine.UIElements.Button;
+
+
 //using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -25,7 +30,10 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
 
     //あ　ゲームオーバー用のUI
-    public GameObject GameOverUI;
+    [SerializeField]
+    private UIDocument _gameOverUI;
+    [SerializeField]
+    private GameObject GameObjOverUI;
 
 
 
@@ -40,6 +48,13 @@ public class PlayerController : MonoBehaviour//へのへのさん
         enter.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
         enter.action.Enable();
 
+        //ゲームオーバーに関するスクリプト（あ）
+        var gameoverroot = _gameOverUI.rootVisualElement;
+        gameoverroot.Q<UIButton>("Restart").clicked += () => UnityEngine.SceneManagement.SceneManager.LoadScene("a 20241215");
+        gameoverroot.Q<UIButton>("Exit").clicked += () => GameExit();
+        GameObjOverUI.SetActive(false);
+        
+        //カメラの回転に関するスクリプト
         CameraAction.action.performed += RotCam; //キャンセルとかもある
         CameraAction.action.Enable();
     }
@@ -117,12 +132,16 @@ public class PlayerController : MonoBehaviour//へのへのさん
     void GameOver()
     {
         // ゲームオーバー画面を表示
-        //GameOverUI.SetActive(true);
+        GameObjOverUI.SetActive(true);
         Debug.Log("GameOver");
+    }
+    void GameExit()
+    {
+        // ゲームを終了する
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
-    Application.Quit();//ゲームプレイ終了
+    Application.Quit();
 #endif
     }
 }

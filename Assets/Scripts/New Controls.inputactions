@@ -38,6 +38,17 @@
                 },
                 {
                     "name": "",
+                    "id": "33bab508-189e-4190-9689-401f4db6210a",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "26fbdd04-508f-47ea-83ff-92493a5c1874",
                     "path": "<Mouse>/delta",
                     "interactions": "",

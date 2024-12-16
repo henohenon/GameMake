@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private InputActionReference space;//スペースキーでカードを裏返す処理
     [SerializeField]
+    private InputActionReference enter;//スペースキーでカードを裏返す処理
+    [SerializeField]
     private AudioManager audioManager;
     [SerializeField]
     private InputActionReference CameraAction;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.position = new Vector3(0, 1f, 0);
         space.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
         space.action.Enable();
+        enter.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
+        enter.action.Enable();
 
         CameraAction.action.performed += RotCam; //キャンセルとかもある
         CameraAction.action.Enable();
@@ -61,7 +65,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
         Debug.DrawRay(transform.position, down, Color.red);
         
         // スペースキーを押したら TODO: InputSystemに変更
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
         {
             
             RaycastHit hit;
@@ -115,6 +119,11 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // ゲームオーバー画面を表示
         //GameOverUI.SetActive(true);
         Debug.Log("GameOver");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 }
 

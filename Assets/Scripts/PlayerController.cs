@@ -30,10 +30,12 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
 
     //あ　ゲームオーバー用のUI
+    /*  
     [SerializeField]
     private UIDocument _gameOverUI;
     [SerializeField]
     private GameObject GameObjOverUI;
+    */
 
 
 
@@ -42,17 +44,19 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.position = new Vector3(0, 1f, 0);
+        //b.position = new Vector3(0, 1f, 0); 初動の位置
         space.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
         space.action.Enable();
         enter.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
         enter.action.Enable();
 
         //ゲームオーバーに関するスクリプト（あ）
+        /*
         var gameoverroot = _gameOverUI.rootVisualElement;
         gameoverroot.Q<UIButton>("Restart").clicked += () => UnityEngine.SceneManagement.SceneManager.LoadScene("a 20241215");
         gameoverroot.Q<UIButton>("Exit").clicked += () => GameExit();
         GameObjOverUI.SetActive(false);
+        */
         
         //カメラの回転に関するスクリプト
         CameraAction.action.performed += RotCam; //キャンセルとかもある
@@ -115,6 +119,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
 
         if (Mouse.current.leftButton.isPressed)
         {
+            Debug.Log("カメラ回転");
             // Moveアクションの入力取得
             var inputMove = context.ReadValue<Vector2>();
             // カメラの回転座標の作成
@@ -131,9 +136,11 @@ public class PlayerController : MonoBehaviour//へのへのさん
     }
     void GameOver()
     {
+        /*
         // ゲームオーバー画面を表示
         GameObjOverUI.SetActive(true);
         Debug.Log("GameOver");
+        */
     }
     void GameExit()
     {

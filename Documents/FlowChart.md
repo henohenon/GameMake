@@ -10,7 +10,10 @@ subgraph カードをめくる
     cardSwitch1--爆弾-->cardEnd1(ゲームオーバー)
     cardSwitch1--アイテム-->card3(アイテムをスタックに追加)
     card3-->cardSwitch2
-    cardSwitch1--何もない-->cardSwitch2(すべての爆弾以外をめくったか)
+    cardSwitch1--何もない-->cardSwitch3(周囲のマスに爆弾がないか)
+    cardSwitch3--はい-->card4(周囲のマスもめくる)
+    cardSwitch3--いいえ-->cardSwitch2(すべての爆弾以外をめくったか)
+    card4-->cardSwitch2
     cardSwitch2--はい-->cardEnd2(ゲームクリア)
     cardSwitch2--いいえ-->card1
 end

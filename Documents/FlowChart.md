@@ -1,23 +1,28 @@
 ```mermaid
 graph TD;
 
-subgraph アイテムを使用
-    item1(アイテムを使用)-->item2(アイテムがスタックから消える)-->item3(アイテムの効果が発動)
+subgraph アイテム
+    useItem1([アイテムを使用])-->useItemSwitch1{選択している番号のアイテムがスタックに存在するか}--はい-->useItemSwitch2{使うアイテムが旗か}
+    useItemSwitch2--いいえ-->useItem2(使ったアイテムがスタックから消える)-->useItem3[[アイテムの効果が発動]]
+    useItemSwitch2--はい-->useItem3
+
+    addItem1([アイテムを追加])-->addItemSwitch{アイテムのスタックに空きがあるか}--はい-->addItem3(空いているスタックの一番小さい番号に割り振られる)
+
+    removeItem1([アイテムを捨てる])-->removeItemSwitch1{選択している番号のアイテムがスタックに存在するか}--はい-->removeItemSwitch2{捨てるアイテムが旗か}--いいえ-->removeItem2(選択しているアイテムがスタックから消える)
 end
 subgraph タイルをめくる
     card1(タイルをめくる)-->card2(タイルが消える)
     card2-->cardSwitch1{めくったタイルの種類は？}
     cardSwitch1--爆弾-->cardEnd1(ゲームオーバー)
-    cardSwitch1--アイテム-->card3(アイテムをスタックに追加)
-    card3-->cardSwitch2
-    cardSwitch1--何もない-->cardSwitch3(周囲のマスに爆弾がないか)
+    cardSwitch1--アイテム-->card3[[アイテムをスタックに追加]]
+    card3-->cardSwitch3
+    cardSwitch1--安全-->cardSwitch3(周囲のマスに爆弾がないか)
     cardSwitch3--はい-->card4(周囲のマスもめくる)
-    cardSwitch3--いいえ-->cardSwitch2(すべての爆弾以外をめくったか)
     card4-->cardSwitch2
     cardSwitch2--はい-->cardEnd2(ゲームクリア)
+    cardSwitch3--いいえ-->cardSwitch2(すべての爆弾以外をめくったか)
     cardSwitch2--いいえ-->card1
 end
-
 ```
 
 ```mermaid

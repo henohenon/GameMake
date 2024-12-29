@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Style.uss?fileID=7433441132597879392&amp;guid=2a969dc04022472458dd7b5cd0cfd6f3&amp;type=3#Style" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/GameOver.uss?fileID=7433441132597879392&amp;guid=7fc92d3f42140914fbfdd2895db88409&amp;type=3#GameOver" />
+    <ui:Label tabindex="-1" text="M I S S I O N  F A I L E D" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; color: rgb(255, 255, 255); font-size: 60px; -unity-text-align: upper-center; top: 190px;" />
+    <ui:Button text="Back  to  Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_GameoverToMenu" class="ActionButton" style="top: 250px; width: 250px; left: 355px; font-size: 23px;" />
+</ui:UXML>

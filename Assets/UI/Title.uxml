@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Style.uss?fileID=7433441132597879392&amp;guid=2a969dc04022472458dd7b5cd0cfd6f3&amp;type=3#Style" />
+    <ui:Label tabindex="-1" text="High Score XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_HighScore" style="color: rgb(255, 255, 255); -unity-text-align: upper-right; font-size: 20px;" />
+    <ui:Label tabindex="-1" text="Multi Sweepers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Title" style="color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-align: upper-center; font-size: 90px; top: 70px;" />
+    <ui:VisualElement name="ActionButton" style="flex-grow: 1; display: flex;">
+        <ui:Button text="Play as Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Soldier" class="ActionButton" style="-unity-font-style: bold;" />
+        <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" style="-unity-font-style: bold;" />
+        <ui:Button text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Options" class="ActionButton" style="font-size: 20px; top: 150px;" />
+        <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button__Credit" class="ActionButton" style="width: 120px; font-size: 17px; top: 170px;" />
+    </ui:VisualElement>
+</ui:UXML>

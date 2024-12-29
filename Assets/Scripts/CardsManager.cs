@@ -128,6 +128,7 @@ public class CardsManager : MonoBehaviour
             var direction = (playerPos - cardPos).normalized;
             playerController.Impact(direction);
             Debug.Log("if");
+            
         }
         else
         {

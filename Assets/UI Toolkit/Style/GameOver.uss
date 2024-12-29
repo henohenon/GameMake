@@ -1,0 +1,11 @@
+.ActionButton {
+    background-color: rgb(45, 45, 48);
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+
+.ActionButton:hover {
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    background-color: rgb(25, 25, 25);
+}

@@ -1,72 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Alchemy.Inspector;
+using RandomExtensions;
+using RandomExtensions.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
-
-[Serializable]
-public class SquareTileMap
-{
-    public int width;
-    public int height;
-    [SerializeField]
-    private int[] map;
-    
-    public int[] Map => map;
-
-    // スタート位置を指定するコンストラクタ
-    public SquareTileMap(GameRateAsset asset, int width, int height, Vector2Int start)
-    {
-        this.width = width;
-        this.height = height;
-        
-        map = new int[width * height];
-        GenerateMap(asset, start);
-    }
-    // 完全ランダムなマップを生成するコンストラクタ
-    public SquareTileMap(GameRateAsset asset, int width, int height)
-    {
-        this.width = width;
-        this.height = height;
-        
-        map = new int[width * height];
-        GenerateMap(asset);
-    }
-    
-    // 完全ランダムなマップを生成
-    private void GenerateMap(GameRateAsset asset)
-    {
-        for (var i = 0; i < map.Length; i++)
-        {
-            // ランダムなタイルを設定
-            map[i] = asset.GetRandomIndex();
-        }
-    }
-    
-    // スタート位置が絶対安全なマップを生成
-    private void GenerateMap(GameRateAsset asset, Vector2Int start)
-    {
-        // スタート地点のタイルIDを取得
-        var startId = MapTileCalc.GetTileId(start, width);
-        
-        // マップを生成
-        for (var i = 0; i < map.Length; i++)
-        {
-            // スタート地点のタイルIDの場合
-            if (i == startId)
-            {
-                // デフォルトのタイルを設定
-                map[i] = asset.defaultTile;
-            }
-            else
-            {
-                // ランダムなタイルを設定
-                map[i] = asset.GetRandomIndex();
-            }
-        }
-    }
-}
+using Scriptable;
 
 public static class MapTileCalc
 {

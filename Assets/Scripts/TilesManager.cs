@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using R3;
+using RandomExtensions;
+using RandomExtensions.Linq;
+using Scriptable;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,7 +21,7 @@ public class TilesManager : MonoBehaviour
     private UIManager uiManager;
 
     private TileController[] _tiles;
-    private SquareTileMap _squareTileMap;
+    private GameInfo _gameInfo;
 
     // Start is called before the first frame update
     void Start()
@@ -26,31 +29,32 @@ public class TilesManager : MonoBehaviour
         // タイルタイルの配列指定の長さで初期化
         _tiles = new TileController[length * length];
         
-        // アセットと開始位置、長さを指定してMapを生成
-        _squareTileMap = new SquareTileMap(gameRate, length, length);
+        // 乱数のシードを生成
+        var seed = GenerateSeed();
+        // ゲーム情報を初期化
+        _gameInfo = new GameInfo(length, length, gameRate, seed);
         // 3dオブジェクトを生成
-        Create3dMap(gameRate, _squareTileMap);
+        Create3dMap(gameRate, _gameInfo.MapInfo);
         
         // タイルマップのUIをクリア
         uiManager.ClearMaps();
         // タイルマップの配列を作成
-        var maps = new SquareTileMap[]
+        var maps = new []
         {
-            _squareTileMap,
-            new (gameRate, length, length),
-            new (gameRate, length, length)
-        };
-        // タイルマップをシャッフル
-        var shuffledMaps = maps.OrderBy(m => Random.value).ToArray();
-        
-        // タイルマップをUIに書き込む
-        foreach (var map in shuffledMaps)
+            _gameInfo.MapInfo,
+            new (length, gameRate.tileRateInfos),
+            new (length, gameRate.tileRateInfos),
+        }.AsEnumerable();
+
+        // タイルマップをシャッフルしてUIに書き込む
+        maps = maps.Shuffle().ToArray();
+        foreach (var map in maps)
         {
             uiManager.WriteMap(gameRate, map);
         }
     }
     
-    private void Create3dMap(GameRateAsset asset, SquareTileMap map)
+    private void Create3dMap(GameRateAsset asset, MapInfo map)
     {
         // 既存のタイルを破棄
         foreach (var tile in _tiles)
@@ -62,14 +66,14 @@ public class TilesManager : MonoBehaviour
         }
         
         // マップのデータに沿ってタイルタイルプレファブのインスタンスを生成
-        for (int i = 0; i < map.Map.Length; i ++)
+        for (int i = 0; i < map.Tiles.Length; i ++)
         {
             // タイル情報を取得
-            var tileInfo = asset.tileInfos[map.Map[i]];
+            var tileInfo = asset.tileRateInfos[map.Tiles[i]];
             // タイルタイルの座標を計算
             var tilePosition = MapTileCalc.GetTilePosition(i, length); // タイルタイルの座標を取得
-            var tileX = tilePosition.x - map.width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
-            var tileZ = tilePosition.y - map.height / 2;
+            var tileX = tilePosition.x - map.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
+            var tileZ = tilePosition.y - map.Height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
 
@@ -149,5 +153,11 @@ public class TilesManager : MonoBehaviour
         }
 
         return sum;
+    }
+    
+    private uint GenerateSeed()
+    {
+        // 最大5桁の乱数を生成
+        return RandomEx.Shared.NextUInt(10000);
     }
 }

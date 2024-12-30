@@ -9,7 +9,9 @@ public class ItemRateAsset : ScriptableObject
 {
     public BlueItemRate blueItemRate;
     public YellowItemRate yellowItemRate;
+    public YellowPuzzleCalcIcon[] yellowCalcIcons;
     public PurpleItemRate purpleItemRate;
+    
     
     public TileController blueItemTilePrefab;
     public TileController yellowItemTilePrefab;
@@ -30,7 +32,7 @@ public class BlueItemRate
     // アイテムの効果の情報
     public ItemRateInfo[] itemRateInfos;
     // パズルのアイコンの情報
-    public Sprite[] itemIcons;
+    public string[] itemIcons;
     
     // 生成されるパズルの数
     public int maxItemNum = 5;
@@ -43,9 +45,7 @@ public class YellowItemRate
     // アイテムの効果の情報
     public ItemRateInfo[] itemRateInfos;
     // パズルのアイコンの情報
-    public Sprite[] numbIcons;
-    // パズルの計算のアイコンの情報
-    public YellowCalcIcon[] calcIcons; 
+    public string[] numbIcons;
     
     // 生成される答えの数
     public int maxResultNum = 3;
@@ -60,7 +60,7 @@ public class YellowItemRate
 public class YellowCalcIcon
 {
     public YellowPuzzleCalcType calcType;
-    public Sprite calcIcon;
+    public String calcText;
 }
 
 [Serializable]
@@ -84,7 +84,7 @@ public class PurpleItemRate
 public class PurpleCalcIcon
 {
     public PurplePuzzleCalcType calcType;
-    public Sprite calcIcon;
+    public string calcIcon;
 }
 
 public enum ItemTier
@@ -111,8 +111,7 @@ public class ItemPuzzleInfo
     public BluePuzzleItem[] bluePuzzleItems;
     [Header("Yellow Puzzle")]
     public YellowPuzzleItem[] yellowPuzzleItems;
-    public Sprite[] yellowNumbIcons;
-    public YellowPuzzleCalcIcon[] yellowCalcIcons;
+    public string[] yellowNumbIcons;
     [Header("Purple Puzzle")]
     public ItemType[] purplePuzzleItems;
     public PurplePuzzleCalcIcon[] purpleCalcIcons;
@@ -129,13 +128,6 @@ public class ItemPuzzleInfo
         for (var i = 0; i < yellowPuzzleItems.Length; i++)
         {
             yellowPuzzleItems[i] = new YellowPuzzleItem(new int[itemRate.yellowItemRate.maxCalcNumb], itemRate.yellowItemRate.itemRateInfos[i].itemType);
-        }
-        
-        yellowNumbIcons = itemRate.yellowItemRate.numbIcons;
-        yellowCalcIcons = new YellowPuzzleCalcIcon[itemRate.yellowItemRate.maxCalcNumb];
-        for (var i = 0; i < yellowCalcIcons.Length; i++)
-        {
-            yellowCalcIcons[i] = new YellowPuzzleCalcIcon(itemRate.yellowItemRate.calcIcons[i].calcType, itemRate.yellowItemRate.calcIcons[i].calcIcon);
         }
         
         purplePuzzleItems = new ItemType[itemRate.purpleItemRate.maxResultNum];
@@ -155,10 +147,10 @@ public class ItemPuzzleInfo
 [Serializable]
 public class BluePuzzleItem
 {
-    public Sprite itemIcon;
+    public string itemIcon;
     public ItemType itemType;
     
-    public BluePuzzleItem(Sprite itemIcon, ItemType itemType)
+    public BluePuzzleItem(string itemIcon, ItemType itemType)
     {
         this.itemIcon = itemIcon;
         this.itemType = itemType;
@@ -177,12 +169,12 @@ public enum YellowPuzzleCalcType
 public class YellowPuzzleCalcIcon
 {
     public YellowPuzzleCalcType calcType;
-    public Sprite icon;
+    public String calcText;
     
-    public YellowPuzzleCalcIcon(YellowPuzzleCalcType calcType, Sprite icon)
+    public YellowPuzzleCalcIcon(YellowPuzzleCalcType calcType, String calcText)
     {
         this.calcType = calcType;
-        this.icon = icon;
+        this.calcText = calcText;
     }
 }
 
@@ -210,9 +202,9 @@ public enum PurplePuzzleCalcType
 public class PurplePuzzleCalcIcon
 {
     public PurplePuzzleCalcType calcType;
-    public Sprite icon;
+    public string icon;
     
-    public PurplePuzzleCalcIcon(PurplePuzzleCalcType calcType, Sprite icon)
+    public PurplePuzzleCalcIcon(PurplePuzzleCalcType calcType, string icon)
     {
         this.calcType = calcType;
         this.icon = icon;

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// ボタンイベントの際のシーン遷移を行ってます。最初のBooleanはアタッチされるオブジェクトによって有効/無効のものがあるのでそれらを分けるためにあります。
 /// </summary>
-public class SceneLoader : MonoBehaviour//ニコマル
+public class TitleUIManager : MonoBehaviour//ニコマル
 {
     public bool isTitle;
     public bool isCredit;

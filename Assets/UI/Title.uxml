@@ -6,6 +6,6 @@
         <ui:Button text="Play as Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Soldier" class="ActionButton" style="-unity-font-style: bold;" />
         <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" style="-unity-font-style: bold;" />
         <ui:Button text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Options" class="ActionButton" style="font-size: 20px; top: 150px;" />
-        <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button__Credit" class="ActionButton" style="width: 120px; font-size: 17px; top: 170px;" />
+        <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Credit" class="ActionButton" style="width: 120px; font-size: 17px; top: 170px;" />
     </ui:VisualElement>
 </ui:UXML>

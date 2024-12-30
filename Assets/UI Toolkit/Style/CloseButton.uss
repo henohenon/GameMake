@@ -1,0 +1,19 @@
+.ActionButton {
+    background-color: rgb(45, 45, 48);
+    border-left-color: rgb(45, 45, 48);
+    border-right-color: rgb(45, 45, 48);
+    border-bottom-color: rgb(45, 45, 48);
+    border-top-color: rgb(45, 45, 48);
+    transition-duration: 0.2s;
+    transition-property: background-color;
+}
+
+.ActionButton:hover {
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    background-color: rgb(32, 32, 32);
+    border-left-color: rgb(33, 33, 33);
+    border-right-color: rgb(33, 33, 33);
+    border-top-color: rgb(33, 33, 33);
+    border-bottom-color: rgb(33, 33, 33);
+}

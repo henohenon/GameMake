@@ -1,0 +1,6 @@
+.Text {
+    background-color: rgba(217, 217, 217, 0);
+    color: rgb(234, 234, 234);
+    -unity-text-align: upper-center;
+    font-size: 28px;
+}

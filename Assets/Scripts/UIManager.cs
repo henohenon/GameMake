@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
         tileMapsContainer.Clear();
     }
     
-    public void WriteMap(SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
+    public void WriteMap(GameRateAsset asset, SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
     {
         // タイルコンテナーを生成
         var tileMapsContainer = _root.Q<VisualElement>("tile-maps-container");
@@ -37,11 +37,11 @@ public class UIManager : MonoBehaviour
             var tileIndex = i;
             if (rightToLeft)
             {
-                tileIndex = MapTileCalc.GetInvertXId(tileIndex, tileMap.Width);
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, tileMap.width);
             }
             if (bottomToTop)
             {
-                tileIndex = MapTileCalc.GetInvertYId(tileIndex, tileMap.Height);
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, tileMap.height);
             }
             
             // タイルのテンプレートを複製
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
             // idからタイルの名前を設定
             tile.name = $"Tile_{tileIndex}";
             // idのタイルの情報を取得
-            var tileInfo = tileMap.Asset.tileInfos[tileMap.Map[tileIndex]];
+            var tileInfo = asset.tileInfos[tileMap.Map[tileIndex]];
             // タイルコンテナーに追加
             tileContainer.Add(tile);
             // 爆弾なら赤にする

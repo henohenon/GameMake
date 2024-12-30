@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+// アイテムとマップのレートを持ち、ゲームのランダム要素のレートを統合して保有するクラス
 [CreateAssetMenu(fileName = "GameRateData", menuName = "GameRateData")]
 public class GameRateAsset : ScriptableObject
 {
@@ -54,7 +55,9 @@ public class EachTileInfo
 
 public enum TileType
 {
-    Normal,
-    Item,
+    Safety,
     Bomb,
+    BlueItem,
+    YellowItem,
+    PurpleItem,
 }

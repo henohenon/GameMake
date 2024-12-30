@@ -1,67 +1,68 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Alchemy.Inspector;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[Serializable]
 public class SquareTileMap
 {
-    public readonly GameRateAsset Asset;
-    public readonly int Width;
-    public readonly int Height;
-    private readonly int[] _map;
+    public int width;
+    public int height;
+    [SerializeField]
+    private int[] map;
     
-    public int[] Map => _map;
+    public int[] Map => map;
 
     // スタート位置を指定するコンストラクタ
     public SquareTileMap(GameRateAsset asset, int width, int height, Vector2Int start)
     {
-        Asset = asset;
-        Width = width;
-        Height = height;
+        this.width = width;
+        this.height = height;
         
-        _map = new int[Width * Height];
-        GenerateMap(start);
+        map = new int[width * height];
+        GenerateMap(asset, start);
     }
-    // コンストラクタ
+    // 完全ランダムなマップを生成するコンストラクタ
     public SquareTileMap(GameRateAsset asset, int width, int height)
     {
-        Asset = asset;
-        Width = width;
-        Height = height;
+        this.width = width;
+        this.height = height;
         
-        _map = new int[Width * Height];
-        GenerateMap();
+        map = new int[width * height];
+        GenerateMap(asset);
     }
     
     // 完全ランダムなマップを生成
-    private void GenerateMap()
+    private void GenerateMap(GameRateAsset asset)
     {
-        for (var i = 0; i < _map.Length; i++)
+        for (var i = 0; i < map.Length; i++)
         {
             // ランダムなタイルを設定
-            _map[i] = Asset.GetRandomIndex();
+            map[i] = asset.GetRandomIndex();
         }
     }
     
     // スタート位置が絶対安全なマップを生成
-    private void GenerateMap(Vector2Int start)
+    private void GenerateMap(GameRateAsset asset, Vector2Int start)
     {
         // スタート地点のタイルIDを取得
-        var startId = MapTileCalc.GetTileId(start, Width);
+        var startId = MapTileCalc.GetTileId(start, width);
         
         // マップを生成
-        for (var i = 0; i < _map.Length; i++)
+        for (var i = 0; i < map.Length; i++)
         {
             // スタート地点のタイルIDの場合
             if (i == startId)
             {
                 // デフォルトのタイルを設定
-                _map[i] = Asset.defaultTile;
+                map[i] = asset.defaultTile;
             }
             else
             {
                 // ランダムなタイルを設定
-                _map[i] = Asset.GetRandomIndex();
+                map[i] = asset.GetRandomIndex();
             }
         }
     }

@@ -46,7 +46,7 @@ public class TilesManager : MonoBehaviour
         // タイルマップをUIに書き込む
         foreach (var map in shuffledMaps)
         {
-            uiManager.WriteMap(map);
+            uiManager.WriteMap(gameRate, map);
         }
     }
     
@@ -68,8 +68,8 @@ public class TilesManager : MonoBehaviour
             var tileInfo = asset.tileInfos[map.Map[i]];
             // タイルタイルの座標を計算
             var tilePosition = MapTileCalc.GetTilePosition(i, length); // タイルタイルの座標を取得
-            var tileX = tilePosition.x - map.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
-            var tileZ = tilePosition.y - map.Height / 2;
+            var tileX = tilePosition.x - map.width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
+            var tileZ = tilePosition.y - map.height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
 

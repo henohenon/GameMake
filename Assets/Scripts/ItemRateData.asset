@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c0a0a9df76df3409d345297ecebb5b, type: 3}
+  m_Name: ItemRateData
+  m_EditorClassIdentifier: 
+  blueItemRate:
+    itemRateInfos: []
+    itemIcons: []
+    maxItemNum: 5
+    minItemNum: 3
+  yellowItemRate:
+    itemRateInfos: []
+    numbIcons: []
+    calcIcons: []
+    maxResultNum: 3
+    minResultNum: 1
+    maxCalcNumb: 3
+  purpleItemRate:
+    itemRateInfos: []
+    calcIcons: []
+    maxResultNum: 3
+    minResultNum: 1
+    maxIconNumb: 3
+    minIconNumb: 0
+  blueItemTilePrefab: {fileID: 0}
+  yellowItemTilePrefab: {fileID: 0}
+  purpleItemTilePrefab: {fileID: 0}

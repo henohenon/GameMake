@@ -8,7 +8,9 @@ using UnityEngine.Serialization;
 public class GameRateAsset : ScriptableObject
 {
     public EachTileInfo[] tileInfos;
-    public int _defaultTile = 0;
+    public int defaultTile = 0;
+    public ItemRateAsset itemRateAsset;
+    
     [NonSerialized] // シリアライズ(保存)しない
     private int _rateSum = -1;
     
@@ -41,7 +43,7 @@ public class GameRateAsset : ScriptableObject
     }
 }
 
-// 
+
 [Serializable] // クラスはserializableをつけるとインスペクターでいじれるようになる(シリアル化可能な変数で構成されている場合に限る)
 public class EachTileInfo
 {
@@ -57,4 +59,3 @@ public enum TileType
     Item,
     Bomb,
 }
-

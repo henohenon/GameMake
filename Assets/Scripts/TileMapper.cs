@@ -36,7 +36,7 @@ public class SquareTileMap
             if (i == startId)
             {
                 // デフォルトのタイルを設定
-                _map[i] = Asset._defaultTile;
+                _map[i] = Asset.defaultTile;
             }
             else
             {

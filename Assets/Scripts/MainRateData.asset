@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: MainRateData
   m_EditorClassIdentifier: 
   tileInfos:
-  - tilePrefab: {fileID: 3287875108102595959, guid: c97752b3067d98943b095621d821cbbc,
-      type: 3}
-    rate: 2
-    tileType: 3
   - tilePrefab: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
       type: 3}
     rate: 8
-    tileType: 1
-  _defaultTile: 1
+    tileType: 0
+  - tilePrefab: {fileID: 3287875108102595959, guid: c97752b3067d98943b095621d821cbbc,
+      type: 3}
+    rate: 2
+    tileType: 2
+  defaultTile: 0
+  itemRateAsset: {fileID: 11400000, guid: dbb6337f1c23a514eb2d4173d8810da2, type: 2}

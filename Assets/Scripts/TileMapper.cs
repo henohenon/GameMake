@@ -12,8 +12,8 @@ public class SquareTileMap
     
     public int[] Map => _map;
 
-    // コンストラクタ
-    public SquareTileMap(GameRateAsset asset, Vector2Int start, int width, int height)
+    // スタート位置を指定するコンストラクタ
+    public SquareTileMap(GameRateAsset asset, int width, int height, Vector2Int start)
     {
         Asset = asset;
         Width = width;
@@ -22,8 +22,28 @@ public class SquareTileMap
         _map = new int[Width * Height];
         GenerateMap(start);
     }
+    // コンストラクタ
+    public SquareTileMap(GameRateAsset asset, int width, int height)
+    {
+        Asset = asset;
+        Width = width;
+        Height = height;
+        
+        _map = new int[Width * Height];
+        GenerateMap();
+    }
     
-
+    // 完全ランダムなマップを生成
+    private void GenerateMap()
+    {
+        for (var i = 0; i < _map.Length; i++)
+        {
+            // ランダムなタイルを設定
+            _map[i] = Asset.GetRandomIndex();
+        }
+    }
+    
+    // スタート位置が絶対安全なマップを生成
     private void GenerateMap(Vector2Int start)
     {
         // スタート地点のタイルIDを取得

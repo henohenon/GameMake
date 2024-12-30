@@ -54,7 +54,6 @@ public class EachTileInfo
 
 public enum TileType
 {
-    First,
     Normal,
     Item,
     Bomb,

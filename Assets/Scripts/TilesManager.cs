@@ -9,8 +9,6 @@ using UnityEngine.Serialization;
 public class TilesManager : MonoBehaviour
 {
     [SerializeField]
-    private GameRateAsset firstAsset;
-    [SerializeField]
     private GameRateAsset gameRate;
     [SerializeField]
     private int length = 9; // 一片の長さ。length*lengthのマスが生成される
@@ -27,15 +25,34 @@ public class TilesManager : MonoBehaviour
     {
         // タイルタイルの配列指定の長さで初期化
         _tiles = new TileController[length * length];
-        // 開始位置判定用のタイルタイルを生成
-        CreateMaps(firstAsset, Vector2Int.zero);
-        // マップをUIに書き込む
-        uiManager.WriteMap(_squareTileMap);
+        
+        // アセットと開始位置、長さを指定してMapを生成
+        _squareTileMap = new SquareTileMap(gameRate, length, length);
+        // 3dオブジェクトを生成
+        Create3dMap(gameRate, _squareTileMap);
+        
+        // タイルマップのUIをクリア
+        uiManager.ClearMaps();
+        // タイルマップの配列を作成
+        var maps = new SquareTileMap[]
+        {
+            _squareTileMap,
+            new (gameRate, length, length),
+            new (gameRate, length, length)
+        };
+        // タイルマップをシャッフル
+        var shuffledMaps = maps.OrderBy(m => Random.value).ToArray();
+        
+        // タイルマップをUIに書き込む
+        foreach (var map in shuffledMaps)
+        {
+            uiManager.WriteMap(map);
+        }
     }
-
-    private void CreateMaps(GameRateAsset asset, Vector2Int startPos)
+    
+    private void Create3dMap(GameRateAsset asset, SquareTileMap map)
     {
-        // タイルタイルの配列を生成
+        // 既存のタイルを破棄
         foreach (var tile in _tiles)
         {
             if (tile != null)
@@ -44,18 +61,15 @@ public class TilesManager : MonoBehaviour
             }
         }
         
-        // アセットと開始位置、長さを指定してMapを生成
-        _squareTileMap = new SquareTileMap(asset, startPos, length, length);
-        
         // マップのデータに沿ってタイルタイルプレファブのインスタンスを生成
-        for (int i = 0; i < _squareTileMap.Map.Length; i ++)
+        for (int i = 0; i < map.Map.Length; i ++)
         {
             // タイル情報を取得
-            var tileInfo = asset.tileInfos[_squareTileMap.Map[i]];
+            var tileInfo = asset.tileInfos[map.Map[i]];
             // タイルタイルの座標を計算
             var tilePosition = MapTileCalc.GetTilePosition(i, length); // タイルタイルの座標を取得
-            var tileX = tilePosition.x - _squareTileMap.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
-            var tileZ = tilePosition.y - _squareTileMap.Height / 2;
+            var tileX = tilePosition.x - map.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
+            var tileZ = tilePosition.y - map.Height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
 
@@ -68,50 +82,9 @@ public class TilesManager : MonoBehaviour
             // タイルタイルを配列に格納
             _tiles[i] = instantiate;
             
-            // 最初の位置選択の場合
-            if (tileInfo.tileType == TileType.First)
-            {
-                // タイルタイルが裏返されたときのイベントを購読し、初期位置選択時の処理を実行
-                instantiate.OnFlipped.Subscribe(OnFirstFlipped);
-            }
-            else
-            {
-                // タイルタイルが裏返されたときのイベントを購読し、(本番)タイルタイルが裏返されたときの処理を実行
-                instantiate.OnFlipped.Subscribe(OnTileFlipped);
-            }
+            // タイルタイルが裏返されたときのイベントを購読し、(本番)タイルタイルが裏返されたときの処理を実行
+            instantiate.OnFlipped.Subscribe(OnTileFlipped);
         }
-    }
-
-    // タイルタイルが裏返されたときの処理
-    private async void OnFirstFlipped(int tileId)
-    {
-        // 選択されたタイルから初期位置を取得
-        var tilePosition = MapTileCalc.GetTilePosition(tileId, length);
-        // 本番タイルタイルを生成
-        CreateMaps(gameRate, tilePosition);
-        
-        // タイルマップのUIをクリア
-        uiManager.ClearMaps();
-        // タイルマップの配列を作成
-        var maps = new SquareTileMap[]
-        {
-            _squareTileMap,
-            new (gameRate, tilePosition, length, length),
-            new (gameRate, tilePosition, length, length)
-        };
-        // タイルマップをシャッフル
-        var shuffledMaps = maps.OrderBy(m => Random.value).ToArray();
-        
-        // タイルマップをUIに書き込む
-        foreach (var map in shuffledMaps)
-        {
-            uiManager.WriteMap(map);
-        }
-
-        // タイルインスタンスのStartメソッドが呼ばれるのを待つため、1フレーム待機(Startをなくしたほうがきれいではある)
-        await UniTask.DelayFrame(1);
-        // 初期位置(選択された)のタイルを裏返す
-        _tiles[tileId].Flip();
     }
     
     // タイルタイルが裏返されたときの処理
@@ -177,14 +150,4 @@ public class TilesManager : MonoBehaviour
 
         return sum;
     }
-    /*
-    private void CheckForOnlyBombs()
-{
-    if (onlyBombs)
-    {
-        Debug.Log("Clear! All tiles are bombs.");
-        // クリア処理をここに追加
-    }
-}
-    */
 }

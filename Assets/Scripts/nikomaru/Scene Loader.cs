@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 
 /// <summary>
-/// ƒ{ƒ^ƒ“ƒCƒxƒ“ƒg‚ÌÛ‚ÌƒV[ƒ“‘JˆÚ‚ðs‚Á‚Ä‚Ü‚·BÅ‰‚ÌBoolean‚ÍƒAƒ^ƒbƒ`‚³‚ê‚éƒIƒuƒWƒFƒNƒg‚É‚æ‚Á‚Ä—LŒø/–³Œø‚Ì‚à‚Ì‚ª‚ ‚é‚Ì‚Å‚»‚ê‚ç‚ð•ª‚¯‚é‚½‚ß‚É‚ ‚è‚Ü‚·B
+/// ãƒœã‚¿ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®éš›ã®ã‚·ãƒ¼ãƒ³é·ç§»ã‚’è¡Œã£ã¦ã¾ã™ã€‚æœ€åˆã®Booleanã¯ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚ˆã£ã¦æœ‰åŠ¹/ç„¡åŠ¹ã®ã‚‚ã®ãŒã‚ã‚‹ã®ã§ãã‚Œã‚‰ã‚’åˆ†ã‘ã‚‹ãŸã‚ã«ã‚ã‚Šã¾ã™ã€‚
 /// </summary>
-public class SceneLoader : MonoBehaviour//ƒjƒRƒ}ƒ‹
+public class SceneLoader : MonoBehaviour//ãƒ‹ã‚³ãƒžãƒ«
 {
     public bool isTitle;
     public bool isCredit;
@@ -21,7 +21,7 @@ public class SceneLoader : MonoBehaviour//ƒjƒRƒ}ƒ‹
 
 
         if (isTitle)
-        {//ƒƒCƒ“ƒƒjƒ…[
+        {//ãƒ¡ã‚¤ãƒ³ãƒ¡ãƒ‹ãƒ¥ãƒ¼
             GameObject creditScreen = GameObject.Find("UIDocument_Credit");
             GameObject test = GameObject.Find("UIDocument");
             creditScreen.GetComponent<UIDocument>().enabled = false;
@@ -40,12 +40,12 @@ public class SceneLoader : MonoBehaviour//ƒjƒRƒ}ƒ‹
         }
 
         if (isGameover) 
-        { //ƒQ[ƒ€ƒI[ƒo[‰æ–Ê
+        { //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ç”»é¢
             root.Q<Button>("Button_GameoverToMenu").clicked += () => SceneManager.LoadScene("TitleScene");
         }
 
         if (isClear)
-        { //ƒNƒŠƒA‰æ–Ê
+        { //ã‚¯ãƒªã‚¢ç”»é¢
             root.Q<Button>("Button_ClearToMenu").clicked += () => SceneManager.LoadScene("TitleScene");
         }
     }

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "CardRateData", menuName = "CardRateData")]
-public class CardRateAsset : ScriptableObject
+[CreateAssetMenu(fileName = "GameRateData", menuName = "GameRateData")]
+public class GameRateAsset : ScriptableObject
 {
-    public EachCardInfo[] cardInfos;
-    public int _defaultCard = 0;
+    public EachTileInfo[] tileInfos;
+    public int _defaultTile = 0;
     [NonSerialized] // シリアライズ(保存)しない
     private int _rateSum = -1;
     
@@ -18,19 +18,19 @@ public class CardRateAsset : ScriptableObject
         {
             // 各レートを合算していく
             _rateSum = 0;
-            foreach (var cardRate in cardInfos)
+            foreach (var tileInfo in tileInfos)
             {
-                _rateSum += cardRate.rate;
+                _rateSum += tileInfo.rate;
             }
         }
 
         // 0~最大値の間でランダムな値を取得
         var randomValue = UnityEngine.Random.Range(0, _rateSum);
-        for (int i = 0; i < cardInfos.Length; i++)
+        for (int i = 0; i < tileInfos.Length; i++)
         {
             // ランダムな値からレートを引いていく
-            randomValue -= cardInfos[i].rate;
-            // ランダムな値が0未満になったらそのカードを返す
+            randomValue -= tileInfos[i].rate;
+            // ランダムな値が0未満になったらそのタイルを返す
             if (randomValue < 0)
             {
                 return i;
@@ -41,17 +41,20 @@ public class CardRateAsset : ScriptableObject
     }
 }
 
+// 
 [Serializable] // クラスはserializableをつけるとインスペクターでいじれるようになる(シリアル化可能な変数で構成されている場合に限る)
-public class EachCardInfo
+public class EachTileInfo
 {
-    public CardController cardPrefab;
+    public TileController tilePrefab;
     public int rate;
-    public CardType cardType;
+    public TileType tileType;
 }
 
-public enum CardType
+public enum TileType
 {
     First,
     Normal,
+    Item,
     Bomb,
 }
+

@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class SquareTileMap
 {
-    public readonly CardRateAsset Asset;
+    public readonly GameRateAsset Asset;
     public readonly int Width;
     public readonly int Height;
     private readonly int[] _map;
@@ -13,7 +13,7 @@ public class SquareTileMap
     public int[] Map => _map;
 
     // コンストラクタ
-    public SquareTileMap(CardRateAsset asset, Vector2Int start, int width, int height)
+    public SquareTileMap(GameRateAsset asset, Vector2Int start, int width, int height)
     {
         Asset = asset;
         Width = width;
@@ -26,21 +26,21 @@ public class SquareTileMap
 
     private void GenerateMap(Vector2Int start)
     {
-        // スタート地点のカードIDを取得
-        var startId = MapTileCalc.GetCardId(start, Width);
+        // スタート地点のタイルIDを取得
+        var startId = MapTileCalc.GetTileId(start, Width);
         
         // マップを生成
         for (var i = 0; i < _map.Length; i++)
         {
-            // スタート地点のカードIDの場合
+            // スタート地点のタイルIDの場合
             if (i == startId)
             {
-                // デフォルトのカードを設定
-                _map[i] = Asset._defaultCard;
+                // デフォルトのタイルを設定
+                _map[i] = Asset._defaultTile;
             }
             else
             {
-                // ランダムなカードを設定
+                // ランダムなタイルを設定
                 _map[i] = Asset.GetRandomIndex();
             }
         }
@@ -49,14 +49,14 @@ public class SquareTileMap
 
 public static class MapTileCalc
 {
-    public static Vector2Int GetCardPosition(int cardId, int width)
+    public static Vector2Int GetTilePosition(int tileId, int width)
     {
-        var x = cardId % width;// 余りを求める
-        var y = cardId / width;// 商を求める
+        var x = tileId % width;// 余りを求める
+        var y = tileId / width;// 商を求める
         return new Vector2Int(x, y);
     }
     
-    public static int GetCardId(Vector2Int position, int width)
+    public static int GetTileId(Vector2Int position, int width)
     {
         return position.y * width + position.x;
     }
@@ -69,19 +69,19 @@ public static class MapTileCalc
     public static int GetInvertXId(Vector2Int position, int height)
     {
         var invertPosition = GetInvertXPosition(position, height);
-        return GetCardId(invertPosition, height);
+        return GetTileId(invertPosition, height);
     }
     
-    public static Vector2Int GetInvertXPosition(int cardId, int width)
+    public static Vector2Int GetInvertXPosition(int tileId, int width)
     {
-        var cardPosition = GetCardPosition(cardId, width);
-        return GetInvertXPosition(cardPosition, width);
+        var tilePosition = GetTilePosition(tileId, width);
+        return GetInvertXPosition(tilePosition, width);
     }
 
-    public static int GetInvertXId(int cardId, int width)
+    public static int GetInvertXId(int tileId, int width)
     {
-        var cardPosition = GetCardPosition(cardId, width);
-        return GetInvertXId(cardPosition, width);
+        var tilePosition = GetTilePosition(tileId, width);
+        return GetInvertXId(tilePosition, width);
     }
     
     
@@ -93,25 +93,25 @@ public static class MapTileCalc
     public static int GetInvertYId(Vector2Int position, int width)
     {
         var invertPosition = GetInvertYPosition(position, width);
-        return GetCardId(invertPosition, width);
+        return GetTileId(invertPosition, width);
     }
     
-    public static Vector2Int GetInvertYPosition(int cardId, int width, int height)
+    public static Vector2Int GetInvertYPosition(int tileId, int width, int height)
     {
-        return GetInvertYPosition(GetCardPosition(cardId, width), height);
+        return GetInvertYPosition(GetTilePosition(tileId, width), height);
     }
 
-    public static int GetInvertYId(int cardId, int width)
+    public static int GetInvertYId(int tileId, int width)
     {
-        var cardPosition = GetCardPosition(cardId, width);
-        return GetInvertYId(cardPosition, width);
+        var tilePosition = GetTilePosition(tileId, width);
+        return GetInvertYId(tilePosition, width);
     }
     
-    public static List<int> GetAroundCardIds(int cardId, int width, int length)
+    public static List<int> GetAroundTileIds(int tileId, int width, int length)
     {
-        // 指定のタイルカードの座標を取得
-        var position = GetCardPosition(cardId, width);
-        // 指定のタイルカードの周囲の座標の一覧を作成
+        // 指定のタイルタイルの座標を取得
+        var position = GetTilePosition(tileId, width);
+        // 指定のタイルタイルの周囲の座標の一覧を作成
         var aroundPositions = new []
         {
             position + Vector2Int.up,
@@ -123,21 +123,21 @@ public static class MapTileCalc
             position + Vector2Int.down + Vector2Int.right,
             position + Vector2Int.down + Vector2Int.left
         };
-        // 周囲のタイルカードのIDを取得
-        var aroundCardIds = new List<int>();
+        // 周囲のタイルタイルのIDを取得
+        var aroundTileIds = new List<int>();
         foreach (var aroundPosition in aroundPositions)
         {
-            // タイルカードの座標が範囲外の場合はスキップ
+            // タイルタイルの座標が範囲外の場合はスキップ
             if(aroundPosition.x < 0 || aroundPosition.x >= width) continue;
             if(aroundPosition.y < 0 || aroundPosition.y >= length / width) continue;
-            // タイルカードのIDを取得
-            var aroundCardId = GetCardId(aroundPosition, width);
-            // タイルカードのIDが範囲外の場合はスキップ
-            if(aroundCardId < 0 || aroundCardId >= length) continue;
-            // 周囲のタイルカードのIDを追加
-            aroundCardIds.Add(aroundCardId);
+            // タイルタイルのIDを取得
+            var aroundTileId = GetTileId(aroundPosition, width);
+            // タイルタイルのIDが範囲外の場合はスキップ
+            if(aroundTileId < 0 || aroundTileId >= length) continue;
+            // 周囲のタイルタイルのIDを追加
+            aroundTileIds.Add(aroundTileId);
         }
-        return aroundCardIds;
+        return aroundTileIds;
     }
 
 }

@@ -34,26 +34,26 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < tileMap.Map.Length; i++)
         {
             // タイルのインデックスをフラグに応じて反転
-            var cardIndex = i;
+            var tileIndex = i;
             if (rightToLeft)
             {
-                cardIndex = MapTileCalc.GetInvertXId(cardIndex, tileMap.Width);
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, tileMap.Width);
             }
             if (bottomToTop)
             {
-                cardIndex = MapTileCalc.GetInvertYId(cardIndex, tileMap.Height);
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, tileMap.Height);
             }
             
             // タイルのテンプレートを複製
             var tile = tileAsset.CloneTree();
             // idからタイルの名前を設定
-            tile.name = $"Tile_{cardIndex}";
+            tile.name = $"Tile_{tileIndex}";
             // idのタイルの情報を取得
-            var tileInfo = tileMap.Asset.cardInfos[tileMap.Map[cardIndex]];
+            var tileInfo = tileMap.Asset.tileInfos[tileMap.Map[tileIndex]];
             // タイルコンテナーに追加
             tileContainer.Add(tile);
             // 爆弾なら赤にする
-            if (tileInfo.cardType == CardType.Bomb)
+            if (tileInfo.tileType == TileType.Bomb)
             {
                 tile.AddToClassList("red");
             }

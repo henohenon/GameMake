@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat("SE", volume);
     }
     
-    public void PlayFlipCardEffect()
+    public void PlayFlipTileEffect()
     {
         audioSource.PlayOneShot(flipSound);
     }

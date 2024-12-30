@@ -21,8 +21,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private InputActionReference CameraAction;
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
-
-
+    
 
     private Rigidbody _rb;
 

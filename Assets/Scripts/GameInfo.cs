@@ -9,6 +9,9 @@ public class GameInfo
     
     public GameInfo(int width, int height, GameRateAsset rateAsset, uint seed)
     {
-        MapInfo = new MapInfo(width, height, rateAsset.tileRateInfos, seed);
+        // シード値から乱数生成器を生成
+        var random = new Xoshiro256StarStarRandom(seed);
+
+        MapInfo = new MapInfo(width, height, rateAsset.tileRateInfos, random);
     }
 }

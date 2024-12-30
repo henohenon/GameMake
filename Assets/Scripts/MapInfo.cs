@@ -9,28 +9,21 @@ public class MapInfo
     public readonly int Height;
     public readonly int[] Tiles;
     
-    public MapInfo(int width, int height, EachTileInfo[] tileRateInfos, uint seed)
+    public MapInfo(int width, int height, EachTileInfo[] tileRateInfos, IRandom random)
     {
         Width = width;
         Height = height;
         Tiles = new int[width * height];
-        
-        // シード値から乱数生成器を生成
-        var random = new Xoshiro256StarStarRandom(seed);
-     
         // マップの生成
         CreateRandomMap(random, tileRateInfos);
     }
     
-    public MapInfo(int length, EachTileInfo[] tileRateInfos, uint seed)
+    public MapInfo(int length, EachTileInfo[] tileRateInfos, IRandom random)
     {
         Width = length;
         Height = length;
         Tiles = new int[length * length];
         
-        // シード値から乱数生成器を生成
-        var random = new Xoshiro256StarStarRandom(seed);
-
         // マップの生成
         CreateRandomMap(random, tileRateInfos);
     }

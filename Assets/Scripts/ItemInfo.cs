@@ -18,7 +18,6 @@ public class ItemInfo
     
     public readonly ItemType[] purpleItems;
     public readonly List<int>[] purpleResultItems;
-    public PurplePuzzleIcon[] purplePuzzleIcons;
 
     public ItemInfo(ItemRateAsset asset, IRandom random)
     {

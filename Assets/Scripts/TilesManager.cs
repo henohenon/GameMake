@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Alchemy.Inspector;
 using Cysharp.Threading.Tasks;
 using R3;
 using RandomExtensions;
@@ -11,7 +12,7 @@ using UnityEngine.Serialization;
 
 public class TilesManager : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, InlineEditor]
     private GameRateAsset gameRate;
     [SerializeField]
     private int length = 9; // 一片の長さ。length*lengthのマスが生成される
@@ -83,16 +84,18 @@ public class TilesManager : MonoBehaviour
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
 
             // タイルタイルを生成
-            var instantiate = Instantiate(tileInfo.tilePrefab, tileVector, tileQuaternion);
+            var tileController = Instantiate(tileInfo.tilePrefab, tileVector, tileQuaternion);
+            var tileObjIdx = RandomEx.Shared.NextInt(0, gameRate.randomTiles.Length);
+            var tileObjInstance = Instantiate(gameRate.randomTiles[tileObjIdx]);
             // タイルタイルを初期化
-            instantiate.Initialize(i, tileInfo.tileType);
+            tileController.Initialize(i, tileInfo.tileType, tileObjInstance);
             // タイルタイルをこのスクリプトがアタッチされているオブジェクトの子にする
-            instantiate.transform.SetParent(transform);
+            tileController.transform.SetParent(transform);
             // タイルタイルを配列に格納
-            _tiles[i] = instantiate;
+            _tiles[i] = tileController;
             
             // タイルタイルが裏返されたときのイベントを購読し、(本番)タイルタイルが裏返されたときの処理を実行
-            instantiate.OnFlipped.Subscribe(OnTileFlipped);
+            tileController.OnFlipped.Subscribe(OnTileFlipped);
         }
     }
     
@@ -124,7 +127,7 @@ public class TilesManager : MonoBehaviour
                 var aroundTiles = MapTileCalc.GetAroundTileIds(tileId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                 foreach (var aroundTileId in aroundTiles)
                 {
-                    _tiles[aroundTileId].Flip();
+                    _tiles[aroundTileId].Open();
                 }
             }
             else

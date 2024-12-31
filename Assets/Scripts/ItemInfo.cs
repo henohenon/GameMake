@@ -12,12 +12,12 @@ public class ItemInfo
 {
     public readonly BlueResultItem[] BlueResultItems;
     
-    public readonly ItemType[] yellowItems;
-    public readonly List<int>[] yellowResultItems;
-    public readonly string[] yellowPuzzleIcons;
+    public readonly ItemType[] YellowItems;
+    public readonly List<int>[] YellowResultItems;
+    public readonly string[] YellowPuzzleIcons;
     
-    public readonly ItemType[] purpleItems;
-    public readonly List<int>[] purpleResultItems;
+    public readonly ItemType[] PurpleItems;
+    public readonly List<int>[] PurpleResultItems;
 
     public ItemInfo(ItemRateAsset asset, IRandom random)
     {
@@ -48,19 +48,19 @@ public class ItemInfo
         // 今回のアイテムの重みつきリスト
         var yellowResultItemsArray = new WeightedList<int>();
         // 黄色アイテムの配列を生成
-        yellowItems = new ItemType[yellowItemCount];
+        YellowItems = new ItemType[yellowItemCount];
         for(var i = 0; i < yellowItemCount; i++)
         {
             var item = yellowItemArray.GetItem(random);
             yellowItemArray.Remove(item);
             // 今回使用するアイテムの種類を追加
-            yellowItems[i] = item.itemType;
+            YellowItems[i] = item.itemType;
             // 今回のアイテムの重みつきリストに追加
             yellowResultItemsArray.Add(i, item.rate);
         }
         
         // 黄色アイテムの計算結果のシャッフル配列の生成
-        yellowResultItems = new List<int>[yellowItemCount];
+        YellowResultItems = new List<int>[yellowItemCount];
         var yellowResultEnumerable = Enumerable.Range(asset.yellowItemRate.MinResultNum, asset.yellowItemRate.MaxResultNum);
         var yellowResultArray = yellowResultEnumerable.Shuffle(random).ToArray();
         for(var i = 0; i < yellowResultArray.Length; i++)
@@ -69,13 +69,13 @@ public class ItemInfo
             // ひとつづつアイテムが入るように
             if(i < yellowItemCount)
             {
-                yellowResultItems[i] = new List<int> { resultIndex };
+                YellowResultItems[i] = new List<int> { resultIndex };
             }
             else
             {
                 // 重みつきリストからランダムに取得
                 var index = yellowResultItemsArray.GetItem(random);
-                yellowResultItems[index].Add(resultIndex);
+                YellowResultItems[index].Add(resultIndex);
             }
         }
         // 黄色アイテムの記号のシャッフル配列の生成
@@ -83,10 +83,10 @@ public class ItemInfo
         yellowNumbIcons = yellowNumbIcons.Shuffle(random).ToArray();
         // 黄色アイテムの記号の配列を生成
         var yellowNumbCount = asset.yellowItemRate.MaxNumbCount - asset.yellowItemRate.MinNumbCount;
-        yellowPuzzleIcons = new string[yellowNumbCount];
+        YellowPuzzleIcons = new string[yellowNumbCount];
         for(var i = 0; i < yellowNumbCount; i++)
         {
-            yellowPuzzleIcons[i] = yellowNumbIcons.ElementAt(i);
+            YellowPuzzleIcons[i] = yellowNumbIcons.ElementAt(i);
         }
         
         // 紫色アイテムの種類の重みつきリストを生成
@@ -94,18 +94,18 @@ public class ItemInfo
         // 紫色アイテムの数
         var purpleItemCount = asset.purpleItemRate.itemCount;
         // 紫色アイテムの配列を生成
-        purpleItems = new ItemType[purpleItemCount];
+        PurpleItems = new ItemType[purpleItemCount];
         // 今回のアイテムの重みつきリスト
         var purpleResultItemsArray = new WeightedList<int>();
         for(var i = 0; i < purpleItemCount; i++)
         {
             var item = purpleItemArray.GetItem(random);
             purpleItemArray.Remove(item);
-            purpleItems[i] = item.itemType;
+            PurpleItems[i] = item.itemType;
             purpleResultItemsArray.Add(i, item.rate);
         }
         // 紫色アイテムの計算結果の数をランダムに設定
-        purpleResultItems = new List<int>[purpleItemCount];
+        PurpleResultItems = new List<int>[purpleItemCount];
         var purpleResultEnumerable = Enumerable.Range(asset.purpleItemRate.minIconNumb, asset.purpleItemRate.maxIconNumb);
         var purpleResultArray = purpleResultEnumerable.Shuffle(random).ToArray();
         // 紫色アイテムの計算結果の数をランダムに設定
@@ -114,12 +114,12 @@ public class ItemInfo
             var resultIndex = purpleResultArray[i];
             if(i < purpleItemCount)
             {
-                purpleResultItems[i] = new List<int> { resultIndex };
+                PurpleResultItems[i] = new List<int> { resultIndex };
             }
             else
             {
                 var index = purpleResultItemsArray.GetItem(random);
-                purpleResultItems[index].Add(resultIndex);
+                PurpleResultItems[index].Add(resultIndex);
             }
         }
     }

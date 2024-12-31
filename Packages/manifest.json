@@ -57,6 +57,13 @@
         "com.cysharp",
         "com.github-glitchenzo.nugetforunity"
       ]
+    },
+    {
+      "name": "Arvtesh",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "com.unityfx"
+      ]
     }
   ]
 }

@@ -77,7 +77,7 @@ MonoBehaviour:
   purplePuzzleIcons:
   - calcType: 0
     icon: "\u25B3"
-    description: 
+    description: "\u304A\u306B\u304E\u308A"
   blueItemTilePrefab: {fileID: 0}
   yellowItemTilePrefab: {fileID: 0}
   purpleItemTilePrefab: {fileID: 0}

@@ -6,6 +6,7 @@ using Scriptable;
 public class GameInfo
 {
     public readonly MapInfo MapInfo;
+    public readonly ItemInfo ItemInfo;
     
     public GameInfo(int width, int height, GameRateAsset rateAsset, uint seed)
     {
@@ -13,5 +14,6 @@ public class GameInfo
         var random = new Xoshiro256StarStarRandom(seed);
 
         MapInfo = new MapInfo(width, height, rateAsset.tileRateInfos, random);
+        ItemInfo = new ItemInfo(rateAsset.itemRateAsset, random);
     }
 }

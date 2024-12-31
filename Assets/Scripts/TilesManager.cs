@@ -34,8 +34,9 @@ public class TilesManager : MonoBehaviour
         Debug.Log("Seed: " + seed);
         // ゲーム情報を初期化
         _gameInfo = new GameInfo(length, length, gameRate, seed);
-        
-        ItemInfoLogger.LogItem(_gameInfo.ItemInfo, gameRate.itemRateAsset);
+        // ログを出力
+        InfoLogger.LogItem(_gameInfo.ItemInfo, gameRate.itemRateAsset);
+        InfoLogger.LogMap(_gameInfo.MapInfo, gameRate);
         
         // 3dオブジェクトを生成
         Create3dMap(gameRate, _gameInfo.MapInfo);

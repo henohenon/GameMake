@@ -31,7 +31,7 @@ namespace Scriptable
     public class ItemRateInfo : RateItemBase
     {
         public ItemType itemType;
-        public string itemText;
+        public string description;
     }
     
     [Serializable]
@@ -171,11 +171,6 @@ namespace Scriptable
     {
         public PurplePuzzleCalcType calcType;
         public string icon;
-
-        public PurplePuzzleIcon(PurplePuzzleCalcType calcType, string icon)
-        {
-            this.calcType = calcType;
-            this.icon = icon;
-        }
+        public string description;
     }
 }

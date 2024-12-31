@@ -8,45 +8,38 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// ボタンイベントの際のシーン遷移を行ってます。最初のBooleanはアタッチされるオブジェクトによって有効/無効のものがあるのでそれらを分けるためにあります。
 /// </summary>
+[RequireComponent(typeof(UIDocument))]
 public class TitleUIManager : MonoBehaviour//ニコマル
 {
-    public bool isTitle;
-    public bool isCredit;
-    public bool isClear;
-    public bool isGameover;
-
+    private VisualElement creditScreen;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
+        creditScreen = root.Q<VisualElement>("Credit_Screen");
+        
+        //メインメニュー
+        root.Q<Button>("Button_Credit").clicked += () => SetHiddenCredit(false);
+        root.Q<Button>("Button_Soldier").clicked += LoadGameScene;
+        root.Q<Button>("Button_Commander").clicked += LoadGameScene;
 
+        // クレジット画面
+        root.Q<Button>("Button_CloseCredit").clicked += () => SetHiddenCredit(true);
+    }
+    
+    private void LoadGameScene()
+    {
+        SceneManager.LoadScene("nikomaru");
+    }
 
-        if (isTitle)
-        {//メインメニュー
-            GameObject creditScreen = GameObject.Find("UIDocument_Credit");
-            GameObject test = GameObject.Find("UIDocument");
-            creditScreen.GetComponent<UIDocument>().enabled = false;
-            root.Q<Button>("Button_Options").clicked += () => test.SetActive(false);
-            root.Q<Button>("Button_Soldier").clicked += () => SceneManager.LoadScene("nikomaru");
-            root.Q<Button>("Button_Commander").clicked += () => SceneManager.LoadScene("nikomaru");
-            root.Q<Button>("Button_Credit").clicked += () => creditScreen.GetComponent<UIDocument>().enabled = true;
-
-        }
-
-        if (isCredit)
+    private void SetHiddenCredit(bool isHidden = true)
+    {
+        if (isHidden)
         {
-            GameObject creditScreen = GameObject.Find("UIDocument_Credit");
-            root.Q<Button>("Button_CloseCredit").clicked += () => creditScreen.GetComponent<UIDocument>().enabled = false;
-
+            creditScreen.AddToClassList("hidden");
         }
-
-        if (isGameover) 
-        { //ゲームオーバー画面
-            root.Q<Button>("Button_GameoverToMenu").clicked += () => SceneManager.LoadScene("TitleScene");
-        }
-
-        if (isClear)
-        { //クリア画面
-            root.Q<Button>("Button_ClearToMenu").clicked += () => SceneManager.LoadScene("TitleScene");
+        else
+        {
+            creditScreen.RemoveFromClassList("hidden");
         }
     }
 }

@@ -31,8 +31,12 @@ public class TilesManager : MonoBehaviour
         
         // 乱数のシードを生成
         var seed = GenerateSeed();
+        Debug.Log("Seed: " + seed);
         // ゲーム情報を初期化
         _gameInfo = new GameInfo(length, length, gameRate, seed);
+        
+        ItemInfoLogger.LogItem(_gameInfo.ItemInfo, gameRate.itemRateAsset);
+        
         // 3dオブジェクトを生成
         Create3dMap(gameRate, _gameInfo.MapInfo);
         

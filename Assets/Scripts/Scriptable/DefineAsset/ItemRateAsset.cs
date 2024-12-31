@@ -33,26 +33,33 @@ namespace Scriptable
         public ItemType itemType;
         public string itemText;
     }
+    
+    [Serializable]
+    public abstract class ItemRateBase
+    {
+        public ItemRateInfo[] itemRateInfos;
+        
+        // Dictionaryにしたかったよ私だって。でもUnityのシリアライズができないんだよ。alchemyのシリアライズは挙動が怪しいんだよ。。
+        public ItemRateInfo GetItemRateInfo(ItemType itemType)
+        {
+            return itemRateInfos.First(x => x.itemType == itemType);
+        }
+    }
 
     [Serializable]
-    public class BlueItemRate
+    public class BlueItemRate: ItemRateBase
     {
-        // アイテムの効果の情報
-        public ItemRateInfo[] itemRateInfos;
-
         // パズルのアイコンの情報
         public string[] itemIcons;
 
         [Header("アイテムの数")] public int maxItemCount = 7;
         public int minItemCount = 5;
+        
     }
 
     [Serializable]
-    public class YellowItemRate
+    public class YellowItemRate: ItemRateBase
     {
-        // アイテムの効果の情報
-        public ItemRateInfo[] itemRateInfos;
-
         // パズルのアイコンの情報
         public string[] numbIcons;
 
@@ -76,11 +83,8 @@ namespace Scriptable
     }
 
     [Serializable]
-    public class PurpleItemRate
+    public class PurpleItemRate: ItemRateBase
     {
-        // アイテムの効果の情報
-        public ItemRateInfo[] itemRateInfos;
-
         // パズルのアイコンの情報
         public PurpleCalcIcon[] calcIcons;
 

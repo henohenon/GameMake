@@ -10,5 +10,7 @@
         <ui:Button text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Options" class="ActionButton" style="font-size: 20px;" />
     </ui:VisualElement>
     <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Credit" class="ActionButton" style="width: 120px; font-size: 17px;" />
-    <ui:Instance template="Credit" name="Credit_Screen" class="hidden" style="position: absolute; width: 100%; height: 100%;" />
+    <ui:ScrollView name="Credit_Scroller" class="hidden" style="position: absolute; flex-grow: 1; width: 961px; height: 588px; top: -24px;">
+        <ui:Instance template="Credit" name="Credit_Screen" style="position: absolute; width: 100%; height: 100%;" />
+    </ui:ScrollView>
 </ui:UXML>

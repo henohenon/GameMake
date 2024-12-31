@@ -99,13 +99,12 @@ public class TilesManager : MonoBehaviour
         // タイルタイルが爆弾の場合はゲームオーバー
         if (tileTile.TileType == TileType.Bomb)
         {
-            //Debug.Log("Game Over");
+            Debug.Log("Game Over");
             // プレイヤーの位置とタイルタイルの位置から方向を計算し、プレイヤーに衝撃を与える
             var playerPos = playerController.transform.position;
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
             playerController.Impact(direction);
-            Debug.Log("if");
             
         }
         else
@@ -122,13 +121,11 @@ public class TilesManager : MonoBehaviour
                 {
                     _tiles[aroundTileId].Flip();
                 }
-                Debug.Log("else if");
             }
             else
             {
                 // 周囲に爆弾がある場合は周囲の爆弾の数を表示
                 tileTile.SetText(sum.ToString());
-                Debug.Log("else else");
             }
         }
         //CheckForOnlyBombs();

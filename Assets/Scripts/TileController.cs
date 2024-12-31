@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using R3;
 using RandomExtensions;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class TileController : MonoBehaviour
 {
@@ -17,10 +15,13 @@ public class TileController : MonoBehaviour
     private Subject<int> _onFlipped = new ();
     // 購買のみを公開
     public Observable<int> OnFlipped => _onFlipped;
+    public int defaultLayer;
+    public int selectedLayer;
     
     // 余りこの辺は持たせたくはないが今回は分かりやすさを重視ということで
     private int _tileId;
     public TileType TileType { get; private set; } // getはpublic、setはprivate
+    
     
     private float[] _tileRotationY = {0, 90, 180, 270};
     // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッド
@@ -46,6 +47,12 @@ public class TileController : MonoBehaviour
         _tileObject.SetActive(false);
         // イベントを発行
         _onFlipped.OnNext(_tileId);
+    }
+    
+    public void Select(bool isSelected = true)
+    {
+        if(_isOpened) return; // もし裏返していたら何もしない
+        _tileObject.layer = isSelected ? selectedLayer : defaultLayer;
     }
     
     public void SetText(string text)

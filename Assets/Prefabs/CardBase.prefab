@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4c77edcacf7a54c853ea59f3a01adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frontColor: {r: 0.63529414, g: 1, b: 0.4, a: 0}
-  _backColor: {r: 1, g: 0.9392379, b: 0.5801887, a: 0}
-  _textMesh: {fileID: 5547469695830742409}
+  textMesh: {fileID: 0}
+  defaultLayer: 0
+  selectedLayer: 6

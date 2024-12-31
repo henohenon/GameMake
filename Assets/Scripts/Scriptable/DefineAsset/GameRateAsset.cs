@@ -14,6 +14,8 @@ namespace Scriptable
     {
         public EachTileInfo[] tileRateInfos;
         [InlineEditor,AssetsOnly] public ItemRateAsset itemRateAsset;
+        [AssetsOnly]
+        public GameObject[] randomTiles;
     }
     
     /*

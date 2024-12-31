@@ -167,13 +167,11 @@ namespace Scriptable
     {
         public PurplePuzzleCalcType calcType;
         public string icon;
-        public int number;
 
-        public PurplePuzzleIcon(PurplePuzzleCalcType calcType, string icon, int number)
+        public PurplePuzzleIcon(PurplePuzzleCalcType calcType, string icon)
         {
             this.calcType = calcType;
             this.icon = icon;
-            this.number = number;
         }
     }
 }

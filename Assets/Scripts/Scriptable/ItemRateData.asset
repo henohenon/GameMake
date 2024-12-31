@@ -28,8 +28,8 @@ MonoBehaviour:
     - "\u307B"
     - "\u3078"
     - "\u3068"
-    maxItemNum: 5
-    minItemNum: 3
+    maxItemCount: 2
+    minItemCount: 1
   yellowItemRate:
     itemRateInfos:
     - rate: 1
@@ -49,18 +49,13 @@ MonoBehaviour:
     - "\u3088"
     - "\u305F"
     - "\u308C"
-    maxResultNum: 3
-    minResultNum: 1
+    itemCount: 2
     maxCalcNumb: 3
-  yellowCalcIcons:
+  yellowPuzzleIcons:
   - calcType: 0
     calcText: +
   - calcType: 1
     calcText: '-'
-  - calcType: 2
-    calcText: "\xD7"
-  - calcType: 3
-    calcText: "\xF7"
   purpleItemRate:
     itemRateInfos:
     - rate: 1
@@ -76,10 +71,12 @@ MonoBehaviour:
       calcIcon: "\u56DB"
     - calcType: 2
       calcIcon: "\u4E94"
-    maxResultNum: 3
-    minResultNum: 1
+    itemCount: 2
     maxIconNumb: 3
     minIconNumb: 0
+  purplePuzzleIcons:
+  - calcType: 0
+    icon: "\u25B3"
   blueItemTilePrefab: {fileID: 0}
   yellowItemTilePrefab: {fileID: 0}
   purpleItemTilePrefab: {fileID: 0}

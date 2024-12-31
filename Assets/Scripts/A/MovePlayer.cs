@@ -51,7 +51,7 @@ public class MovePlayer : MonoBehaviour
                 if (hitObject.TryGetComponent<TileController>(out var tileController))
                 {
                     // タイルを回転させる
-                    tileController.Flip();
+                    tileController.Open();
                 }
             }
         }

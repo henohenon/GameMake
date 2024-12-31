@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
                 if (hitObject.TryGetComponent<TileController>(out var tileController))
                 {
                     // タイルを回転させる
-                    tileController.Flip();
+                    tileController.Open();
                 }
             }
         }

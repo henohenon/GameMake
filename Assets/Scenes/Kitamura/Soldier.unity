@@ -1131,6 +1131,8 @@ MonoBehaviour:
   moveSpeed: 3
   rotateSpeed: 0
   space: {fileID: -4231335808290103030, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
+  mouse: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
+  move: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
   audioManager: {fileID: 120220426}
   CameraAction: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}

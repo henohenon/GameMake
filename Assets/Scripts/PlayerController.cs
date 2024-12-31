@@ -16,13 +16,16 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private InputActionReference space;//スペースキーでタイルを裏返す処理
     [SerializeField]
+    private InputActionReference mouse;//マウスの入力を取得
+    [SerializeField]
+    private InputActionReference move;//キャラクターの移動を取得
+    [SerializeField]
     private AudioManager audioManager;
     [SerializeField]
     private InputActionReference CameraAction;
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
     
-
     private Rigidbody _rb;
 
     private void Start()
@@ -31,19 +34,20 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.position = new Vector3(0, 1f, 0);
         space.action.performed += _ => audioManager.PlayFlipTileEffect(); //キャンセルとかもある
         space.action.Enable();
-
+        
+        move.action.Enable();
+        
         CameraAction.action.performed += RotCam; //キャンセルとかもある
         CameraAction.action.Enable();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // キー入力を取得 TODO: InputSystemに変更
-        var horizontal = Input.GetAxis("Horizontal");//左右の入力
-        var vertical = Input.GetAxis("Vertical");//前後の入力
+        var moveInput = move.action.ReadValue<Vector2>();
 
         // 移動方向を計算
-        var movement = (transform.forward * vertical) + (transform.right * horizontal); // 正面に対して前後の入力
+        var movement = (transform.forward * moveInput.y) + (transform.right * moveInput.x); // 正面に対して前後の入力
 
         // スピードとフレームの経過時間をかける
         movement *= moveSpeed * Time.deltaTime;
@@ -79,6 +83,13 @@ public class PlayerController : MonoBehaviour//へのへのさん
             // カメラの回転を適用
             _rb.MoveRotation(Quaternion.Euler(nextRotation));
         }
+    }
+    
+    private void OnDisable()
+    {
+        space.action.Disable();
+        move.action.Disable();
+        CameraAction.action.Disable();
     }
 }
 

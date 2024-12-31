@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Scriptable;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -23,7 +24,7 @@ public class UIManager : MonoBehaviour
         tileMapsContainer.Clear();
     }
     
-    public void WriteMap(SquareTileMap tileMap, bool rightToLeft = false, bool bottomToTop = true)
+    public void WriteMap(GameRateAsset asset, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)
     {
         // タイルコンテナーを生成
         var tileMapsContainer = _root.Q<VisualElement>("tile-maps-container");
@@ -31,29 +32,29 @@ public class UIManager : MonoBehaviour
         tileMapsContainer.Add(tileContainer);
         tileContainer.AddToClassList("tile-map");
         // マップのデータに沿ってタイルを生成
-        for (int i = 0; i < tileMap.Map.Length; i++)
+        for (int i = 0; i < map.Tiles.Length; i++)
         {
             // タイルのインデックスをフラグに応じて反転
-            var cardIndex = i;
+            var tileIndex = i;
             if (rightToLeft)
             {
-                cardIndex = MapTileCalc.GetInvertXId(cardIndex, tileMap.Width);
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.Width);
             }
             if (bottomToTop)
             {
-                cardIndex = MapTileCalc.GetInvertYId(cardIndex, tileMap.Height);
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.Height);
             }
             
             // タイルのテンプレートを複製
             var tile = tileAsset.CloneTree();
             // idからタイルの名前を設定
-            tile.name = $"Tile_{cardIndex}";
+            tile.name = $"Tile_{tileIndex}";
             // idのタイルの情報を取得
-            var tileInfo = tileMap.Asset.cardInfos[tileMap.Map[cardIndex]];
+            var tileInfo = asset.tileRateInfos[map.Tiles[tileIndex]];
             // タイルコンテナーに追加
             tileContainer.Add(tile);
             // 爆弾なら赤にする
-            if (tileInfo.cardType == CardType.Bomb)
+            if (tileInfo.tileType == TileType.Bomb)
             {
                 tile.AddToClassList("red");
             }

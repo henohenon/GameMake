@@ -14,15 +14,14 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private float rotateSpeed;
     [SerializeField]
-    private InputActionReference space;//スペースキーでカードを裏返す処理
+    private InputActionReference space;//スペースキーでタイルを裏返す処理
     [SerializeField]
     private AudioManager audioManager;
     [SerializeField]
     private InputActionReference CameraAction;
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
-
-
+    
 
     private Rigidbody _rb;
 
@@ -30,7 +29,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     {
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
-        space.action.performed += _ => audioManager.PlayFlipCardEffect(); //キャンセルとかもある
+        space.action.performed += _ => audioManager.PlayFlipTileEffect(); //キャンセルとかもある
         space.action.Enable();
 
         CameraAction.action.performed += RotCam; //キャンセルとかもある
@@ -67,11 +66,11 @@ public class PlayerController : MonoBehaviour//へのへのさん
             {
                 // Rayが当たったオブジェクトを取得
                 var hitObject = hit.collider.gameObject;
-                // カードコントローラーがアタッチされていたら
-                if (hitObject.TryGetComponent<CardController>(out var cardController))
+                // タイルコントローラーがアタッチされていたら
+                if (hitObject.TryGetComponent<TileController>(out var tileController))
                 {
-                    // カードを回転させる
-                    cardController.FlipCard();
+                    // タイルを回転させる
+                    tileController.Flip();
                 }
             }
         }

@@ -260,8 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d813ccec43ee30b4a80a4c9364377964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAsset: {fileID: 11400000, guid: 30f64907183a6e742a160d7e0a49c599, type: 2}
-  cardRate: {fileID: 11400000, guid: 9c1147d54d376634aa78f217fbc52aa9, type: 2}
+  gameRate: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
   length: 9
   playerController: {fileID: 1856347866}
   uiManager: {fileID: 1328982679}
@@ -932,6 +931,7 @@ GameObject:
   - component: {fileID: 1328982678}
   - component: {fileID: 1328982677}
   - component: {fileID: 1328982679}
+  - component: {fileID: 1328982680}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -986,6 +986,19 @@ MonoBehaviour:
   uiDocument: {fileID: 1328982677}
   tileAsset: {fileID: 9197481963319205126, guid: ddc9c06db8a2b8747a56b4d3cabaed0d,
     type: 3}
+--- !u!114 &1328982680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328982676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ef290bf4f7fcf4683726ca1b0aaa95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameRate: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
 --- !u!1 &1410687072
 GameObject:
   m_ObjectHideFlags: 0

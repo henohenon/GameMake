@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c0a0a9df76df3409d345297ecebb5b, type: 3}
+  m_Name: ItemRateData
+  m_EditorClassIdentifier: 
+  blueItemRate:
+    itemRateInfos:
+    - rate: 1
+      itemType: 0
+      description: "\u901F\u5EA6\u30A2\u30C3\u30D7\uFF01"
+    - rate: 1
+      itemType: 1
+      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+    itemIcons:
+    - "\u3044"
+    - "\u308D"
+    - "\u306F"
+    - "\u306B"
+    - "\u307B"
+    - "\u3078"
+    - "\u3068"
+    maxItemCount: 2
+    minItemCount: 1
+  yellowItemRate:
+    itemRateInfos:
+    - rate: 1
+      itemType: 0
+      description: "\u901F\u5EA6\u7D50\u69CB\u30A2\u30C3\u30D7"
+    - rate: 1
+      itemType: 1
+      description: "\u901F\u5EA6\u5272\u3068\u30C0\u30A6\u30F3"
+    numbIcons:
+    - "\u3061"
+    - "\u308A"
+    - "\u306C"
+    - "\u308B"
+    - "\u3092"
+    - "\u308F"
+    - "\u304B"
+    - "\u3088"
+    - "\u305F"
+    - "\u308C"
+    itemCount: 2
+    maxCalcNumb: 3
+  yellowPuzzleIcons:
+  - calcType: 0
+    calcText: +
+  - calcType: 1
+    calcText: '-'
+  purpleItemRate:
+    itemRateInfos:
+    - rate: 1
+      itemType: 0
+      description: "\u901F\u5EA6\u8D85\u7D76\u3042\u3063\u3077\u3063\u3077"
+    - rate: 1
+      itemType: 1
+      description: "\u3046\u3001\u52D5\u3051\u3093"
+    calcIcons:
+    - calcType: 0
+      calcIcon: "\u4E09"
+    - calcType: 1
+      calcIcon: "\u56DB"
+    - calcType: 2
+      calcIcon: "\u4E94"
+    itemCount: 2
+    maxIconNumb: 3
+    minIconNumb: 0
+  purplePuzzleIcons:
+  - calcType: 0
+    icon: "\u25B3"
+    description: "\u304A\u306B\u304E\u308A"
+  blueItemTilePrefab: {fileID: 0}
+  yellowItemTilePrefab: {fileID: 0}
+  purpleItemTilePrefab: {fileID: 0}

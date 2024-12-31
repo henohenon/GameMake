@@ -95,17 +95,17 @@
     <member name="M:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute.#ctor">
       <summary>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute" /> class.</summary>
     </member>
-    <member name="T:System.ComponentModel.DataAnnotations.CreditCardAttribute">
-      <summary>Specifies that a data field value is a credit card number.</summary>
+    <member name="T:System.ComponentModel.DataAnnotations.CreditTileAttribute">
+      <summary>Specifies that a data field value is a credit tile number.</summary>
     </member>
-    <member name="M:System.ComponentModel.DataAnnotations.CreditCardAttribute.#ctor">
-      <summary>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CreditCardAttribute" /> class.</summary>
+    <member name="M:System.ComponentModel.DataAnnotations.CreditTileAttribute.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CreditTileAttribute" /> class.</summary>
     </member>
-    <member name="M:System.ComponentModel.DataAnnotations.CreditCardAttribute.IsValid(System.Object)">
-      <summary>Determines whether the specified credit card number is valid.</summary>
+    <member name="M:System.ComponentModel.DataAnnotations.CreditTileAttribute.IsValid(System.Object)">
+      <summary>Determines whether the specified credit tile number is valid.</summary>
       <param name="value">The value to validate.</param>
       <returns>
-        <see langword="true" /> if the credit card number is valid; otherwise, <see langword="false" />.</returns>
+        <see langword="true" /> if the credit tile number is valid; otherwise, <see langword="false" />.</returns>
     </member>
     <member name="T:System.ComponentModel.DataAnnotations.CustomValidationAttribute">
       <summary>Specifies a custom validation method that is used to validate a property or class instance.</summary>
@@ -132,8 +132,8 @@
     <member name="T:System.ComponentModel.DataAnnotations.DataType">
       <summary>Represents an enumeration of the data types associated with data fields and parameters.</summary>
     </member>
-    <member name="F:System.ComponentModel.DataAnnotations.DataType.CreditCard">
-      <summary>Represents a credit card number.</summary>
+    <member name="F:System.ComponentModel.DataAnnotations.DataType.CreditTile">
+      <summary>Represents a credit tile number.</summary>
     </member>
     <member name="F:System.ComponentModel.DataAnnotations.DataType.Currency">
       <summary>Represents a currency value.</summary>

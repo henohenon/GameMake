@@ -20,38 +20,38 @@ public class MovePlayer : MonoBehaviour
 
     private void Update()
     {
-        // ƒL[“ü—Í‚ğæ“¾
+        // ã‚­ãƒ¼å…¥åŠ›ã‚’å–å¾—
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
 
-        // ˆÚ“®•ûŒü‚ğŒvZ
-        var movement = transform.forward * vertical; // ³–Ê‚É‘Î‚µ‚Ä‘OŒã‚Ì“ü—Í
+        // ç§»å‹•æ–¹å‘ã‚’è¨ˆç®—
+        var movement = transform.forward * vertical; // æ­£é¢ã«å¯¾ã—ã¦å‰å¾Œã®å…¥åŠ›
 
-        // ‰ñ“]•ûŒü‚ğŒvZ
-        var rotation = Vector3.up * horizontal; // ã•ûŒü‚É‘Î‚µ‚Ä¶‰E‚Ì“ü—Í
+        // å›è»¢æ–¹å‘ã‚’è¨ˆç®—
+        var rotation = Vector3.up * horizontal; // ä¸Šæ–¹å‘ã«å¯¾ã—ã¦å·¦å³ã®å…¥åŠ›
 
-        // ƒXƒs[ƒh‚ÆƒtƒŒ[ƒ€‚ÌŒo‰ßŠÔ‚ğ‚©‚¯‚é
+        // ã‚¹ãƒ”ãƒ¼ãƒ‰ã¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®çµŒéæ™‚é–“ã‚’ã‹ã‘ã‚‹
         movement *= moveSpeed * Time.deltaTime;
         rotation *= rotateSpeed * Time.deltaTime;
 
-        // ˆÚ“®‚Æ‰ñ“]
+        // ç§»å‹•ã¨å›è»¢
         _rb.position += movement;
         _rb.MoveRotation(_rb.rotation * Quaternion.Euler(rotation));
 
-        // ƒXƒy[ƒXƒL[‚ğ‰Ÿ‚µ‚½‚ç
+        // ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
         if (Input.GetKeyDown(KeyCode.Space))
         {
             RaycastHit hit;
-            // ©•ª‚ÌˆÊ’u‚©‚ç‰º•ûŒü‚É2‚ÌRay‚ğ”ò‚Î‚·
+            // è‡ªåˆ†ã®ä½ç½®ã‹ã‚‰ä¸‹æ–¹å‘ã«2ã®Rayã‚’é£›ã°ã™
             if (Physics.Raycast(transform.position, -transform.up, out hit, 2))
             {
-                // Ray‚ª“–‚½‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğæ“¾
+                // RayãŒå½“ãŸã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—
                 var hitObject = hit.collider.gameObject;
-                // ƒJ[ƒhƒRƒ“ƒgƒ[ƒ‰[‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚½‚ç
-                if (hitObject.TryGetComponent<CardController>(out var cardController))
+                // ã‚¿ã‚¤ãƒ«ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ãŸã‚‰
+                if (hitObject.TryGetComponent<TileController>(out var tileController))
                 {
-                    // ƒJ[ƒh‚ğ‰ñ“]‚³‚¹‚é
-                    cardController.FlipCard();
+                    // ã‚¿ã‚¤ãƒ«ã‚’å›è»¢ã•ã›ã‚‹
+                    tileController.Flip();
                 }
             }
         }

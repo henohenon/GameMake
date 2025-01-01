@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +61,40 @@ public class TilesManager : MonoBehaviour
         }
     }
     
+    private TileController selectingTile;
+
+    public void Update()
+    {
+        var playerPosition = playerController.transform.position;
+        var playerDirection = playerController.transform.forward;
+        playerDirection.y = 0;
+        playerDirection.Normalize();
+        var playerForwardPosition = playerPosition + playerDirection;
+        
+        var highLightPosition = GetPosition(playerForwardPosition);
+        
+        var positionTileId = MapTileCalc.GetTileId(highLightPosition, _gameInfo.MapInfo.Width, _gameInfo.MapInfo.Height);
+
+        if (positionTileId == -1)
+        {
+            if (selectingTile)
+            {
+                selectingTile.Select(false);
+                selectingTile = null;
+            }
+            return;
+        }
+        
+        var tile = _tiles[positionTileId];
+
+        if (tile != selectingTile)
+        {
+            selectingTile?.Select(false);
+            selectingTile = tile;
+            selectingTile.Select();
+        }
+    }
+
     private void Create3dMap(GameRateAsset asset, MapInfo map)
     {
         // 既存のタイルを破棄
@@ -164,5 +199,12 @@ public class TilesManager : MonoBehaviour
     {
         // 最大5桁の乱数を生成
         return RandomEx.Shared.NextUInt(10000);
+    }
+    public Vector2Int GetPosition(Vector3 position)
+    {
+        var x = Mathf.FloorToInt(position.x + (float)_gameInfo.MapInfo.Width / 2);
+        var z = Mathf.FloorToInt(position.z + (float)_gameInfo.MapInfo.Height / 2);
+            
+        return new Vector2Int(x, z);
     }
 }

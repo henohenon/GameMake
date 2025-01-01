@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private InputActionReference CameraAction;
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
+    [SerializeField]
+    private TilesManager tilesManager;
     
     private Rigidbody _rb;
 
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
         CameraAction.action.performed += RotCam; //キャンセルとかもある
         CameraAction.action.Enable();
     }
-
+    
     private void FixedUpdate()
     {
         // キー入力を取得 TODO: InputSystemに変更

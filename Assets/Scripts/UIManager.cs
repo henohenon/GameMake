@@ -38,11 +38,11 @@ public class UIManager : MonoBehaviour
             var tileIndex = i;
             if (rightToLeft)
             {
-                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.Width);
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.Width, map.Height);
             }
             if (bottomToTop)
             {
-                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.Height);
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.Height, map.Width);
             }
             
             // タイルのテンプレートを複製

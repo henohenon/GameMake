@@ -14,84 +14,83 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private float rotateSpeed;
     [SerializeField]
-    private InputActionReference space;//スペースキーでタイルを裏返す処理
-    [SerializeField]
     private InputActionReference mouse;//マウスの入力を取得
     [SerializeField]
     private InputActionReference move;//キャラクターの移動を取得
-    [SerializeField]
-    private AudioManager audioManager;
-    [SerializeField]
-    private InputActionReference CameraAction;
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
     [SerializeField]
     private TilesManager tilesManager;
     
     private Rigidbody _rb;
+    private Vector2 moveInput;
+    private Vector2 cameraInput;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
-        space.action.performed += _ => audioManager.PlayFlipTileEffect(); //キャンセルとかもある
-        space.action.Enable();
-        
+    
+        // 0の入力も受け取れるように、canceledも登録
+        move.action.performed += MoveInput;
+        move.action.canceled += MoveInput;
         move.action.Enable();
         
-        CameraAction.action.performed += RotCam; //キャンセルとかもある
-        CameraAction.action.Enable();
+        mouse.action.performed += CameraInput;
+        mouse.action.canceled += CameraInput;
+        mouse.action.Enable();
     }
     
-    private void FixedUpdate()
+    private void CameraInput(InputAction.CallbackContext context)
     {
-        // キー入力を取得 TODO: InputSystemに変更
-        var moveInput = move.action.ReadValue<Vector2>();
-
+        // performed、canceledコールバックを受け取る
+        if (context.started) return;
+        
+        cameraInput = context.ReadValue<Vector2>();
+    }
+    
+    private void MoveInput(InputAction.CallbackContext context)
+    {
+        // performed、canceledコールバックを受け取る
+        if (context.started) return;
+        
+        moveInput = context.ReadValue<Vector2>();
+    }
+    
+    private void Update()
+    {
         // 移動方向を計算
-        var movement = (transform.forward * moveInput.y) + (transform.right * moveInput.x); // 正面に対して前後の入力
-
-        // スピードとフレームの経過時間をかける
-        movement *= moveSpeed * Time.deltaTime;
-
-        // 移動と回転
-        _rb.position = new Vector3(_rb.position.x + movement.x, _rb.position.y, _rb.position.z + movement.z);
+        var moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
+        // 移動方向を正規化
+        moveDirection.Normalize();
+        // 移動方向をカメラの向きに合わせる
+        moveDirection = Quaternion.Euler(0, _rb.rotation.eulerAngles.y, 0) * moveDirection;
+        // 移動方向を適用
+        _rb.position += moveDirection * (moveSpeed * Time.deltaTime);
+        
+        // カメラの回転座標の作成
+        var addRotation = new Vector3(
+            -cameraInput.y * cameraRotationSpeed,
+            cameraInput.x * cameraRotationSpeed,
+            0
+        );
+        var currentRotation = _rb.rotation.eulerAngles;
+        var nextRotation = currentRotation + addRotation;
+        // カメラの回転を適用
+        _rb.MoveRotation(Quaternion.Euler(nextRotation));
     }
 
     public void Impact(Vector3 direction)
     {
-        audioManager.PlayExplosionEffect();
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
     }
-    void RotCam(InputAction.CallbackContext context)
-    {
-        // performed、canceledコールバックを受け取る
-        if (context.started) return;
-
-        if (Mouse.current.leftButton.isPressed)
-        {
-            // Moveアクションの入力取得
-            var inputMove = context.ReadValue<Vector2>();
-            // カメラの回転座標の作成
-            var addRotation = new Vector3( // 2d空間と3d空間で軸が違うので注意
-                -inputMove.y * cameraRotationSpeed, // -逆だったりしたらごめんなさい
-                inputMove.x * cameraRotationSpeed,
-                0
-            );
-            var currentRotation = _rb.rotation.eulerAngles;
-            var nextRotation = currentRotation + addRotation;
-            // カメラの回転を適用
-            _rb.MoveRotation(Quaternion.Euler(nextRotation));
-        }
-    }
     
     private void OnDisable()
     {
-        space.action.Disable();
         move.action.Disable();
-        CameraAction.action.Disable();
+        mouse.action.Disable();
     }
 }
 

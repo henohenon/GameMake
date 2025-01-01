@@ -15,7 +15,7 @@ public class TitleUIManager : MonoBehaviour//ニコマル
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        creditScreen = root.Q<VisualElement>("Credit_Screen");
+        creditScreen = root.Q<VisualElement>("Credit_Scroller");
         
         //メインメニュー
         root.Q<Button>("Button_Credit").clicked += () => SetHiddenCredit(false);

@@ -685,6 +685,8 @@ MonoBehaviour:
   length: 9
   playerController: {fileID: 1856347866}
   uiManager: {fileID: 1328982679}
+  openTile: {fileID: -4231335808290103030, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0
@@ -1130,11 +1132,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   rotateSpeed: 0
-  space: {fileID: -4231335808290103030, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
-  mouse: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
-  move: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
-  audioManager: {fileID: 120220426}
-  CameraAction: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+  cameraInput: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  moveInput: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  cameraLock: {fileID: -8547146756359953873, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   cameraRotationSpeed: 0.1
   tilesManager: {fileID: 921744851}

@@ -111,6 +111,7 @@ public class TilesManager : MonoBehaviour
         }
     }
 
+    private int noBombCount = 0;
     private void Create3dMap(GameRateAsset asset, MapInfo map)
     {
         // 既存のタイルを破棄
@@ -121,6 +122,9 @@ public class TilesManager : MonoBehaviour
                 Destroy(tile.gameObject);
             }
         }
+        
+        // 爆弾以外のタイルの数をリセット
+        noBombCount = 0;
         
         // マップのデータに沿ってタイルタイルプレファブのインスタンスを生成
         for (int i = 0; i < map.Tiles.Length; i ++)
@@ -147,6 +151,12 @@ public class TilesManager : MonoBehaviour
             
             // タイルタイルが裏返されたときのイベントを購読し、(本番)タイルタイルが裏返されたときの処理を実行
             tileController.OnFlipped.Subscribe(OnTileFlipped);
+            
+            // 爆弾以外のタイルの数をカウント
+            if (tileInfo.tileType != TileType.Bomb)
+            {
+                noBombCount++;
+            }
         }
     }
     
@@ -186,8 +196,18 @@ public class TilesManager : MonoBehaviour
                 // 周囲に爆弾がある場合は周囲の爆弾の数を表示
                 tileTile.SetText(sum.ToString());
             }
+            
+            // 爆弾以外のタイルの数を減らす
+            noBombCount--;
+            // 爆弾以外のタイルがなくなった場合はクリア
+            if (noBombCount == 0)
+            {
+                Debug.Log("Game Clear");
+            }
         }
         //CheckForOnlyBombs();
+        
+        
     }
     
     // タイルタイルの周囲の爆弾の数を取得

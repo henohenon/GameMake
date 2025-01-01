@@ -6,7 +6,7 @@
             "id": "a1aa70a7-dcd6-4c88-9498-37ef33703369",
             "actions": [
                 {
-                    "name": "Space",
+                    "name": "OpenTile",
                     "type": "Button",
                     "id": "bb5e86ed-10de-4afa-b11e-2fc46d8753f8",
                     "expectedControlType": "",
@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CameraLock",
+                    "type": "Button",
+                    "id": "39929ace-ee9b-4095-bd89-3d11972d0aca",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -41,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Space",
+                    "action": "OpenTile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -174,6 +183,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "ca35fc55-3a8c-450f-af7c-2305aa3a84ee",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLock",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9067873c-81ba-4443-af36-9f72a5925a0f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLock",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4bb79cb1-0d46-4e98-af43-35e48d19869e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLock",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

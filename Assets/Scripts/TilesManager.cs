@@ -9,6 +9,7 @@ using RandomExtensions;
 using RandomExtensions.Linq;
 using Scriptable;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class TilesManager : MonoBehaviour
@@ -21,6 +22,7 @@ public class TilesManager : MonoBehaviour
     private PlayerController playerController;
     [SerializeField]
     private UIManager uiManager;
+    [SerializeField] private InputActionReference openTile;
 
     private TileController[] _tiles;
     private GameInfo _gameInfo;
@@ -59,10 +61,24 @@ public class TilesManager : MonoBehaviour
         {
             uiManager.WriteMap(gameRate, map);
         }
+        
+        openTile.action.started += OpenTileCallback;
+        openTile.action.Enable();
+    }
+    
+    private void OpenTileCallback(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if(selectingTile)
+            {
+                Debug.Log("Open");
+                selectingTile.Open();
+            }
+        }
     }
     
     private TileController selectingTile;
-
     public void Update()
     {
         var playerPosition = playerController.transform.position;

@@ -214,23 +214,29 @@ public class TilesManager : MonoBehaviour
         }
         else
         {
-            // タイルタイルが爆弾でない場合は周囲の爆弾の数を取得
-            var sum = GetTileAroundBombSum(tileId);
-
-            // 周囲に爆弾がない場合
-            if (sum == 0)
+            // 周囲のタイルの状況を調べる
+            var bombSum = GetTileAroundTypeSum(tileId, TileType.Bomb);
+            
+            // 周囲がすべて安全な場合
+            if (bombSum == 0)
             {
                 // 周囲のタイルタイルを裏返す
                 var aroundTiles = MapTileCalc.GetAroundTileIds(tileId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                 foreach (var aroundTileId in aroundTiles)
                 {
-                    _tiles[aroundTileId].Open();
+                    // 安全なタイルなら開ける
+                    var tileInfoIndex = _gameInfo.MapInfo.Tiles[aroundTileId];
+                    var tileType = gameRate.tileRateInfos[tileInfoIndex].tileType;
+                    if (tileType == TileType.Safety)
+                    {
+                        _tiles[aroundTileId].Open();
+                    }
                 }
             }
             else
             {
-                // 周囲に爆弾がある場合は周囲の爆弾の数を表示
-                tileTile.SetText(sum.ToString());
+                // 周囲の爆弾の数を表示
+                tileTile.SetText(bombSum.ToString());
             }
             
             // 爆弾以外のタイルの数を減らす
@@ -247,7 +253,7 @@ public class TilesManager : MonoBehaviour
     }
     
     // タイルタイルの周囲の爆弾の数を取得
-    private int GetTileAroundBombSum(int tileId)
+    private int GetTileAroundTypeSum(int tileId, TileType type)
     {
         var sum = 0;
 
@@ -257,8 +263,8 @@ public class TilesManager : MonoBehaviour
         // 周囲のタイルタイルを調べる
         foreach (var aroundTileId in aroundTileIds)
         {
-            // タイルタイルが爆弾の場合は加算
-            if (_tiles[aroundTileId].TileType == TileType.Bomb)
+            // 指定のタイプであれば加算
+            if (_tiles[aroundTileId].TileType == type)
             {
                 sum++;
             }

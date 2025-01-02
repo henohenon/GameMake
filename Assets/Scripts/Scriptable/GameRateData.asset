@@ -17,14 +17,18 @@ MonoBehaviour:
     tilePrefab: {fileID: 3287875108102595959, guid: c97752b3067d98943b095621d821cbbc,
       type: 3}
     tileType: 1
-  - rate: 8
+  - rate: 6
     tilePrefab: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
       type: 3}
     tileType: 0
-  - rate: 5
+  - rate: 1
     tilePrefab: {fileID: 8759481559525510411, guid: 2a554991f30ff334b855dc01fabaa9ad,
       type: 3}
     tileType: 2
+  - rate: 1
+    tilePrefab: {fileID: 8759481559525510411, guid: 2a554991f30ff334b855dc01fabaa9ad,
+      type: 3}
+    tileType: 3
   itemRateAsset: {fileID: 11400000, guid: dbb6337f1c23a514eb2d4173d8810da2, type: 2}
   randomTiles:
   - {fileID: 7712833765362121007, guid: acda655639be9f542ace8be445054d81, type: 3}

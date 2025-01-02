@@ -21,10 +21,6 @@ namespace Scriptable
         public YellowPuzzleIcon[] yellowPuzzleIcons;
         public PurpleItemRate purpleItemRate;
         public PurplePuzzleIcon[] purplePuzzleIcons;
-
-        public TileController blueItemTilePrefab;
-        public TileController yellowItemTilePrefab;
-        public TileController purpleItemTilePrefab;
     }
 
     [Serializable]

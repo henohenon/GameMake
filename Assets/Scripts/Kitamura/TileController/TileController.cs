@@ -38,15 +38,17 @@ public class TileController : MonoBehaviour
         _tileObject.transform.localPosition = Vector3.zero;
     }
     
-    public virtual void Open()
+    public virtual bool Open()
     {
-        if(_isOpened) return; // もし裏返していたら何もしない
+        if(_isOpened) return false; // もし裏返していたら何もしない
         _isOpened = true;
         
         // タイルを消す
         _tileObject.SetActive(false);
         // イベントを発行
         _onFlipped.OnNext(_tileId);
+
+        return true;
     }
     
     public void Select(bool isSelected = true)

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b2447e2b3aca84ca31c25fe33bc933, type: 3}
+  m_Name: TilePrefabsAsset
+  m_EditorClassIdentifier: 
+  safeTilePrefab: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
+    type: 3}
+  bombTilePrefab: {fileID: 3287875108102595959, guid: c97752b3067d98943b095621d821cbbc,
+    type: 3}
+  blueItemTilePrefab: {fileID: 8759481559525510411, guid: 2a554991f30ff334b855dc01fabaa9ad,
+    type: 3}
+  yellowItemTilePrefab: {fileID: 0}
+  purpleItemTilePrefab: {fileID: 0}

@@ -11,11 +11,13 @@ using Scriptable;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.Tilemaps;
 
 public class TilesManager : MonoBehaviour
 {
     [SerializeField, InlineEditor]
     private GameRateAsset gameRate;
+    [SerializeField, InlineEditor] private TilePrefabsAsset tilePrefabs;
     [SerializeField]
     private int length = 9; // 一片の長さ。length*lengthのマスが生成される
     [SerializeField]
@@ -131,26 +133,60 @@ public class TilesManager : MonoBehaviour
         {
             // タイル情報を取得
             var tileInfo = asset.tileRateInfos[map.Tiles[i]];
-            // タイルタイルの座標を計算
+            
+            // タイルを生成。種類によって使用するプレファブを変える
+            TileController instance = null;
+            // タイルごとに特殊な処理がある場合はここで実装する
+            switch (tileInfo.tileType)
+            {
+                case TileType.Safety:
+                {
+                    var prefab = tilePrefabs.safeTilePrefab;
+                    instance = Instantiate(prefab);
+                    break;
+                }
+                case TileType.Bomb:
+                {
+                    var prefab = tilePrefabs.bombTilePrefab;
+                    instance = Instantiate(prefab);
+                    break;
+                }
+                case TileType.BlueItem:
+                {
+                    // アイコンを設定する
+                    var prefab = tilePrefabs.blueItemTilePrefab;
+                    var blueInstance = Instantiate(prefab);
+                    blueInstance.SetItemIcon("heno");
+                    instance = blueInstance;
+                    break;
+                }
+            }
+            
+            // タイルの座標を計算
             var tilePosition = MapTileCalc.GetTilePosition(i, length); // タイルタイルの座標を取得
             var tileX = tilePosition.x - map.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
             var tileZ = tilePosition.y - map.Height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
-
-            // タイルタイルを生成
-            var tileController = Instantiate(tileInfo.tilePrefab, tileVector, tileQuaternion);
+            // タイルの座標を設定
+            instance.transform.position = tileVector;
+            instance.transform.rotation = tileQuaternion;
+            
+            // このスクリプトがアタッチされているオブジェクトの子にする
+            instance.transform.SetParent(transform);
+            
+            // ランダムにタイルの見た目オブジェクトを生成
             var tileObjIdx = RandomEx.Shared.NextInt(0, gameRate.randomTiles.Length);
             var tileObjInstance = Instantiate(gameRate.randomTiles[tileObjIdx]);
-            // タイルタイルを初期化
-            tileController.Initialize(i, tileInfo.tileType, tileObjInstance);
-            // タイルタイルをこのスクリプトがアタッチされているオブジェクトの子にする
-            tileController.transform.SetParent(transform);
-            // タイルタイルを配列に格納
-            _tiles[i] = tileController;
             
-            // タイルタイルが裏返されたときのイベントを購読し、(本番)タイルタイルが裏返されたときの処理を実行
-            tileController.OnFlipped.Subscribe(OnTileFlipped);
+            // TileControllerを初期化
+            instance.Initialize(i, tileInfo.tileType, tileObjInstance);
+            
+            // TileControllerを配列に格納
+            _tiles[i] = instance;
+        
+            // タイルが裏返されたときのイベントを購読し、タイルが裏返されたときの処理を実行
+            instance.OnFlipped.Subscribe(OnTileFlipped);
             
             // 爆弾以外のタイルの数をカウント
             if (tileInfo.tileType != TileType.Bomb)

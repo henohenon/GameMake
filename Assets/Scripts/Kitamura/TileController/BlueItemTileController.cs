@@ -8,10 +8,22 @@ public class BlueItemTileController : TileController
     [SerializeField]
     private GameObject blueObject;
 
+    private string _itemIcon;
 
-    public override void Open()
+    public void SetItemIcon(string itemIcon)
     {
-        base.Open();
-        blueObject.SetActive(true);
+        this._itemIcon = itemIcon;
+    }
+
+    public override bool Open()
+    {
+        var baseResult = base.Open();
+        if (baseResult)
+        {
+            blueObject.SetActive(true);
+            Debug.Log(_itemIcon);
+        }
+
+        return baseResult;
     }
 }

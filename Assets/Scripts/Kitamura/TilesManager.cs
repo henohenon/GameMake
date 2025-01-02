@@ -24,16 +24,15 @@ public class TilesManager : MonoBehaviour
     private PlayerController playerController;
     [SerializeField]
     private UIManager uiManager;
-    [SerializeField] private InputActionReference openTile;
 
-    private TileController[] _tiles;
+    public TileController[] tiles { get; private set; }
     private GameInfo _gameInfo;
 
     // Start is called before the first frame update
     void Start()
     {
         // タイルタイルの配列指定の長さで初期化
-        _tiles = new TileController[length * length];
+        tiles = new TileController[length * length];
         
         // 乱数のシードを生成
         var seed = GenerateSeed();
@@ -63,61 +62,13 @@ public class TilesManager : MonoBehaviour
         {
             uiManager.WriteMap(gameRate, map);
         }
-        
-        openTile.action.started += OpenTileCallback;
-        openTile.action.Enable();
     }
     
-    private void OpenTileCallback(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            if(selectingTile)
-            {
-                Debug.Log("Open");
-                selectingTile.Open();
-            }
-        }
-    }
-    
-    private TileController selectingTile;
-    public void Update()
-    {
-        var playerPosition = playerController.transform.position;
-        var playerDirection = playerController.transform.forward;
-        playerDirection.y = 0;
-        playerDirection.Normalize();
-        var playerForwardPosition = playerPosition + playerDirection;
-        
-        var highLightPosition = GetPosition(playerForwardPosition);
-        
-        var positionTileId = MapTileCalc.GetTileId(highLightPosition, _gameInfo.MapInfo.Width, _gameInfo.MapInfo.Height);
-
-        if (positionTileId == -1)
-        {
-            if (selectingTile)
-            {
-                selectingTile.Select(false);
-                selectingTile = null;
-            }
-            return;
-        }
-        
-        var tile = _tiles[positionTileId];
-
-        if (tile != selectingTile)
-        {
-            selectingTile?.Select(false);
-            selectingTile = tile;
-            selectingTile.Select();
-        }
-    }
-
     private int noBombCount = 0;
     private void Create3dMap(GameRateAsset asset, MapInfo map)
     {
         // 既存のタイルを破棄
-        foreach (var tile in _tiles)
+        foreach (var tile in tiles)
         {
             if (tile != null)
             {
@@ -183,7 +134,7 @@ public class TilesManager : MonoBehaviour
             instance.Initialize(i, tileInfo.tileType, tileObjInstance);
             
             // TileControllerを配列に格納
-            _tiles[i] = instance;
+            tiles[i] = instance;
         
             // タイルが裏返されたときのイベントを購読し、タイルが裏返されたときの処理を実行
             instance.OnFlipped.Subscribe(OnTileFlipped);
@@ -200,7 +151,7 @@ public class TilesManager : MonoBehaviour
     private void OnTileFlipped(int tileId)
     {
         // タイルのインスタンスをキャッシュ的な感じで取得
-        var tileTile = _tiles[tileId];
+        var tileTile = tiles[tileId];
         // タイルタイルが爆弾の場合はゲームオーバー
         if (tileTile.TileType == TileType.Bomb)
         {
@@ -229,7 +180,7 @@ public class TilesManager : MonoBehaviour
                     var tileType = gameRate.tileRateInfos[tileInfoIndex].tileType;
                     if (tileType == TileType.Safety)
                     {
-                        _tiles[aroundTileId].Open();
+                        tiles[aroundTileId].Open();
                     }
                 }
             }
@@ -264,7 +215,7 @@ public class TilesManager : MonoBehaviour
         foreach (var aroundTileId in aroundTileIds)
         {
             // 指定のタイプであれば加算
-            if (_tiles[aroundTileId].TileType == type)
+            if (tiles[aroundTileId].TileType == type)
             {
                 sum++;
             }
@@ -272,13 +223,20 @@ public class TilesManager : MonoBehaviour
 
         return sum;
     }
+
+    public TileType GetTileIdType(int tileId)
+    {
+        var infoIndex = _gameInfo.MapInfo.Tiles[tileId];
+        var tileType = gameRate.tileRateInfos[infoIndex].tileType;
+        return tileType;
+    }
     
     private uint GenerateSeed()
     {
         // 最大5桁の乱数を生成
         return RandomEx.Shared.NextUInt(10000);
     }
-    public Vector2Int GetPosition(Vector3 position)
+    public Vector2Int GetMapPosition(Vector3 position)
     {
         var x = Mathf.FloorToInt(position.x + (float)_gameInfo.MapInfo.Width / 2);
         var z = Mathf.FloorToInt(position.z + (float)_gameInfo.MapInfo.Height / 2);

@@ -15,61 +15,25 @@ using UnityEngine.Tilemaps;
 
 public class TilesManager : MonoBehaviour
 {
-    [SerializeField, InlineEditor]
-    private GameRateAsset gameRate;
     [SerializeField, InlineEditor] private TilePrefabsAsset tilePrefabs;
     [SerializeField]
-    private int length = 9; // 一片の長さ。length*lengthのマスが生成される
-    [SerializeField]
     private PlayerController playerController;
-    [SerializeField]
-    private UIManager uiManager;
 
+    // ゲームクリア時のサブジェクト
     private readonly Subject<Unit> _gameClear = new();
     public Observable<Unit> GameClear => _gameClear;
 
     public TileController[] TileControllers { get; private set; }
-    private GameInfo _gameInfo;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // タイルタイルの配列指定の長さで初期化
-        TileControllers = new TileController[length * length];
-        
-        // 乱数のシードを生成
-        var seed = GenerateSeed();
-        Debug.Log("Seed: " + seed);
-        // ゲーム情報を初期化
-        _gameInfo = new GameInfo(length, length, gameRate, seed);
-        // ログを出力
-        InfoLogger.LogItem(_gameInfo.ItemInfo, gameRate.itemRateAsset);
-        InfoLogger.LogMap(_gameInfo.MapInfo, gameRate);
-        
-        // 3dオブジェクトを生成
-        Create3dMap(gameRate, _gameInfo.MapInfo);
-        
-        // タイルマップのUIをクリア
-        uiManager.ClearMaps();
-        // タイルマップの配列を作成
-        var maps = new []
-        {
-            _gameInfo.MapInfo,
-            new (length, gameRate.tileRateInfos),
-            new (length, gameRate.tileRateInfos),
-        }.AsEnumerable();
-
-        // タイルマップをシャッフルしてUIに書き込む
-        maps = maps.Shuffle().ToArray();
-        foreach (var map in maps)
-        {
-            uiManager.WriteMap(gameRate, map);
-        }
-    }
     
-    private int noBombCount = 0;
-    private void Create3dMap(GameRateAsset asset, MapInfo map)
+    private int _noBombCount = 0;
+    private MapRateAsset _mapRate;
+    private MapInfo _mapInfo;
+    
+    private void Generate3dMap(MapRateAsset rate, MapInfo info)
     {
+        _mapRate = rate;
+        _mapInfo = info;
+        
         // 既存のタイルを破棄
         foreach (var tile in TileControllers)
         {
@@ -78,15 +42,18 @@ public class TilesManager : MonoBehaviour
                 Destroy(tile.gameObject);
             }
         }
+
+        // 配列の初期化
+        TileControllers = new TileController[_mapInfo.MapLength.TotalLength];
         
         // 爆弾以外のタイルの数をリセット
-        noBombCount = 0;
+        _noBombCount = 0;
         
         // マップのデータに沿ってタイルタイルプレファブのインスタンスを生成
-        for (int i = 0; i < map.Tiles.Length; i ++)
+        for (int i = 0; i < _mapInfo.Tiles.Length; i ++)
         {
             // タイル情報を取得
-            var tileInfo = asset.tileRateInfos[map.Tiles[i]];
+            var tileInfo = rate.tileRateInfos[_mapInfo.Tiles[i]];
             
             // タイルを生成。種類によって使用するプレファブを変える
             TileController instance = null;
@@ -117,9 +84,9 @@ public class TilesManager : MonoBehaviour
             }
             
             // タイルの座標を計算
-            var tilePosition = MapTileCalc.GetTilePosition(i, length); // タイルタイルの座標を取得
-            var tileX = tilePosition.x - map.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
-            var tileZ = tilePosition.y - map.Height / 2;
+            var tilePosition = MapTileCalc.GetTilePosition(i, _mapInfo.MapLength); // タイルタイルの座標を取得
+            var tileX = tilePosition.x - _mapInfo.MapLength.Width / 2; // 真ん中のタイルが真ん中になるようにタイルの半分を引く
+            var tileZ = tilePosition.y - _mapInfo.MapLength.Height / 2;
             var tileVector = new Vector3(tileX, 0, tileZ);
             var tileQuaternion = Quaternion.identity; // 回転なし、0度の状態
             // タイルの座標を設定
@@ -130,8 +97,8 @@ public class TilesManager : MonoBehaviour
             instance.transform.SetParent(transform);
             
             // ランダムにタイルの見た目オブジェクトを生成
-            var tileObjIdx = RandomEx.Shared.NextInt(0, gameRate.randomTiles.Length);
-            var tileObjInstance = Instantiate(gameRate.randomTiles[tileObjIdx]);
+            var tileObjIdx = RandomEx.Shared.NextInt(0, _mapRate.randomTiles.Length);
+            var tileObjInstance = Instantiate(_mapRate.randomTiles[tileObjIdx]);
             
             // TileControllerを初期化
             instance.Initialize(i, tileInfo.tileType, tileObjInstance);
@@ -145,7 +112,7 @@ public class TilesManager : MonoBehaviour
             // 爆弾以外のタイルの数をカウント
             if (tileInfo.tileType != TileType.Bomb)
             {
-                noBombCount++;
+                _noBombCount++;
             }
         }
     }
@@ -175,12 +142,12 @@ public class TilesManager : MonoBehaviour
             if (bombSum == 0)
             {
                 // 周囲のタイルタイルを裏返す
-                var aroundTiles = MapTileCalc.GetAroundTileIds(tileId, length, length * length); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
+                var aroundTiles = MapTileCalc.GetAroundTileIds(tileId, _mapInfo.MapLength); // 周辺取得何回か繰り返しちゃってるがまぁ気にしないこととする
                 foreach (var aroundTileId in aroundTiles)
                 {
                     // 安全なタイルなら開ける
-                    var tileInfoIndex = _gameInfo.MapInfo.Tiles[aroundTileId];
-                    var tileType = gameRate.tileRateInfos[tileInfoIndex].tileType;
+                    var tileInfoIndex = _mapInfo.Tiles[aroundTileId];
+                    var tileType = _mapRate.tileRateInfos[tileInfoIndex].tileType;
                     if (tileType == TileType.Safety)
                     {
                         TileControllers[aroundTileId].Open();
@@ -194,9 +161,9 @@ public class TilesManager : MonoBehaviour
             }
             
             // 爆弾以外のタイルの数を減らす
-            noBombCount--;
+            _noBombCount--;
             // 爆弾以外のタイルがなくなった場合はクリア
-            if (noBombCount == 0)
+            if (_noBombCount == 0)
             {
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
@@ -213,7 +180,7 @@ public class TilesManager : MonoBehaviour
         var sum = 0;
 
         // 周囲のタイルタイルのIDを取得
-        var aroundTileIds = MapTileCalc.GetAroundTileIds(tileId, length, length * length);
+        var aroundTileIds = MapTileCalc.GetAroundTileIds(tileId, _mapInfo.MapLength);
         Debug.Log(aroundTileIds);
         // 周囲のタイルタイルを調べる
         foreach (var aroundTileId in aroundTileIds)
@@ -230,20 +197,15 @@ public class TilesManager : MonoBehaviour
 
     public TileType GetTileIdType(int tileId)
     {
-        var infoIndex = _gameInfo.MapInfo.Tiles[tileId];
-        var tileType = gameRate.tileRateInfos[infoIndex].tileType;
+        var infoIndex = _mapInfo.Tiles[tileId];
+        var tileType = _mapRate.tileRateInfos[infoIndex].tileType;
         return tileType;
     }
     
-    private uint GenerateSeed()
-    {
-        // 最大5桁の乱数を生成
-        return RandomEx.Shared.NextUInt(10000);
-    }
     public Vector2Int GetMapPosition(Vector3 position)
     {
-        var x = Mathf.FloorToInt(position.x + (float)_gameInfo.MapInfo.Width / 2);
-        var z = Mathf.FloorToInt(position.z + (float)_gameInfo.MapInfo.Height / 2);
+        var x = Mathf.FloorToInt(position.x + (float)_mapInfo.MapLength.Width / 2);
+        var z = Mathf.FloorToInt(position.z + (float)_mapInfo.MapLength.Height / 2);
             
         return new Vector2Int(x, z);
     }

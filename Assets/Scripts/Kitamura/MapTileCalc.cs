@@ -7,76 +7,76 @@ using Scriptable;
 
 public static class MapTileCalc
 {
-    public static Vector2Int GetTilePosition(int tileId, int width)
+    public static Vector2Int GetTilePosition(int tileId, MapLength length)
     {
-        var x = tileId % width;// 余りを求める
-        var y = tileId / width;// 商を求める
+        var x = tileId % length.Width;// 余りを求める
+        var y = tileId / length.Width;// 商を求める
         return new Vector2Int(x, y);
     }
     
-    public static int GetTileId(Vector2Int position, int width, int height)
+    public static int GetTileId(Vector2Int position, MapLength length)
     {
         // タイルタイルの座標が範囲外の場合はスキップ
-        if(position.x < 0 || position.x >= width) return -1;
-        if (position.y < 0 || position.y >= height) return -1;
+        if(position.x < 0 || position.x >= length.Width) return -1;
+        if (position.y < 0 || position.y >= length.Height) return -1;
         // タイルタイルのIDを取得
-        var calcId = position.y * width + position.x;
+        var calcId = position.y * length.Width + position.x;
         // タイルタイルのIDが範囲外の場合はスキップ
-        if(calcId < 0 || calcId >= width*height) return -1;
+        if(calcId < 0 || calcId >= length.TotalLength) return -1;
         
         return calcId;
     }
     
-    public static Vector2Int GetInvertXPosition(Vector2Int position, int width)
+    public static Vector2Int GetInvertXPosition(Vector2Int position, MapLength length)
     {
-        return new Vector2Int(width - position.x - 1, position.y);
+        return new Vector2Int(length.Width - position.x - 1, position.y);
     }
     
-    public static int GetInvertXId(Vector2Int position, int width, int height)
+    public static int GetInvertXId(Vector2Int position, MapLength length)
     {
-        var invertPosition = GetInvertXPosition(position, height);
-        return GetTileId(invertPosition, width, height);
+        var invertPosition = GetInvertXPosition(position, length);
+        return GetTileId(invertPosition, length);
     }
     
-    public static Vector2Int GetInvertXPosition(int tileId, int width)
+    public static Vector2Int GetInvertXPosition(int tileId, MapLength length)
     {
-        var tilePosition = GetTilePosition(tileId, width);
-        return GetInvertXPosition(tilePosition, width);
+        var tilePosition = GetTilePosition(tileId, length);
+        return GetInvertXPosition(tilePosition, length);
     }
 
-    public static int GetInvertXId(int tileId, int width, int height)
+    public static int GetInvertXId(int tileId, MapLength length)
     {
-        var tilePosition = GetTilePosition(tileId, width);
-        return GetInvertXId(tilePosition, width, height);
-    }
-    
-    
-    public static Vector2Int GetInvertYPosition(Vector2Int position, int height)
-    {
-        return new Vector2Int(position.x, height - position.y - 1);
-    }
-    
-    public static int GetInvertYId(Vector2Int position, int width, int height)
-    {
-        var invertPosition = GetInvertYPosition(position, width);
-        return GetTileId(invertPosition, width, height);
-    }
-    
-    public static Vector2Int GetInvertYPosition(int tileId, int width, int height)
-    {
-        return GetInvertYPosition(GetTilePosition(tileId, width), height);
+        var tilePosition = GetTilePosition(tileId, length);
+        return GetInvertXId(tilePosition, length);
     }
 
-    public static int GetInvertYId(int tileId, int width, int height)
+
+    public static Vector2Int GetInvertYPosition(Vector2Int position, MapLength length)
     {
-        var tilePosition = GetTilePosition(tileId, width);
-        return GetInvertYId(tilePosition, width, height);
+        return new Vector2Int(position.x, length.Height - position.y - 1);
     }
     
-    public static List<int> GetAroundTileIds(int tileId, int width, int length)
+    public static int GetInvertYId(Vector2Int position, MapLength length)
+    {
+        var invertPosition = GetInvertYPosition(position, length);
+        return GetTileId(invertPosition, length);
+    }
+    
+    public static Vector2Int GetInvertYPosition(int tileId, MapLength length)
+    {
+        return GetInvertYPosition(GetTilePosition(tileId, length), length);
+    }
+
+    public static int GetInvertYId(int tileId, MapLength length)
+    {
+        var tilePosition = GetTilePosition(tileId, length);
+        return GetInvertYId(tilePosition, length);
+    }
+    
+    public static List<int> GetAroundTileIds(int tileId, MapLength length)
     {
         // 指定のタイルタイルの座標を取得
-        var position = GetTilePosition(tileId, width);
+        var position = GetTilePosition(tileId, length);
         // 指定のタイルタイルの周囲の座標の一覧を作成
         var aroundPositions = new []
         {
@@ -94,7 +94,7 @@ public static class MapTileCalc
         foreach (var aroundPosition in aroundPositions)
         {
             // タイルタイルのIDを取得
-            var aroundTileId = GetTileId(aroundPosition, width, length / width);
+            var aroundTileId = GetTileId(aroundPosition, length);
             // タイルタイルのIDが範囲外の場合はスキップ
             if (aroundTileId == -1) continue;
             aroundTileIds.Add(aroundTileId);

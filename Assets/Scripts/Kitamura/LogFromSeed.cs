@@ -10,9 +10,9 @@ public class LogFromSeed : MonoBehaviour
     private GameRateAsset gameRate;
     
     [Button]
-    public void Log(uint seed)
+    public void Log(uint seed, int length = 9)
     {
-        var gameInfo = new GameInfo(9, gameRate, seed);
+        var gameInfo = new GameInfo(gameRate, length, seed);
         InfoLogger.LogMap(gameInfo.MapInfo, gameRate);
         InfoLogger.LogItem(gameInfo.ItemInfo, gameRate.itemRateAsset);
     }

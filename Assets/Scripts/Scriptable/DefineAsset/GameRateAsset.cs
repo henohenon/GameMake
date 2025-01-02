@@ -12,11 +12,10 @@ namespace Scriptable
     [CreateAssetMenu(fileName = "GameRateData", menuName = "GameRateData")]
     public class GameRateAsset : ScriptableObject
     {
-        public EachTileInfo[] tileRateInfos;
+        [InlineEditor,AssetsOnly] public MapRateAsset mapRateAsset;
         [InlineEditor,AssetsOnly] public ItemRateAsset itemRateAsset;
-        [AssetsOnly]
-        public GameObject[] randomTiles;
     }
+
     
     /*
      * RandomExを生かしたint rateを用いた重みつきリストのラッパークラス達

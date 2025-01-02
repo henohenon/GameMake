@@ -30,7 +30,7 @@ public class TileSelectManager : MonoBehaviour
         
         var highLightPosition = tilesManager.GetMapPosition(playerForwardPosition);
         
-        var positionTileId = MapTileCalc.GetTileId(highLightPosition, _mapInfo.Width, _mapInfo.Height);
+        var positionTileId = MapTileCalc.GetTileId(highLightPosition, _mapInfo.MapLength);
 
         if (positionTileId == -1)
         {

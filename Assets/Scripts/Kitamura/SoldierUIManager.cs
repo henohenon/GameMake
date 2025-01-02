@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class UIManager : MonoBehaviour
+public class SoldierUIManager : MonoBehaviour
 {
     [SerializeField]
     private UIDocument uiDocument;
@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
         tileMapsContainer.Clear();
     }
     
-    public void WriteMap(GameRateAsset asset, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)
+    public void WriteMap(MapRateAsset rate, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)
     {
         // タイルコンテナーを生成
         var tileMapsContainer = _root.Q<VisualElement>("tile-maps-container");
@@ -38,11 +38,11 @@ public class UIManager : MonoBehaviour
             var tileIndex = i;
             if (rightToLeft)
             {
-                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.Width, map.Height);
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.MapLength);
             }
             if (bottomToTop)
             {
-                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.Height, map.Width);
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.MapLength);
             }
             
             // タイルのテンプレートを複製
@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
             // idからタイルの名前を設定
             tile.name = $"Tile_{tileIndex}";
             // idのタイルの情報を取得
-            var tileInfo = asset.tileRateInfos[map.Tiles[tileIndex]];
+            var tileInfo = rate.tileRateInfos[map.Tiles[tileIndex]];
             // タイルコンテナーに追加
             tileContainer.Add(tile);
             // 爆弾なら赤にする

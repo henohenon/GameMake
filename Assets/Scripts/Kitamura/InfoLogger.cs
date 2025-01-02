@@ -6,15 +6,15 @@ public static class InfoLogger
 {
     public static void LogMap(MapInfo mapInfo,  GameRateAsset rateAsset)
     {
-        Debug.Log("------------------------Map Width: " + mapInfo.Width + ", Height: " + mapInfo.Height);
+        Debug.Log("------------------------Map Width: " + mapInfo.MapLength.Width + ", Height: " + mapInfo.MapLength.Height);
         var mapText = "";
-        for (var i = 0; i < mapInfo.Height; i++)
+        for (var i = 0; i < mapInfo.MapLength.Height; i++)
         {
-            for (int j = 0; j < mapInfo.Width; j++)
+            for (int j = 0; j < mapInfo.MapLength.Width; j++)
             {
-                var index = i * mapInfo.Width + j;
+                var index = i * mapInfo.MapLength.Width + j;
                 // タイルの種類を取得
-                var tileType = rateAsset.tileRateInfos[mapInfo.Tiles[index]].tileType;
+                var tileType = rateAsset.mapRateAsset.tileRateInfos[mapInfo.Tiles[index]].tileType;
                 // タイルの種類によって文字を変える
                 switch (tileType)
                 {

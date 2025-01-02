@@ -2,41 +2,51 @@ using RandomExtensions;
 using RandomExtensions.Algorithms;
 using RandomExtensions.Collections;
 using Scriptable;
+using UnityEditor;
 
 public class MapInfo
 {
-    public readonly int Width;
-    public readonly int Height;
+    public readonly MapLength MapLength;
     public readonly int[] Tiles;
     
-    public MapInfo(int width, int height, EachTileInfo[] tileRateInfos, IRandom random)
+    public MapInfo(EachTileInfo[] tileRateInfos, IRandom random, int width, int height)
     {
-        Width = width;
-        Height = height;
-        Tiles = new int[width * height];
-        // マップの生成
-        CreateRandomMap(random, tileRateInfos);
-    }
-    
-    public MapInfo(int length, EachTileInfo[] tileRateInfos, IRandom random)
-    {
-        Width = length;
-        Height = length;
-        Tiles = new int[length * length];
+        MapLength = new MapLength(width, height);
+        Tiles = new int[MapLength.TotalLength];
         
         // マップの生成
         CreateRandomMap(random, tileRateInfos);
     }
     
-    public MapInfo(int length, EachTileInfo[] tileRateInfos)
+    public MapInfo(EachTileInfo[] tileRateInfos, IRandom random, int length)
     {
-        Width = length;
-        Height = length;
-        Tiles = new int[length * length];
+        MapLength = new MapLength(length);
+        Tiles = new int[MapLength.TotalLength];
         
         // マップの生成
-        CreateRandomMap(RandomEx.Shared, tileRateInfos);
+        CreateRandomMap(random, tileRateInfos);
     }
+    
+    public MapInfo(EachTileInfo[] tileRateInfos, int width, int height)
+    {
+        var random = RandomEx.Shared;
+        MapLength = new MapLength(width, height);
+        Tiles = new int[MapLength.TotalLength];
+        
+        // マップの生成
+        CreateRandomMap(random, tileRateInfos);
+    }
+    
+    public MapInfo(EachTileInfo[] tileRateInfos, int length)
+    {
+        var random = RandomEx.Shared;
+        MapLength = new MapLength(length);
+        Tiles = new int[MapLength.TotalLength];
+        
+        // マップの生成
+        CreateRandomMap(random, tileRateInfos);
+    }
+
 
     private void CreateRandomMap(IRandom random, EachTileInfo[] tileRateInfos)
     {
@@ -52,5 +62,24 @@ public class MapInfo
         {
             Tiles[i] = weightList.GetItem(random);
         }
+    }
+}
+
+public class MapLength
+{
+    public readonly int Width;
+    public readonly int Height;
+    public int TotalLength => Width * Height;
+
+    public MapLength(int width, int height)
+    {
+        Width = width;
+        Height = height;
+    }
+
+    public MapLength(int length)
+    {
+        Width = length;
+        Height = length;
     }
 }

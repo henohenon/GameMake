@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Alchemy.Inspector;
 using Scriptable;
-using Unity.Collections;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ItemStackManager : MonoBehaviour
 {

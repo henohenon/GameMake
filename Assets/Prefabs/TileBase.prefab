@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2058871231099828899}
   - component: {fileID: 5767477687585010028}
   m_Layer: 0
-  m_Name: CardBase
+  m_Name: TileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4c77edcacf7a54c853ea59f3a01adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
+  textMesh: {fileID: 5547469695830742409}
   defaultLayer: 0
   selectedLayer: 6

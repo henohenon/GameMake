@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 5802507882061350920}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: -0.062}
+  m_LocalPosition: {x: 0, y: -0.088, z: -0.062}
   m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -344,7 +344,7 @@ PrefabInstance:
     - target: {fileID: 2159426325771876638, guid: ffac905825482a247aaec95c6988a1cb,
         type: 3}
       propertyPath: m_Name
-      value: BombCard
+      value: Bomb
       objectReference: {fileID: 0}
     - target: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
         type: 3}

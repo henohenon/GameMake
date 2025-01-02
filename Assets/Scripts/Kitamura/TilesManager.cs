@@ -25,14 +25,17 @@ public class TilesManager : MonoBehaviour
     [SerializeField]
     private UIManager uiManager;
 
-    public TileController[] tiles { get; private set; }
+    private readonly Subject<Unit> _gameClear = new();
+    public Observable<Unit> GameClear => _gameClear;
+
+    public TileController[] TileControllers { get; private set; }
     private GameInfo _gameInfo;
 
     // Start is called before the first frame update
     void Start()
     {
         // タイルタイルの配列指定の長さで初期化
-        tiles = new TileController[length * length];
+        TileControllers = new TileController[length * length];
         
         // 乱数のシードを生成
         var seed = GenerateSeed();
@@ -68,7 +71,7 @@ public class TilesManager : MonoBehaviour
     private void Create3dMap(GameRateAsset asset, MapInfo map)
     {
         // 既存のタイルを破棄
-        foreach (var tile in tiles)
+        foreach (var tile in TileControllers)
         {
             if (tile != null)
             {
@@ -134,7 +137,7 @@ public class TilesManager : MonoBehaviour
             instance.Initialize(i, tileInfo.tileType, tileObjInstance);
             
             // TileControllerを配列に格納
-            tiles[i] = instance;
+            TileControllers[i] = instance;
         
             // タイルが裏返されたときのイベントを購読し、タイルが裏返されたときの処理を実行
             instance.OnFlipped.Subscribe(OnTileFlipped);
@@ -151,7 +154,7 @@ public class TilesManager : MonoBehaviour
     private void OnTileFlipped(int tileId)
     {
         // タイルのインスタンスをキャッシュ的な感じで取得
-        var tileTile = tiles[tileId];
+        var tileTile = TileControllers[tileId];
         // タイルタイルが爆弾の場合はゲームオーバー
         if (tileTile.TileType == TileType.Bomb)
         {
@@ -180,7 +183,7 @@ public class TilesManager : MonoBehaviour
                     var tileType = gameRate.tileRateInfos[tileInfoIndex].tileType;
                     if (tileType == TileType.Safety)
                     {
-                        tiles[aroundTileId].Open();
+                        TileControllers[aroundTileId].Open();
                     }
                 }
             }
@@ -196,6 +199,7 @@ public class TilesManager : MonoBehaviour
             if (noBombCount == 0)
             {
                 Debug.Log("Game Clear");
+                _gameClear.OnNext(Unit.Default);
             }
         }
         //CheckForOnlyBombs();
@@ -215,7 +219,7 @@ public class TilesManager : MonoBehaviour
         foreach (var aroundTileId in aroundTileIds)
         {
             // 指定のタイプであれば加算
-            if (tiles[aroundTileId].TileType == type)
+            if (TileControllers[aroundTileId].TileType == type)
             {
                 sum++;
             }

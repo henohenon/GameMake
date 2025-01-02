@@ -42,7 +42,7 @@ public class TileSelectManager : MonoBehaviour
             return;
         }
         
-        var tile = tilesManager.tiles[positionTileId];
+        var tile = tilesManager.TileControllers[positionTileId];
 
         if (tile != selectingTile)
         {

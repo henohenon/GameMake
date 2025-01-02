@@ -11,8 +11,6 @@ public class TileSelectManager : MonoBehaviour
     [SerializeField] private TilesManager tilesManager;
     [SerializeField] private InputActionReference openTile;
     
-    private MapInfo _mapInfo;
-
     private void Start()
     {
         openTile.action.started += OpenTileCallback;
@@ -22,6 +20,7 @@ public class TileSelectManager : MonoBehaviour
     private TileController selectingTile;
     public void Update()
     {
+        if(tilesManager.TileControllers == null) return;
         var playerPosition = playerTransform.position;
         var playerDirection = playerTransform.forward;
         playerDirection.y = 0;
@@ -30,7 +29,7 @@ public class TileSelectManager : MonoBehaviour
         
         var highLightPosition = tilesManager.GetMapPosition(playerForwardPosition);
         
-        var positionTileId = MapTileCalc.GetTileId(highLightPosition, _mapInfo.MapLength);
+        var positionTileId = MapTileCalc.GetTileId(highLightPosition, tilesManager.MapInfo.MapLength);
 
         if (positionTileId == -1)
         {

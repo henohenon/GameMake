@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 921744852}
   - component: {fileID: 921744851}
   - component: {fileID: 921744853}
+  - component: {fileID: 921744854}
   m_Layer: 0
   m_Name: TilesManager
   m_TagString: Untagged
@@ -715,6 +716,23 @@ MonoBehaviour:
   gameRateAsset: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
   mapLength: 9
   soldierUIManager: {fileID: 1328982679}
+  tilesManager: {fileID: 921744851}
+--- !u!114 &921744854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921744850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214e1741ac7839c48b9e1fe648f75947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1856347870}
+  tilesManager: {fileID: 921744851}
+  openTile: {fileID: -4231335808290103030, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
 --- !u!1 &939279651
 GameObject:
   m_ObjectHideFlags: 0

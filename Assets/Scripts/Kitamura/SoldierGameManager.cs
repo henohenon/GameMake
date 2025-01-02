@@ -13,6 +13,7 @@ public class SoldierGameManager : MonoBehaviour
     [SerializeField] private GameRateAsset gameRateAsset;
     [SerializeField] private int mapLength = 9;
     [SerializeField] private SoldierUIManager soldierUIManager;
+    [SerializeField] private TilesManager tilesManager;
     
     private void Start()
     {
@@ -25,6 +26,8 @@ public class SoldierGameManager : MonoBehaviour
         Debug.Log("Seed: " + seed);
         InfoLogger.LogItem(gameInfo.ItemInfo, gameRateAsset.itemRateAsset);
         InfoLogger.LogMap(gameInfo.MapInfo, gameRateAsset);
+        
+        tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo.MapInfo);
         
         // 既存のタイルマップのUIをクリア
         soldierUIManager.ClearMaps();

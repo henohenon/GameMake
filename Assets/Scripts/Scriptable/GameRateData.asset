@@ -22,7 +22,7 @@ MonoBehaviour:
       type: 3}
     tileType: 0
   - rate: 5
-    tilePrefab: {fileID: 2157513987861848000, guid: 2a554991f30ff334b855dc01fabaa9ad,
+    tilePrefab: {fileID: 8759481559525510411, guid: 2a554991f30ff334b855dc01fabaa9ad,
       type: 3}
     tileType: 2
   itemRateAsset: {fileID: 11400000, guid: dbb6337f1c23a514eb2d4173d8810da2, type: 2}

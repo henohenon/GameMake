@@ -38,7 +38,7 @@ public class TileController : MonoBehaviour
         _tileObject.transform.localPosition = Vector3.zero;
     }
     
-    public void Open()
+    public virtual void Open()
     {
         if(_isOpened) return; // もし裏返していたら何もしない
         _isOpened = true;

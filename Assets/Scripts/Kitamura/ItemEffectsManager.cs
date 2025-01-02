@@ -20,7 +20,7 @@ public class ItemEffectsManager : MonoBehaviour
             }
             case ItemType.SpeedDown:
             {
-                _playerController.AddMoveSpeedNumb(2f);
+                _playerController.AddMoveSpeedNumb(-2f);
                 break;
             }
         }

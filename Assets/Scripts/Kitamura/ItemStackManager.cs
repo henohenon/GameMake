@@ -9,7 +9,9 @@ public class ItemStackManager : MonoBehaviour
 {
     [SerializeField] private ItemEffectsManager itemEffectsManager;
     [SerializeField] private InputActionReference[] stackNumbInputs;
-    
+    [SerializeField] private InputActionReference useItemInput;
+    [SerializeField] private InputActionReference removeItemInput;
+
     // 実行中のみ編集を許可
     private static bool IsPlaying => EditorApplication.isPlaying;
     [SerializeField, EnableIf("IsPlaying")]
@@ -23,6 +25,7 @@ public class ItemStackManager : MonoBehaviour
 
     private void Start()
     {
+        // アイテム選択の入力
         for (var i = 0; i < stackNumbInputs.Length; i++)
         {
             // iだと全部最後の数字になっちゃうので無理やりコピーしていく
@@ -30,6 +33,13 @@ public class ItemStackManager : MonoBehaviour
             stackNumbInputs[i].action.started += _ => OnInputNumber(index);
             stackNumbInputs[i].action.Enable();
         }
+        
+        // アイテム使用の入力
+        useItemInput.action.started += _ => UseItem();
+        useItemInput.action.Enable();
+        // アイテム捨てるの入力
+        removeItemInput.action.started += _ => RemoveItem();
+        removeItemInput.action.Enable();
     }
 
     private void OnInputNumber(int numb)
@@ -55,7 +65,7 @@ public class ItemStackManager : MonoBehaviour
         Debug.Log("Item stack is max");
     }
 
-    public void RemoveItem()
+    private void RemoveItem()
     {
         var itemType = itemStack[_selectingStackIndex];
         // 旗なら捨てない
@@ -68,7 +78,7 @@ public class ItemStackManager : MonoBehaviour
         itemStack[_selectingStackIndex] = ItemType.Empty;
     }
 
-    public void UseItem()
+    private void UseItem()
     {
         var itemType = itemStack[_selectingStackIndex];
         // アイテムを実行
@@ -86,5 +96,8 @@ public class ItemStackManager : MonoBehaviour
         {
             input.action.Disable();
         }
+        
+        useItemInput.action.Disable();
+        removeItemInput.action.Disable();
     }
 }

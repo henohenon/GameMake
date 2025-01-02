@@ -752,6 +752,10 @@ MonoBehaviour:
   - {fileID: 5117120674878144333, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
   - {fileID: 64914920230092992, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
   - {fileID: 402085440191246544, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
+  useItemInput: {fileID: -7803304000029112952, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  removeItemInput: {fileID: 8796532731297689166, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:

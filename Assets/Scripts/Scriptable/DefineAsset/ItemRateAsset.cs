@@ -102,10 +102,13 @@ namespace Scriptable
         public string calcIcon;
     }
 
+    // アイテムの種類。数字付けてるのは追加や削除があってもシリアル化された既存の値が変化しないように
     public enum ItemType
     {
-        SpeedUp,
-        SpeedDown,
+        Empty = -1,
+        Flag = 0,
+        SpeedUp = 1,
+        SpeedDown = 2,
     }
 
     [Serializable]

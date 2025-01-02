@@ -11,9 +11,9 @@ using static UnityEngine.Rendering.DebugUI;
 public class PlayerController : MonoBehaviour//へのへのさん
 {
     [SerializeField]
-    private float moveSpeed;
+    private float defaultMoveSpeed;
     [SerializeField]
-    private float rotateSpeed;
+    private float defaultRotateSpeed;
     [SerializeField]
     private InputActionReference cameraInput;//マウスの入力を取得
     [SerializeField]
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private TilesManager tilesManager;
     
     private Rigidbody _rb;
+    private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
 
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
         
         cameraLock.action.started += CameraLockCallback;
         cameraLock.action.Enable();
+        
+        CalcMoveSpeed();
     }
     
     private void CameraInputCallback(InputAction.CallbackContext context)
@@ -89,7 +92,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // 移動方向をカメラの向きに合わせる
         moveDirection = Quaternion.Euler(0, _rb.rotation.eulerAngles.y, 0) * moveDirection;
         // 移動方向を適用
-        _rb.position += moveDirection * (moveSpeed * Time.deltaTime);
+        _rb.position += moveDirection * (_nowMoveSpeed * Time.deltaTime);
         
         // カメラの回転座標の作成
         var addRotation = new Vector3(
@@ -108,6 +111,29 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.AddForce(direction * 10, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
+    }
+
+    private List<float> addMoveSpeeds = new();
+    public void AddMoveSpeedNumb(float speed)
+    {
+        addMoveSpeeds.Add(speed);
+        CalcMoveSpeed();
+    }
+
+    private float minMoveSpeed = 0.05f;
+    private void CalcMoveSpeed()
+    {
+        _nowMoveSpeed = defaultMoveSpeed;
+
+        foreach (var addSpeed in addMoveSpeeds)
+        {
+            _nowMoveSpeed += addSpeed;
+        }
+
+        if (_nowMoveSpeed < minMoveSpeed)
+        {
+            _nowMoveSpeed = minMoveSpeed;
+        }
     }
     
     private void OnDisable()

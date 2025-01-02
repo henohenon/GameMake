@@ -663,6 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 921744852}
   - component: {fileID: 921744851}
+  - component: {fileID: 921744853}
   m_Layer: 0
   m_Name: TilesManager
   m_TagString: Untagged
@@ -682,13 +683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d813ccec43ee30b4a80a4c9364377964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameRate: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
-  length: 9
   playerController: {fileID: 1856347866}
-  uiManager: {fileID: 1328982679}
-  openTile: {fileID: -4231335808290103030, guid: 4248f5acb6a544d42b8f38ed90469fc4,
-    type: 3}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0
@@ -704,6 +700,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &921744853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921744850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef456aeee3ea764b956de34429b36c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameRateAsset: {fileID: 0}
+  mapLength: 9
+  soldierUIManager: {fileID: 0}
 --- !u!1 &939279651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,8 +1143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93b7ef9a4af9814688e3bb5640d74eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  rotateSpeed: 0
+  defaultMoveSpeed: 0
+  defaultRotateSpeed: 0
   cameraInput: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   moveInput: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4,

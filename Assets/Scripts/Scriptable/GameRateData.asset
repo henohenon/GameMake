@@ -12,19 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5822aa50049234c9548eb3810bf918, type: 3}
   m_Name: GameRateData
   m_EditorClassIdentifier: 
-  tileRateInfos:
-  - rate: 2
-    tileType: 1
-  - rate: 6
-    tileType: 0
-  - rate: 1
-    tileType: 2
+  mapRateAsset: {fileID: 11400000, guid: 4f529f0c7442cdd4c9bf7e68879baba0, type: 2}
   itemRateAsset: {fileID: 11400000, guid: dbb6337f1c23a514eb2d4173d8810da2, type: 2}
-  randomTiles:
-  - {fileID: 7712833765362121007, guid: acda655639be9f542ace8be445054d81, type: 3}
-  - {fileID: 7989757796300909819, guid: 279f6cd0c346ea14aa841056616329e1, type: 3}
-  - {fileID: 5542247828512330069, guid: 199cf3697dbbd4342b4541c9a5823b52, type: 3}
-  - {fileID: 6197383817184632635, guid: fcedafedc4f397142b00c05b0c328376, type: 3}
-  - {fileID: 5268635609809890154, guid: 2e5a10496fb70a746a838d656f20762d, type: 3}
-  - {fileID: 6261668174232186628, guid: a3a5f55f6fd3aed4294638363d74fcfe, type: 3}
-  - {fileID: 3707492048351128893, guid: ab15bfd49e88069448804ca193b5d046, type: 3}

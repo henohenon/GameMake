@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc13b12c7a04f64821dcaf55c10ad72, type: 3}
+  m_Name: MapRateData
+  m_EditorClassIdentifier: 
+  randomTiles:
+  - {fileID: 7712833765362121007, guid: acda655639be9f542ace8be445054d81, type: 3}
+  - {fileID: 7989757796300909819, guid: 279f6cd0c346ea14aa841056616329e1, type: 3}
+  - {fileID: 5542247828512330069, guid: 199cf3697dbbd4342b4541c9a5823b52, type: 3}
+  - {fileID: 6197383817184632635, guid: fcedafedc4f397142b00c05b0c328376, type: 3}
+  - {fileID: 5268635609809890154, guid: 2e5a10496fb70a746a838d656f20762d, type: 3}
+  - {fileID: 6261668174232186628, guid: a3a5f55f6fd3aed4294638363d74fcfe, type: 3}
+  - {fileID: 3707492048351128893, guid: ab15bfd49e88069448804ca193b5d046, type: 3}
+  tileRateInfos:
+  - rate: 7
+    tileType: 0
+  - rate: 2
+    tileType: 1
+  - rate: 1
+    tileType: 2

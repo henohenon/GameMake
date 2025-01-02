@@ -747,6 +747,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab705cc7dd7b3f45aeeb75fe1070470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemEffectsManager: {fileID: 921744856}
+  stackNumbInputs:
+  - {fileID: 5117120674878144333, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
+  - {fileID: 64914920230092992, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
+  - {fileID: 402085440191246544, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:
@@ -760,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6730d8b0a710c4bbae006be7469fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 0}
+  _playerController: {fileID: 1856347866}
   flagPrefab: {fileID: 0}
 --- !u!1 &939279651
 GameObject:

@@ -260,11 +260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d813ccec43ee30b4a80a4c9364377964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAsset: {fileID: 11400000, guid: 30f64907183a6e742a160d7e0a49c599, type: 2}
-  cardRate: {fileID: 11400000, guid: 9c1147d54d376634aa78f217fbc52aa9, type: 2}
-  length: 9
+  tilePrefabs: {fileID: 0}
   playerController: {fileID: 1856347866}
-  uiManager: {fileID: 1328982679}
+  _itemStackManager: {fileID: 0}
+  Screen: {fileID: 0}
 --- !u!64 &58930929
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1107,13 +1106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93b7ef9a4af9814688e3bb5640d74eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  rotateSpeed: 0
-  space: {fileID: -4231335808290103030, guid: 4248f5acb6a544d42b8f38ed90469fc4, type: 3}
-  audioManager: {fileID: 120220426}
-  CameraAction: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
-    type: 3}
+  defaultMoveSpeed: 0
+  defaultRotateSpeed: 0
+  cameraInput: {fileID: 0}
+  moveInput: {fileID: 0}
+  cameraLock: {fileID: 0}
   cameraRotationSpeed: 0.1
+  tilesManager: {fileID: 0}
 --- !u!114 &1856347867
 MonoBehaviour:
   m_ObjectHideFlags: 0

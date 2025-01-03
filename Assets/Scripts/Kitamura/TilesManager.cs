@@ -19,6 +19,8 @@ public class TilesManager : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
 
+    [SerializeField] private ItemStackManager _itemStackManager;
+
     // ゲームクリア時のサブジェクト
     private readonly Subject<Unit> _gameClear = new();
     public Observable<Unit> GameClear => _gameClear;
@@ -27,13 +29,15 @@ public class TilesManager : MonoBehaviour
     public TileController[] TileControllers { get; private set; }
     public MapRateAsset MapRate { get; private set; }
     public MapInfo MapInfo { get; private set; }
+    private ItemInfo _itemInfo;
     
     private int _noBombCount = 0;
     
-    public void Generate3dMap(MapRateAsset rate, MapInfo info)
+    public void Generate3dMap(MapRateAsset rate, GameInfo info)
     {
         MapRate = rate;
-        MapInfo = info;
+        MapInfo = info.MapInfo;
+        _itemInfo = info.ItemInfo;
 
         if (TileControllers != null)
         {
@@ -81,7 +85,13 @@ public class TilesManager : MonoBehaviour
                     // アイコンを設定する
                     var prefab = tilePrefabs.blueItemTilePrefab;
                     var blueInstance = Instantiate(prefab);
-                    blueInstance.SetItemIcon("heno");
+                    var itemInfo = _itemInfo.GetRandomBlueItem();
+                    blueInstance.SetItemIcon(itemInfo.itemIcon);
+                    // めくられたらアイテムを追加
+                    blueInstance.OnFlipped.Subscribe(_ =>
+                    {
+                        _itemStackManager.AddItem(itemInfo.itemType);
+                    });
                     instance = blueInstance;
                     break;
                 }
@@ -174,8 +184,6 @@ public class TilesManager : MonoBehaviour
             }
         }
         //CheckForOnlyBombs();
-        
-        
     }
     
     // タイルタイルの周囲の爆弾の数を取得

@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
   playerController: {fileID: 1856347866}
+  _itemStackManager: {fileID: 921744855}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0

@@ -15,10 +15,10 @@ MonoBehaviour:
   blueItemRate:
     itemRateInfos:
     - rate: 1
-      itemType: 0
+      itemType: 1
       description: "\u901F\u5EA6\u30A2\u30C3\u30D7\uFF01"
     - rate: 1
-      itemType: 1
+      itemType: 2
       description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
     itemIcons:
     - "\u3044"
@@ -33,10 +33,10 @@ MonoBehaviour:
   yellowItemRate:
     itemRateInfos:
     - rate: 1
-      itemType: 0
+      itemType: 1
       description: "\u901F\u5EA6\u7D50\u69CB\u30A2\u30C3\u30D7"
     - rate: 1
-      itemType: 1
+      itemType: 2
       description: "\u901F\u5EA6\u5272\u3068\u30C0\u30A6\u30F3"
     numbIcons:
     - "\u3061"
@@ -59,10 +59,10 @@ MonoBehaviour:
   purpleItemRate:
     itemRateInfos:
     - rate: 1
-      itemType: 0
+      itemType: 1
       description: "\u901F\u5EA6\u8D85\u7D76\u3042\u3063\u3077\u3063\u3077"
     - rate: 1
-      itemType: 1
+      itemType: 2
       description: "\u3046\u3001\u52D5\u3051\u3093"
     calcIcons:
     - calcType: 0
@@ -78,6 +78,3 @@ MonoBehaviour:
   - calcType: 0
     icon: "\u25B3"
     description: "\u304A\u306B\u304E\u308A"
-  blueItemTilePrefab: {fileID: 0}
-  yellowItemTilePrefab: {fileID: 0}
-  purpleItemTilePrefab: {fileID: 0}

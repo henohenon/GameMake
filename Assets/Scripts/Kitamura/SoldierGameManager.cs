@@ -27,7 +27,7 @@ public class SoldierGameManager : MonoBehaviour
         InfoLogger.LogItem(gameInfo.ItemInfo, gameRateAsset.itemRateAsset);
         InfoLogger.LogMap(gameInfo.MapInfo, gameRateAsset);
         
-        tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo.MapInfo);
+        tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
         
         // 既存のタイルマップのUIをクリア
         soldierUIManager.ClearMaps();

@@ -38,7 +38,6 @@ public class ItemInfo
             blueItemArray.Remove(item); // 重複を許可しないため、取得したアイテムをリストから削除
             var icon = blueIconArray.ElementAt(i);
             BlueResultItems[i] = new BlueResultItem(icon, item.itemType);
-
         }
         
         // 黄色アイテムの種類の重みつきリストを生成
@@ -122,6 +121,12 @@ public class ItemInfo
                 PurpleResultItems[index].Add(resultIndex);
             }
         }
+    }
+
+    public BlueResultItem GetRandomBlueItem()
+    {
+        var itemIndex = RandomEx.Shared.NextInt(0, BlueResultItems.Length-1);
+        return BlueResultItems[itemIndex];
     }
     
     private WeightedList<T> CreateWaitedArray<T> (T[] items) where T : RateItemBase

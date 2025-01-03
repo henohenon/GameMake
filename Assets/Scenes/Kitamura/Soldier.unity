@@ -771,7 +771,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1856347866}
-  flagPrefab: {fileID: 0}
+  _tileSelectManager: {fileID: 921744854}
+  flagPrefab: {fileID: 2871383591519906417, guid: 8227b93e551259b41af2834a0c5d657d,
+    type: 3}
 --- !u!1 &939279651
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,9 +7,10 @@ public class TileController : MonoBehaviour
 {
     [SerializeField]
     private TextMesh textMesh;
-    
-    private bool _isOpened = false;
+
+    private TileState _tileState;
     private GameObject _tileObject;
+    private GameObject _flagObject;
     
     // タイルが裏返されたときのイベント
     private Subject<int> _onFlipped = new ();
@@ -40,8 +41,9 @@ public class TileController : MonoBehaviour
     
     public virtual bool Open()
     {
-        if(_isOpened) return false; // もし裏返していたら何もしない
-        _isOpened = true;
+        // もし素の状態でなければ何もしない
+        if(_tileState != TileState.Default) return false;
+        _tileState = TileState.Open;
         
         // タイルを消す
         _tileObject.SetActive(false);
@@ -50,10 +52,33 @@ public class TileController : MonoBehaviour
 
         return true;
     }
+
+    public void Flag(GameObject prefab)
+    {
+        // もし裏返していたら何もしない
+        if(_tileState == TileState.Open) return;
+
+        // もし旗オブジェクトがあれば消す
+        if (_flagObject)
+        {
+            Destroy(_flagObject);
+        }
+        if (_tileState == TileState.Flag)
+        {
+            _tileState = TileState.Default;
+        }
+        else if(_tileState == TileState.Default)
+        {
+            // 自身のことして旗オブジェクトを生成
+            _flagObject = Instantiate(prefab, this.transform);
+            _tileState = TileState.Flag;
+        }
+    }
     
     public void Select(bool isSelected = true)
     {
-        if(_isOpened) return; // もし裏返していたら何もしない
+        // もし裏返していたら何もしない
+        if(_tileState == TileState.Open) return;
         _tileObject.layer = isSelected ? selectedLayer : defaultLayer;
     }
     
@@ -61,4 +86,12 @@ public class TileController : MonoBehaviour
     {
         textMesh.text = text;
     }
+
+    private enum TileState
+    {
+        Default,
+        Open,
+        Flag
+    }
 }
+

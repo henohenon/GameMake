@@ -17,7 +17,7 @@ public class TileSelectManager : MonoBehaviour
         openTile.action.Enable();
     }
 
-    private TileController _selectingTile;
+    public TileController SelectingTile { get; private set; }
     public void Update()
     {
         if(tilesManager.TileControllers == null) return;
@@ -33,35 +33,33 @@ public class TileSelectManager : MonoBehaviour
 
         if (positionTileId == -1)
         {
-            if (_selectingTile)
+            if (SelectingTile)
             {
-                _selectingTile.Select(false);
-                _selectingTile = null;
+                SelectingTile.Select(false);
+                SelectingTile = null;
             }
             return;
         }
         
         var tile = tilesManager.TileControllers[positionTileId];
 
-        if (tile != _selectingTile)
+        if (tile != SelectingTile)
         {
-            _selectingTile?.Select(false);
-            _selectingTile = tile;
-            _selectingTile.Select();
+            SelectingTile?.Select(false);
+            SelectingTile = tile;
+            SelectingTile.Select();
         }
     }
-    
     
     private void OpenTileCallback(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            if(_selectingTile)
+            if(SelectingTile)
             {
                 Debug.Log("Open");
-                _selectingTile.Open();
+                SelectingTile.Open();
             }
         }
     }
-
 }

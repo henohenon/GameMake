@@ -32,7 +32,12 @@ public class TilesManager : MonoBehaviour
     private ItemInfo _itemInfo;
     
     private int _noBombCount = 0;
-    
+
+    //ニコマル追記(1/3)
+    //-ここから
+    public InPlayUIManager Screen;
+    //ここまで-
+
     public void Generate3dMap(MapRateAsset rate, GameInfo info)
     {
         MapRate = rate;
@@ -145,8 +150,18 @@ public class TilesManager : MonoBehaviour
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
             playerController.Impact(direction);
-            
-        }
+            //ニコマル追記(2/3)
+            //-ここから
+            if (Screen == null)
+            {
+                Debug.LogError("ScreenManager is not initialized!");
+                return;
+            }
+            Screen.SetHiddenCredit(2,true);
+            //ここまで-
+
+
+}
         else
         {
             // 周囲のタイルの状況を調べる
@@ -181,6 +196,10 @@ public class TilesManager : MonoBehaviour
             {
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
+                //ニコマル追記(3/3)
+                //-ここから
+                Screen.SetHiddenCredit(1, true);
+                //ここまで-
             }
         }
         //CheckForOnlyBombs();

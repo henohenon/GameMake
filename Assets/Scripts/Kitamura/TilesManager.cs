@@ -157,7 +157,7 @@ public class TilesManager : MonoBehaviour
                 Debug.LogError("ScreenManager is not initialized!");
                 return;
             }
-            Screen.SetHiddenCredit(2,true);
+            Screen.SetHiddenCredit(2,false);
             //ここまで-
 
 
@@ -198,7 +198,7 @@ public class TilesManager : MonoBehaviour
                 _gameClear.OnNext(Unit.Default);
                 //ニコマル追記(3/3)
                 //-ここから
-                Screen.SetHiddenCredit(1, true);
+                Screen.SetHiddenCredit(1, false);
                 //ここまで-
             }
         }

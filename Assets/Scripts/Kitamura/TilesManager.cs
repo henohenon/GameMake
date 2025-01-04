@@ -196,6 +196,8 @@ public class TilesManager : MonoBehaviour
         // 周囲のタイルタイルのIDを取得
         var aroundTileIds = MapTileCalc.GetAroundTileIds(tileId, MapInfo.MapLength);
         Debug.Log(aroundTileIds);
+        
+        
         // 周囲のタイルタイルを調べる
         foreach (var aroundTileId in aroundTileIds)
         {

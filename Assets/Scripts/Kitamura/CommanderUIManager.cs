@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Alchemy.Inspector;
+using RandomExtensions;
+using RandomExtensions.Linq;
 using Scriptable;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -33,15 +36,28 @@ public class CommanderUIManager : MonoBehaviour
 
     }
 
+    private const int mapLength = 9;
     private void RecreateView()
     {
         if (uint.TryParse(_idTextField.value, out uint result))
         {
-            var gameInfo = new GameInfo(rate, 9, result);
+            var gameInfo = new GameInfo(rate, mapLength, result);
             // マップのクリア
             _tileMapsContainer.Clear();
-            // マップを書く
-            WriteMap(rate.mapRateAsset, gameInfo.MapInfo);
+            // 本物+偽物*2のマップ配列を作成
+            var maps = new []
+            {
+                gameInfo.MapInfo,
+                new (rate.mapRateAsset.tileRateInfos, mapLength),
+                new (rate.mapRateAsset.tileRateInfos, mapLength),
+            }.AsEnumerable();
+            // マップ配列シャッフル
+            maps = maps.Shuffle().ToArray();
+            // uiに書く
+            foreach (var map in maps)
+            {
+                WriteMap(rate.mapRateAsset, map, RandomEx.Shared.NextBool(), RandomEx.Shared.NextBool());
+            }
             // アイテム情報の表示
             _detailsLabel.text = GetItemInfoStr(gameInfo.ItemInfo, rate.itemRateAsset);
         }

@@ -1,8 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="TileMaps" src="project://database/Assets/UI/TileMaps.uxml?fileID=9197481963319205126&amp;guid=a1b65786a86243b488a430e8962abb49&amp;type=3#TileMaps" />
     <ui:VisualElement style="flex-direction: row;">
         <ui:TextField picking-mode="Ignore" label="ShareID" value="Input shareId" name="IdInputField" />
         <ui:Button text="Apply" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Apply" />
     </ui:VisualElement>
     <ui:Button text="Back to title" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleButton" />
+    <ui:Instance template="TileMaps" name="TileMaps" />
     <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Details" style="flex-grow: 1;" />
 </ui:UXML>

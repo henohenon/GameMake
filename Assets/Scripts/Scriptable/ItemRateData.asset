@@ -29,7 +29,7 @@ MonoBehaviour:
     - "\u3078"
     - "\u3068"
     maxItemCount: 2
-    minItemCount: 1
+    minItemCount: 2
   yellowItemRate:
     itemRateInfos:
     - rate: 1

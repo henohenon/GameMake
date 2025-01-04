@@ -9,33 +9,84 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(UIDocument))]
 public class CommanderUIManager : MonoBehaviour
 {
-    private UIDocument _document;
     [SerializeField, AssetsOnly] private GameRateAsset rate;
-
+    [SerializeField, AssetsOnly]
+    private VisualTreeAsset tileAsset;// TODO: クラス指定のnew VisualElementで行けるようにしたい
+    
+    private UIDocument _document;
+    private VisualElement _tileMapsContainer;
+    private Label _detailsLabel;
+    private TextField _idTextField;
+    
     private void Start()
     {
         _document = GetComponent<UIDocument>();
         var root = _document.rootVisualElement;
+        
 
         var applyButton = root.Q<Button>("Apply");
-        var idInputField = root.Q<TextField>("IdInputField");
+        _idTextField = root.Q<TextField>("IdInputField");
+        _detailsLabel = root.Q<Label>("Details");
+        _tileMapsContainer = root.Q<VisualElement>("tile-maps-container");
+        
+        applyButton.clicked += RecreateView;
 
-        var detailText = root.Q<Label>("Details");
-
-        applyButton.clicked += () =>
-        {
-            if (uint.TryParse(idInputField.value, out uint result))
-            {
-                var gameInfo = new GameInfo(rate, 9, result);
-                detailText.text = GetItemInfoStr(gameInfo.ItemInfo, rate.itemRateAsset);
-            }
-            else
-            {
-                Debug.LogWarning("Invalid input. Reverting to previous value.");
-            }
-        };
     }
 
+    private void RecreateView()
+    {
+        if (uint.TryParse(_idTextField.value, out uint result))
+        {
+            var gameInfo = new GameInfo(rate, 9, result);
+            // マップのクリア
+            _tileMapsContainer.Clear();
+            // マップを書く
+            WriteMap(rate.mapRateAsset, gameInfo.MapInfo);
+            // アイテム情報の表示
+            _detailsLabel.text = GetItemInfoStr(gameInfo.ItemInfo, rate.itemRateAsset);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input. Reverting to previous value.");
+        }
+        
+    }
+    
+    public void WriteMap(MapRateAsset rate, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)
+    {
+        // タイルコンテナーを生成
+        var tileContainer = new VisualElement();
+        _tileMapsContainer.Add(tileContainer);
+        tileContainer.AddToClassList("tile-map");
+        // マップのデータに沿ってタイルを生成
+        for (int i = 0; i < map.Tiles.Length; i++)
+        {
+            // タイルのインデックスをフラグに応じて反転
+            var tileIndex = i;
+            if (rightToLeft)
+            {
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.MapLength);
+            }
+            if (bottomToTop)
+            {
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.MapLength);
+            }
+            
+            // タイルのテンプレートを複製
+            var tile = tileAsset.CloneTree();
+            // idからタイルの名前を設定
+            tile.name = $"Tile_{tileIndex}";
+            // idのタイルの情報を取得
+            var tileInfo = rate.tileRateInfos[map.Tiles[tileIndex]];
+            // タイルコンテナーに追加
+            tileContainer.Add(tile);
+            // 爆弾なら赤にする
+            if (tileInfo.tileType == TileType.Bomb)
+            {
+                tile.AddToClassList("red");
+            }
+        }
+    }
     private string GetItemInfoStr(ItemInfo info, ItemRateAsset rate)
     {
         string str = "";

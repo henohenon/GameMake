@@ -12,7 +12,6 @@ public class SoldierGameManager : MonoBehaviour
 {
     [SerializeField] private GameRateAsset gameRateAsset;
     [SerializeField] private int mapLength = 9;
-    [SerializeField] private SoldierUIManager soldierUIManager;
     [SerializeField] private TilesManager tilesManager;
     
     private void Start()
@@ -27,23 +26,6 @@ public class SoldierGameManager : MonoBehaviour
         InfoLogger.LogGame(gameInfo, gameRateAsset);
         
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
-        
-        // 既存のタイルマップのUIをクリア
-        soldierUIManager.ClearMaps();
-        // 本物+偽物*2のマップ配列を作成
-        var maps = new []
-        {
-            gameInfo.MapInfo,
-            new (gameRateAsset.mapRateAsset.tileRateInfos, mapLength),
-            new (gameRateAsset.mapRateAsset.tileRateInfos, mapLength),
-        }.AsEnumerable();
-        // マップ配列シャッフル
-        maps = maps.Shuffle().ToArray();
-        // uiに書く
-        foreach (var map in maps)
-        {
-            soldierUIManager.WriteMap(gameRateAsset.mapRateAsset, map);
-        }
     }
     
     private uint GenerateSeed()

@@ -36,7 +36,6 @@ public class InPlayUIManager : MonoBehaviour//ニコマル
         VisualElement screen = null;
         switch (type)
         {
-            case 1:
             case InPlayScreenType.GameClear:
                 screen = ClearScreen;
                 break;

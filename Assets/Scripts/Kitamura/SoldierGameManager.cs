@@ -24,8 +24,7 @@ public class SoldierGameManager : MonoBehaviour
         
         // ログ出力。TODO: UIにつなげる
         Debug.Log("Seed: " + seed);
-        InfoLogger.LogItem(gameInfo.ItemInfo, gameRateAsset.itemRateAsset);
-        InfoLogger.LogMap(gameInfo.MapInfo, gameRateAsset);
+        InfoLogger.LogGame(gameInfo, gameRateAsset);
         
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
         

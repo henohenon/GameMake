@@ -4,7 +4,13 @@ using UnityEngine;
 
 public static class InfoLogger
 {
-    public static void LogMap(MapInfo mapInfo,  GameRateAsset rateAsset)
+    public static void LogGame(GameInfo info, GameRateAsset rate)
+    {
+        LogMap(info.MapInfo, rate.mapRateAsset);
+        LogItem(info.ItemInfo, rate.itemRateAsset);
+    }
+    
+    public static void LogMap(MapInfo mapInfo,  MapRateAsset rateAsset)
     {
         Debug.Log("------------------------Map Width: " + mapInfo.MapLength.Width + ", Height: " + mapInfo.MapLength.Height);
         var mapText = "";
@@ -14,7 +20,7 @@ public static class InfoLogger
             {
                 var index = i * mapInfo.MapLength.Width + j;
                 // タイルの種類を取得
-                var tileType = rateAsset.mapRateAsset.tileRateInfos[mapInfo.Tiles[index]].tileType;
+                var tileType = rateAsset.tileRateInfos[mapInfo.Tiles[index]].tileType;
                 // タイルの種類によって文字を変える
                 switch (tileType)
                 {

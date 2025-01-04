@@ -12,9 +12,11 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private InputActionReference useItemInput;
     [SerializeField] private InputActionReference removeItemInput;
 
+#if UNITY_EDITOR
     // 実行中のみ編集を許可
     private static bool IsPlaying => EditorApplication.isPlaying;
     [SerializeField, EnableIf("IsPlaying")]
+#endif
     private ItemType[] itemStack = new[]
     {
         ItemType.Flag,

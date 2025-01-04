@@ -19,11 +19,10 @@ public class SoldierGameManager : MonoBehaviour
         // 乱数のシードを生成
         var seed = GenerateSeed();
         // ゲーム情報を初期化
-        var gameInfo = new GameInfo(gameRateAsset, mapLength);
+        var gameInfo = new GameInfo(gameRateAsset, mapLength, seed);
         
         // ログ出力。TODO: UIにつなげる
         Debug.Log("Seed: " + seed);
-        InfoLogger.LogGame(gameInfo, gameRateAsset);
         
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
     }

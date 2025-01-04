@@ -41,9 +41,11 @@ public class CommanderUIManager : MonoBehaviour
     {
         if (uint.TryParse(_idTextField.value, out uint result))
         {
+            Debug.Log("inputSeed: "+result);
             var gameInfo = new GameInfo(rate, mapLength, result);
             // マップのクリア
             _tileMapsContainer.Clear();
+            
             // 本物+偽物*2のマップ配列を作成
             var maps = new []
             {
@@ -56,7 +58,7 @@ public class CommanderUIManager : MonoBehaviour
             // uiに書く
             foreach (var map in maps)
             {
-                WriteMap(rate.mapRateAsset, map, RandomEx.Shared.NextBool(), RandomEx.Shared.NextBool());
+                WriteMap(rate.mapRateAsset, map);
             }
             // アイテム情報の表示
             _detailsLabel.text = GetItemInfoStr(gameInfo.ItemInfo, rate.itemRateAsset);

@@ -21,13 +21,13 @@ MonoBehaviour:
       itemType: 2
       description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
     itemIcons:
-    - "\u3044"
-    - "\u308D"
-    - "\u306F"
-    - "\u306B"
-    - "\u307B"
-    - "\u3078"
-    - "\u3068"
+    - A
+    - a
+    - B
+    - b
+    - C
+    - c
+    - D
     maxItemCount: 2
     minItemCount: 2
   yellowItemRate:
@@ -39,16 +39,16 @@ MonoBehaviour:
       itemType: 2
       description: "\u901F\u5EA6\u5272\u3068\u30C0\u30A6\u30F3"
     numbIcons:
-    - "\u3061"
-    - "\u308A"
-    - "\u306C"
-    - "\u308B"
-    - "\u3092"
-    - "\u308F"
-    - "\u304B"
-    - "\u3088"
-    - "\u305F"
-    - "\u308C"
+    - E
+    - e
+    - F
+    - f
+    - G
+    - g
+    - H
+    - h
+    - I
+    - i
     itemCount: 2
     maxCalcNumb: 3
   yellowPuzzleIcons:

@@ -11,13 +11,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene Kitamura.unity
     guid: edded6247941fad4ab007bdd5c7989e8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/a/a.unity
-    guid: 99c874f006f173c42918ff2528a55650
-  - enabled: 1
+    guid: d0a61648c26551241a6d3e4126729352
+  - enabled: 0
     path: Assets/Scenes/nikomaru/TitleScene.unity
     guid: 9843f30a385dd4e4bbd9b133173d9a85
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/nikomaru/nikomaru.unity
-    guid: 3177a063b60eb9343b8a983ccfde4246
+    guid: ec8558687d41fa343ac1dfe9b2457cfc
+  - enabled: 0
+    path: Assets/Scenes/Kitamura/Soldier.unity
+    guid: 39408ab8c10d8584fabe28b52c0b1852
+  - enabled: 1
+    path: Assets/Scenes/Kitamura/Commander.unity
+    guid: c287608e07cb1464c86750f0792e9f6f
   m_configObjects: {}

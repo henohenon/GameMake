@@ -24,7 +24,7 @@ public class TileController : MonoBehaviour
     public TileType TileType { get; private set; } // getはpublic、setはprivate
     
     
-    private float[] _tileRotationY = {0, 90, 180, 270};
+    private readonly float[] _tileRotationY = {0, 90, 180, 270};
     // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッド
     public void Initialize(int tileId, TileType type, GameObject tileObject)
     {
@@ -35,8 +35,9 @@ public class TileController : MonoBehaviour
         
         _tileObject.transform.SetParent(transform);
         var randomRotation = _tileRotationY[RandomEx.Shared.NextInt(0, _tileRotationY.Length)];
-        _tileObject.transform.localRotation = Quaternion.Euler(-90, randomRotation, 0);
+        _tileObject.transform.localRotation = Quaternion.Euler(0, randomRotation, 0);
         _tileObject.transform.localPosition = Vector3.zero;
+        _tileObject.transform.localScale = Vector3.Scale(_tileObject.transform.localScale, new Vector3(1, 0.3f, 1));
     }
     
     public virtual bool Open()

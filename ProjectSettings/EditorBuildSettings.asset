@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/nikomaru/nikomaru.unity
     guid: ec8558687d41fa343ac1dfe9b2457cfc
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Kitamura/Soldier.unity
     guid: 39408ab8c10d8584fabe28b52c0b1852
   - enabled: 1

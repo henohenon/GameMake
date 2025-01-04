@@ -7,6 +7,7 @@ using RandomExtensions;
 using RandomExtensions.Linq;
 using Scriptable;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
@@ -28,12 +29,17 @@ public class CommanderUIManager : MonoBehaviour
         
 
         var applyButton = root.Q<Button>("Apply");
+        var backButton = root.Q<Button>("TitleButton");
         _idTextField = root.Q<TextField>("IdInputField");
         _detailsLabel = root.Q<Label>("Details");
         _tileMapsContainer = root.Q<VisualElement>("tile-maps-container");
         
         applyButton.clicked += RecreateView;
 
+        backButton.clicked += () =>
+        {
+            SceneManager.LoadScene("TitleScene");
+        };
     }
 
     private const int mapLength = 9;

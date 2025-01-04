@@ -19,16 +19,22 @@ public class TitleUIManager : MonoBehaviour//ニコマル
         
         //メインメニュー
         root.Q<Button>("Button_Credit").clicked += () => SetHiddenCredit(false);
-        root.Q<Button>("Button_Soldier").clicked += LoadGameScene;
-        root.Q<Button>("Button_Commander").clicked += LoadGameScene;
+        root.Q<Button>("Button_Soldier").clicked += LoadSoldeirScene;
+        root.Q<Button>("Button_Commander").clicked += LoadCommanderScene;
 
         // クレジット画面
         root.Q<Button>("Button_CloseCredit").clicked += () => SetHiddenCredit(true);
     }
     
-    private void LoadGameScene()
+    private void LoadSoldeirScene()
     {
-        SceneManager.LoadScene("nikomaru");
+        SceneManager.LoadScene("Soldier");
+    }
+    
+    
+    private void LoadCommanderScene()
+    {
+        SceneManager.LoadScene("Commander");
     }
 
     private void SetHiddenCredit(bool isHidden = true)

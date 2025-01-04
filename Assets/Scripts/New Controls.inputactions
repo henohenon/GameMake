@@ -229,7 +229,7 @@
                 {
                     "name": "positive",
                     "id": "4bb79cb1-0d46-4e98-af43-35e48d19869e",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

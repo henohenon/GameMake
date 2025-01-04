@@ -689,6 +689,7 @@ MonoBehaviour:
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
   playerController: {fileID: 1856347866}
   _itemStackManager: {fileID: 921744855}
+  Screen: {fileID: 1328982681}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0
@@ -718,7 +719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameRateAsset: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
   mapLength: 9
-  soldierUIManager: {fileID: 1328982679}
+  soldierUIManager: {fileID: 0}
   tilesManager: {fileID: 921744851}
 --- !u!114 &921744854
 MonoBehaviour:
@@ -994,8 +995,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1328982678}
   - component: {fileID: 1328982677}
-  - component: {fileID: 1328982679}
   - component: {fileID: 1328982680}
+  - component: {fileID: 1328982681}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1017,7 +1018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: cb14344e8313b86458935d71fee2b6d6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: a1b65786a86243b488a430e8962abb49,
+  sourceAsset: {fileID: 9197481963319205126, guid: feb7abf3b1e24564687f03fff0b72ed6,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1328982678
@@ -1035,21 +1036,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328982679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328982676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 189a64b2c36232249941f3240667febd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiDocument: {fileID: 1328982677}
-  tileAsset: {fileID: 9197481963319205126, guid: ddc9c06db8a2b8747a56b4d3cabaed0d,
-    type: 3}
 --- !u!114 &1328982680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1049,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameRate: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
+--- !u!114 &1328982681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328982676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268638a65de0b88409e451cc010972de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1522717596
 GameObject:
   m_ObjectHideFlags: 0

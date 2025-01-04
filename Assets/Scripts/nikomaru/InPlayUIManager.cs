@@ -30,36 +30,38 @@ public class InPlayUIManager : MonoBehaviour//ニコマル
     {
         SceneManager.LoadScene("TitleScene");
     }
-
-    public void SetHiddenCredit(int num, bool isHidden = true)
+    
+    public void SetHiddenCredit(InPlayScreenType type, bool isHidden = true)
     {
-        Debug.Log("InPlay");
-        Debug.Log(num);
-        Debug.Log(isHidden);
-        switch (num)
+        VisualElement screen = null;
+        switch (type)
         {
             case 1:
-                if (isHidden)
-                {
-                    ClearScreen.AddToClassList("hidden");
-                }
-                else
-                {
-                    ClearScreen.RemoveFromClassList("hidden");
-                }
+            case InPlayScreenType.GameClear:
+                screen = ClearScreen;
                 break;
-            case 2:
-                if (isHidden)
-                {
-                    GameoverScreen.AddToClassList("hidden");
-                }
-                else
-                {
-                    GameoverScreen.RemoveFromClassList("hidden");
-                }
+            case InPlayScreenType.GameOver:
+                screen = GameoverScreen;
                 break;
+            default:
+                Debug.LogError("Screen does not found");
+                return;
+        }
+        
+        if (isHidden)
+        {
+            screen.AddToClassList("hidden");
+        }
+        else
+        {
+            screen.RemoveFromClassList("hidden");
         }
     }
 }
 
+public enum InPlayScreenType
+{
+    GameClear,
+    GameOver
+}
 

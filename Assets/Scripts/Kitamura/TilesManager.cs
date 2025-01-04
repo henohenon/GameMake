@@ -146,7 +146,7 @@ public class TilesManager : MonoBehaviour
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
             playerController.Impact(direction);
-            Screen.SetHiddenCredit(InPlayScreenType.GameClear,false);
+            Screen.SetHiddenCredit(InPlayScreenType.GameOver,false);
         }
         else
         {

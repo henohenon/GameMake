@@ -11,11 +11,11 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UIDocument))]
 public class TitleUIManager : MonoBehaviour//ニコマル
 {
-    private VisualElement creditScreen;
+    private VisualElement _creditScreen;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        creditScreen = root.Q<VisualElement>("Credit_Scroller");
+        _creditScreen = root.Q<VisualElement>("Credit_Scroller");
         
         //メインメニュー
         root.Q<Button>("Button_Credit").clicked += () => SetHiddenCredit(false);
@@ -40,11 +40,11 @@ public class TitleUIManager : MonoBehaviour//ニコマル
     {
         if (isHidden)
         {
-            creditScreen.AddToClassList("hidden");
+            _creditScreen.AddToClassList("hidden");
         }
         else
         {
-            creditScreen.RemoveFromClassList("hidden");
+            _creditScreen.RemoveFromClassList("hidden");
         }
     }
 }

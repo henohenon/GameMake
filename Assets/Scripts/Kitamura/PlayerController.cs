@@ -69,16 +69,28 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private void CameraLockCallback(InputAction.CallbackContext context)
     {
         if (!context.started) return;
+        if (_isMovementPose) return;
         
         // 入力に併せてカメラを固定
         var input = context.ReadValue<float>();
-        if (input == 1)
-        {
+        SetCameraLock(input == 1);
+    }
+
+    private bool _isMovementPose = false;
+    public void MovementPose()
+    {
+        _isMovementPose = true;
+        _rb.freezeRotation = false;
+    }
+
+    public void SetCameraLock(bool isLock)
+    {
+        if(isLock){
             cameraInput.action.Enable();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        else if (input == -1)
+        else
         {
             cameraInput.action.Disable();
             Cursor.lockState = CursorLockMode.None;
@@ -88,6 +100,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     
     private void Update()
     {
+        if(_isMovementPose) return;
         // 移動入力
         var moveDirection = new Vector3(_moveInputValue.x, 0, _moveInputValue.y);
         // y軸の向きと入力を掛け合わせ、今向いてる方向に平行移動
@@ -153,6 +166,13 @@ public class PlayerController : MonoBehaviour//へのへのさん
         moveInput.action.Disable();
         cameraInput.action.Disable();
         cameraLock.action.Disable();
+    }
+    
+    public enum PlayerPoseType
+    {
+        FpsLock,
+        FpsNotLock,
+        UIPose,
     }
 }
 

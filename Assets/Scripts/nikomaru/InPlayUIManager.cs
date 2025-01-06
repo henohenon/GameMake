@@ -13,6 +13,7 @@ public class InPlayUIManager : MonoBehaviour//ニコマル
 {
     private VisualElement ClearScreen;
     private VisualElement GameoverScreen;
+    private Label idLabel;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -24,6 +25,13 @@ public class InPlayUIManager : MonoBehaviour//ニコマル
 
         // ゲームオーバー
         root.Q<Button>("Button_GameoverToMenu").clicked += () => LoadGameScene();
+    }
+
+    public void SetShareID(uint seed)
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        idLabel = root.Q<Label>("ShareIDText");
+        idLabel.text = seed.ToString();
     }
     
     private void LoadGameScene()

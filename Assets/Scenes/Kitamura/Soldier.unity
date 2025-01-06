@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 921744854}
   - component: {fileID: 921744856}
   - component: {fileID: 921744855}
+  - component: {fileID: 921744857}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -723,6 +724,7 @@ MonoBehaviour:
   tilesManager: {fileID: 921744851}
   soldierUIManager: {fileID: 1328982681}
   playerController: {fileID: 1856347866}
+  TimerManager: {fileID: 921744857}
 --- !u!114 &921744854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +779,20 @@ MonoBehaviour:
   _tileSelectManager: {fileID: 921744854}
   flagPrefab: {fileID: 2871383591519906417, guid: 8227b93e551259b41af2834a0c5d657d,
     type: 3}
+--- !u!114 &921744857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921744850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548801245fcf617458a71280f51ff3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Running: 1
+  _uiManager: {fileID: 1328982681}
 --- !u!1 &939279651
 GameObject:
   m_ObjectHideFlags: 0

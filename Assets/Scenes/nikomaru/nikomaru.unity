@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 921744854}
   - component: {fileID: 921744856}
   - component: {fileID: 921744855}
+  - component: {fileID: 921744857}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -688,6 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
   playerController: {fileID: 1856347866}
+  gameManager: {fileID: 0}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
 --- !u!4 &921744852
@@ -720,6 +722,9 @@ MonoBehaviour:
   gameRateAsset: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
   mapLength: 9
   tilesManager: {fileID: 921744851}
+  soldierUIManager: {fileID: 0}
+  playerController: {fileID: 0}
+  TimerManager: {fileID: 0}
 --- !u!114 &921744854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +779,21 @@ MonoBehaviour:
   _tileSelectManager: {fileID: 921744854}
   flagPrefab: {fileID: 2871383591519906417, guid: 8227b93e551259b41af2834a0c5d657d,
     type: 3}
+--- !u!114 &921744857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921744850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548801245fcf617458a71280f51ff3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Running: 1
+  TimeText: 
+  time: {fileID: 1328982681}
 --- !u!1 &939279651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: cb14344e8313b86458935d71fee2b6d6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: a1b65786a86243b488a430e8962abb49,
+  sourceAsset: {fileID: 9197481963319205126, guid: feb7abf3b1e24564687f03fff0b72ed6,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1328982678

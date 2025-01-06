@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using R3;
+using RandomExtensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -71,19 +72,24 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private void CameraLockCallback(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        if (_isMovementPose) return;
+        if (_isDeadPose) return;
         
         // 入力に併せてカメラを固定
         var input = context.ReadValue<float>();
         SetCameraLock(input == 1);
     }
 
-    private bool _isMovementPose = false;
-    public void MovementPose()
+    private bool _isDeadPose = false;
+    public void DeadPose()
     {
-        _isMovementPose = true;
+        _isDeadPose = true;
         _rb.freezeRotation = false;
         _camera.nearClipPlane = 0.01f;
+        
+        // 吹っ飛ぶ
+        _rb.AddForce(_hitDirection * 1f, ForceMode.Impulse);
+        Vector3 torqueAxis = Vector3.Cross(_hitDirection, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
+        _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
     }
 
     public void SetCameraLock(bool isLock)
@@ -103,7 +109,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     
     private void Update()
     {
-        if(_isMovementPose) return;
+        if(_isDeadPose) return;
         // 移動入力
         var moveDirection = new Vector3(_moveInputValue.x, 0, _moveInputValue.y);
         // y軸の向きと入力を掛け合わせ、今向いてる方向に平行移動
@@ -123,14 +129,6 @@ public class PlayerController : MonoBehaviour//へのへのさん
         var nextRotation = currentRotation + addRotation * cameraRotationSpeed;
         // カメラの回転を適用
         _rb.MoveRotation(Quaternion.Euler(nextRotation));
-    }
-
-    // 爆発で吹っ飛ぶ
-    public void Impact(Vector3 direction)
-    {
-        _rb.AddForce(direction * 1f, ForceMode.Impulse);
-        Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
-        _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
     }
 
     private readonly List<float> _addMoveSpeeds = new();
@@ -163,10 +161,17 @@ public class PlayerController : MonoBehaviour//へのへのさん
         }
     }
 
+    private Vector3 _hitDirection = Vector3.zero;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Damage"))
         {
+            // 当たった位置から衝撃方向を計算、保存
+            var playerPos = transform.position;
+            var tilePos = other.transform.position;
+            _hitDirection = (playerPos - tilePos).normalized;
+            _hitDirection.y += RandomEx.Shared.NextFloat(0, 1);
+            // ダメージイベントの発行
             _onDamage.OnNext(Unit.Default);
         }
     }

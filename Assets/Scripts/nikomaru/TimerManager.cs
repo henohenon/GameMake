@@ -7,8 +7,8 @@ public class TimerManager : MonoBehaviour
     private float _Timer = 0f;
     public bool _Running = true;
     private int Min, Sec, MilliSec;
-    public string TimeText;
-    [SerializeField] private SoldierUIManager time;
+    private string TimeText;
+    [SerializeField] private SoldierUIManager _uiManager;
 
     void Update()
     {
@@ -18,19 +18,14 @@ public class TimerManager : MonoBehaviour
             Min = (int)(_Timer / 60);
             Sec = (int)(_Timer % 60);
             MilliSec = (int)((_Timer % 1) * 100);
-            TimeText = Min + ":" + Sec + ":" + MilliSec;
-            time.UpdateTimer(TimeText);
-
+            if(Sec >= 10)
+            {
+                TimeText = Min + ":" + Sec + ":" + MilliSec;
+            } else
+            {
+                TimeText = Min + ":0" + Sec + ":" + MilliSec;
+            }
+            _uiManager.UpdateTimer(TimeText);
         }
-    }
-
-    public void OnStart()
-    {
-        _Running = true;
-    }
-
-    public void OnStop()
-    {
-        _Running = false;
     }
 }

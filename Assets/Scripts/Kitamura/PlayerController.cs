@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 //using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static UnityEngine.Rendering.DebugUI;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Camera))]
 public class PlayerController : MonoBehaviour//へのへのさん
 {
     [SerializeField]
@@ -25,12 +27,15 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private TilesManager tilesManager;
     
     private Rigidbody _rb;
+    private Camera _camera;
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
 
     private void Start()
     {
+        _camera = GetComponent<Camera>();
+        
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
     
@@ -81,6 +86,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     {
         _isMovementPose = true;
         _rb.freezeRotation = false;
+        _camera.nearClipPlane = 0.01f;
     }
 
     public void SetCameraLock(bool isLock)
@@ -125,9 +131,9 @@ public class PlayerController : MonoBehaviour//へのへのさん
     // 爆発で吹っ飛ぶ
     public void Impact(Vector3 direction)
     {
-        _rb.AddForce(direction * 10, ForceMode.Impulse);
+        _rb.AddForce(direction * 1f, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(direction, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
-        _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
+        _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
     }
 
     private readonly List<float> _addMoveSpeeds = new();

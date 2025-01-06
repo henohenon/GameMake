@@ -136,8 +136,9 @@ public class TilesManager : MonoBehaviour
             var playerPos = playerController.transform.position;
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
-            playerController.Impact(direction);
+            direction.y += RandomEx.Shared.NextFloat(0, 1);
             playerController.MovementPose();
+            playerController.Impact(direction);
             playerController.SetCameraLock(false);
             Screen.SetPopupHidden(InPlayScreenType.GameOver,false);
         }

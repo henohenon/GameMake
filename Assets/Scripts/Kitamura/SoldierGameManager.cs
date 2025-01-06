@@ -19,14 +19,13 @@ public class SoldierGameManager : MonoBehaviour
     {
         // 乱数のシードを生成
         var seed = GenerateSeed();
+        Debug.Log("Seed: " + seed);
         // ゲーム情報を初期化
         var gameInfo = new GameInfo(gameRateAsset, mapLength, seed);
         
+        // uiにシード値を表記
         soldierUIManager.SetShareID(seed);
-        
-        // ログ出力。TODO: UIにつなげる
-        Debug.Log("Seed: " + seed);
-        
+        // ゲーム情報などからマップの生成
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
     }
     

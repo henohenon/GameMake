@@ -54,7 +54,7 @@ public class TileController : MonoBehaviour
         return true;
     }
 
-    public void Flag(GameObject prefab)
+    public void ToggleFlag(GameObject prefab)
     {
         // もし裏返していたら何もしない
         if(_tileState == TileState.Open) return;

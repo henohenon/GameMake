@@ -11,44 +11,44 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UIDocument))]
 public class SoldierUIManager : MonoBehaviour//ニコマル
 {
-    private VisualElement ClearScreen;
-    private VisualElement GameoverScreen;
-    private Label idLabel;
+    private VisualElement _clearScreen;
+    private VisualElement _gameOverScreen;
+    private Label _idLabel;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        ClearScreen = root.Q<VisualElement>("Clear");
-        GameoverScreen = root.Q<VisualElement>("GameOver");
+        _clearScreen = root.Q<VisualElement>("Clear");
+        _gameOverScreen = root.Q<VisualElement>("GameOver");
+        _idLabel = root.Q<Label>("ShareIDText");
 
         //クリア
-        root.Q<Button>("Button_ClearToMenu").clicked += LoadGameScene;
+        root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
 
         // ゲームオーバー
-        root.Q<Button>("Button_GameoverToMenu").clicked += () => LoadGameScene();
+        root.Q<Button>("Button_GameoverToMenu").clicked += LoadTitleScene;
     }
 
     public void SetShareID(uint seed)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        idLabel = root.Q<Label>("ShareIDText");
-        idLabel.text = seed.ToString();
+        _idLabel.text = seed.ToString();
     }
     
-    private void LoadGameScene()
+    private void LoadTitleScene()
     {
         SceneManager.LoadScene("TitleScene");
     }
     
-    public void SetHiddenCredit(InPlayScreenType type, bool isHidden = true)
+    // TODO: コールバックからにしたい
+    public void SetPopupHidden(InPlayScreenType type, bool isHidden = true)
     {
         VisualElement screen = null;
         switch (type)
         {
             case InPlayScreenType.GameClear:
-                screen = ClearScreen;
+                screen = _clearScreen;
                 break;
             case InPlayScreenType.GameOver:
-                screen = GameoverScreen;
+                screen = _gameOverScreen;
                 break;
             default:
                 Debug.LogError("Screen does not found");

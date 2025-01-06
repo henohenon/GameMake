@@ -4,6 +4,15 @@ using Alchemy.Inspector;
 using Scriptable;
 using UnityEngine;
 
+// アイテムの種類。数字付けてるのは追加や削除があってもシリアル化された既存の値が変化しないように
+public enum ItemType
+{
+    Empty = -1,
+    Flag = 0,
+    SpeedUp = 1,
+    SpeedDown = 2,
+}
+
 public class ItemEffectsManager : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;

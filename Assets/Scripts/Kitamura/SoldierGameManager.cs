@@ -17,6 +17,7 @@ public class SoldierGameManager : MonoBehaviour
     [SerializeField] private TilesManager tilesManager;
     [SerializeField] private SoldierUIManager soldierUIManager;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private TimerManager TimerManager;
     
     
     private void Start()
@@ -38,6 +39,7 @@ public class SoldierGameManager : MonoBehaviour
         playerController.MovementPose();
         playerController.SetCameraLock(false);
         soldierUIManager.SetPopupHidden(InPlayScreenType.GameOver,false);
+        TimerManager.OnStop();
 
     }
     

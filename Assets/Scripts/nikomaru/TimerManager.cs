@@ -7,7 +7,8 @@ public class TimerManager : MonoBehaviour
     private float _Timer = 0f;
     private bool _Running = true;
     private int Min, Sec, MilliSec;
-    //[SerializeField] private SoldierUIManager time;
+    public string TimeText;
+    [SerializeField] private SoldierUIManager time;
 
     void Update()
     {
@@ -17,7 +18,9 @@ public class TimerManager : MonoBehaviour
             Min = (int)(_Timer / 60);
             Sec = (int)(_Timer % 60);
             MilliSec = (int)((_Timer % 1) * 100);
-            Debug.LogFormat("{0}:{1}:{2}", Min, Sec, MilliSec);
+            TimeText = Min + ":" + Sec + ":" + MilliSec;
+            Debug.LogFormat("{0}", TimeText);
+            time.UpdateTimer(TimeText);
 
         }
     }

@@ -21,6 +21,7 @@ public class TileSelectManager : MonoBehaviour
     public TileController SelectingTile { get; private set; }
     public void Update()
     {
+        if(_isSelectPose) return;
         // タイルの一覧がないなら実行しない
         if(tilesManager.TileControllers == null) return;
         // プレイヤーの位置の取得
@@ -77,5 +78,23 @@ public class TileSelectManager : MonoBehaviour
                 SelectingTile.Open();
             }
         }
+    }
+
+    private bool _isSelectPose = false;
+    public void SelectPose()
+    {
+        _isSelectPose = true;
+
+        if (SelectingTile)
+        {
+            SelectingTile.Select(false);
+            SelectingTile = null;
+        }
+        openTile.action.Disable();
+    }
+
+    private void OnDisable()
+    {
+        openTile.action.Disable();
     }
 }

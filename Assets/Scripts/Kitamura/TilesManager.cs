@@ -9,6 +9,7 @@ public class TilesManager : MonoBehaviour
     [SerializeField, InlineEditor] private TilePrefabsAsset tilePrefabs;
     [SerializeField]
     private PlayerController playerController;
+    [SerializeField] private SoldierGameManager gameManager;
 
     [SerializeField] private ItemStackManager _itemStackManager;
     [SerializeField] private SoldierUIManager Screen;
@@ -137,6 +138,7 @@ public class TilesManager : MonoBehaviour
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
             direction.y += RandomEx.Shared.NextFloat(0, 1);
+            gameManager.GameOver();
         }
         else
         {

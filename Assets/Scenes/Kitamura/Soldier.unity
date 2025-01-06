@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
   playerController: {fileID: 1856347866}
+  gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
 --- !u!4 &921744852
@@ -721,6 +722,7 @@ MonoBehaviour:
   mapLength: 9
   tilesManager: {fileID: 921744851}
   soldierUIManager: {fileID: 1328982681}
+  playerController: {fileID: 1856347866}
 --- !u!114 &921744854
 MonoBehaviour:
   m_ObjectHideFlags: 0

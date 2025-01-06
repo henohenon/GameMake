@@ -11,7 +11,7 @@ public class TilesManager : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField] private ItemStackManager _itemStackManager;
-    [SerializeField] private InPlayUIManager Screen;
+    [SerializeField] private SoldierUIManager Screen;
 
     // ゲームクリア時のサブジェクト
     private readonly Subject<Unit> _gameClear = new();
@@ -137,7 +137,7 @@ public class TilesManager : MonoBehaviour
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
             playerController.Impact(direction);
-            Screen.SetHiddenCredit(InPlayScreenType.GameOver,false);
+            Screen.SetPopupHidden(InPlayScreenType.GameOver,false);
         }
         else
         {
@@ -173,7 +173,7 @@ public class TilesManager : MonoBehaviour
             {
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
-                Screen.SetHiddenCredit(InPlayScreenType.GameClear, false);
+                Screen.SetPopupHidden(InPlayScreenType.GameClear, false);
             }
         }
         //CheckForOnlyBombs();

@@ -31,7 +31,6 @@ public class TitleUIManager : MonoBehaviour//ニコマル
         SceneManager.LoadScene("Soldier");
     }
     
-    
     private void LoadCommanderScene()
     {
         SceneManager.LoadScene("Commander");

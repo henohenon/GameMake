@@ -8,22 +8,26 @@ using Scriptable;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+// 他のスクリプトより後で実行。一括管理できないので乱立させていくとすごいことになるのであんまよくないけど一旦これで
+[DefaultExecutionOrder(1)]
 public class SoldierGameManager : MonoBehaviour
 {
     [SerializeField] private GameRateAsset gameRateAsset;
     [SerializeField] private int mapLength = 9;
     [SerializeField] private TilesManager tilesManager;
+    [SerializeField] private SoldierUIManager soldierUIManager;
     
     private void Start()
     {
         // 乱数のシードを生成
         var seed = GenerateSeed();
+        Debug.Log("Seed: " + seed);
         // ゲーム情報を初期化
         var gameInfo = new GameInfo(gameRateAsset, mapLength, seed);
         
-        // ログ出力。TODO: UIにつなげる
-        Debug.Log("Seed: " + seed);
-        
+        // uiにシード値を表記
+        soldierUIManager.SetShareID(seed);
+        // ゲーム情報などからマップの生成
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
     }
     

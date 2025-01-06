@@ -66,9 +66,9 @@ MonoBehaviour:
       description: "\u3046\u3001\u52D5\u3051\u3093"
     calcIcons:
     - calcType: 0
-      calcIcon: "\u4E09"
+      calcIcon: "\u5468\u8FBA\u306E\u6570\u3092\u8DB3\u3059"
     - calcType: 1
-      calcIcon: "\u56DB"
+      calcIcon: "\u5468\u8FBA\u306E\u6570-4"
     - calcType: 2
       calcIcon: "\u4E94"
     itemCount: 2

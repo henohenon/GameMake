@@ -34,17 +34,19 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
     
-        // 0の入力も受け取れるように、canceledも登録
+        // 各種入力の登録
         moveInput.action.performed += MoveInputCallback;
-        moveInput.action.canceled += MoveInputCallback;
-        moveInput.action.Enable();
+        moveInput.action.canceled += MoveInputCallback; // 0の入力も受け取れるように、canceledも登録
+        moveInput.action.Enable(); // enableしないと入力を受け取れない
         
         cameraInput.action.performed += CameraInputCallback;
         cameraInput.action.canceled += CameraInputCallback;
+        // cameraInput.action.Enable(); カーソルがロックされるまで入力を受け取らない
         
         cameraLock.action.started += CameraLockCallback;
         cameraLock.action.Enable();
         
+        // 移動速度の計算
         CalcMoveSpeed();
     }
     
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     {
         if (!context.started) return;
         
+        // 入力に併せてカメラを固定
         var input = context.ReadValue<float>();
         if (input == 1)
         {
@@ -85,27 +88,28 @@ public class PlayerController : MonoBehaviour//へのへのさん
     
     private void Update()
     {
-        // 移動方向を計算
+        // 移動入力
         var moveDirection = new Vector3(_moveInputValue.x, 0, _moveInputValue.y);
-        // 移動方向を正規化
-        moveDirection.Normalize();
-        // 移動方向をカメラの向きに合わせる
-        moveDirection = Quaternion.Euler(0, _rb.rotation.eulerAngles.y, 0) * moveDirection;
-        // 移動方向を適用
-        _rb.position += moveDirection * (_nowMoveSpeed * Time.deltaTime);
+        // y軸の向きと入力を掛け合わせ、今向いてる方向に平行移動
+        var movement = Quaternion.Euler(0, _rb.rotation.eulerAngles.y, 0) * moveDirection;
+        // 移動。現座標 + 移動の向き * 速度 * 経過時間
+        _rb.position += movement * (_nowMoveSpeed * Time.deltaTime);
         
-        // カメラの回転座標の作成
+        // 入力
         var addRotation = new Vector3(
-            -_cameraInputValue.y * cameraRotationSpeed,
-            _cameraInputValue.x * cameraRotationSpeed,
+            -_cameraInputValue.y,
+            _cameraInputValue.x,
             0
         );
+        // 今の角度
         var currentRotation = _rb.rotation.eulerAngles;
-        var nextRotation = currentRotation + addRotation;
+        // 次の角度。今の角度 + 入力 * スピード
+        var nextRotation = currentRotation + addRotation * cameraRotationSpeed;
         // カメラの回転を適用
         _rb.MoveRotation(Quaternion.Euler(nextRotation));
     }
 
+    // 爆発で吹っ飛ぶ
     public void Impact(Vector3 direction)
     {
         _rb.AddForce(direction * 10, ForceMode.Impulse);
@@ -113,29 +117,37 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.AddTorque(torqueAxis * 10, ForceMode.Impulse);
     }
 
-    private List<float> addMoveSpeeds = new();
+    private readonly List<float> _addMoveSpeeds = new();
     public void AddMoveSpeedNumb(float speed)
     {
-        addMoveSpeeds.Add(speed);
+        // 速度を追加
+        _addMoveSpeeds.Add(speed);
+        // 再計算
         CalcMoveSpeed();
     }
 
-    private float minMoveSpeed = 0.05f;
+    // 最小の移動速度
+    private const float MinMoveSpeed = 0.05f;
+    // 移動速度の再計算関数
     private void CalcMoveSpeed()
     {
+        // デフォルト値
         _nowMoveSpeed = defaultMoveSpeed;
 
-        foreach (var addSpeed in addMoveSpeeds)
+        // 外部から追加された速度をすべて加算
+        foreach (var addSpeed in _addMoveSpeeds)
         {
             _nowMoveSpeed += addSpeed;
         }
 
-        if (_nowMoveSpeed < minMoveSpeed)
+        // もし最小値よりも小さい場合は最小値にする
+        if (_nowMoveSpeed < MinMoveSpeed)
         {
-            _nowMoveSpeed = minMoveSpeed;
+            _nowMoveSpeed = MinMoveSpeed;
         }
     }
     
+    // inputactionはdisableしとかないと怒られる
     private void OnDisable()
     {
         moveInput.action.Disable();

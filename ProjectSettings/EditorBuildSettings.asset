@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/a/a.unity
     guid: d0a61648c26551241a6d3e4126729352
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/nikomaru/TitleScene.unity
     guid: 9843f30a385dd4e4bbd9b133173d9a85
   - enabled: 0

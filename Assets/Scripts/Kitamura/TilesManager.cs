@@ -133,11 +133,6 @@ public class TilesManager : MonoBehaviour
         if (tileTile.TileType == TileType.Bomb)
         {
             Debug.Log("Game Over");
-            // プレイヤーの位置とタイルタイルの位置から方向を計算し、プレイヤーに衝撃を与える
-            var playerPos = playerController.transform.position;
-            var tilePos = tileTile.transform.position;
-            var direction = (playerPos - tilePos).normalized;
-            direction.y += RandomEx.Shared.NextFloat(0, 1);
             gameManager.GameOver();
         }
         else

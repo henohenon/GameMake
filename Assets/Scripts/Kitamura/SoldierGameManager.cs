@@ -8,6 +8,8 @@ using Scriptable;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+// 他のスクリプトより後で実行。一括管理できないので乱立させていくとすごいことになるのであんまよくないけど一旦これで
+[DefaultExecutionOrder(1)]
 public class SoldierGameManager : MonoBehaviour
 {
     [SerializeField] private GameRateAsset gameRateAsset;

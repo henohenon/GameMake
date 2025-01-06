@@ -136,7 +136,10 @@ public class TilesManager : MonoBehaviour
             var playerPos = playerController.transform.position;
             var tilePos = tileTile.transform.position;
             var direction = (playerPos - tilePos).normalized;
+            direction.y += RandomEx.Shared.NextFloat(0, 1);
+            playerController.MovementPose();
             playerController.Impact(direction);
+            playerController.SetCameraLock(false);
             Screen.SetPopupHidden(InPlayScreenType.GameOver,false);
         }
         else
@@ -187,7 +190,6 @@ public class TilesManager : MonoBehaviour
         // 周囲のタイルタイルのIDを取得
         var aroundTileIds = MapTileCalc.GetAroundTileIds(tileId, MapInfo.MapLength);
         Debug.Log(aroundTileIds);
-        
         
         // 周囲のタイルタイルを調べる
         foreach (var aroundTileId in aroundTileIds)

@@ -18,7 +18,13 @@ public class TimerManager : MonoBehaviour
             Min = (int)(_Timer / 60);
             Sec = (int)(_Timer % 60);
             MilliSec = (int)((_Timer % 1) * 100);
-            TimeText = Min + ":" + Sec + ":" + MilliSec;
+            if(Sec >= 10)
+            {
+                TimeText = Min + ":" + Sec + ":" + MilliSec;
+            } else
+            {
+                TimeText = Min + ":0" + Sec + ":" + MilliSec;
+            }
             _uiManager.UpdateTimer(TimeText);
         }
     }

@@ -11,7 +11,7 @@ public class TilesManager : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField] private ItemStackManager _itemStackManager;
-    [SerializeField] private InPlayUIManager Screen;
+    [SerializeField] private SoldierUIManager Screen;
 
     // ゲームクリア時のサブジェクト
     private readonly Subject<Unit> _gameClear = new();

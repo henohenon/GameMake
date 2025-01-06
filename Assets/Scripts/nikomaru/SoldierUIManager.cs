@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 /// ボタンイベントの際のシーン遷移を行ってます。最初のBooleanはアタッチされるオブジェクトによって有効/無効のものがあるのでそれらを分けるためにあります。
 /// </summary>
 [RequireComponent(typeof(UIDocument))]
-public class InPlayUIManager : MonoBehaviour//ニコマル
+public class SoldierUIManager : MonoBehaviour//ニコマル
 {
     private VisualElement ClearScreen;
     private VisualElement GameoverScreen;

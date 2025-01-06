@@ -13,7 +13,7 @@ public class SoldierGameManager : MonoBehaviour
     [SerializeField] private GameRateAsset gameRateAsset;
     [SerializeField] private int mapLength = 9;
     [SerializeField] private TilesManager tilesManager;
-    [SerializeField] private InPlayUIManager inPlayUiManager;
+    [SerializeField] private SoldierUIManager soldierUIManager;
     
     private void Start()
     {
@@ -22,7 +22,7 @@ public class SoldierGameManager : MonoBehaviour
         // ゲーム情報を初期化
         var gameInfo = new GameInfo(gameRateAsset, mapLength, seed);
         
-        inPlayUiManager.SetShareID(seed);
+        soldierUIManager.SetShareID(seed);
         
         // ログ出力。TODO: UIにつなげる
         Debug.Log("Seed: " + seed);

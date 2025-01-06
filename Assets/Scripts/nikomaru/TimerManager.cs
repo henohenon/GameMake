@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimerManager : MonoBehaviour
 {
     private float _Timer = 0f;
-    private bool _Running = true;
+    public bool _Running = true;
     private int Min, Sec, MilliSec;
     public string TimeText;
     [SerializeField] private SoldierUIManager time;
@@ -19,7 +19,6 @@ public class TimerManager : MonoBehaviour
             Sec = (int)(_Timer % 60);
             MilliSec = (int)((_Timer % 1) * 100);
             TimeText = Min + ":" + Sec + ":" + MilliSec;
-            Debug.LogFormat("{0}", TimeText);
             time.UpdateTimer(TimeText);
 
         }

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
-    private Subject<Unit> _onDamage;
+    private readonly Subject<Unit> _onDamage = new();
     public Observable<Unit> OnDamage => _onDamage;
 
     private void Start()

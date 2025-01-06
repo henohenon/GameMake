@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BombTileController : TileController
 {
+    [SerializeField] private GameObject bombObject;
     [SerializeField] private Collider damageCollider; 
     
     public override bool Open()
@@ -13,6 +14,7 @@ public class BombTileController : TileController
         if (baseResult)
         {
             Explosion();
+            bombObject.SetActive(true);
         }
 
         return baseResult;

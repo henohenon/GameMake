@@ -16,6 +16,8 @@ public class SoldierGameManager : MonoBehaviour
     [SerializeField] private int mapLength = 9;
     [SerializeField] private TilesManager tilesManager;
     [SerializeField] private SoldierUIManager soldierUIManager;
+    [SerializeField] private PlayerController playerController;
+    
     
     private void Start()
     {
@@ -29,6 +31,14 @@ public class SoldierGameManager : MonoBehaviour
         soldierUIManager.SetShareID(seed);
         // ゲーム情報などからマップの生成
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
+    }
+
+    public void GameOver()
+    {
+        playerController.MovementPose();
+        playerController.SetCameraLock(false);
+        soldierUIManager.SetPopupHidden(InPlayScreenType.GameOver,false);
+
     }
     
     private uint GenerateSeed()

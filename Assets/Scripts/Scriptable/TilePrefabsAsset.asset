@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   safeTilePrefab: {fileID: 5767477687585010028, guid: ffac905825482a247aaec95c6988a1cb,
     type: 3}
-  bombTilePrefab: {fileID: 3287875108102595959, guid: c97752b3067d98943b095621d821cbbc,
+  bombTilePrefab: {fileID: 218251467630565830, guid: c97752b3067d98943b095621d821cbbc,
     type: 3}
   blueItemTilePrefab: {fileID: 8759481559525510411, guid: 2a554991f30ff334b855dc01fabaa9ad,
     type: 3}

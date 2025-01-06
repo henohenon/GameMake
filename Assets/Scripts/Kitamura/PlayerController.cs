@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-//using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Camera))]
@@ -31,6 +26,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
+    private Subject<Unit> _onDamage;
+    public Observable<Unit> OnDamage => _onDamage;
 
     private void Start()
     {
@@ -165,7 +162,15 @@ public class PlayerController : MonoBehaviour//へのへのさん
             _nowMoveSpeed = MinMoveSpeed;
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Damage"))
+        {
+            _onDamage.OnNext(Unit.Default);
+        }
+    }
+
     // inputactionはdisableしとかないと怒られる
     private void OnDisable()
     {

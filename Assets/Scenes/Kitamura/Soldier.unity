@@ -792,8 +792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Running: 1
-  TimeText: 
-  time: {fileID: 1328982681}
+  _uiManager: {fileID: 1328982681}
 --- !u!1 &939279651
 GameObject:
   m_ObjectHideFlags: 0

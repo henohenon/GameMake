@@ -39,7 +39,7 @@ public class SoldierGameManager : MonoBehaviour
         playerController.DeadPose();
         playerController.SetCameraLock(false);
         soldierUIManager.SetPopupHidden(InPlayScreenType.GameOver,false);
-        TimerManager.OnStop();
+        TimerManager._Running = false;
     }
     
     private uint GenerateSeed()

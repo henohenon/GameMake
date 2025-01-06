@@ -130,12 +130,7 @@ public class TilesManager : MonoBehaviour
         // タイルのインスタンスをキャッシュ的な感じで取得
         var tileTile = TileControllers[tileId];
         // タイルタイルが爆弾の場合はゲームオーバー
-        if (tileTile.TileType == TileType.Bomb)
-        {
-            Debug.Log("Game Over");
-            gameManager.GameOver();
-        }
-        else
+        if (tileTile.TileType != TileType.Bomb)
         {
             // 周囲のタイルの状況を調べる
             var bombSum = GetTileAroundTypeSum(tileId, TileType.Bomb);

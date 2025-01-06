@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using RandomExtensions;
-using RandomExtensions.Linq;
 using Scriptable;
 using UnityEngine;
-using UnityEngine.Serialization;
+using R3;
 
 // 他のスクリプトより後で実行。一括管理できないので乱立させていくとすごいことになるのであんまよくないけど一旦これで
 [DefaultExecutionOrder(1)]
@@ -32,9 +27,14 @@ public class SoldierGameManager : MonoBehaviour
         soldierUIManager.SetShareID(seed);
         // ゲーム情報などからマップの生成
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
+
+        playerController.OnDamage.Subscribe(_=>
+        {
+            GameOver();
+        });
     }
 
-    public void GameOver()
+    private void GameOver()
     {
         playerController.DeadPose();
         playerController.SetCameraLock(false);

@@ -15,6 +15,8 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     private VisualElement _gameOverScreen;
     private Label _idLabel;
     private Label _Timer;
+    private Label _clearText;
+    private string _textEdit;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -22,6 +24,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _gameOverScreen = root.Q<VisualElement>("GameOver");
         _idLabel = root.Q<Label>("ShareIDText");
         _Timer = root.Q<Label>("TimerText");
+        _clearText = root.Q<Label>("Text_ClearTime");
 
         //クリア
         root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
@@ -71,6 +74,8 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     public void UpdateTimer(string CurrentTime)
     {
         _Timer.text = CurrentTime;
+        _textEdit = "Clear  Time " + CurrentTime;
+        _clearText.text = CurrentTime;
     }
 
 }

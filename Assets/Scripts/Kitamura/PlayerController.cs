@@ -95,9 +95,14 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private bool _isDeadPose = false;
     public void DeadPose()
     {
+        moveInput.action.Disable();
+        cameraInput.action.Disable();
+        cameraLock.action.Disable();
+        
         _isDeadPose = true;
         _rb.freezeRotation = false;
         _camera.nearClipPlane = 0.01f;
+        _stepsAudioSource.Pause();
         
         // 吹っ飛ぶ
         _rb.AddForce(_hitDirection * 1f, ForceMode.Impulse);
@@ -172,6 +177,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
         {
             _nowMoveSpeed = MinMoveSpeed;
         }
+
+        _stepsAudioSource.pitch = _nowMoveSpeed / defaultMoveSpeed;
     }
 
     private Vector3 _hitDirection = Vector3.zero;

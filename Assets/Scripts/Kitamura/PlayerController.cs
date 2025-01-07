@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour//へのへのさん
 {
     [SerializeField]
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     
     private Rigidbody _rb;
     private Camera _camera;
+    private AudioSource _stepsAudioSource;
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour//へのへのさん
 
     private void Start()
     {
+        _stepsAudioSource = GetComponent<AudioSource>();
+        _stepsAudioSource.Pause();
         _camera = GetComponent<Camera>();
         
         _rb = GetComponent<Rigidbody>();
@@ -67,6 +71,15 @@ public class PlayerController : MonoBehaviour//へのへのさん
         if (context.started) return;
         
         _moveInputValue = context.ReadValue<Vector2>();
+        Debug.Log(_moveInputValue);
+        if (_moveInputValue == Vector2.zero)
+        {
+            _stepsAudioSource.Pause();
+        }
+        else
+        {
+            _stepsAudioSource.UnPause();
+        }
     }
     
     private void CameraLockCallback(InputAction.CallbackContext context)

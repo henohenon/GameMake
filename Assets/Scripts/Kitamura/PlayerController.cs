@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
     [SerializeField]
     private TilesManager tilesManager;
+    [SerializeField] private TileSelectManager tileSelectManager;
     
     private Rigidbody _rb;
     private Camera _camera;
@@ -128,12 +129,16 @@ public class PlayerController : MonoBehaviour//へのへのさん
             cameraInput.action.Enable();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            tileSelectManager.SelectPose(false);
         }
         else
         {
             cameraInput.action.Disable();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            
+            tileSelectManager.SelectPose(true);
         }
     }
     

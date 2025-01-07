@@ -52,12 +52,13 @@ public class CommanderUIManager : MonoBehaviour
             // マップのクリア
             _tileMapsContainer.Clear();
             
+            var random = new Xoshiro256StarStarRandom(result+1);
             // 本物+偽物*2のマップ配列を作成
             var maps = new []
             {
                 gameInfo.MapInfo,
-                new (rate.mapRateAsset.tileRateInfos, mapLength),
-                new (rate.mapRateAsset.tileRateInfos, mapLength),
+                new (rate.mapRateAsset.tileRateInfos, random, mapLength),
+                new (rate.mapRateAsset.tileRateInfos, random, mapLength),
             }.AsEnumerable();
             // マップ配列シャッフル
             maps = maps.Shuffle().ToArray();

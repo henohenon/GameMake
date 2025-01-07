@@ -11,6 +11,8 @@ public enum ItemType
     Flag = 0,
     SpeedUp = 1,
     SpeedDown = 2,
+    SpeedUpup = 10,
+
 }
 
 public class ItemEffectsManager : MonoBehaviour
@@ -47,6 +49,10 @@ public class ItemEffectsManager : MonoBehaviour
                 _playerController.AddMoveSpeedNumb(-2f);
                 break;
             }
+            case ItemType.SpeedUpup:
+                {
+                    break;
+                }
         }
     }
 }

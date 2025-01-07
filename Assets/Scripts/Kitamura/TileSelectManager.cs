@@ -80,7 +80,7 @@ public class TileSelectManager : MonoBehaviour
         }
     }
 
-    private bool _isSelectPose = false;
+    private bool _isSelectPose = true;
     public void SelectPose(bool isPose)
     {
         _isSelectPose = isPose;

@@ -23,9 +23,9 @@ public class BombTileController : TileController
     private async void Explosion()
     {
         await UniTask.WaitForSeconds(0.3f);
-        damageCollider.enabled = true;
+        if(damageCollider) damageCollider.enabled = true;
 
         await UniTask.WaitForSeconds(0.1f);
-        damageCollider.enabled = false;
+        if(damageCollider) damageCollider.enabled = false;
     }
 }

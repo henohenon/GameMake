@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Alchemy.Inspector;
 using Scriptable;
 using UnityEngine;
+using LitMotion;
+using LitMotion.Extensions;
 
 // アイテムの種類。数字付けてるのは追加や削除があってもシリアル化された既存の値が変化しないように
 public enum ItemType
@@ -11,7 +13,8 @@ public enum ItemType
     Flag = 0,
     SpeedUp = 1,
     SpeedDown = 2,
-    ChangeFogEndDistance = 3,
+    ChangeFogEndDistanceUp = 3,
+    ChangeFogEndDistanceDown = 4,
 
 }
 
@@ -49,9 +52,17 @@ public class ItemEffectsManager : MonoBehaviour
                 _playerController.AddMoveSpeedNumb(-2f);
                 break;
             }
-            case ItemType.ChangeFogEndDistance:
+            case ItemType.ChangeFogEndDistanceUp://霧の視界綺麗に
                 {
-                    RenderSettings.fogEndDistance = 5f;
+                    var value = 0f;
+                    RenderSettings.fogEndDistance = value;
+                    LMotion.Create(0f, 8f, 2f) // 0fから10fまで2秒間でアニメーション
+                        .Bind(x => value = x); // 任意の変数やフィールド、プロパティにバインド可能                    //RenderSettings.fogEndDistance = 8f;
+                    break;
+                }
+            case ItemType.ChangeFogEndDistanceDown://霧の視界綺麗に
+                {
+                    RenderSettings.fogEndDistance = 1f;
                     break;
                 }
         }

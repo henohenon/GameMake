@@ -56,18 +56,6 @@ public class PlayerController : MonoBehaviour//へのへのさん
         
         // 移動速度の計算
         CalcMoveSpeed();
-
-
-        //あのRender
-        // フォグの有効化
-        RenderSettings.fog = true;
-
-        // フォグの開始距離と終了距離を設定
-        RenderSettings.fogStartDistance = 0f;
-        RenderSettings.fogEndDistance = 3f;
-
-        // スカイボックスのマテリアルを設定
-        RenderSettings.skybox = Resources.Load<Material>("SkyboxMaterial");
     }
     
     private void CameraInputCallback(InputAction.CallbackContext context)

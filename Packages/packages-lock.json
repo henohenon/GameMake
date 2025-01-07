@@ -7,6 +7,17 @@
       "dependencies": {},
       "hash": "84fb71550bf28d2b5250adafac948e802ddd4b51"
     },
+    "com.annulusgames.lit-motion": {
+      "version": "https://github.com/AnnulusGames/LitMotion.git?path=src/LitMotion/Assets/LitMotion",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.burst": "1.6.0",
+        "com.unity.collections": "1.5.1",
+        "com.unity.mathematics": "1.0.1"
+      },
+      "hash": "f7df4966aa30482fb739148aba2bc7bc672dfaf6"
+    },
     "com.annulusgames.random-extensions.unity": {
       "version": "https://github.com/AnnulusGames/RandomExtensions.git?path=src/RandomExtensions.Unity/Assets/RandomExtensions.Unity",
       "depth": 0,

@@ -13,7 +13,7 @@ public class SoldierGameManager : MonoBehaviour
     [SerializeField] private SoldierUIManager soldierUIManager;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private TimerManager TimerManager;
-    
+    [SerializeField] private SoldierGameSoundManager soundManager;
     
     private void Start()
     {
@@ -28,7 +28,12 @@ public class SoldierGameManager : MonoBehaviour
         // ゲーム情報などからマップの生成
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
 
-        playerController.OnDamage.Subscribe(_=>
+        tilesManager.GameClear.Subscribe(_ =>
+        {
+            soundManager.PlayClearSound();
+        });
+
+        playerController.OnDamage.Subscribe(_ =>
         {
             GameOver();
         });

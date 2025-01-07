@@ -11,7 +11,7 @@ public enum ItemType
     Flag = 0,
     SpeedUp = 1,
     SpeedDown = 2,
-    SpeedUpup = 10,
+    ChangeFogEndDistance = 3,
 
 }
 
@@ -49,8 +49,9 @@ public class ItemEffectsManager : MonoBehaviour
                 _playerController.AddMoveSpeedNumb(-2f);
                 break;
             }
-            case ItemType.SpeedUpup:
+            case ItemType.ChangeFogEndDistance:
                 {
+                    RenderSettings.fogEndDistance = 5f;
                     break;
                 }
         }

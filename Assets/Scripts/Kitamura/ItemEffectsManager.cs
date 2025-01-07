@@ -55,9 +55,12 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.ChangeFogEndDistanceUp://霧の視界綺麗に
                 {
                     var value = 0f;
-                    RenderSettings.fogEndDistance = value;
+                    //RenderSettings.fogEndDistance = value;
                     LMotion.Create(0f, 8f, 2f) // 0fから10fまで2秒間でアニメーション
-                        .Bind(x => value = x); // 任意の変数やフィールド、プロパティにバインド可能                    //RenderSettings.fogEndDistance = 8f;
+                    .WithEase(Ease.OutQuad)
+                        .Bind(x  => value = x); // 任意の変数やフィールド、プロパティにバインド可能  
+        
+                    //RenderSettings.fogEndDistance = 8f;
                     break;
                 }
             case ItemType.ChangeFogEndDistanceDown://霧の視界綺麗に

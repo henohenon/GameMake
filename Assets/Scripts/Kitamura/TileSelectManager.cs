@@ -81,16 +81,24 @@ public class TileSelectManager : MonoBehaviour
     }
 
     private bool _isSelectPose = false;
-    public void SelectPose()
+    public void SelectPose(bool isPose)
     {
-        _isSelectPose = true;
+        _isSelectPose = isPose;
 
-        if (SelectingTile)
+        if (isPose && SelectingTile)
         {
             SelectingTile.Select(false);
             SelectingTile = null;
         }
-        openTile.action.Disable();
+
+        if (isPose)
+        {
+            openTile.action.Disable();
+        }
+        else
+        {
+            openTile.action.Enable();
+        }
     }
 
     private void OnDisable()

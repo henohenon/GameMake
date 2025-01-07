@@ -1508,6 +1508,7 @@ MonoBehaviour:
     type: 3}
   cameraRotationSpeed: 0.1
   tilesManager: {fileID: 921744851}
+  tileSelectManager: {fileID: 921744854}
 --- !u!114 &1856347867
 MonoBehaviour:
   m_ObjectHideFlags: 0

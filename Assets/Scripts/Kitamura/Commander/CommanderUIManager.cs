@@ -20,7 +20,7 @@ public class CommanderUIManager : MonoBehaviour
     private UIDocument _document;
     private VisualElement _tileMapsContainer;
     private Label _detailsLabel;
-    private TextField _idTextField;
+    private UnsignedIntegerField _idTextField;
     
     private void Start()
     {
@@ -30,7 +30,7 @@ public class CommanderUIManager : MonoBehaviour
 
         var applyButton = root.Q<Button>("Apply");
         var backButton = root.Q<Button>("TitleButton");
-        _idTextField = root.Q<TextField>("IdInputField");
+        _idTextField = root.Q<UnsignedIntegerField>("IdInputField");
         _detailsLabel = root.Q<Label>("Details");
         _tileMapsContainer = root.Q<VisualElement>("tile-maps-container");
         
@@ -45,14 +45,12 @@ public class CommanderUIManager : MonoBehaviour
     private const int mapLength = 9;
     private void RecreateView()
     {
-        if (uint.TryParse(_idTextField.value, out uint result))
-        {
-            Debug.Log("inputSeed: "+result);
-            var gameInfo = new GameInfo(rate, mapLength, result);
+            Debug.Log("inputSeed: "+_idTextField.value);
+            var gameInfo = new GameInfo(rate, mapLength, _idTextField.value);
             // マップのクリア
             _tileMapsContainer.Clear();
             
-            var random = new Xoshiro256StarStarRandom(result+1);
+            var random = new Xoshiro256StarStarRandom(_idTextField.value+1);
             // 本物+偽物*2のマップ配列を作成
             var maps = new []
             {
@@ -69,12 +67,6 @@ public class CommanderUIManager : MonoBehaviour
             }
             // アイテム情報の表示
             _detailsLabel.text = GetItemInfoStr(gameInfo.ItemInfo, rate.itemRateAsset);
-        }
-        else
-        {
-            Debug.LogWarning("Invalid input. Reverting to previous value.");
-        }
-        
     }
     
     public void WriteMap(MapRateAsset rate, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)

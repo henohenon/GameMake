@@ -1,10 +1,31 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="TileMaps" src="project://database/Assets/UI/TileMaps.uxml?fileID=9197481963319205126&amp;guid=a1b65786a86243b488a430e8962abb49&amp;type=3#TileMaps" />
-    <ui:VisualElement style="flex-direction: row; min-height: 42px;">
-        <ui:TextField picking-mode="Ignore" label="ShareID" value="Input shareId" name="IdInputField" />
-        <ui:Button text="Apply" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Apply" />
-    </ui:VisualElement>
-    <ui:Button text="Back to title" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleButton" />
-    <ui:Instance template="TileMaps" name="TileMaps" />
-    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Details" style="flex-grow: 1; -unity-font: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;);" />
+    <ui:ScrollView>
+        <ui:VisualElement>
+            <ui:VisualElement style="flex-direction: row; min-height: 42px;">
+                <ui:UnsignedIntegerField label="Unsigned Integer Field" name="IdInputField" />
+                <ui:Button text="Apply" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Apply" />
+            </ui:VisualElement>
+            <ui:Button text="Back to title" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleButton" />
+            <ui:Instance template="TileMaps" name="TileMaps" />
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Details" style="flex-grow: 1; -unity-font: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;);" />
+                <ui:Label text="０．はじめに" />
+                <ui:Label text="地雷の散りばめられたエリアには謎のカードが存在する。&#10;これらは地雷を見つけるうえで有効な手段となる場合があると&#10;報告されている。有効活用し、安全に地雷の位置を特定しろ。" />
+                <ui:Label text="１．青色のカード" />
+                <ui:Label text="これは比較的安全であることが報告されている。&#10;カードには１の記号が描かれており、&#10;記号の形によって効果が異なる。（図１参照）" />
+                <ui:VisualElement>
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:Label tabindex="-1" text="記号" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-grow: 1; -unity-text-align: upper-center;" />
+                        <ui:Label tabindex="-1" text="効果" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-grow: 1; -unity-text-align: upper-center;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-direction: row;">
+                        <ui:Label tabindex="-1" text="⚆ または ⨊ または ⨂" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-grow: 1; -unity-text-align: upper-center;" />
+                        <ui:Label tabindex="-1" text="他のアイテムの位置が分かる" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-grow: 1; -unity-text-align: upper-center;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label text="------------------------------------------図１------------------------------------------" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
 </ui:UXML>

@@ -23,7 +23,8 @@ public class TilesManager : MonoBehaviour
     public MapRateAsset MapRate { get; private set; }
     public MapInfo MapInfo { get; private set; }
     private ItemInfo _itemInfo;
-    
+    [SerializeField] private TimerManager TimerManager;
+
     private int _noBombCount = 0;
     
     public void Generate3dMap(MapRateAsset rate, GameInfo info)
@@ -164,7 +165,10 @@ public class TilesManager : MonoBehaviour
             {
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
+                playerController.SetCameraLock(false);
                 Screen.SetPopupHidden(InPlayScreenType.GameClear, false);
+                TimerManager._Running = false;
+                Debug.Log(TimerManager._Running);
             }
         }
         //CheckForOnlyBombs();

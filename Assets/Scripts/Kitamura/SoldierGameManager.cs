@@ -41,10 +41,12 @@ public class SoldierGameManager : MonoBehaviour
 
     private void GameOver()
     {
+        Debug.Log("GameOver");
         playerController.DeadPose();
         playerController.SetCameraLock(false);
         soldierUIManager.SetPopupHidden(InPlayScreenType.GameOver,false);
         TimerManager._Running = false;
+        Debug.Log(TimerManager._Running);
     }
     
     private uint GenerateSeed()

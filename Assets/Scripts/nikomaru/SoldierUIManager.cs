@@ -75,7 +75,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     {
         _Timer.text = CurrentTime;
         _textEdit = "Clear  Time " + CurrentTime;
-        _clearText.text = CurrentTime;
+        _clearText.text = _textEdit;
     }
 
 }

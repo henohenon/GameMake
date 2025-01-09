@@ -3,10 +3,13 @@ using RandomExtensions;
 using Scriptable;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class TileController : MonoBehaviour
 {
     [SerializeField]
     private TextMesh textMesh;
+
+    protected AudioSource _audioSourse;
 
     private TileState _tileState;
     private GameObject _tileObject;
@@ -23,6 +26,10 @@ public class TileController : MonoBehaviour
     private int _tileId;
     public TileType TileType { get; private set; } // getはpublic、setはprivate
     
+    private void Start()
+    {
+        _audioSourse = GetComponent<AudioSource>();
+    }
     
     private readonly float[] _tileRotationY = {0, 90, 180, 270};
     // monobehaviourはコンストラクタを持てない(どうして)ので初期化メソッド
@@ -86,6 +93,12 @@ public class TileController : MonoBehaviour
     public void SetText(string text)
     {
         textMesh.text = text;
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        _audioSourse.clip= clip;
+        _audioSourse.Play();
     }
 
     private enum TileState

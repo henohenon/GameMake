@@ -690,6 +690,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
+  flipAudios:
+  - {fileID: 8300000, guid: d0edba4026442e04abcc9c118b19284d, type: 3}
+  - {fileID: 8300000, guid: 4cabb23683029d646a130f3c801f6810, type: 3}
+  - {fileID: 8300000, guid: baf4daee98a8f804ca7413e3cda82dda, type: 3}
+  - {fileID: 8300000, guid: 769339ee0f88cff48971165d477be6b8, type: 3}
+  - {fileID: 8300000, guid: b83cb4e478e375049925a849bd0f6574, type: 3}
+  - {fileID: 8300000, guid: a54487a57e56c64438a764198147b94b, type: 3}
+  - {fileID: 8300000, guid: a45b23f2a6004014e8be0afc41e72143, type: 3}
+  - {fileID: 8300000, guid: f0083ee71ff023b489324920e70dbebc, type: 3}
   playerController: {fileID: 1856347866}
   gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
@@ -816,7 +825,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

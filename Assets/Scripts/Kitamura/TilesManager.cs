@@ -1,13 +1,18 @@
 using Alchemy.Inspector;
+using Cysharp.Threading.Tasks;
+using LitMotion;
 using R3;
 using RandomExtensions;
 using Scriptable;
+using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TilesManager : MonoBehaviour
 {
     [SerializeField, InlineEditor] private TilePrefabsAsset tilePrefabs;
+    [SerializeField] private AudioClip[] flipAudios;
     [SerializeField]
     private PlayerController playerController;
     [SerializeField] private SoldierGameManager gameManager;
@@ -32,6 +37,8 @@ public class TilesManager : MonoBehaviour
     [SerializeField] private TimerManager TimerManager;
 
     private int _noBombCount = 0;
+    private int _comboCount = 0;
+    private const float ComboTime = 2.5f;
     
     public void Generate3dMap(MapRateAsset rate, GameInfo info)
     {
@@ -136,9 +143,17 @@ public class TilesManager : MonoBehaviour
     {
         // タイルのインスタンスをキャッシュ的な感じで取得
         var tileTile = TileControllers[tileId];
-        // タイルタイルが爆弾の場合はゲームオーバー
+        // タイルが爆弾出ないとき
         if (tileTile.TileType != TileType.Bomb)
         {
+            ComboTimer();
+            _comboCount++;
+            var soundCount = _comboCount < flipAudios.Length ? _comboCount : flipAudios.Length - 1;
+            var _flipSound = flipAudios[soundCount];
+            Debug.Log(_comboCount+":"+ soundCount);
+            TileControllers[tileId].PlaySound(_flipSound);
+            
+
             // 周囲のタイルの状況を調べる
             var bombSum = GetTileAroundTypeSum(tileId, TileType.Bomb);
             
@@ -174,6 +189,31 @@ public class TilesManager : MonoBehaviour
             }
         }
         //CheckForOnlyBombs();
+    }
+
+    private CancellationTokenSource _cts;
+    private async void ComboTimer()
+    {
+        _cts?.Cancel();
+
+        var newCancellation = new CancellationTokenSource();
+        _cts = newCancellation;
+        try
+        {
+            await UniTask.WaitForSeconds(ComboTime, cancellationToken: newCancellation.Token);
+            _comboCount = 0;
+        }
+        catch
+        {
+        }
+        finally
+        {
+            if(_cts == newCancellation)
+            {
+                _cts.Dispose();
+                _cts = null;
+            }
+        }
     }
     
     // タイルタイルの周囲の爆弾の数を取得

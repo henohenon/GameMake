@@ -240,6 +240,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2159426325771876638, guid: ffac905825482a247aaec95c6988a1cb,
         type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 2159426325771876638, guid: ffac905825482a247aaec95c6988a1cb,
+        type: 3}
       propertyPath: m_Name
       value: BlueItem
       objectReference: {fileID: 0}

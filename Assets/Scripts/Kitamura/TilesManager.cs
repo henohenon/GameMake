@@ -171,12 +171,6 @@ public class TilesManager : MonoBehaviour
             {
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
-                playerController.SetCameraLock(false);
-                Screen.SetPopupHidden(InPlayScreenType.GameClear, false);
-                TimerManager._Running = false;
-                Debug.Log(TimerManager._Running);
-                cameraInput.action.Disable();
-                cameraLock.action.Disable();
             }
         }
         //CheckForOnlyBombs();

@@ -30,13 +30,23 @@ public class SoldierGameManager : MonoBehaviour
 
         tilesManager.GameClear.Subscribe(_ =>
         {
-            soundManager.PlayClearSound();
+            GameClear();
         });
 
         playerController.OnDamage.Subscribe(_ =>
         {
             GameOver();
         });
+    }
+
+    private void GameClear()
+    {
+
+        soundManager.PlayClearSound();
+        playerController.ClearPose();
+        playerController.SetCameraLock(false);
+        soldierUIManager.SetPopupHidden(InPlayScreenType.GameClear,false);
+        TimerManager._Running = false;
     }
 
     private void GameOver()

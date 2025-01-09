@@ -96,19 +96,31 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private bool _isDeadPose = false;
     public void DeadPose()
     {
+        // 各種アクションの無効化
         moveInput.action.Disable();
         cameraInput.action.Disable();
         cameraLock.action.Disable();
         
+        // フラグ
         _isDeadPose = true;
+
+        // 自由回転
         _rb.freezeRotation = false;
+        // 地面に近づいても見えるように
         _camera.nearClipPlane = 0.01f;
+        // 足音を消す
         _stepsAudioSource.Pause();
         
         // 吹っ飛ぶ
         _rb.AddForce(_hitDirection * 1f, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(_hitDirection, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
+    }
+
+    public void ClearPose()
+    {
+        cameraInput.action.Disable();
+        cameraLock.action.Disable();
     }
 
     public void SetCameraLock(bool isLock)

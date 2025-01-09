@@ -11,6 +11,7 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private InputActionReference[] stackNumbInputs;
     [SerializeField] private InputActionReference useItemInput;
     [SerializeField] private InputActionReference removeItemInput;
+    [SerializeField] private SoldierUIManager soldirUIManager;
 
 #if UNITY_EDITOR
     // 実行中のみ編集を許可
@@ -60,6 +61,8 @@ public class ItemStackManager : MonoBehaviour
                 itemStack[i] = addType;
 
                 Debug.Log("Add New Item: "+ addType + " at " + i);
+                //SoldierUIManagerにアイテムアイコンの表示依頼
+                //soldirUIManagerSetItemIcon(string icon, int number)
                 return;
             }
         }

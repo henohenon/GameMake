@@ -694,6 +694,12 @@ MonoBehaviour:
   gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
+  cameraInput: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  moveInput: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  cameraLock: {fileID: -8547146756359953873, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
   TimerManager: {fileID: 921744857}
 --- !u!4 &921744852
 Transform:
@@ -766,6 +772,7 @@ MonoBehaviour:
     type: 3}
   removeItemInput: {fileID: 8796532731297689166, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
+  soldirUIManager: {fileID: 0}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:

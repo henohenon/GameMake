@@ -2,6 +2,7 @@ using RandomExtensions;
 using Scriptable;
 using UnityEngine;
 using R3;
+using Alchemy.Inspector;
 
 // 他のスクリプトより後で実行。一括管理できないので乱立させていくとすごいことになるのであんまよくないけど一旦これで
 [DefaultExecutionOrder(1)]
@@ -39,6 +40,7 @@ public class SoldierGameManager : MonoBehaviour
         });
     }
 
+    [Button]
     private void GameClear()
     {
 
@@ -49,6 +51,7 @@ public class SoldierGameManager : MonoBehaviour
         TimerManager._Running = false;
     }
 
+    [Button]
     private void GameOver()
     {
         Debug.Log("GameOver");

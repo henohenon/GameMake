@@ -3,6 +3,7 @@ using R3;
 using RandomExtensions;
 using Scriptable;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TilesManager : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class TilesManager : MonoBehaviour
 
     [SerializeField] private ItemStackManager _itemStackManager;
     [SerializeField] private SoldierUIManager Screen;
+    [SerializeField]
+    private InputActionReference cameraInput;//マウスの入力を取得
+    [SerializeField]
+    private InputActionReference moveInput;//キャラクターの移動を取得
+    [SerializeField] private InputActionReference cameraLock;
 
     // ゲームクリア時のサブジェクト
     private readonly Subject<Unit> _gameClear = new();
@@ -169,6 +175,8 @@ public class TilesManager : MonoBehaviour
                 Screen.SetPopupHidden(InPlayScreenType.GameClear, false);
                 TimerManager._Running = false;
                 Debug.Log(TimerManager._Running);
+                cameraInput.action.Disable();
+                cameraLock.action.Disable();
             }
         }
         //CheckForOnlyBombs();

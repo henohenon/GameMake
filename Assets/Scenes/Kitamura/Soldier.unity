@@ -694,6 +694,7 @@ MonoBehaviour:
   gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
+  TimerManager: {fileID: 921744857}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0

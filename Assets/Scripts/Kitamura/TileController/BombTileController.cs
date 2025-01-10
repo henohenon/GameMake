@@ -40,11 +40,12 @@ public class BombTileController : TileController
             _audioSource.clip = alertAudio;
             _audioSource.loop = true;
             _audioSource.time = 0.25f;
-            _audioSource.pitch = 2;
+            _audioSource.pitch = 2f;
             _audioSource.Play();
         }
-        await UniTask.WaitForSeconds(0.5f);
-        if(damageCollider) damageCollider.enabled = true;
+        await UniTask.WaitForSeconds(0.45f);
+        explosionObject.SetActive(true);
+        await UniTask.WaitForSeconds(0.05f);
         if (_audioSource)
         {
             _audioSource.clip = explosionAudio;
@@ -52,7 +53,7 @@ public class BombTileController : TileController
             _audioSource.pitch = 1;
             _audioSource.Play();
         }
-        explosionObject.SetActive(true);
+        if(damageCollider) damageCollider.enabled = true;
         await UniTask.WaitForSeconds(0.1f);
         if(damageCollider) damageCollider.enabled = false;
     }

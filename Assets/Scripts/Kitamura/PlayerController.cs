@@ -10,7 +10,6 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Camera))]
 [RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour//へのへのさん
 {
@@ -25,6 +24,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField] private InputActionReference cameraLock;
     [SerializeField]
     private float cameraRotationSpeed = 0.1f; // カメラの回転速度を調節するためのflot
+    [SerializeField] private Camera camera;
     [SerializeField]
     private TilesManager tilesManager;
     [SerializeField] private TileSelectManager tileSelectManager;
@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private Vignette _vignette;
     
     private Rigidbody _rb;
-    private Camera _camera;
     private AudioSource _stepsAudioSource;
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
@@ -47,7 +46,6 @@ public class PlayerController : MonoBehaviour//へのへのさん
     {
         _stepsAudioSource = GetComponent<AudioSource>();
         _stepsAudioSource.Pause();
-        _camera = GetComponent<Camera>();
         
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
@@ -108,7 +106,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     }
 
     private bool _isDeadPose = false;
-    public async void DeadPose()
+    public void DeadPose()
     {
         // 各種アクションの無効化
         moveInput.action.Disable();
@@ -121,28 +119,36 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // 自由回転
         _rb.freezeRotation = false;
         // 地面に近づいても見えるように
-        _camera.nearClipPlane = 0.01f;
+        camera.nearClipPlane = 0.01f;
         // 足音を消す
         _stepsAudioSource.Pause();
         
         // 吹っ飛ぶ
-        _rb.AddForce(_hitDirection * 500, ForceMode.Impulse);
+        _rb.AddForce(_hitDirection * 300, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(_hitDirection, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
-        _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
+        _rb.AddTorque(torqueAxis * 300f, ForceMode.Impulse);
         
         var animTime = 7f;
         
+        // カメラ揺れ
+        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).BindToLocalPositionX(camera.transform);
+        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).BindToLocalPositionY(camera.transform);
+        
         // 周り黒
-        LMotion.Create(_vignette.smoothness.value, 1, animTime).WithEase(Ease.OutExpo).Bind(_vignette.smoothness, (x, target) =>
+        LMotion.Create(_vignette.smoothness.value, 1f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.smoothness, (x, target) =>
+        {
+            target.value = x;
+        });
+        LMotion.Create(_vignette.intensity.value, 0.7f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.intensity, (x, target) =>
         {
             target.value = x;
         });
         // ぼかす
-        LMotion.Create(_dof.focusDistance.value, 300, animTime).WithEase(Ease.OutExpo).Bind(_dof.focusDistance, (x, target) =>
+        LMotion.Create(_dof.focusDistance.value, 300f, animTime).WithEase(Ease.OutExpo).Bind(_dof.focusDistance, (x, target) =>
         {
             target.value = x;
         });
-        LMotion.Create(_dof.focalLength.value, 90, animTime).WithEase(Ease.OutExpo).Bind(_dof.focalLength, (x, target) =>
+        LMotion.Create(_dof.focalLength.value, 90f, animTime).WithEase(Ease.OutExpo).Bind(_dof.focalLength, (x, target) =>
         {
             target.value = x;
         });
@@ -151,6 +157,11 @@ public class PlayerController : MonoBehaviour//へのへのさん
         LMotion.Create(_distortion.intensity.value, 0.6f, animTime).WithEase(Ease.OutExpo).Bind(_distortion.intensity, (x, target) =>
         {
             target.value = x;
+        });
+        // FOV
+        LMotion.Create(camera.fieldOfView, 35f, animTime).WithEase(Ease.OutExpo).Bind(camera, (x, target) =>
+        {
+            target.fieldOfView = x;
         });
     }
 
@@ -189,18 +200,16 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // 移動。現座標 + 移動の向き * 速度 * 経過時間
         _rb.position += movement * (_nowMoveSpeed * Time.deltaTime);
         
-        // 入力
-        var addRotation = new Vector3(
-            -_cameraInputValue.y,
-            _cameraInputValue.x,
-            0
-        );
+        // カメラ横軸
         // 今の角度
         var currentRotation = _rb.rotation.eulerAngles;
-        // 次の角度。今の角度 + 入力 * スピード
-        var nextRotation = currentRotation + addRotation * cameraRotationSpeed;
+        // x軸回転を加算
+        currentRotation.y += _cameraInputValue.x * cameraRotationSpeed;
         // カメラの回転を適用
-        _rb.MoveRotation(Quaternion.Euler(nextRotation));
+        _rb.MoveRotation(Quaternion.Euler(currentRotation));
+        
+        // カメラ縦軸
+        camera.transform.Rotate(new Vector3(-_cameraInputValue.y * cameraRotationSpeed, 0, 0));
     }
 
     private readonly List<float> _addMoveSpeeds = new();

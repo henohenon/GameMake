@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _stepsAudioSource.Pause();
         
         // 吹っ飛ぶ
-        _rb.AddForce(_hitDirection * 1f, ForceMode.Impulse);
+        _rb.AddForce(_hitDirection * 500, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(_hitDirection, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
         
@@ -142,13 +142,13 @@ public class PlayerController : MonoBehaviour//へのへのさん
         {
             target.value = x;
         });
-        LMotion.Create(_dof.focalLength.value, 75, animTime).WithEase(Ease.OutExpo).Bind(_dof.focalLength, (x, target) =>
+        LMotion.Create(_dof.focalLength.value, 90, animTime).WithEase(Ease.OutExpo).Bind(_dof.focalLength, (x, target) =>
         {
             target.value = x;
         });
         
         // 魚眼
-        LMotion.Create(_distortion.intensity.value, 0.5f, animTime).WithEase(Ease.OutExpo).Bind(_distortion.intensity, (x, target) =>
+        LMotion.Create(_distortion.intensity.value, 0.6f, animTime).WithEase(Ease.OutExpo).Bind(_distortion.intensity, (x, target) =>
         {
             target.value = x;
         });

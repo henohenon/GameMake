@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 2
+  m_LinearFogEnd: 4
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -97,8 +97,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 1c69871c674ece54284378d949d8b305,
-    type: 2}
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -691,15 +690,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
-  flipAudios: []
+  flipAudios:
+  - {fileID: 8300000, guid: d0edba4026442e04abcc9c118b19284d, type: 3}
+  - {fileID: 8300000, guid: 4cabb23683029d646a130f3c801f6810, type: 3}
+  - {fileID: 8300000, guid: baf4daee98a8f804ca7413e3cda82dda, type: 3}
+  - {fileID: 8300000, guid: 769339ee0f88cff48971165d477be6b8, type: 3}
+  - {fileID: 8300000, guid: b83cb4e478e375049925a849bd0f6574, type: 3}
+  - {fileID: 8300000, guid: a54487a57e56c64438a764198147b94b, type: 3}
+  - {fileID: 8300000, guid: a45b23f2a6004014e8be0afc41e72143, type: 3}
+  - {fileID: 8300000, guid: f0083ee71ff023b489324920e70dbebc, type: 3}
   playerController: {fileID: 1856347866}
   gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
-  cameraInput: {fileID: 0}
-  moveInput: {fileID: 0}
-  cameraLock: {fileID: 0}
-  TimerManager: {fileID: 0}
+  cameraInput: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  moveInput: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  cameraLock: {fileID: -8547146756359953873, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  TimerManager: {fileID: 921744857}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0
@@ -815,7 +825,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

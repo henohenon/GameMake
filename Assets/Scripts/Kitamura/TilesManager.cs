@@ -265,4 +265,12 @@ public class TilesManager : MonoBehaviour
             
         return new Vector2Int(x, z);
     }
+
+    public void ViewBombNumbs()
+    {
+        foreach (var tileController in TileControllers)
+        {
+            tileController.FadeInNumbText();
+        }
+    }
 }

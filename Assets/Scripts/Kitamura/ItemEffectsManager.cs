@@ -21,7 +21,7 @@ public enum ItemType
     OpenFrontLine = 5,
     RandomMovement = 6,
     AddOpenPosition = 7,
-    ViewAroundBombNumb = 8,
+    ViewBombNumb = 8,
     changefootsteps = 9,
 }
 
@@ -29,6 +29,7 @@ public class ItemEffectsManager : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private TileSelectManager _tileSelectManager;
+    [SerializeField] private TilesManager tilesManager;
     [SerializeField, AssetsOnly] private GameObject flagPrefab;
     [SerializeField] private Light light;
     [SerializeField] public AudioClip _changestepsAudioClip;
@@ -131,6 +132,9 @@ public class ItemEffectsManager : MonoBehaviour
                     _tileSelectManager.AddOpenPosition(OpenPositions[_positionIndex]);
                     _positionIndex++;
                 }
+                break;
+            case ItemType.ViewBombNumb:
+                tilesManager.ViewBombNumbs();
                 break;
         }
     }

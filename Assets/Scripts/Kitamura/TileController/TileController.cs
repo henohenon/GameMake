@@ -1,3 +1,5 @@
+using LitMotion;
+using LitMotion.Extensions;
 using R3;
 using RandomExtensions;
 using Scriptable;
@@ -99,6 +101,14 @@ public class TileController : MonoBehaviour
     {
         _audioSourse.clip= clip;
         _audioSourse.Play();
+    }
+
+    public void FadeInNumbText()
+    {
+        LMotion.Create(Color.clear, Color.white, 0.5f).Bind(textMesh, (x, target) =>
+        {
+            target.color = x;
+        });
     }
 
     private enum TileState

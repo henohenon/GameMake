@@ -22,6 +22,7 @@ public enum ItemType
     RandomMovement = 6,
     AddOpenPosition = 7,
     ViewAroundBombNumb = 8,
+    changefootsteps = 9,
 }
 
 public class ItemEffectsManager : MonoBehaviour
@@ -30,12 +31,15 @@ public class ItemEffectsManager : MonoBehaviour
     [SerializeField] private TileSelectManager _tileSelectManager;
     [SerializeField, AssetsOnly] private GameObject flagPrefab;
     [SerializeField] private Light light;
+    [SerializeField] public AudioClip _stepsAudioSource;
 
     private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
 
     private void Start()
     {
         _lightDistances[_currentLightDistanceType].ApplyValues(light);
+        //_stepsAudioSource = GetComponent<AudioSource>();
+
     }
 
     // アイテムの実行
@@ -94,6 +98,12 @@ public class ItemEffectsManager : MonoBehaviour
                     }
 
                     _lightDistances[_currentLightDistanceType].ApplyValues(light);
+                    break;
+                }
+            case ItemType.changefootsteps:
+                {
+                    _playerController.ChangeFootsteps(_stepsAudioSource);
+                    //PlayerController.AudioSource =changefootsteps;
                     break;
                 }
         }

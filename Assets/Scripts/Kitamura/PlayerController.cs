@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private Vignette _vignette;
     
     private Rigidbody _rb;
-    private AudioSource _stepsAudioSource;
+    private AudioSource _stepsAudioSource; //SE足音
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
@@ -308,6 +308,12 @@ public class PlayerController : MonoBehaviour//へのへのさん
         FpsLock,
         FpsNotLock,
         UIPose,
+    }
+    public void ChangeFootsteps(AudioClip newFootstepClip)
+    {
+        // 足音クリップを変更
+        _stepsAudioSource.clip = newFootstepClip;
+        _stepsAudioSource.Play();
     }
 }
 

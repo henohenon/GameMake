@@ -797,10 +797,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1856347866}
   _tileSelectManager: {fileID: 921744854}
+  tilesManager: {fileID: 921744851}
   flagPrefab: {fileID: 2871383591519906417, guid: 8227b93e551259b41af2834a0c5d657d,
     type: 3}
   light: {fileID: 1300582182}
-  _changestepsAudioClip: {fileID: 8300000, guid: c3e15d3966783b546a924a4d057c0f09,
+  _changestepsAudioClip: {fileID: 8300000, guid: 167d26b0027ba7442b9b77a057fab119,
     type: 3}
 --- !u!114 &921744857
 MonoBehaviour:

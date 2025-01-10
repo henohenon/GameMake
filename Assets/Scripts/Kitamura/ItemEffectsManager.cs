@@ -31,7 +31,7 @@ public class ItemEffectsManager : MonoBehaviour
     [SerializeField] private TileSelectManager _tileSelectManager;
     [SerializeField, AssetsOnly] private GameObject flagPrefab;
     [SerializeField] private Light light;
-    [SerializeField] public AudioClip _stepsAudioSource;
+    [SerializeField] public AudioClip _changestepsAudioClip;
 
     private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
 
@@ -87,7 +87,7 @@ public class ItemEffectsManager : MonoBehaviour
             }
             case ItemType.changefootsteps:
                 {
-                    _playerController.ChangeFootsteps(_stepsAudioSource);
+                    _playerController.ChangeFootsteps(_changestepsAudioClip);
                     //PlayerController.AudioSource =changefootsteps;
                     break;
                 }

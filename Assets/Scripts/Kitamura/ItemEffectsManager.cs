@@ -52,9 +52,9 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.Flag:
             {
                 // 選択しているタイルの旗を切り替え
-                if (_tileSelectManager.SelectingTile)
+                foreach (var selectingTile in _tileSelectManager.SelectingTiles)
                 {
-                    _tileSelectManager.SelectingTile.ToggleFlag(flagPrefab);
+                    selectingTile.ToggleFlag(flagPrefab);
                 }
                 break;
             }

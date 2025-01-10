@@ -11,6 +11,12 @@ public class TileSelectManager : MonoBehaviour
     [SerializeField] private TilesManager tilesManager;
     [SerializeField] private InputActionReference openTile;
     
+    // 開いている座標のリスト
+    private List<Vector2> _openPositions = new()
+    {
+        new Vector2(0, 1),
+    };
+    
     private void Start()
     {
         // めくる入力の受け取り
@@ -18,7 +24,8 @@ public class TileSelectManager : MonoBehaviour
         openTile.action.Enable();
     }
 
-    public TileController SelectingTile { get; private set; }
+    private List<TileController> _selectedTiles = new();
+    public IReadOnlyList<TileController> SelectingTiles => _selectedTiles;
     public void Update()
     {
         if(_isSelectPose) return;
@@ -27,44 +34,40 @@ public class TileSelectManager : MonoBehaviour
         // プレイヤーの位置の取得
         var playerPosition = playerTransform.position;
         // プレイヤーの正面の取得
-        var playerDirection = playerTransform.forward;
-        // yを0にしてからノーマライズすることで、y軸を省いた上から見たときの2次元座標の正面の向きにする
-        playerDirection.y = 0;
-        playerDirection.Normalize();
-        // プレイヤーの位置+正面方向に1の位置を取得
-        var playerForwardPosition = playerPosition + playerDirection;
-        
-        // タイルの座標を取得
-        var highLightPosition = tilesManager.GetMapPosition(playerForwardPosition);
-        
-        // タイルの座標からidを取得
-        var positionTileId = MapTileCalc.GetTileId(highLightPosition, tilesManager.MapInfo.MapLength);
+        var playerForward = playerTransform.forward;
+        var playerRight = playerTransform.right;
 
-        // タイルがない場合
-        if (positionTileId == -1)
-        {
-            // 今選択してるものがあれば
-            if (SelectingTile)
-            {
-                // セレクトを切る
-                SelectingTile.Select(false);
-                // 選択を無くす
-                SelectingTile = null;
-            }
-            // 終了
-            return;
-        }
+        // 既存の選択を削除
+        ClearSelectedTiles();
         
-        var tile = tilesManager.TileControllers[positionTileId];
-        //　既存の選択されているタイルと違えば
-        if (tile != SelectingTile)
+        // リスト内の各座標をプレイヤーの正面方向に適用
+        foreach (var offset in _openPositions)
         {
-            // 既存の選択解除
-            SelectingTile?.Select(false);
-            // 新規選択
-            SelectingTile = tile;
-            SelectingTile.Select();
+            // プレイヤーの位置 + 正面方向にリスト内のオフセットを加算
+            var offsetPosition = playerPosition + playerForward * offset.y + playerRight * offset.x;
+            // タイルの座標を取得
+            var highLightPosition = tilesManager.GetMapPosition(offsetPosition);
+            
+            // タイルの座標からidを取得
+            var positionTileId = MapTileCalc.GetTileId(highLightPosition, tilesManager.MapInfo.MapLength);
+
+            // タイルあるが場合
+            if (positionTileId != -1)
+            {
+                var tile = tilesManager.TileControllers[positionTileId];
+                tile.Select();
+                _selectedTiles.Add(tile);
+            }
         }
+    }
+
+    private void ClearSelectedTiles()
+    {
+        foreach (var selectedTile in _selectedTiles)
+        {
+            selectedTile.Select(false);
+        }
+        _selectedTiles.Clear();
     }
 
     private void OpenTileCallback(InputAction.CallbackContext context)
@@ -72,10 +75,9 @@ public class TileSelectManager : MonoBehaviour
         if (context.started)
         {
             // 選択してるタイルがあるなら開く
-            if(SelectingTile)
+            foreach (var tile in _selectedTiles)
             {
-                Debug.Log("Open");
-                SelectingTile.Open();
+                tile.Open();
             }
         }
     }
@@ -85,10 +87,9 @@ public class TileSelectManager : MonoBehaviour
     {
         _isSelectPose = isPose;
 
-        if (isPose && SelectingTile)
+        if (isPose)
         {
-            SelectingTile.Select(false);
-            SelectingTile = null;
+            ClearSelectedTiles();
         }
 
         if (isPose)
@@ -103,14 +104,20 @@ public class TileSelectManager : MonoBehaviour
 
     public void OpenFrontLine()
     {
-        if (SelectingTile)
+        if (_selectedTiles.Count != 0)
         {
-            var playerPosition = tilesManager.GetMapPosition(playerTransform.position);
-            var frontPosition = tilesManager.GetMapPosition(SelectingTile.transform.position);
+            var playerPosition = tilesManager.GetMapPosition(playerTransform.position);// プレイヤーの正面の取得
+            var playerDirection = playerTransform.forward;
+            // yを0にしてからノーマライズすることで、y軸を省いた上から見たときの2次元座標の正面の向きにする
+            playerDirection.y = 0;
+            playerDirection.Normalize();
+            var playerFront = playerTransform.position + playerDirection;
+            var frontPosition = tilesManager.GetMapPosition(playerFront);
+            var frontTileId = MapTileCalc.GetTileId(frontPosition, tilesManager.MapInfo.MapLength);
             
             var difference = frontPosition - playerPosition;
             var currentPosition = frontPosition;
-            var currentTile = SelectingTile;
+            var currentTile = tilesManager.TileControllers[frontTileId];
             while (true)
             {
                 currentTile.Open();

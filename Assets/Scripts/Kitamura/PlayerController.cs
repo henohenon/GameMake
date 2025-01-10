@@ -131,38 +131,38 @@ public class PlayerController : MonoBehaviour//へのへのさん
         var animTime = 10f;
         
         // カメラ揺れ
-        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).WithEase(Ease.OutExpo).BindToLocalPositionX(camera.transform);
-        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).WithEase(Ease.OutExpo).BindToLocalPositionY(camera.transform);
+        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).WithEase(Ease.OutExpo).BindToLocalPositionX(camera.transform).AddTo(this);
+        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).WithEase(Ease.OutExpo).BindToLocalPositionY(camera.transform).AddTo(this);
         
         // 周り黒
         LMotion.Create(_vignette.smoothness.value, 1f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.smoothness, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
         LMotion.Create(_vignette.intensity.value, 0.4f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.intensity, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
         // ぼかす
         LMotion.Create(_dof.focusDistance.value, 100f, animTime).WithEase(Ease.OutExpo).Bind(_dof.focusDistance, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
         LMotion.Create(_dof.focalLength.value, 100f, animTime).WithEase(Ease.OutExpo).Bind(_dof.focalLength, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
         
         // 魚眼
         LMotion.Create(_distortion.intensity.value, 0.6f, animTime).WithEase(Ease.OutExpo).Bind(_distortion.intensity, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
         // FOV
         LMotion.Create(camera.fieldOfView, 35f, animTime).WithEase(Ease.OutExpo).Bind(camera, (x, target) =>
         {
             target.fieldOfView = x;
-        });
+        }).AddTo(this);
     }
 
     public void ClearPose()
@@ -176,19 +176,19 @@ public class PlayerController : MonoBehaviour//へのへのさん
         LMotion.Create(_vignette.intensity.value, 0f, animTime).WithEase(Ease.InExpo).Bind(_vignette.intensity, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
 
         // 魚眼
         LMotion.Create(_distortion.intensity.value, -0.5f, animTime).WithEase(Ease.InExpo).Bind(_distortion.intensity, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
         
         // ぼかし
         LMotion.Create(_dof.focusDistance.value, 0.1f, animTime).WithEase(Ease.InExpo).Bind(_dof.focusDistance, (x, target) =>
         {
             target.value = x;
-        });
+        }).AddTo(this);
     }
 
     public void SetCameraLock(bool isLock)

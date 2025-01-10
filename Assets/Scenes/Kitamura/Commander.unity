@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 1569783742}
   - component: {fileID: 1569783741}
   - component: {fileID: 1569783743}
+  - component: {fileID: 1569783744}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -391,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: cb14344e8313b86458935d71fee2b6d6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 79cef7bcf334fa14eab33fe047793abc,
+  sourceAsset: {fileID: 9197481963319205126, guid: 147d15ba132406b4c8fbb10921ae437a,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1569783742
@@ -416,13 +417,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569783740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84397030df2e7e543b92c547cc653e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rate: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
   tileAsset: {fileID: 9197481963319205126, guid: ddc9c06db8a2b8747a56b4d3cabaed0d,
+    type: 3}
+--- !u!114 &1569783744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569783740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da10a70043d3ad1479725886c5b92800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cmdLine: {fileID: 9197481963319205126, guid: 147d15ba132406b4c8fbb10921ae437a, type: 3}
+  execInput: {fileID: 748945606620384592, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
 --- !u!1 &1785313685
 GameObject:

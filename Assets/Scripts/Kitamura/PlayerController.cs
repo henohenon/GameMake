@@ -232,6 +232,22 @@ public class PlayerController : MonoBehaviour//へのへのさん
         camera.transform.Rotate(new Vector3(-_cameraInputValue.y * cameraRotationSpeed, 0, 0));
     }
 
+    public async UniTask RandomMovement()
+    {
+         moveInput.action.Disable();
+         cameraInput.action.Disable();
+         
+         _moveInputValue = new Vector2(RandomEx.Shared.NextFloat(-3, 3), RandomEx.Shared.NextFloat(-3, 3));
+         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(-1, 1), 0);
+
+         await UniTask.WaitForSeconds(1f);
+         _moveInputValue = Vector2.zero;
+         _cameraInputValue = Vector2.zero;
+         
+         moveInput.action.Enable();
+         cameraInput.action.Enable();
+    }
+
     private readonly List<float> _addMoveSpeeds = new();
     public void AddMoveSpeedNumb(float speed)
     {

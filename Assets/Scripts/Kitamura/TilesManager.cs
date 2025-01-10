@@ -5,6 +5,7 @@ using R3;
 using RandomExtensions;
 using Scriptable;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -155,7 +156,7 @@ public class TilesManager : MonoBehaviour
             
 
             // 周囲のタイルの状況を調べる
-            var bombSum = GetTileAroundTypeSum(tileId, TileType.Bomb);
+            var bombSum = GetTileAroundSumByType(tileId, TileType.Bomb);
             
             // 周囲がすべて安全な場合
             if (bombSum == 0)
@@ -217,7 +218,7 @@ public class TilesManager : MonoBehaviour
     }
     
     // タイルタイルの周囲の爆弾の数を取得
-    private int GetTileAroundTypeSum(int tileId, TileType type)
+    private int GetTileAroundSumByType(int tileId, TileType type)
     {
         var sum = 0;
 
@@ -238,6 +239,18 @@ public class TilesManager : MonoBehaviour
         return sum;
     }
 
+    public List<TileController> GetTillAllByType(TileType type)
+    {
+        List<TileController> result = new ();
+
+        foreach (var tileController in TileControllers)
+        {
+            result.Add(tileController);
+        }
+
+        return result;
+    }
+    
     public TileType GetTileIdType(int tileId)
     {
         var infoIndex = MapInfo.Tiles[tileId];

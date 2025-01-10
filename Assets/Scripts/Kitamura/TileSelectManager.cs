@@ -66,7 +66,7 @@ public class TileSelectManager : MonoBehaviour
             SelectingTile.Select();
         }
     }
-    
+
     private void OpenTileCallback(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -98,6 +98,30 @@ public class TileSelectManager : MonoBehaviour
         else
         {
             openTile.action.Enable();
+        }
+    }
+
+    public void OpenFrontLine()
+    {
+        if (SelectingTile)
+        {
+            var playerPosition = tilesManager.GetMapPosition(playerTransform.position);
+            var frontPosition = tilesManager.GetMapPosition(SelectingTile.transform.position);
+            
+            var difference = frontPosition - playerPosition;
+            var currentPosition = frontPosition;
+            var currentTile = SelectingTile;
+            while (true)
+            {
+                currentTile.Open();
+                
+                // 一つ先のタイルを取得
+                currentPosition += difference;
+                var currentId = MapTileCalc.GetTileId(currentPosition, tilesManager.MapInfo.MapLength);
+                // 一つ先がなければ終了
+                if(currentId == -1) break;
+                currentTile = tilesManager.TileControllers[currentId];
+            }
         }
     }
 

@@ -71,41 +71,48 @@ public class ItemEffectsManager : MonoBehaviour
                 break;
             }
             case ItemType.LightUp://霧の視界綺麗に
+            {
+                switch (_currentLightDistanceType)
                 {
-                    switch (_currentLightDistanceType)
-                    {
-                        case LightDistanceType.Normal:
-                            _currentLightDistanceType = LightDistanceType.Maximum;
-                            break;
-                        case LightDistanceType.Minimum:
-                            _currentLightDistanceType = LightDistanceType.Normal;
-                            break;
-                    }
-
-                    _lightDistances[_currentLightDistanceType].ApplyValues(light);
-                    break;
+                    case LightDistanceType.Normal:
+                        _currentLightDistanceType = LightDistanceType.Maximum;
+                        break;
+                    case LightDistanceType.Minimum:
+                        _currentLightDistanceType = LightDistanceType.Normal;
+                        break;
                 }
-            case ItemType.LightDown://霧の視界綺麗に
-                {
-                    switch (_currentLightDistanceType)
-                    {
-                        case LightDistanceType.Normal:
-                            _currentLightDistanceType = LightDistanceType.Minimum;
-                            break;
-                        case LightDistanceType.Maximum:
-                            _currentLightDistanceType = LightDistanceType.Normal;
-                            break;
-                    }
 
-                    _lightDistances[_currentLightDistanceType].ApplyValues(light);
-                    break;
-                }
+                _lightDistances[_currentLightDistanceType].ApplyValues(light);
+                break;
+            }
             case ItemType.changefootsteps:
                 {
                     _playerController.ChangeFootsteps(_stepsAudioSource);
                     //PlayerController.AudioSource =changefootsteps;
                     break;
                 }
+            case ItemType.LightDown://霧の視界綺麗に
+            {
+                switch (_currentLightDistanceType)
+                {
+                    case LightDistanceType.Normal:
+                        _currentLightDistanceType = LightDistanceType.Minimum;
+                        break;
+                    case LightDistanceType.Maximum:
+                        _currentLightDistanceType = LightDistanceType.Normal;
+                        break;
+                }
+                _lightDistances[_currentLightDistanceType].ApplyValues(light);
+                break;
+            }
+            case ItemType.OpenFrontLine:
+            {
+                _tileSelectManager.OpenFrontLine();
+                break;
+            }
+            case ItemType.RandomMovement:
+                _playerController.RandomMovement();
+                break;
         }
     }
     

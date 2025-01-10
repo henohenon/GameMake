@@ -101,6 +101,9 @@ public class ItemEffectsManager : MonoBehaviour
                 _tileSelectManager.OpenFrontLine();
                 break;
             }
+            case ItemType.RandomMovement:
+                _playerController.RandomMovement();
+                break;
         }
     }
     

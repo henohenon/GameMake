@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.91764706, g: 0.91764706, b: 0.91764706, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -691,10 +691,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 11400000, guid: 92fbdc26ce079064687cec1c5c77ad1e, type: 2}
+  flipAudios: []
   playerController: {fileID: 1856347866}
   gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
+  cameraInput: {fileID: 0}
+  moveInput: {fileID: 0}
+  cameraLock: {fileID: 0}
+  TimerManager: {fileID: 0}
 --- !u!4 &921744852
 Transform:
   m_ObjectHideFlags: 0
@@ -766,6 +771,7 @@ MonoBehaviour:
     type: 3}
   removeItemInput: {fileID: 8796532731297689166, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
+  soldirUIManager: {fileID: 0}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:

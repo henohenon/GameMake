@@ -83,6 +83,9 @@ public class ItemStackManager : MonoBehaviour
         itemStack[_selectingStackIndex] = ItemType.Empty;
     }
 
+#if UNITY_EDITOR
+    [Button, EnableIf("IsPlaying")]
+#endif
     private void UseItem()
     {
         var itemType = itemStack[_selectingStackIndex];

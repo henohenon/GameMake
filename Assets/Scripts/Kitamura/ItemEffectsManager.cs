@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Alchemy.Inspector;
@@ -5,6 +6,8 @@ using Scriptable;
 using UnityEngine;
 using LitMotion;
 using LitMotion.Extensions;
+using UnityEngine.Experimental.GlobalIllumination;
+using RenderSettings = UnityEngine.RenderSettings;
 
 // アイテムの種類。数字付けてるのは追加や削除があってもシリアル化された既存の値が変化しないように
 public enum ItemType
@@ -23,7 +26,15 @@ public class ItemEffectsManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private TileSelectManager _tileSelectManager;
     [SerializeField, AssetsOnly] private GameObject flagPrefab;
-    
+    [SerializeField] private Light light;
+
+    private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
+
+    private void Start()
+    {
+        _lightDistances[_currentLightDistanceType].ApplyValues(light);
+    }
+
     // アイテムの実行
     public void ExecItem(ItemType type)
     {
@@ -54,26 +65,69 @@ public class ItemEffectsManager : MonoBehaviour
             }
             case ItemType.ChangeFogEndDistanceUp://霧の視界綺麗に
                 {
+                    switch (_currentLightDistanceType)
+                    {
+                        case LightDistanceType.Normal:
+                            _currentLightDistanceType = LightDistanceType.Maximum;
+                            break;
+                        case LightDistanceType.Minimum:
+                            _currentLightDistanceType = LightDistanceType.Normal;
+                            break;
+                    }
 
-                    var value = RenderSettings.fogEndDistance;
-                    //RenderSettings.fogEndDistance = value;
-                    /*
-                    LMotion.Create(0f, 8f, 2f) // 0fから10fまで2秒間でアニメーション
-                    .WithEase(Ease.OutQuad)
-                        .Bind(x  => value = x); // 任意の変数やフィールド、プロパティにバインド可能  
-                    */
-                    //RenderSettings.fogEndDistance = 8f;
-
-                    LMotion.Create(0f, 8f, 2f) // 0fから10fまで2秒間でアニメーション
-                        .Bind(x => RenderSettings.fogEndDistance = x); // 任意の変数やフィールド、プロパティにバインド可能
-
+                    _lightDistances[_currentLightDistanceType].ApplyValues(light);
                     break;
                 }
             case ItemType.ChangeFogEndDistanceDown://霧の視界綺麗に
                 {
-                    RenderSettings.fogEndDistance = 1f;
+                    switch (_currentLightDistanceType)
+                    {
+                        case LightDistanceType.Normal:
+                            _currentLightDistanceType = LightDistanceType.Minimum;
+                            break;
+                        case LightDistanceType.Maximum:
+                            _currentLightDistanceType = LightDistanceType.Normal;
+                            break;
+                    }
+
+                    _lightDistances[_currentLightDistanceType].ApplyValues(light);
                     break;
                 }
         }
+    }
+    
+    private readonly Dictionary<LightDistanceType, LightDistanceValues> _lightDistances = new ()
+    {
+        {LightDistanceType.Normal, new LightDistanceValues(0.3f, 0.2f, 7.5f)},
+        {LightDistanceType.Minimum, new LightDistanceValues(0.1f, 0.075f, 2f)},
+        {LightDistanceType.Maximum, new LightDistanceValues(0.45f, 0.3f, 10f)},
+    };
+    
+    private class LightDistanceValues
+    {
+        public float ambientIntensity;
+        public float reflectionIntensity;
+        public float lightRange;
+
+        public LightDistanceValues(float ambientIntensity, float reflectionIntensity, float lightRange)
+        {
+            this.ambientIntensity = ambientIntensity;
+            this.reflectionIntensity = reflectionIntensity;
+            this.lightRange = lightRange;
+        }
+
+        public void ApplyValues(Light light)
+        {
+            RenderSettings.ambientIntensity = ambientIntensity;
+            RenderSettings.reflectionIntensity = reflectionIntensity;
+            light.range = lightRange;
+        }
+    }
+    
+    private enum LightDistanceType
+    {
+        Normal = 0,
+        Minimum = 1,
+        Maximum = 2,
     }
 }

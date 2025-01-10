@@ -37,6 +37,17 @@ public class CmdController : MonoBehaviour
         CreateNewLine();
     }
 
+    /*
+.88b  d88. .d8888.         .o88b.  .d88b.  .88b  d88. .88b  d88.  .d8b.  d8b   db d8888b. d88888b d8888b.
+88'YbdP`88 88'  YP        d8P  Y8 .8P  Y8. 88'YbdP`88 88'YbdP`88 d8' `8b 888o  88 88  `8D 88'     88  `8D
+88  88  88 `8bo.          8P      88    88 88  88  88 88  88  88 88ooo88 88V8o 88 88   88 88ooooo 88oobY'
+88  88  88   `Y8b. C8888D 8b      88    88 88  88  88 88  88  88 88~~~88 88 V8o88 88   88 88~~~~~ 88`8b
+88  88  88 db   8D        Y8b  d8 `8b  d8' 88  88  88 88  88  88 88   88 88  V888 88  .8D 88.     88 `88.
+YP  YP  YP `8888Y'         `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP YP   YP VP   V8P Y8888D' Y88888P 88   YD
+
+     */
+    
+    
     // 正規表現でecho "any text"形式を確認
     private const string MscPattern = @"^msc\s+""(.*?)""$";
     private const string EchoPattern = @"^echo\s+""(.*?)""$";

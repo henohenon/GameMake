@@ -132,6 +132,11 @@ public class TileSelectManager : MonoBehaviour
         }
     }
 
+    public void AddOpenPosition(Vector2 position)
+    {
+        _openPositions.Add(position);
+    }
+
     private void OnDisable()
     {
         openTile.action.Disable();

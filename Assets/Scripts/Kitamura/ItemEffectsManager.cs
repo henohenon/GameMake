@@ -35,6 +35,16 @@ public class ItemEffectsManager : MonoBehaviour
 
     private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
 
+    private static readonly Vector2[] OpenPositions = new Vector2[]
+    {
+        new Vector2(1, 1),
+        new Vector2(-1, 1),
+        new Vector2(1, 0),
+        new Vector2(-1, 0),
+        new Vector2(1, -1),
+        new Vector2(-1, -1),
+    };
+
     private void Start()
     {
         _lightDistances[_currentLightDistanceType].ApplyValues(light);
@@ -42,6 +52,8 @@ public class ItemEffectsManager : MonoBehaviour
 
     }
 
+    private int _positionIndex = 0;
+    
     // アイテムの実行
     public void ExecItem(ItemType type)
     {
@@ -112,6 +124,13 @@ public class ItemEffectsManager : MonoBehaviour
             }
             case ItemType.RandomMovement:
                 _playerController.RandomMovement();
+                break;
+            case ItemType.AddOpenPosition:
+                if (OpenPositions.Length > _positionIndex)
+                {
+                    _tileSelectManager.AddOpenPosition(OpenPositions[_positionIndex]);
+                    _positionIndex++;
+                }
                 break;
         }
     }

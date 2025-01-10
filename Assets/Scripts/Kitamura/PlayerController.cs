@@ -1,8 +1,13 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using LitMotion;
+using LitMotion.Extensions;
 using R3;
 using RandomExtensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Camera))]
@@ -23,6 +28,11 @@ public class PlayerController : MonoBehaviour//へのへのさん
     [SerializeField]
     private TilesManager tilesManager;
     [SerializeField] private TileSelectManager tileSelectManager;
+    [SerializeField] private Volume volume;
+    
+    private DepthOfField _dof;
+    private LensDistortion _distortion;
+    private Vignette _vignette;
     
     private Rigidbody _rb;
     private Camera _camera;
@@ -41,6 +51,10 @@ public class PlayerController : MonoBehaviour//へのへのさん
         
         _rb = GetComponent<Rigidbody>();
         _rb.position = new Vector3(0, 1f, 0);
+
+        volume.profile.TryGet(out _dof);
+        volume.profile.TryGet(out _distortion);
+        volume.profile.TryGet(out _vignette);
     
         // 各種入力の登録
         moveInput.action.performed += MoveInputCallback;
@@ -94,7 +108,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     }
 
     private bool _isDeadPose = false;
-    public void DeadPose()
+    public async void DeadPose()
     {
         // 各種アクションの無効化
         moveInput.action.Disable();
@@ -115,6 +129,29 @@ public class PlayerController : MonoBehaviour//へのへのさん
         _rb.AddForce(_hitDirection * 1f, ForceMode.Impulse);
         Vector3 torqueAxis = Vector3.Cross(_hitDirection, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 1f, ForceMode.Impulse);
+        
+        var animTime = 7f;
+        
+        // 周り黒
+        LMotion.Create(_vignette.smoothness.value, 1, animTime).WithEase(Ease.OutExpo).Bind(_vignette.smoothness, (x, target) =>
+        {
+            target.value = x;
+        });
+        // ぼかす
+        LMotion.Create(_dof.focusDistance.value, 300, animTime).WithEase(Ease.OutExpo).Bind(_dof.focusDistance, (x, target) =>
+        {
+            target.value = x;
+        });
+        LMotion.Create(_dof.focalLength.value, 75, animTime).WithEase(Ease.OutExpo).Bind(_dof.focalLength, (x, target) =>
+        {
+            target.value = x;
+        });
+        
+        // 魚眼
+        LMotion.Create(_distortion.intensity.value, 0.5f, animTime).WithEase(Ease.OutExpo).Bind(_distortion.intensity, (x, target) =>
+        {
+            target.value = x;
+        });
     }
 
     public void ClearPose()

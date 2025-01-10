@@ -16,9 +16,12 @@ public enum ItemType
     Flag = 0,
     SpeedUp = 1,
     SpeedDown = 2,
-    ChangeFogEndDistanceUp = 3,
-    ChangeFogEndDistanceDown = 4,
-
+    LightUp = 3,
+    LightDown = 4,
+    OpenFrontLine = 5,
+    RandomMovement = 6,
+    AddOpenPosition = 7,
+    ViewAroundBombNumb = 8,
 }
 
 public class ItemEffectsManager : MonoBehaviour
@@ -63,7 +66,7 @@ public class ItemEffectsManager : MonoBehaviour
                 _playerController.AddMoveSpeedNumb(-2f);
                 break;
             }
-            case ItemType.ChangeFogEndDistanceUp://霧の視界綺麗に
+            case ItemType.LightUp://霧の視界綺麗に
                 {
                     switch (_currentLightDistanceType)
                     {
@@ -78,7 +81,7 @@ public class ItemEffectsManager : MonoBehaviour
                     _lightDistances[_currentLightDistanceType].ApplyValues(light);
                     break;
                 }
-            case ItemType.ChangeFogEndDistanceDown://霧の視界綺麗に
+            case ItemType.LightDown://霧の視界綺麗に
                 {
                     switch (_currentLightDistanceType)
                     {

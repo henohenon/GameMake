@@ -128,18 +128,18 @@ public class PlayerController : MonoBehaviour//へのへのさん
         Vector3 torqueAxis = Vector3.Cross(_hitDirection, Vector3.up); // 適当にgptに吐かせた。なにやってるのかわかってない
         _rb.AddTorque(torqueAxis * 300f, ForceMode.Impulse);
         
-        var animTime = 7f;
+        var animTime = 10f;
         
         // カメラ揺れ
-        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).BindToLocalPositionX(camera.transform);
-        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).BindToLocalPositionY(camera.transform);
+        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).WithEase(Ease.OutExpo).BindToLocalPositionX(camera.transform);
+        LMotion.Shake.Create(0, 1.5f, 1.3f).WithFrequency(3).WithEase(Ease.OutExpo).BindToLocalPositionY(camera.transform);
         
         // 周り黒
         LMotion.Create(_vignette.smoothness.value, 1f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.smoothness, (x, target) =>
         {
             target.value = x;
         });
-        LMotion.Create(_vignette.intensity.value, 0.7f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.intensity, (x, target) =>
+        LMotion.Create(_vignette.intensity.value, 0.4f, animTime*2).WithEase(Ease.OutExpo).Bind(_vignette.intensity, (x, target) =>
         {
             target.value = x;
         });

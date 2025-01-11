@@ -15,7 +15,7 @@ public class TileController : MonoBehaviour
 
     private TileState _tileState;
     private GameObject _tileObject;
-    private GameObject _flagObject;
+    private FlagController _flagObject;
     
     // タイルが裏返されたときのイベント
     private Subject<int> _onFlipped = new ();
@@ -63,7 +63,7 @@ public class TileController : MonoBehaviour
         return true;
     }
 
-    public void ToggleFlag(GameObject prefab)
+    public void ToggleFlag(FlagController prefab)
     {
         // もし裏返していたら何もしない
         if(_tileState == TileState.Open) return;
@@ -71,7 +71,8 @@ public class TileController : MonoBehaviour
         // もし旗オブジェクトがあれば消す
         if (_flagObject)
         {
-            Destroy(_flagObject);
+            _flagObject.Remove();
+            _flagObject = null;
         }
         if (_tileState == TileState.Flag)
         {

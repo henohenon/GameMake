@@ -40,7 +40,7 @@ public class ItemEffectsManager : MonoBehaviour
     //public TileSelectManager tileSelectManager;
     public AudioSource _audioSource;//アイテム使用時の音
 
-    private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
+    // private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
 
     private static readonly Vector2[] OpenPositions = new Vector2[]
     {
@@ -54,7 +54,7 @@ public class ItemEffectsManager : MonoBehaviour
 
     private void Start()
     {
-        _lightDistances[_currentLightDistanceType].ApplyValues(light);
+        // _lightDistances[_currentLightDistanceType].ApplyValues(light);
         //_stepsAudioSource = GetComponent<AudioSource>();
 
     }
@@ -101,6 +101,7 @@ public class ItemEffectsManager : MonoBehaviour
                 _playerController.AddMoveSpeedNumb(-1f);
                 break;
             }
+            /*
             case ItemType.LightUp://霧の視界綺麗に
             {
                 switch (_currentLightDistanceType)
@@ -115,25 +116,11 @@ public class ItemEffectsManager : MonoBehaviour
 
                 _lightDistances[_currentLightDistanceType].ApplyValues(light);
                 break;
-            }
+            }*/
             case ItemType.changefootsteps:
-                {
-                    _playerController.ChangeFootsteps(_changestepsAudioClip);
-                    //PlayerController.AudioSource =changefootsteps;
-                    break;
-                }
-            case ItemType.LightDown://霧の視界綺麗に
             {
-                switch (_currentLightDistanceType)
-                {
-                    case LightDistanceType.Normal:
-                        _currentLightDistanceType = LightDistanceType.Minimum;
-                        break;
-                    case LightDistanceType.Maximum:
-                        _currentLightDistanceType = LightDistanceType.Normal;
-                        break;
-                }
-                _lightDistances[_currentLightDistanceType].ApplyValues(light);
+                _playerController.ChangeFootsteps(_changestepsAudioClip);
+                //PlayerController.AudioSource =changefootsteps;
                 break;
             }
             case ItemType.OpenFrontLine:
@@ -157,6 +144,7 @@ public class ItemEffectsManager : MonoBehaviour
         }
     }
     
+    /*
     private readonly Dictionary<LightDistanceType, LightDistanceValues> _lightDistances = new ()
     {
         {LightDistanceType.Normal, new LightDistanceValues(0.3f, 0.2f, 7.5f)},
@@ -190,5 +178,5 @@ public class ItemEffectsManager : MonoBehaviour
         Normal = 0,
         Minimum = 1,
         Maximum = 2,
-    }
+    }*/
 }

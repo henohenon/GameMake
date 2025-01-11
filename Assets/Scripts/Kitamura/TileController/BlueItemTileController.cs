@@ -9,12 +9,12 @@ public class BlueItemTileController : TileController
     private GameObject blueObject;
     [SerializeField] private TextMesh itemText;
 
-    private string _itemIcon;
+    private Sprite _itemIcon;
 
-    public void SetItemIcon(string itemIcon)
+    public void SetItemIcon(Sprite itemIcon)
     {
         _itemIcon = itemIcon;
-        itemText.text = _itemIcon;
+        // itemText.text = _itemIcon;
     }
 
     public override bool Open()

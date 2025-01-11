@@ -20,14 +20,34 @@ MonoBehaviour:
     - rate: 1
       itemType: 2
       description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+    - rate: 1
+      itemType: 3
+      description: "\u5149\u91CF\u30A2\u30C3\u30D7\uFF01"
+    - rate: 1
+      itemType: 4
+      description: "\u5149\u91CF\u30C0\u30A6\u30F3\uFF01"
+    - rate: 1
+      itemType: 2
+      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+    - rate: 1
+      itemType: 2
+      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+    - rate: 1
+      itemType: 2
+      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
     itemIcons:
-    - A
-    - a
-    - B
-    - b
-    - C
-    - c
-    - D
+    - {fileID: 21300000, guid: 728ae7600d7e6324d86d1a0741fde95d, type: 3}
+    - {fileID: 21300000, guid: 2be7ef67b01c5ea4f9aa2bad09647f5e, type: 3}
+    - {fileID: 21300000, guid: 762c4a91f48d42c418915f3b657c2fd5, type: 3}
+    - {fileID: 21300000, guid: 217fbd1aa6a541049902d8e2698d1247, type: 3}
+    - {fileID: 21300000, guid: c6a40815f735c4d44968dde8f371128b, type: 3}
+    - {fileID: 21300000, guid: 71623dee29f9aa344b5520197774322a, type: 3}
+    - {fileID: 21300000, guid: 04f542ed3e29c6a45b5e618125bce515, type: 3}
+    - {fileID: 21300000, guid: 3de67d32261b6834eb83720abf8e8611, type: 3}
+    - {fileID: 21300000, guid: 6ed3d3928a6f04747a6e2e150011dfff, type: 3}
+    - {fileID: 21300000, guid: 47543f35a48d61f44b5a789d9c24573b, type: 3}
+    - {fileID: 21300000, guid: f1e9c91863979f94396e92c7cf292b5a, type: 3}
+    - {fileID: 21300000, guid: 5c4de0b8e7735104b93896a35be7077c, type: 3}
     maxItemCount: 2
     minItemCount: 2
   yellowItemRate:
@@ -39,16 +59,16 @@ MonoBehaviour:
       itemType: 2
       description: "\u901F\u5EA6\u5272\u3068\u30C0\u30A6\u30F3"
     numbIcons:
-    - E
-    - e
-    - F
-    - f
-    - G
-    - g
-    - H
-    - h
-    - I
-    - i
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     itemCount: 2
     maxCalcNumb: 3
   yellowPuzzleIcons:

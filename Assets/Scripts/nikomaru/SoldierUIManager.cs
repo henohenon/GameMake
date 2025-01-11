@@ -14,6 +14,9 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     private VisualElement _clearScreen;
     private VisualElement _gameOverScreen;
     private VisualElement _logBox;
+    private VisualElement _ItemBox_0;
+    private VisualElement _ItemBox_1;
+    private VisualElement _ItemBox_2;
     private Label _idLabel;
     private Label _Timer;
     private Label _clearText;
@@ -30,8 +33,12 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _idLabel = root.Q<Label>("ShareIDText");
         _Timer = root.Q<Label>("TimerText");
         _clearText = root.Q<Label>("Text_ClearTime");
+        _ItemBox_0 = root.Q<VisualElement>("_ItemBox_0");
+        _ItemBox_1 = root.Q<VisualElement>("_ItemBox_1");
+        _ItemBox_2 = root.Q<VisualElement>("_ItemBox_2");
 
-        //Text_Log01
+        //FlagのUI追加
+        //_ItemBox_0.style.backgroundImage = new StyleBackground(Resources.Load<Texture2D>());
 
         //クリア
         root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
@@ -111,6 +118,25 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     }
 
 
+    public void SetItemIcon(ItemType type, int num, string iconName)
+    {
+
+        switch (type)
+        {
+            case ItemType.SpeedUp:
+
+                break;
+
+            case ItemType.SpeedDown:
+                break;
+
+        }
+    }
+
+    public void SelectItemBox(int num)
+    {
+
+    }
 
 }
 

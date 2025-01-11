@@ -13,6 +13,9 @@ public class FlagController : MonoBehaviour
 
     private void Start()
     {
+        var startPos = transform.position;
+        startPos.y += 1;
+        LMotion.Create(startPos, transform.localPosition, 0.5f).WithEase(Ease.OutExpo).BindToLocalPosition(transform);
         _audioSource = GetComponent<AudioSource>();
         
         _audioSource.Play();

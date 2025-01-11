@@ -24,17 +24,20 @@ MonoBehaviour:
       itemType: 3
       description: "\u5149\u91CF\u30A2\u30C3\u30D7\uFF01"
     - rate: 1
-      itemType: 4
-      description: "\u5149\u91CF\u30C0\u30A6\u30F3\uFF01"
+      itemType: 5
+      description: "\u524D\u65B9\u306E\u30BF\u30A4\u30EB\u3092\u3059\u3079\u3066\u958B\u3051\u308B"
     - rate: 1
-      itemType: 2
-      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+      itemType: 6
+      description: "\u4E00\u6642\u7684\u306B\u932F\u4E71\u72B6\u614B\u306B\u9665\u308B"
     - rate: 1
-      itemType: 2
-      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+      itemType: 7
+      description: "\u958B\u304F\u5834\u6240\u3092\u8FFD\u52A0"
     - rate: 1
-      itemType: 2
-      description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
+      itemType: 8
+      description: "\u5468\u56F2\u306E\u7206\u5F3E\u306E\u6570\u304C\u898B\u3048\u308B\u3088\u3046\u306B\u306A\u308B"
+    - rate: 1
+      itemType: 9
+      description: "\u8DB3\u97F3\u304C\u4E0B\u99C4\u306B\u306A\u308B"
     itemIcons:
     - {fileID: 21300000, guid: 728ae7600d7e6324d86d1a0741fde95d, type: 3}
     - {fileID: 21300000, guid: 2be7ef67b01c5ea4f9aa2bad09647f5e, type: 3}
@@ -48,7 +51,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 47543f35a48d61f44b5a789d9c24573b, type: 3}
     - {fileID: 21300000, guid: f1e9c91863979f94396e92c7cf292b5a, type: 3}
     - {fileID: 21300000, guid: 5c4de0b8e7735104b93896a35be7077c, type: 3}
-    maxItemCount: 2
+    maxItemCount: 5
     minItemCount: 2
   yellowItemRate:
     itemRateInfos:

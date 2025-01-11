@@ -51,6 +51,7 @@ public class ItemStackManager : MonoBehaviour
     {
         Debug.Log("Select item: "+numb);
         _selectingStackIndex = numb;
+        soldirUIManager.SetSelect(numb);
     }
 
     public void AddItem(ItemType addType, Sprite addIcon)

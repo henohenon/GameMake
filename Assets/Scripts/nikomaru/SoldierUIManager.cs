@@ -120,30 +120,15 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
 
     public void SetItemIcon(ItemType type, int num, Sprite Icon)
     {
-        //new StyleBackground(Icon);
-        if (Icon == null)
-        {
-            AddLog("Icon is null!");
-        } else
-        {
-            AddLog("Icon isn't null!!");
-        }
-        if (_ItemBox_1 == null || _ItemBox_2 == null)
-        {
-            AddLog("ItemBox is not initialized properly!");
-            return;
-        }
 
         switch (num)
         {
             case 1:
                 _ItemBox_1.style.backgroundImage = new StyleBackground(Icon);
-                AddLog("add Icon in Box_1");
                 break;
 
             case 2:
                 _ItemBox_2.style.backgroundImage = new StyleBackground(Icon);
-                AddLog("add Icon in Box_2");
                 break;
 
             default:
@@ -158,12 +143,10 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         {
             case 1:
                 _ItemBox_1.style.backgroundImage = new StyleBackground();
-                AddLog("Remove Icon in Box_1");
                 break;
 
             case 2:
                 _ItemBox_2.style.backgroundImage = new StyleBackground();
-                AddLog("Remove Icon in Box_2");
                 break;
 
             default:
@@ -171,6 +154,33 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
                 break;
         }
     }
+
+    public void SetSelect(int num)
+    {
+        _ItemBox_0.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.41f));
+        _ItemBox_1.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.41f));
+        _ItemBox_2.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.41f));
+        
+        switch (num)
+        {
+            case 0:
+                _ItemBox_0.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.9f));
+                break;
+            case 1:
+                _ItemBox_1.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.9f));
+                break;
+
+            case 2:
+                _ItemBox_2.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.9f));
+                break;
+
+            default:
+                Debug.Log("SetBackground failed.");
+                break;
+        }
+        
+    }
+
 
 }
 

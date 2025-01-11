@@ -9,9 +9,15 @@
             <ui:Label tabindex="-1" text="XX:XX:XX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimerText" style="color: rgb(255, 255, 255); font-size: 40px; -unity-text-align: upper-left; width: 200px;" />
             <ui:Label tabindex="-1" text="XXXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShareIDText" style="width: 150px; color: rgb(255, 255, 255); font-size: 50px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="ItemBox0" class="ItemBox" style="flex-grow: 1; height: 130px;" />
-        <ui:VisualElement name="ItemBox1" class="ItemBox" style="flex-grow: 1; height: 130px;" />
-        <ui:VisualElement name="ItemBox2" class="ItemBox" style="flex-grow: 1; height: 130px;" />
+        <ui:VisualElement name="ItemBox0" class="ItemBox" style="flex-grow: 1; height: 130px;">
+            <ui:Label tabindex="-1" text="F" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Flag" style="font-size: 50px; color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: center; justify-content: center; top: 30px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ItemBox1" class="ItemBox" style="flex-grow: 1; height: 130px;">
+            <ui:Label tabindex="-1" text="2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Flag" style="font-size: 30px; color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: flex-end; justify-content: flex-start; top: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ItemBox2" class="ItemBox" style="flex-grow: 1; height: 130px;">
+            <ui:Label tabindex="-1" text="3" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Flag" style="font-size: 30px; color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; align-self: flex-end;" />
+        </ui:VisualElement>
         <ui:VisualElement name="LogBox" tabindex="1" style="width: 312px; background-color: rgba(26, 143, 46, 0.04); color: rgb(255, 255, 255); height: 200px;" />
     </ui:VisualElement>
     <ui:Instance template="Clear" name="Clear" class="hidden" style="position: absolute; width: 941px; height: 546px;" />

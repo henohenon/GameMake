@@ -65,11 +65,11 @@ public class ItemEffectsManager : MonoBehaviour
     {
         if (type == ItemType.Empty)
         {
-            _audioSource.PlayOneShot(noneitem); // Flag用の音
+            _audioSource.PlayOneShot(noneitem); // アイテムがないときの使用時
         }
-        else
+        else　if (type != ItemType.Flag)
         {
-            _audioSource.PlayOneShot(useitem);//アイテム使用時の音
+            _audioSource.PlayOneShot(useitem);//Flag以外のアイテム使用時音
         }
         // 種類ごとに処理を設定。
         // ここで制御できるようにしてあげることで、一括で速度アップの値の変更などができる

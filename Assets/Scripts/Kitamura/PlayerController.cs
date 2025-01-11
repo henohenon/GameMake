@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour//へのへのさん
         if (context.started) return;
         
         _moveInputValue = context.ReadValue<Vector2>();
-        Debug.Log(_moveInputValue);
         if (_moveInputValue == Vector2.zero)
         {
             _stepsAudioSource.Pause();
@@ -237,12 +236,15 @@ public class PlayerController : MonoBehaviour//へのへのさん
          moveInput.action.Disable();
          cameraInput.action.Disable();
          
-         _moveInputValue = new Vector2(RandomEx.Shared.NextFloat(-3, 3), RandomEx.Shared.NextFloat(-3, 3));
-         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(-1, 1), 0);
+         _stepsAudioSource.UnPause();
+         
+         _moveInputValue = new Vector2(RandomEx.Shared.NextFloat(-10, 10), RandomEx.Shared.NextFloat(-10, 10));
+         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(-5, 5), 0);
 
          await UniTask.WaitForSeconds(1f);
          _moveInputValue = Vector2.zero;
          _cameraInputValue = Vector2.zero;
+         _stepsAudioSource.Pause();
          
          moveInput.action.Enable();
          cameraInput.action.Enable();
@@ -311,9 +313,18 @@ public class PlayerController : MonoBehaviour//へのへのさん
     }
     public void ChangeFootsteps(AudioClip newFootstepClip)
     {
+        _stepsAudioSource.Stop();
         // 足音クリップを変更
         _stepsAudioSource.clip = newFootstepClip;
         _stepsAudioSource.Play();
+        if (_moveInputValue == Vector2.zero)
+        {
+            _stepsAudioSource.Pause();
+        }
+        else
+        {
+            _stepsAudioSource.UnPause();
+        }
     }
 }
 

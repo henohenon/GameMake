@@ -30,7 +30,7 @@ public class ItemEffectsManager : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private TileSelectManager _tileSelectManager;
     [SerializeField] private TilesManager tilesManager;
-    [SerializeField, AssetsOnly] private GameObject flagPrefab;
+    [SerializeField, AssetsOnly] private FlagController flagPrefab;
     [SerializeField] private Light light;
     [SerializeField] public AudioClip _changestepsAudioClip;
 

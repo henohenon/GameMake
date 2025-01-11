@@ -833,7 +833,7 @@ MonoBehaviour:
   _playerController: {fileID: 1856347866}
   _tileSelectManager: {fileID: 921744854}
   tilesManager: {fileID: 921744851}
-  flagPrefab: {fileID: 7664609544684894703, guid: c18a2d16cb33bd74bba969069b3b69e9,
+  flagPrefab: {fileID: 1387575590399194522, guid: c18a2d16cb33bd74bba969069b3b69e9,
     type: 3}
   light: {fileID: 1300582182}
   _changestepsAudioClip: {fileID: 8300000, guid: 167d26b0027ba7442b9b77a057fab119,
@@ -862,7 +862,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 33a675e8561bbc446b9f339199501053, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1

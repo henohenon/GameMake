@@ -5,6 +5,7 @@ using R3;
 using RandomExtensions;
 using Scriptable;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,7 @@ public class TilesManager : MonoBehaviour
 
     [SerializeField] private ItemStackManager _itemStackManager;
     [SerializeField] private SoldierUIManager Screen;
+    [SerializeField] private SoldierUIManager Log;
     [SerializeField]
     private InputActionReference cameraInput;//マウスの入力を取得
     [SerializeField]
@@ -93,11 +95,12 @@ public class TilesManager : MonoBehaviour
                     var prefab = tilePrefabs.blueItemTilePrefab;
                     var blueInstance = Instantiate(prefab);
                     var itemInfo = _itemInfo.GetRandomBlueItem();
+                    Debug.Log(itemInfo.itemIcon);
                     blueInstance.SetItemIcon(itemInfo.itemIcon);
                     // めくられたらアイテムを追加
                     blueInstance.OnFlipped.Subscribe(_ =>
                     {
-                        _itemStackManager.AddItem(itemInfo.itemType);
+                        _itemStackManager.AddItem(itemInfo.itemType, itemInfo.itemIcon);
                     });
                     instance = blueInstance;
                     break;
@@ -146,6 +149,7 @@ public class TilesManager : MonoBehaviour
         // タイルが爆弾出ないとき
         if (tileTile.TileType != TileType.Bomb)
         {
+            Log.AddLog("Safe");
             ComboTimer();
             _comboCount++;
             var soundCount = _comboCount < flipAudios.Length ? _comboCount : flipAudios.Length - 1;
@@ -155,7 +159,7 @@ public class TilesManager : MonoBehaviour
             
 
             // 周囲のタイルの状況を調べる
-            var bombSum = GetTileAroundTypeSum(tileId, TileType.Bomb);
+            var bombSum = GetTileAroundSumByType(tileId, TileType.Bomb);
             
             // 周囲がすべて安全な場合
             if (bombSum == 0)
@@ -187,6 +191,9 @@ public class TilesManager : MonoBehaviour
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
             }
+        } else
+        {
+            Log.AddLog("It's Bomb!!");
         }
         //CheckForOnlyBombs();
     }
@@ -217,7 +224,7 @@ public class TilesManager : MonoBehaviour
     }
     
     // タイルタイルの周囲の爆弾の数を取得
-    private int GetTileAroundTypeSum(int tileId, TileType type)
+    private int GetTileAroundSumByType(int tileId, TileType type)
     {
         var sum = 0;
 
@@ -238,6 +245,18 @@ public class TilesManager : MonoBehaviour
         return sum;
     }
 
+    public List<TileController> GetTillAllByType(TileType type)
+    {
+        List<TileController> result = new ();
+
+        foreach (var tileController in TileControllers)
+        {
+            result.Add(tileController);
+        }
+
+        return result;
+    }
+    
     public TileType GetTileIdType(int tileId)
     {
         var infoIndex = MapInfo.Tiles[tileId];
@@ -251,5 +270,13 @@ public class TilesManager : MonoBehaviour
         var z = Mathf.FloorToInt(position.z + (float)MapInfo.MapLength.Height / 2);
             
         return new Vector2Int(x, z);
+    }
+
+    public void ViewBombNumbs()
+    {
+        foreach (var tileController in TileControllers)
+        {
+            tileController.FadeInNumbText();
+        }
     }
 }

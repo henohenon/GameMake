@@ -1,6 +1,7 @@
 using System;
 using Alchemy.Inspector;
 using Scriptable;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private InputActionReference removeItemInput;
     [SerializeField] private SoldierUIManager soldirUIManager;
 
+
 #if UNITY_EDITOR
     // 実行中のみ編集を許可
     private static bool IsPlaying => EditorApplication.isPlaying;
@@ -24,7 +26,7 @@ public class ItemStackManager : MonoBehaviour
         ItemType.Empty,
         ItemType.Empty
     };
-    private int _selectingStackIndex = 0;
+    public int _selectingStackIndex = 0;
 
     private void Start()
     {
@@ -38,10 +40,10 @@ public class ItemStackManager : MonoBehaviour
         }
         
         // アイテム使用の入力
-        useItemInput.action.started += _ => UseItem();
+        useItemInput.action.started += _ => UseItem(_selectingStackIndex);
         useItemInput.action.Enable();
         // アイテム捨てるの入力
-        removeItemInput.action.started += _ => RemoveItem();
+        removeItemInput.action.started += _ => RemoveItem(_selectingStackIndex);
         removeItemInput.action.Enable();
     }
 
@@ -49,9 +51,10 @@ public class ItemStackManager : MonoBehaviour
     {
         Debug.Log("Select item: "+numb);
         _selectingStackIndex = numb;
+        soldirUIManager.SetSelect(numb);
     }
 
-    public void AddItem(ItemType addType)
+    public void AddItem(ItemType addType, Sprite addIcon)
     {
         // 順番に見て言って、空いていたらそこに追加
         for (var i = 0; i < itemStack.Length; i++)
@@ -59,6 +62,7 @@ public class ItemStackManager : MonoBehaviour
             if (itemStack[i] == ItemType.Empty)
             {
                 itemStack[i] = addType;
+                soldirUIManager.SetItemIcon(addType, i, addIcon);
 
                 Debug.Log("Add New Item: "+ addType + " at " + i);
                 //SoldierUIManagerにアイテムアイコンの表示依頼
@@ -70,7 +74,7 @@ public class ItemStackManager : MonoBehaviour
         Debug.Log("Item stack is max");
     }
 
-    private void RemoveItem()
+    private void RemoveItem(int num)
     {
         var itemType = itemStack[_selectingStackIndex];
         // 旗なら捨てない
@@ -79,11 +83,15 @@ public class ItemStackManager : MonoBehaviour
             Debug.Log("Can't remove flag item");
             return;
         }
+        soldirUIManager.RemoveItemIcon(_selectingStackIndex);
         // 空にする
         itemStack[_selectingStackIndex] = ItemType.Empty;
     }
 
-    private void UseItem()
+#if UNITY_EDITOR
+    [Button, EnableIf("IsPlaying")]
+#endif
+    private void UseItem(int num)
     {
         var itemType = itemStack[_selectingStackIndex];
         // アイテムを実行
@@ -93,6 +101,7 @@ public class ItemStackManager : MonoBehaviour
         {
             itemStack[_selectingStackIndex] = ItemType.Empty;
         }
+        soldirUIManager.RemoveItemIcon(_selectingStackIndex);
     }
 
     private void OnDisable()

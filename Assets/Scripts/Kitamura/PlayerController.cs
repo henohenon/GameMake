@@ -4,6 +4,7 @@ using LitMotion;
 using LitMotion.Extensions;
 using R3;
 using RandomExtensions;
+using RandomExtensions.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private Vignette _vignette;
     
     private Rigidbody _rb;
-    private AudioSource _stepsAudioSource;
+    private AudioSource _stepsAudioSource; //SE足音
     private float _nowMoveSpeed;
     private Vector2 _moveInputValue;
     private Vector2 _cameraInputValue;
@@ -86,7 +87,6 @@ public class PlayerController : MonoBehaviour//へのへのさん
         if (context.started) return;
         
         _moveInputValue = context.ReadValue<Vector2>();
-        Debug.Log(_moveInputValue);
         if (_moveInputValue == Vector2.zero)
         {
             _stepsAudioSource.Pause();
@@ -233,6 +233,44 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // カメラ縦軸
         camera.transform.Rotate(new Vector3(-_cameraInputValue.y * cameraRotationSpeed, 0, 0));
     }
+    
+    public async UniTask RandomMovement()
+    {
+         moveInput.action.Disable();
+         cameraInput.action.Disable();
+
+         var basePitch = _stepsAudioSource.pitch;
+         _stepsAudioSource.pitch = 3;
+         _stepsAudioSource.UnPause();
+
+         _moveInputValue = Vector2.zero;
+         var randomAddPosition = RandomEx.Shared.NextVector2(Vector2.one * 3);
+         var nextPosition = new Vector3(_rb.position.x + randomAddPosition.x, _rb.position.y, _rb.position.z + randomAddPosition.y);
+         // TODO: 壁抜けできるのでできれば修正
+         LMotion.Create(_rb.position, nextPosition, 0.5f).Bind(_rb, (x, target) =>
+         {
+             _rb.position = x;
+         });
+         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(100, 400) * (RandomEx.Shared.NextBool()? 1: -1), 0);
+
+         await UniTask.WaitForSeconds(0.5f);
+         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(100, 400) * (RandomEx.Shared.NextBool()? 1: -1), 0);
+         randomAddPosition = RandomEx.Shared.NextVector2(Vector2.one * 3);
+         nextPosition = new Vector3(_rb.position.x + randomAddPosition.x, _rb.position.y, _rb.position.z + randomAddPosition.y);
+         LMotion.Create(_rb.position, nextPosition, 0.5f).Bind(_rb, (x, target) =>
+         {
+             _rb.position = x;
+         });
+         await UniTask.WaitForSeconds(0.5f);
+
+         _moveInputValue = Vector2.zero;
+         _cameraInputValue = Vector2.zero;
+         _stepsAudioSource.pitch = basePitch;
+         _stepsAudioSource.Pause();
+         
+         moveInput.action.Enable();
+         cameraInput.action.Enable();
+    }
 
     private readonly List<float> _addMoveSpeeds = new();
     public void AddMoveSpeedNumb(float speed)
@@ -263,7 +301,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
             _nowMoveSpeed = MinMoveSpeed;
         }
 
-        _stepsAudioSource.pitch = _nowMoveSpeed / defaultMoveSpeed;
+        _stepsAudioSource.pitch = 1 + ((_nowMoveSpeed / defaultMoveSpeed - 1) / 2);
     }
 
     private Vector3 _hitDirection = Vector3.zero;
@@ -294,6 +332,21 @@ public class PlayerController : MonoBehaviour//へのへのさん
         FpsLock,
         FpsNotLock,
         UIPose,
+    }
+    public void ChangeFootsteps(AudioClip newFootstepClip)
+    {
+        _stepsAudioSource.Stop();
+        // 足音クリップを変更
+        _stepsAudioSource.clip = newFootstepClip;
+        _stepsAudioSource.Play();
+        if (_moveInputValue == Vector2.zero)
+        {
+            _stepsAudioSource.Pause();
+        }
+        else
+        {
+            _stepsAudioSource.UnPause();
+        }
     }
 }
 

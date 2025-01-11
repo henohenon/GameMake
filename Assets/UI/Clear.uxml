@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Style/GameOver.uss?fileID=7433441132597879392&amp;guid=7fc92d3f42140914fbfdd2895db88409&amp;type=3#GameOver" />
     <Style src="project://database/Assets/UI%20Toolkit/Style/Clear.uss?fileID=7433441132597879392&amp;guid=c6530ea74b0ff73429154f72f218de68&amp;type=3#Clear" />
-    <ui:VisualElement style="flex-grow: 1; top: 90px;">
+    <ui:VisualElement style="flex-grow: 1; top: 140px;">
         <ui:Label tabindex="-1" text="C L E A R" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Clear" style="-unity-font-style: bold; font-size: 80px; -unity-text-align: upper-center; background-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255);" />
         <ui:Label tabindex="-1" text="Clear  Time  XX:XX:XX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_ClearTime" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 30px; top: 30px;" />
         <ui:Button text="Back to Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_ClearToMenu" class="ActionButton" style="top: 75px; color: rgb(255, 255, 255); width: 250px; left: 350px; font-size: 23px;" />

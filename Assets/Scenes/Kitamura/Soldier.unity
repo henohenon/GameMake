@@ -1069,7 +1069,7 @@ MonoBehaviour:
   _changestepsAudioClip: {fileID: 8300000, guid: 167d26b0027ba7442b9b77a057fab119,
     type: 3}
   noneitem: {fileID: 8300000, guid: 8fc33147ca77e374487c3a4dfb5c7e78, type: 3}
-  useitem: {fileID: 8300000, guid: adbe0bc47bc8d664a9d54449ded81616, type: 3}
+  useitem: {fileID: 8300000, guid: 40a1606293ee17e46907ebaafaa98933, type: 3}
   _audioSource: {fileID: 921744858}
 --- !u!114 &921744857
 MonoBehaviour:

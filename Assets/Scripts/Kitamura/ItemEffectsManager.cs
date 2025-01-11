@@ -82,7 +82,7 @@ public class ItemEffectsManager : MonoBehaviour
                 {
                     selectingTile.ToggleFlag(flagPrefab);
                 }
-                break;
+                    break;
             }
             case ItemType.SpeedUp:
             {

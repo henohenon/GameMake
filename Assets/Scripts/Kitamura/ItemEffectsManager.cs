@@ -25,7 +25,6 @@ public enum ItemType
     AddOpenPosition = 7,
     ViewBombNumb = 8,
     changefootsteps = 9,
-    RandomBombFlag = 10,
 }
 
 public class ItemEffectsManager : MonoBehaviour
@@ -68,7 +67,7 @@ public class ItemEffectsManager : MonoBehaviour
     {
         if (type == ItemType.Empty)
         {
-            _audioSource.PlayOneShot(noneitem); // アイテムがないときの使用時
+            _audioSource.PlayOneShot(noneitem , 0.2f); // アイテムがないときの使用時
         }
         else　if (type != ItemType.Flag)
         {
@@ -123,28 +122,6 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.ViewBombNumb:
                 tilesManager.ViewBombNumbs();
                 break;
-            case ItemType RandomBombFlag:
-                {
-                    var allTiles = FindObjectsOfType<TileController>();
-                    // Bombタイプのタイルに旗を立てる
-                    var bombTiles = allTiles.Where(tile => tile.TileType == TileType.Bomb).ToList();
-                    // Bombタイプのタイルが1つ以上ある場合、ランダムに1つ選択
-                    if (bombTiles.Count > 0)
-                    {
-                        var randomTile = bombTiles[UnityEngine.Random.Range(0, bombTiles.Count)];
-                        randomTile.ToggleFlag(flagPrefab);
-                    }
-                    /*
-                    foreach (var tile in allTiles)
-                    {
-                        if (tile.TileType == TileType.Bomb)
-                        {
-                            Random tile.ToggleFlag(flagPrefab);
-                        }
-                    }
-                */
-                    break;
-                }
         }
     }
 }

@@ -183,7 +183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b826b6eb961154e46b4c476102daae83, type: 2}
+  - {fileID: 2100000, guid: 9a3ec9be8b2794802a9d89b98e8df80b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -261,10 +261,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs: {fileID: 0}
+  flipAudios: []
   playerController: {fileID: 1856347866}
   gameManager: {fileID: 0}
   _itemStackManager: {fileID: 0}
   Screen: {fileID: 0}
+  Log: {fileID: 0}
+  cameraInput: {fileID: 0}
+  moveInput: {fileID: 0}
+  cameraLock: {fileID: 0}
+  TimerManager: {fileID: 0}
 --- !u!64 &58930929
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -649,7 +655,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b826b6eb961154e46b4c476102daae83, type: 2}
+  - {fileID: 2100000, guid: 9a3ec9be8b2794802a9d89b98e8df80b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -747,7 +753,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b826b6eb961154e46b4c476102daae83, type: 2}
+  - {fileID: 2100000, guid: 9a3ec9be8b2794802a9d89b98e8df80b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1679,7 +1685,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b826b6eb961154e46b4c476102daae83, type: 2}
+  - {fileID: 2100000, guid: 9a3ec9be8b2794802a9d89b98e8df80b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2033,7 +2039,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b826b6eb961154e46b4c476102daae83, type: 2}
+  - {fileID: 2100000, guid: 9a3ec9be8b2794802a9d89b98e8df80b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2714,7 +2720,10 @@ MonoBehaviour:
   moveInput: {fileID: 0}
   cameraLock: {fileID: 0}
   cameraRotationSpeed: 0.1
+  camera: {fileID: 0}
   tilesManager: {fileID: 0}
+  tileSelectManager: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!114 &1856347867
 MonoBehaviour:
   m_ObjectHideFlags: 0

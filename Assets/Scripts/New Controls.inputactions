@@ -379,6 +379,76 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Cmd",
+            "id": "fc5d96ba-41b7-4412-99fc-f2975db75e2a",
+            "actions": [
+                {
+                    "name": "Exec",
+                    "type": "Button",
+                    "id": "188ec411-7bdf-4720-b1fc-20b94ed98191",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Close",
+                    "type": "Button",
+                    "id": "5fb008c4-8863-44bf-849b-63b802576604",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0815d5a2-062e-44b7-af13-871a2c56261a",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exec",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "b9152f73-4ce1-4403-9e81-f0e093b88381",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "4ab5917e-b2aa-4ea2-84b7-2fd32c0768ee",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "89173528-d4b3-43fb-a3a2-7f365b5beb7b",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
         }
     ],
     "controlSchemes": []

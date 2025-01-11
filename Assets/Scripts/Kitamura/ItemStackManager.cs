@@ -12,9 +12,10 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private InputActionReference useItemInput;
     [SerializeField] private InputActionReference removeItemInput;
     [SerializeField] private SoldierUIManager soldirUIManager;
-    [SerializeField] public AudioClip useflagitem;//アイテム使用時の音
+    [SerializeField] public AudioClip noneitem;//アイテムがない使用時の音
+    [SerializeField] public AudioClip useflagitem;//フラグ使用時の音
     [SerializeField] public AudioClip useitem;//アイテム使用時の音
-    [SerializeField] public AudioClip noneitem;//アイテム使用時の音
+
 
 
     public AudioSource _audioSource;//アイテム使用時の音

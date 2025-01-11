@@ -102,7 +102,7 @@ public class TileSelectManager : MonoBehaviour
         }
     }
 
-    public void OpenFrontLine()
+    public void OpenFrontLine()//開くラインの色
     {
         var playerPosition = tilesManager.GetMapPosition(playerTransform.position);
         var playerFrontPosition = playerTransform.position + playerTransform.forward;

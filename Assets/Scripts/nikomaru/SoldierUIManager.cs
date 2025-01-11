@@ -33,9 +33,9 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _idLabel = root.Q<Label>("ShareIDText");
         _Timer = root.Q<Label>("TimerText");
         _clearText = root.Q<Label>("Text_ClearTime");
-        _ItemBox_0 = root.Q<VisualElement>("_ItemBox_0");
-        _ItemBox_1 = root.Q<VisualElement>("_ItemBox_1");
-        _ItemBox_2 = root.Q<VisualElement>("_ItemBox_2");
+        _ItemBox_0 = root.Q<VisualElement>("ItemBox0");
+        _ItemBox_1 = root.Q<VisualElement>("ItemBox1");
+        _ItemBox_2 = root.Q<VisualElement>("ItemBox2");
 
         //FlagのUI追加
         //_ItemBox_0.style.backgroundImage = new StyleBackground(Resources.Load<Texture2D>());
@@ -118,24 +118,58 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     }
 
 
-    public void SetItemIcon(ItemType type, int num, string iconName)
+    public void SetItemIcon(ItemType type, int num, Sprite Icon)
     {
-
-        switch (type)
+        //new StyleBackground(Icon);
+        if (Icon == null)
         {
-            case ItemType.SpeedUp:
+            AddLog("Icon is null!");
+        } else
+        {
+            AddLog("Icon isn't null!!");
+        }
+        if (_ItemBox_1 == null || _ItemBox_2 == null)
+        {
+            AddLog("ItemBox is not initialized properly!");
+            return;
+        }
 
+        switch (num)
+        {
+            case 1:
+                _ItemBox_1.style.backgroundImage = new StyleBackground(Icon);
+                AddLog("add Icon in Box_1");
                 break;
 
-            case ItemType.SpeedDown:
+            case 2:
+                _ItemBox_2.style.backgroundImage = new StyleBackground(Icon);
+                AddLog("add Icon in Box_2");
                 break;
 
+            default:
+                Debug.Log("SetIcon failed.");
+                break;
         }
     }
 
-    public void SelectItemBox(int num)
+    public void RemoveItemIcon(int num)
     {
+        switch (num)
+        {
+            case 1:
+                _ItemBox_1.style.backgroundImage = new StyleBackground();
+                AddLog("Remove Icon in Box_1");
+                break;
 
+            case 2:
+                _ItemBox_2.style.backgroundImage = new StyleBackground();
+                AddLog("Remove Icon in Box_2");
+                break;
+
+            default:
+                Debug.Log("SetIcon failed.");
+                break;
+        }
     }
 
 }

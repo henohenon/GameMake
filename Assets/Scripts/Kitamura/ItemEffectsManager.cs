@@ -68,7 +68,7 @@ public class ItemEffectsManager : MonoBehaviour
     {
         if (type == ItemType.Empty)
         {
-            _audioSource.PlayOneShot(noneitem); // アイテムがないときの使用時
+            _audioSource.PlayOneShot(noneitem , 0.5f); // アイテムがないときの使用時
         }
         else　if (type != ItemType.Flag)
         {
@@ -123,6 +123,7 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.ViewBombNumb:
                 tilesManager.ViewBombNumbs();
                 break;
+                
             case ItemType RandomBombFlag:
                 {
                     var allTiles = FindObjectsOfType<TileController>();

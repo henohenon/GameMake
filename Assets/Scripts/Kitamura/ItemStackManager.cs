@@ -12,7 +12,10 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private InputActionReference useItemInput;
     [SerializeField] private InputActionReference removeItemInput;
     [SerializeField] private SoldierUIManager soldirUIManager;
+    [SerializeField] public AudioClip useflagitem;//アイテム使用時の音
     [SerializeField] public AudioClip useitem;//アイテム使用時の音
+    [SerializeField] public AudioClip noneitem;//アイテム使用時の音
+
 
     public AudioSource _audioSource;//アイテム使用時の音
 
@@ -94,7 +97,22 @@ public class ItemStackManager : MonoBehaviour
         var itemType = itemStack[_selectingStackIndex];
         // アイテムを実行
         itemEffectsManager.ExecItem(itemType);
-        _audioSource.PlayOneShot(useitem);//アイテム使用時の音
+        //アイテム使用時の音(フラグを置くときのみ)
+
+        
+        if (itemType == ItemType.Flag)
+        {
+            _audioSource.PlayOneShot(useflagitem);//アイテム使用時の音
+        }
+        else if (itemType == ItemType.Empty)
+        {
+            _audioSource.PlayOneShot(noneitem); // Flag用の音
+        }
+        else
+        {
+            _audioSource.PlayOneShot(useitem);//アイテム使用時の音
+        }
+        
         // 旗以外なら空にする
         if (itemType != ItemType.Flag)
         {

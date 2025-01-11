@@ -167,35 +167,20 @@ public class CmdController : MonoBehaviour
         foreach (var blueResultItem in gameInfo.ItemInfo.BlueResultItems)
         {
             var itemRow = new VisualElement();
-            
+            itemRow.AddToClassList("itemRow");
             
             var itemIcon = new VisualElement();
-            var texture = SpriteToTexture(blueResultItem.itemIcon);
-            
-            itemIcon.style.backgroundImage = texture;
-            var itemInfo = new Label(blueResultItem.itemType.ToString());
+            itemIcon.style.backgroundImage = blueResultItem.itemIcon.texture;
+            itemIcon.AddToClassList("itemIcon");
+            var itemRateInfo = gameRateAsset.itemRateAsset.blueItemRate.GetItemRateInfo(blueResultItem.itemType);
+            Debug.Log(itemRateInfo.description);
+            var itemInfo = new Label(itemRateInfo.description);
+            itemInfo.AddToClassList("itemInfo");
             itemRow.Add(itemIcon);
             itemRow.Add(itemInfo);
             
             _root.Add(itemRow);
-
         }
-    }
-    
-    
-    private Texture2D SpriteToTexture(Sprite sprite)
-    {
-        // Spriteのテクスチャを取得し、切り出し領域を反映
-        Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
-        Color[] pixels = sprite.texture.GetPixels(
-            (int)sprite.rect.x,
-            (int)sprite.rect.y,
-            (int)sprite.rect.width,
-            (int)sprite.rect.height
-        );
-        texture.SetPixels(pixels);
-        texture.Apply();
-        return texture;
     }
     
     public void WriteMap(VisualElement mapContainer, MapRateAsset rate, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)

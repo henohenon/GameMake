@@ -14,6 +14,8 @@ namespace Scriptable
         public YellowPuzzleIcon[] yellowPuzzleIcons;
         public PurpleItemRate purpleItemRate;
         public PurplePuzzleIcon[] purplePuzzleIcons;
+        
+
     }
 
     [Serializable]
@@ -43,7 +45,6 @@ namespace Scriptable
 
         [Header("アイテムの数")] public int maxItemCount = 7;
         public int minItemCount = 5;
-        
     }
 
     [Serializable]

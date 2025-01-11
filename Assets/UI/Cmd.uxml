@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="CmdLine" src="project://database/Assets/UI/CmdLine.uxml?fileID=9197481963319205126&amp;guid=147d15ba132406b4c8fbb10921ae437a&amp;type=3#CmdLine" />
-    <Style src="project://database/Assets/UI/Cmd.uss?fileID=7433441132597879392&amp;guid=32ea40109663c6d498034d0f5ae68007&amp;type=3#Cmd" />
-    <ui:Instance template="CmdLine" name="CmdLine" />
-</ui:UXML>

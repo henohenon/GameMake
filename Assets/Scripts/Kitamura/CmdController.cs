@@ -1,30 +1,45 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Cysharp.Threading.Tasks;
+using RandomExtensions;
+using RandomExtensions.Linq;
+using Scriptable;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
 public class CmdController : MonoBehaviour
 {
+    [SerializeField] private GameRateAsset gameRateAsset;
+    [SerializeField] private VisualTreeAsset helperTreeView;
     [SerializeField] private InputActionReference execInput;
     [SerializeField] private InputActionReference anyInput;
     [SerializeField] private InputActionReference previousInput;
     [SerializeField] private InputActionReference nextInput;
+    [SerializeField] private InputActionReference closeInput;
     private TextField _currentTextField = null;
-    private UIDocument _uiDocument;
+    private VisualElement _root;
     
     // Start is called before the first frame update
     private void Start()
     {
         execInput.action.started += ctx => Exec();
         execInput.action.Enable();
+        closeInput.action.started += ctx => ReturnToTitle();
+        execInput.action.Enable();
         
-        _uiDocument = GetComponent<UIDocument>();
+        var uiDocument = GetComponent<UIDocument>();
+        var rootElement = uiDocument.rootVisualElement;
+
+        _root = rootElement.Q<VisualElement>("unity-content-container");
+        
+        _root.Add(helperTreeView.CloneTree());
         
         CreateNewLine();
     }
@@ -36,20 +51,9 @@ public class CmdController : MonoBehaviour
         
         CreateNewLine();
     }
-
-    /*
-.88b  d88. .d8888.         .o88b.  .d88b.  .88b  d88. .88b  d88.  .d8b.  d8b   db d8888b. d88888b d8888b.
-88'YbdP`88 88'  YP        d8P  Y8 .8P  Y8. 88'YbdP`88 88'YbdP`88 d8' `8b 888o  88 88  `8D 88'     88  `8D
-88  88  88 `8bo.          8P      88    88 88  88  88 88  88  88 88ooo88 88V8o 88 88   88 88ooooo 88oobY'
-88  88  88   `Y8b. C8888D 8b      88    88 88  88  88 88  88  88 88~~~88 88 V8o88 88   88 88~~~~~ 88`8b
-88  88  88 db   8D        Y8b  d8 `8b  d8' 88  88  88 88  88  88 88   88 88  V888 88  .8D 88.     88 `88.
-YP  YP  YP `8888Y'         `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP YP   YP VP   V8P Y8888D' Y88888P 88   YD
-
-     */
-    
     
     // 正規表現でecho "any text"形式を確認
-    private const string MscPattern = @"^msc\s+""(.*?)""$";
+    private const string MscPattern = @"^msc\s+(.+)$";
     private const string EchoPattern = @"^echo\s+""(.*?)""$";
     private const string CdPattern = @"^cd\s+(.+)$";
     private const string LsPattern = @"^ls(\s+.+)$";
@@ -63,12 +67,19 @@ YP  YP  YP `8888Y'         `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP YP   YP VP   V8
             var mscText = mscMatch.Groups[1].Value;
             if (uint.TryParse(mscText, out uint result))
             {
-                CreateLog(result.ToString());
+                RecreateView(result);
             }
             else
             {
                 CreateLog(mscText + " is not a valid number");
             }
+            
+            return;
+        }
+
+        if (command == "ctr+c")
+        {
+            ReturnToTitle();
         }
         
         CreateLog("command not found");
@@ -77,7 +88,7 @@ YP  YP  YP `8888Y'         `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP YP   YP VP   V8
     private void CreateLog(string text)
     {
         var logText = new Label(text);
-        _uiDocument.rootVisualElement.Add(logText);
+        _root.Add(logText);
     }
     
     private void CreateNewLine()
@@ -88,7 +99,7 @@ YP  YP  YP `8888Y'         `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP YP   YP VP   V8
         }
         
         var line = new TextField();
-        _uiDocument.rootVisualElement.Add(line);
+        _root.Add(line);
         _currentTextField = line;
         
         line.label = "multisweeper@commander:~/opt/msc $";
@@ -107,8 +118,188 @@ YP  YP  YP `8888Y'         `Y88P'  `Y88P'  YP  YP  YP YP  YP  YP YP   YP VP   V8
 
     }
 
+    private void ReturnToTitle(){
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    private const int mapLength = 9;
+    private async UniTask RecreateView(uint seed)
+    {
+        // データの生成
+        var gameInfo = new GameInfo(gameRateAsset, mapLength, seed);
+        var moreRandom = new Xoshiro256StarStarRandom(seed+1);
+        // 本物+偽物*2のマップ配列を作成
+        var maps = new []
+        {
+            gameInfo.MapInfo,
+            new (gameRateAsset.mapRateAsset.tileRateInfos, moreRandom, mapLength),
+            new (gameRateAsset.mapRateAsset.tileRateInfos, moreRandom, mapLength),
+        }.AsEnumerable();
+        // マップ配列シャッフル
+        maps = maps.Shuffle().ToArray();
+     
+        var generateRoot = new VisualElement();
+        _root.Add(generateRoot);
+        var loadingText = new Label("...loading");
+        generateRoot.Add(loadingText);
+        await UniTask.WaitForSeconds(0.5f);
+        loadingText.text = "...searching";
+        await UniTask.WaitForSeconds(0.75f);
+        
+        generateRoot.Remove(loadingText);
+
+
+        var mapText = new Label("三つのうち一つがホンモノのマップです");
+        _root.Add(mapText);
+        
+        var tileContainer = new VisualElement();
+        _root.Add(tileContainer);
+        
+        // uiに書く
+        foreach (var map in maps)
+        {
+            WriteMap(tileContainer, gameRateAsset.mapRateAsset, map);
+        }
+        
+        var itemText = new Label("アイテムアイコン: 効果");
+        _root.Add(itemText);
+        // アイテム情報の表示
+        foreach (var blueResultItem in gameInfo.ItemInfo.BlueResultItems)
+        {
+            var itemRow = new VisualElement();
+            
+            
+            var itemIcon = new VisualElement();
+            var texture = SpriteToTexture(blueResultItem.itemIcon);
+            
+            itemIcon.style.backgroundImage = texture;
+            var itemInfo = new Label(blueResultItem.itemType.ToString());
+            itemRow.Add(itemIcon);
+            itemRow.Add(itemInfo);
+            
+            _root.Add(itemRow);
+
+        }
+    }
+    
+    
+    private Texture2D SpriteToTexture(Sprite sprite)
+    {
+        // Spriteのテクスチャを取得し、切り出し領域を反映
+        Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+        Color[] pixels = sprite.texture.GetPixels(
+            (int)sprite.rect.x,
+            (int)sprite.rect.y,
+            (int)sprite.rect.width,
+            (int)sprite.rect.height
+        );
+        texture.SetPixels(pixels);
+        texture.Apply();
+        return texture;
+    }
+    
+    public void WriteMap(VisualElement mapContainer, MapRateAsset rate, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)
+    {
+        // タイルコンテナーを生成
+        var tileContainer = new VisualElement();
+        mapContainer.Add(tileContainer);
+        tileContainer.AddToClassList("tile-map");
+        // マップのデータに沿ってタイルを生成
+        for (int i = 0; i < map.Tiles.Length; i++)
+        {
+            // タイルのインデックスをフラグに応じて反転
+            var tileIndex = i;
+            if (rightToLeft)
+            {
+                tileIndex = MapTileCalc.GetInvertXId(tileIndex, map.MapLength);
+            }
+            if (bottomToTop)
+            {
+                tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.MapLength);
+            }
+            
+            // タイルのテンプレートを複製
+            var tile = new VisualElement();
+            tile.AddToClassList("tile");
+            // idからタイルの名前を設定
+            tile.name = $"Tile_{tileIndex}";
+            // idのタイルの情報を取得
+            var tileInfo = rate.tileRateInfos[map.Tiles[tileIndex]];
+            // タイルコンテナーに追加
+            tileContainer.Add(tile);
+            // 爆弾なら赤にする
+            if (tileInfo.tileType == TileType.Bomb)
+            {
+                tile.AddToClassList("red");
+            }
+        }
+    }
+    private string GetItemInfoStr(ItemInfo info, ItemRateAsset rate)
+    {
+        string str = "";
+
+        str += "----------------------Blue Item: \n";
+        // アイテムごとにループ
+        foreach (var item in info.BlueResultItems)
+        {
+            // アイテムの種類を取得
+            var type = item.itemType;
+            // アイテムの説明を取得
+            var description = rate.blueItemRate.GetItemRateInfo(type).description;
+            str += "Icon: " + item.itemIcon + ", Type: " + item.itemType + ", Description: " + description + "\n";
+        }
+        
+        str += "-----------------------Yellow Item: " + "\n";
+        // アイテムごとにループ
+        for(var i = 0; i < info.YellowItems.Length; i++)
+        {
+            // アイテムの種類を取得
+            var type = info.YellowItems[i];
+            // アイテムの説明を取得
+            var description = rate.yellowItemRate.GetItemRateInfo(type).description;
+            // そのアイテムになる計算結果のリストをテキストに
+            var resultText = "";
+            foreach (var result in info.YellowResultItems[i])
+            {
+                resultText += result + ", ";
+            }
+            str += "Result: " + resultText + "Type: " + type + ", Description: " + description + "\n";
+        }
+        // 黄色のパズルアイコンをその数と共に表示
+        for(var i = 0; i < info.YellowPuzzleIcons.Length; i++)
+        {
+            // シャッフルしてもいいかも
+            str += "Icon: " + info.YellowPuzzleIcons[i] + ", Number: " + i + "\n";
+        }
+        
+        str += "-----------------------Purple Item: " + "\n";
+        // アイテムごとにループ
+        for(var i = 0; i < info.PurpleItems.Length; i++)
+        {
+            // アイテムの種類を取得
+            var type = info.PurpleItems[i];
+            // アイテムの説明を取得
+            var description = rate.purpleItemRate.GetItemRateInfo(type).description;
+            // そのアイテムになる計算結果のリストをテキストに
+            var resultText = "";
+            foreach (var result in info.PurpleResultItems[i])
+            {
+                resultText += result + ", ";
+            }
+            str += "Result: " + resultText + "Type: " + type + ", Description: " + description + "\n";
+        }
+        // 紫色のパズルアイコンをその説明と共に表示
+        for(var i = 0; i < rate.purplePuzzleIcons.Length; i++)
+        {
+            str += "Icon: " + rate.purplePuzzleIcons[i].icon + ", Description: " + rate.purplePuzzleIcons[i].description + "\n";
+        }
+
+        return str;
+    }
+    
     private void OnDisable()
     {
         execInput.action.Disable();
+        closeInput.action.Disable();
     }
 }

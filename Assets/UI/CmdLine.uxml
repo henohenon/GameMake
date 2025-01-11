@@ -1,4 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Cmd.uss?fileID=7433441132597879392&amp;guid=32ea40109663c6d498034d0f5ae68007&amp;type=3#Cmd" />
-    <ui:TextField label="c:/multisweeper&gt;" name="textField" />
-</ui:UXML>

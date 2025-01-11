@@ -392,7 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: cb14344e8313b86458935d71fee2b6d6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 147d15ba132406b4c8fbb10921ae437a,
+  sourceAsset: {fileID: 9197481963319205126, guid: 1086fa52ea2a4de4faed2e271c6e6c86,
     type: 3}
   m_SortingOrder: 0
 --- !u!4 &1569783742
@@ -437,8 +437,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da10a70043d3ad1479725886c5b92800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cmdLine: {fileID: 9197481963319205126, guid: 147d15ba132406b4c8fbb10921ae437a, type: 3}
+  gameRateAsset: {fileID: 11400000, guid: 6a68ab1523e2cfa4e9853d05646955e0, type: 2}
+  helperTreeView: {fileID: 9197481963319205126, guid: bf9fc4ddfa1ba8a4f889bf9e07a22941,
+    type: 3}
   execInput: {fileID: 748945606620384592, guid: 4248f5acb6a544d42b8f38ed90469fc4,
+    type: 3}
+  anyInput: {fileID: 0}
+  previousInput: {fileID: 0}
+  nextInput: {fileID: 0}
+  closeInput: {fileID: -2862102179178586577, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
 --- !u!1 &1785313685
 GameObject:

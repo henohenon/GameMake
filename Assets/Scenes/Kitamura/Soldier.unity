@@ -1068,10 +1068,9 @@ MonoBehaviour:
   light: {fileID: 1300582182}
   _changestepsAudioClip: {fileID: 8300000, guid: 167d26b0027ba7442b9b77a057fab119,
     type: 3}
-  noneitem: {fileID: 0}
-  useflagitem: {fileID: 0}
-  useitem: {fileID: 0}
-  _audioSource: {fileID: 0}
+  noneitem: {fileID: 8300000, guid: 8fc33147ca77e374487c3a4dfb5c7e78, type: 3}
+  useitem: {fileID: 8300000, guid: adbe0bc47bc8d664a9d54449ded81616, type: 3}
+  _audioSource: {fileID: 921744858}
 --- !u!114 &921744857
 MonoBehaviour:
   m_ObjectHideFlags: 0

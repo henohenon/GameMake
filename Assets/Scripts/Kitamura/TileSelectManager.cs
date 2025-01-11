@@ -104,31 +104,26 @@ public class TileSelectManager : MonoBehaviour
 
     public void OpenFrontLine()
     {
-        if (_selectedTiles.Count != 0)
+        var playerPosition = tilesManager.GetMapPosition(playerTransform.position);
+        var playerFrontPosition = playerTransform.position + playerTransform.forward;
+        var firstPosition = tilesManager.GetMapPosition(playerFrontPosition);
+        var frontTileId = MapTileCalc.GetTileId(firstPosition, tilesManager.MapInfo.MapLength);
+        
+        if(frontTileId == -1) return;
+        
+        var difference = firstPosition - playerPosition;
+        var currentPosition = firstPosition;
+        var currentTile = tilesManager.TileControllers[frontTileId];
+        while (true)
         {
-            var playerPosition = tilesManager.GetMapPosition(playerTransform.position);// プレイヤーの正面の取得
-            var playerDirection = playerTransform.forward;
-            // yを0にしてからノーマライズすることで、y軸を省いた上から見たときの2次元座標の正面の向きにする
-            playerDirection.y = 0;
-            playerDirection.Normalize();
-            var playerFront = playerTransform.position + playerDirection;
-            var frontPosition = tilesManager.GetMapPosition(playerFront);
-            var frontTileId = MapTileCalc.GetTileId(frontPosition, tilesManager.MapInfo.MapLength);
+            currentTile.Open();
             
-            var difference = frontPosition - playerPosition;
-            var currentPosition = frontPosition;
-            var currentTile = tilesManager.TileControllers[frontTileId];
-            while (true)
-            {
-                currentTile.Open();
-                
-                // 一つ先のタイルを取得
-                currentPosition += difference;
-                var currentId = MapTileCalc.GetTileId(currentPosition, tilesManager.MapInfo.MapLength);
-                // 一つ先がなければ終了
-                if(currentId == -1) break;
-                currentTile = tilesManager.TileControllers[currentId];
-            }
+            // 一つ先のタイルを取得
+            currentPosition += difference;
+            var currentId = MapTileCalc.GetTileId(currentPosition, tilesManager.MapInfo.MapLength);
+            // 一つ先がなければ終了
+            if(currentId == -1) break;
+            currentTile = tilesManager.TileControllers[currentId];
         }
     }
 

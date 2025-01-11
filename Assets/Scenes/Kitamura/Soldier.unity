@@ -1038,6 +1038,8 @@ MonoBehaviour:
   removeItemInput: {fileID: 8796532731297689166, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   soldirUIManager: {fileID: 1328982681}
+  useitem: {fileID: 8300000, guid: 40a1606293ee17e46907ebaafaa98933, type: 3}
+  _audioSource: {fileID: 921744858}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:

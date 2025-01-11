@@ -4,6 +4,7 @@ using LitMotion;
 using LitMotion.Extensions;
 using R3;
 using RandomExtensions;
+using RandomExtensions.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -230,20 +231,39 @@ public class PlayerController : MonoBehaviour//へのへのさん
         // カメラ縦軸
         camera.transform.Rotate(new Vector3(-_cameraInputValue.y * cameraRotationSpeed, 0, 0));
     }
-
+    
     public async UniTask RandomMovement()
     {
          moveInput.action.Disable();
          cameraInput.action.Disable();
-         
-         _stepsAudioSource.UnPause();
-         
-         _moveInputValue = new Vector2(RandomEx.Shared.NextFloat(-10, 10), RandomEx.Shared.NextFloat(-10, 10));
-         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(-5, 5), 0);
 
-         await UniTask.WaitForSeconds(1f);
+         var basePitch = _stepsAudioSource.pitch;
+         _stepsAudioSource.pitch = 3;
+         _stepsAudioSource.UnPause();
+
+         _moveInputValue = Vector2.zero;
+         var randomAddPosition = RandomEx.Shared.NextVector2(Vector2.one * 3);
+         var nextPosition = new Vector3(_rb.position.x + randomAddPosition.x, _rb.position.y, _rb.position.z + randomAddPosition.y);
+         // TODO: 壁抜けできるのでできれば修正
+         LMotion.Create(_rb.position, nextPosition, 0.5f).Bind(_rb, (x, target) =>
+         {
+             _rb.position = x;
+         });
+         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(100, 400) * (RandomEx.Shared.NextBool()? 1: -1), 0);
+
+         await UniTask.WaitForSeconds(0.5f);
+         _cameraInputValue = new Vector2(RandomEx.Shared.NextFloat(100, 400) * (RandomEx.Shared.NextBool()? 1: -1), 0);
+         randomAddPosition = RandomEx.Shared.NextVector2(Vector2.one * 3);
+         nextPosition = new Vector3(_rb.position.x + randomAddPosition.x, _rb.position.y, _rb.position.z + randomAddPosition.y);
+         LMotion.Create(_rb.position, nextPosition, 0.5f).Bind(_rb, (x, target) =>
+         {
+             _rb.position = x;
+         });
+         await UniTask.WaitForSeconds(0.5f);
+
          _moveInputValue = Vector2.zero;
          _cameraInputValue = Vector2.zero;
+         _stepsAudioSource.pitch = basePitch;
          _stepsAudioSource.Pause();
          
          moveInput.action.Enable();

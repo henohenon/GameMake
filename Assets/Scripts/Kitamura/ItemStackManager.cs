@@ -53,7 +53,7 @@ public class ItemStackManager : MonoBehaviour
         _selectingStackIndex = numb;
     }
 
-    public void AddItem(ItemType addType)
+    public void AddItem(ItemType addType, Sprite addIcon)
     {
         // 順番に見て言って、空いていたらそこに追加
         for (var i = 0; i < itemStack.Length; i++)

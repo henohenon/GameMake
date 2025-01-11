@@ -100,7 +100,7 @@ public class TilesManager : MonoBehaviour
                     // めくられたらアイテムを追加
                     blueInstance.OnFlipped.Subscribe(_ =>
                     {
-                        _itemStackManager.AddItem(itemInfo.itemType);
+                        _itemStackManager.AddItem(itemInfo.itemType, itemInfo.itemIcon);
                     });
                     instance = blueInstance;
                     break;

@@ -21,9 +21,6 @@ MonoBehaviour:
       itemType: 2
       description: "\u901F\u5EA6\u30C0\u30A6\u30F3\uFF01"
     - rate: 1
-      itemType: 3
-      description: "\u5149\u91CF\u30A2\u30C3\u30D7\uFF01"
-    - rate: 1
       itemType: 5
       description: "\u524D\u65B9\u306E\u30BF\u30A4\u30EB\u3092\u3059\u3079\u3066\u958B\u3051\u308B"
     - rate: 1

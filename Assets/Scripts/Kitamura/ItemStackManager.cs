@@ -14,7 +14,7 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private SoldierUIManager soldirUIManager;
     [SerializeField] public AudioClip useitem;//アイテム使用時の音
 
-    //private AudioSource _audioSource;//アイテム使用時の音
+    public AudioSource _audioSource;//アイテム使用時の音
 
 #if UNITY_EDITOR
     // 実行中のみ編集を許可
@@ -94,7 +94,7 @@ public class ItemStackManager : MonoBehaviour
         var itemType = itemStack[_selectingStackIndex];
         // アイテムを実行
         itemEffectsManager.ExecItem(itemType);
-        //_audioSource.PlayOneShot(useitem);//アイテム使用時の音
+        _audioSource.PlayOneShot(useitem);//アイテム使用時の音
         // 旗以外なら空にする
         if (itemType != ItemType.Flag)
         {

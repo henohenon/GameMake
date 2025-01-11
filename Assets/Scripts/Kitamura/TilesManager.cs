@@ -95,6 +95,7 @@ public class TilesManager : MonoBehaviour
                     var prefab = tilePrefabs.blueItemTilePrefab;
                     var blueInstance = Instantiate(prefab);
                     var itemInfo = _itemInfo.GetRandomBlueItem();
+                    Debug.Log(itemInfo.itemIcon);
                     blueInstance.SetItemIcon(itemInfo.itemIcon);
                     // めくられたらアイテムを追加
                     blueInstance.OnFlipped.Subscribe(_ =>

@@ -33,6 +33,12 @@ public class ItemEffectsManager : MonoBehaviour
     [SerializeField, AssetsOnly] private FlagController flagPrefab;
     [SerializeField] private Light light;
     [SerializeField] public AudioClip _changestepsAudioClip;
+    [SerializeField] public AudioClip noneitem;//アイテムがない使用時の音
+    [SerializeField] public AudioClip useflagitem;//フラグ使用時の音
+    [SerializeField] public AudioClip useitem;//アイテム使用時の音
+
+    //public TileSelectManager tileSelectManager;
+    public AudioSource _audioSource;//アイテム使用時の音
 
     private LightDistanceType _currentLightDistanceType = LightDistanceType.Normal;
 
@@ -58,6 +64,18 @@ public class ItemEffectsManager : MonoBehaviour
     // アイテムの実行
     public void ExecItem(ItemType type)
     {
+        if (type == ItemType.Flag)
+        {
+            _audioSource.PlayOneShot(useflagitem);//アイテム使用時の音
+        }
+        else if (type == ItemType.Empty)
+        {
+            _audioSource.PlayOneShot(noneitem); // Flag用の音
+        }
+        else
+        {
+            _audioSource.PlayOneShot(useitem);//アイテム使用時の音
+        }
         // 種類ごとに処理を設定。
         // ここで制御できるようにしてあげることで、一括で速度アップの値の変更などができる
         switch (type)

@@ -4,6 +4,7 @@ using RandomExtensions;
 using RandomExtensions.Collections;
 using RandomExtensions.Linq;
 using Scriptable;
+using UnityEngine;
 
 public class ItemInfo
 {
@@ -11,7 +12,7 @@ public class ItemInfo
     
     public readonly ItemType[] YellowItems;
     public readonly List<int>[] YellowResultItems;
-    public readonly string[] YellowPuzzleIcons;
+    public readonly Sprite[] YellowPuzzleIcons;
     
     public readonly ItemType[] PurpleItems;
     public readonly List<int>[] PurpleResultItems;
@@ -79,7 +80,7 @@ public class ItemInfo
         yellowNumbIcons = yellowNumbIcons.Shuffle(random).ToArray();
         // 黄色アイテムの記号の配列を生成
         var yellowNumbCount = asset.yellowItemRate.MaxNumbCount - asset.yellowItemRate.MinNumbCount;
-        YellowPuzzleIcons = new string[yellowNumbCount];
+        YellowPuzzleIcons = new Sprite[yellowNumbCount];
         for(var i = 0; i < yellowNumbCount; i++)
         {
             YellowPuzzleIcons[i] = yellowNumbIcons.ElementAt(i);

@@ -959,7 +959,6 @@ MonoBehaviour:
   gameManager: {fileID: 921744853}
   _itemStackManager: {fileID: 921744855}
   Screen: {fileID: 1328982681}
-  Log: {fileID: 1328982681}
   cameraInput: {fileID: 5161590799083112370, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   moveInput: {fileID: 4918689811454270778, guid: 4248f5acb6a544d42b8f38ed90469fc4,
@@ -1039,7 +1038,8 @@ MonoBehaviour:
   removeItemInput: {fileID: 8796532731297689166, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   soldirUIManager: {fileID: 1328982681}
-  useitem: {fileID: 0}
+  useitem: {fileID: 8300000, guid: 40a1606293ee17e46907ebaafaa98933, type: 3}
+  _audioSource: {fileID: 921744858}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:

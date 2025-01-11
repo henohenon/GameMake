@@ -1,6 +1,7 @@
 using System;
 using Alchemy.Inspector;
 using Scriptable;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,13 +13,7 @@ public class ItemStackManager : MonoBehaviour
     [SerializeField] private InputActionReference useItemInput;
     [SerializeField] private InputActionReference removeItemInput;
     [SerializeField] private SoldierUIManager soldirUIManager;
-    [SerializeField] public AudioClip noneitem;//アイテムがない使用時の音
-    [SerializeField] public AudioClip useflagitem;//フラグ使用時の音
-    [SerializeField] public AudioClip useitem;//アイテム使用時の音
 
-
-
-    public AudioSource _audioSource;//アイテム使用時の音
 
 #if UNITY_EDITOR
     // 実行中のみ編集を許可
@@ -98,22 +93,6 @@ public class ItemStackManager : MonoBehaviour
         var itemType = itemStack[_selectingStackIndex];
         // アイテムを実行
         itemEffectsManager.ExecItem(itemType);
-        //アイテム使用時の音(フラグを置くときのみ)
-
-        
-        if (itemType == ItemType.Flag)
-        {
-            _audioSource.PlayOneShot(useflagitem);//アイテム使用時の音
-        }
-        else if (itemType == ItemType.Empty)
-        {
-            _audioSource.PlayOneShot(noneitem); // Flag用の音
-        }
-        else
-        {
-            _audioSource.PlayOneShot(useitem);//アイテム使用時の音
-        }
-        
         // 旗以外なら空にする
         if (itemType != ItemType.Flag)
         {

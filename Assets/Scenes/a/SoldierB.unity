@@ -1038,10 +1038,6 @@ MonoBehaviour:
   removeItemInput: {fileID: 8796532731297689166, guid: 4248f5acb6a544d42b8f38ed90469fc4,
     type: 3}
   soldirUIManager: {fileID: 1328982681}
-  useflagitem: {fileID: 8300000, guid: 40a1606293ee17e46907ebaafaa98933, type: 3}
-  useitem: {fileID: 8300000, guid: a785dba0f23a6de41a76f22552076041, type: 3}
-  noneitem: {fileID: 8300000, guid: 2dd87ade13d251342b802a92b7b79393, type: 3}
-  _audioSource: {fileID: 921744858}
   itemStack: 00000000ffffffffffffffff
 --- !u!114 &921744856
 MonoBehaviour:
@@ -1063,6 +1059,10 @@ MonoBehaviour:
   light: {fileID: 1300582182}
   _changestepsAudioClip: {fileID: 8300000, guid: 167d26b0027ba7442b9b77a057fab119,
     type: 3}
+  noneitem: {fileID: 8300000, guid: 8fc33147ca77e374487c3a4dfb5c7e78, type: 3}
+  useflagitem: {fileID: 8300000, guid: 40a1606293ee17e46907ebaafaa98933, type: 3}
+  useitem: {fileID: 8300000, guid: 0846c8e483e24ff4a957f9ebd27e34e7, type: 3}
+  _audioSource: {fileID: 921744858}
 --- !u!114 &921744857
 MonoBehaviour:
   m_ObjectHideFlags: 0

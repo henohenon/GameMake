@@ -20,6 +20,7 @@ public class TilesManager : MonoBehaviour
 
     [SerializeField] private ItemStackManager _itemStackManager;
     [SerializeField] private SoldierUIManager Screen;
+    [SerializeField] private SoldierUIManager Log;
     [SerializeField]
     private InputActionReference cameraInput;//マウスの入力を取得
     [SerializeField]
@@ -147,6 +148,7 @@ public class TilesManager : MonoBehaviour
         // タイルが爆弾出ないとき
         if (tileTile.TileType != TileType.Bomb)
         {
+            Log.AddLog("Safe");
             ComboTimer();
             _comboCount++;
             var soundCount = _comboCount < flipAudios.Length ? _comboCount : flipAudios.Length - 1;
@@ -188,6 +190,9 @@ public class TilesManager : MonoBehaviour
                 Debug.Log("Game Clear");
                 _gameClear.OnNext(Unit.Default);
             }
+        } else
+        {
+            Log.AddLog("It's Bomb!!");
         }
         //CheckForOnlyBombs();
     }

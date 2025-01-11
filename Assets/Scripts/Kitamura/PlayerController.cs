@@ -299,7 +299,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
             _nowMoveSpeed = MinMoveSpeed;
         }
 
-        _stepsAudioSource.pitch = _nowMoveSpeed / defaultMoveSpeed;
+        _stepsAudioSource.pitch = 1 + ((1 - _nowMoveSpeed / defaultMoveSpeed) / 2);
     }
 
     private Vector3 _hitDirection = Vector3.zero;

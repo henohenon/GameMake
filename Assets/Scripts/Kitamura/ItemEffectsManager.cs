@@ -74,13 +74,13 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.SpeedUp:
             {
                 // 移動速度+2
-                _playerController.AddMoveSpeedNumb(2f);
+                _playerController.AddMoveSpeedNumb(1f);
                 break;
             }
             case ItemType.SpeedDown:
             {
                 // 移動速度-2
-                _playerController.AddMoveSpeedNumb(-2f);
+                _playerController.AddMoveSpeedNumb(-1f);
                 break;
             }
             case ItemType.LightUp://霧の視界綺麗に

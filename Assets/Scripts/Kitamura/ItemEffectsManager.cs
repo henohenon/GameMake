@@ -8,6 +8,8 @@ using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine.Experimental.GlobalIllumination;
 using RenderSettings = UnityEngine.RenderSettings;
+using Unity.VisualScripting;
+using System.Linq;
 
 // アイテムの種類。数字付けてるのは追加や削除があってもシリアル化された既存の値が変化しないように
 public enum ItemType
@@ -23,6 +25,7 @@ public enum ItemType
     AddOpenPosition = 7,
     ViewBombNumb = 8,
     changefootsteps = 9,
+    RandomBombFlag = 10,
 }
 
 public class ItemEffectsManager : MonoBehaviour
@@ -96,22 +99,6 @@ public class ItemEffectsManager : MonoBehaviour
                 _playerController.AddMoveSpeedNumb(-1f);
                 break;
             }
-            /*
-            case ItemType.LightUp://霧の視界綺麗に
-            {
-                switch (_currentLightDistanceType)
-                {
-                    case LightDistanceType.Normal:
-                        _currentLightDistanceType = LightDistanceType.Maximum;
-                        break;
-                    case LightDistanceType.Minimum:
-                        _currentLightDistanceType = LightDistanceType.Normal;
-                        break;
-                }
-
-                _lightDistances[_currentLightDistanceType].ApplyValues(light);
-                break;
-            }*/
             case ItemType.changefootsteps:
             {
                 _playerController.ChangeFootsteps(_changestepsAudioClip);
@@ -136,42 +123,28 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.ViewBombNumb:
                 tilesManager.ViewBombNumbs();
                 break;
+            case ItemType RandomBombFlag:
+                {
+                    var allTiles = FindObjectsOfType<TileController>();
+                    // Bombタイプのタイルに旗を立てる
+                    var bombTiles = allTiles.Where(tile => tile.TileType == TileType.Bomb).ToList();
+                    // Bombタイプのタイルが1つ以上ある場合、ランダムに1つ選択
+                    if (bombTiles.Count > 0)
+                    {
+                        var randomTile = bombTiles[UnityEngine.Random.Range(0, bombTiles.Count)];
+                        randomTile.ToggleFlag(flagPrefab);
+                    }
+                    /*
+                    foreach (var tile in allTiles)
+                    {
+                        if (tile.TileType == TileType.Bomb)
+                        {
+                            Random tile.ToggleFlag(flagPrefab);
+                        }
+                    }
+                */
+                    break;
+                }
         }
     }
-    
-    /*
-    private readonly Dictionary<LightDistanceType, LightDistanceValues> _lightDistances = new ()
-    {
-        {LightDistanceType.Normal, new LightDistanceValues(0.3f, 0.2f, 7.5f)},
-        {LightDistanceType.Minimum, new LightDistanceValues(0.1f, 0.075f, 2f)},
-        {LightDistanceType.Maximum, new LightDistanceValues(0.45f, 0.3f, 10f)},
-    };
-    
-    private class LightDistanceValues
-    {
-        public float ambientIntensity;
-        public float reflectionIntensity;
-        public float lightRange;
-
-        public LightDistanceValues(float ambientIntensity, float reflectionIntensity, float lightRange)
-        {
-            this.ambientIntensity = ambientIntensity;
-            this.reflectionIntensity = reflectionIntensity;
-            this.lightRange = lightRange;
-        }
-
-        public void ApplyValues(Light light)
-        {
-            RenderSettings.ambientIntensity = ambientIntensity;
-            RenderSettings.reflectionIntensity = reflectionIntensity;
-            light.range = lightRange;
-        }
-    }
-    
-    private enum LightDistanceType
-    {
-        Normal = 0,
-        Minimum = 1,
-        Maximum = 2,
-    }*/
 }

@@ -416,9 +416,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
+                    "name": "Button With One Modifier",
                     "id": "b9152f73-4ce1-4403-9e81-f0e093b88381",
-                    "path": "OneModifier",
+                    "path": "ButtonWithOneModifier(overrideModifiersNeedToBePressedFirst=true)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -427,7 +427,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier",
+                    "name": "Modifier",
                     "id": "4ab5917e-b2aa-4ea2-84b7-2fd32c0768ee",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
@@ -438,8 +438,41 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "binding",
+                    "name": "Button",
                     "id": "89173528-d4b3-43fb-a3a2-7f365b5beb7b",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "af83c934-7aa7-4a5b-90b7-3e630f276766",
+                    "path": "ButtonWithOneModifier(overrideModifiersNeedToBePressedFirst=true)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Modifier",
+                    "id": "6b430bae-14ef-405f-9a58-844b5dd95fdb",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button",
+                    "id": "959722df-bd5d-4544-8836-10cef5a087b7",
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",

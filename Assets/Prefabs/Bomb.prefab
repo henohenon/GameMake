@@ -508,6 +508,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 197734194295620363}
   m_SourcePrefab: {fileID: 100100000, guid: ffac905825482a247aaec95c6988a1cb, type: 3}
+--- !u!1 &3419615968820144873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5971271732885208818, guid: ffac905825482a247aaec95c6988a1cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 9055281567939892251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!102 &3555100217953960338 stripped
 TextMesh:
   m_CorrespondingSourceObject: {fileID: 5547469695830742409, guid: ffac905825482a247aaec95c6988a1cb,
@@ -533,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 3555100217953960338}
+  selectObj: {fileID: 3419615968820144873}
   defaultLayer: 0
   selectedLayer: 6
   bombObject: {fileID: 5802507882061350920}

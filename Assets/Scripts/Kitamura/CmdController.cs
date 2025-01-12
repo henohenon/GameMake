@@ -32,7 +32,7 @@ public class CmdController : MonoBehaviour
         execInput.action.started += ctx => Exec();
         execInput.action.Enable();
         closeInput.action.started += ctx => ReturnToTitle();
-        execInput.action.Enable();
+        closeInput.action.Enable();
         
         var uiDocument = GetComponent<UIDocument>();
         var rootElement = uiDocument.rootVisualElement;

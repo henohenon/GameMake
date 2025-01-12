@@ -10,6 +10,7 @@ public class TileController : MonoBehaviour
 {
     [SerializeField]
     private TextMesh textMesh;
+    [SerializeField] private GameObject selectObj;
 
     protected AudioSource _audioSourse;
 
@@ -31,6 +32,7 @@ public class TileController : MonoBehaviour
     private void Start()
     {
         _audioSourse = GetComponent<AudioSource>();
+        selectObj.SetActive(false);
     }
     
     private readonly float[] _tileRotationY = {0, 90, 180, 270};
@@ -57,6 +59,8 @@ public class TileController : MonoBehaviour
         
         // タイルを消す
         _tileObject.SetActive(false);
+        // 選択を消す
+        selectObj.SetActive(false);
         // イベントを発行
         _onFlipped.OnNext(_tileId);
 
@@ -91,6 +95,7 @@ public class TileController : MonoBehaviour
         // もし裏返していたら何もしない
         if(_tileState == TileState.Open) return;
         _tileObject.layer = isSelected ? selectedLayer : defaultLayer;
+        selectObj.SetActive(isSelected);
     }
     
     public void SetText(string text)

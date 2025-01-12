@@ -9,6 +9,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour//へのへのさん
     private Vector2 _cameraInputValue;
     private readonly Subject<Unit> _onDamage = new();
     public Observable<Unit> OnDamage => _onDamage;
-
+    
     private void Start()
     {
         _stepsAudioSource = GetComponent<AudioSource>();

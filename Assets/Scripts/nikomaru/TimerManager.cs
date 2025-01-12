@@ -19,7 +19,7 @@ public class TimerManager : MonoBehaviour
             Sec = (int)(_Timer % 60);
             MilliSec = (int)((_Timer % 1) * 100);
 
-            if(Min >= 10)
+            if(Min >= 10)//分
             {
                 TimeText = Min.ToString();
             }
@@ -28,7 +28,7 @@ public class TimerManager : MonoBehaviour
                 TimeText = "0" + Min.ToString();
             }
 
-            if (Sec >= 10)
+            if (Sec >= 10)//秒
             {
                 TimeText += ":" + Sec;
             }
@@ -37,7 +37,7 @@ public class TimerManager : MonoBehaviour
                 TimeText += ":0" + Sec;
             }
 
-            if (MilliSec >= 10)
+            if (MilliSec >= 10)//ミリ秒
             {
                 TimeText +=":" + MilliSec;
             }

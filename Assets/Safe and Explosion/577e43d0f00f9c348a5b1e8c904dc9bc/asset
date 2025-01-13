@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
+
+/// <summary>
+/// ボタンイベントの際のシーン遷移を行ってます。最初のBooleanはアタッチされるオブジェクトによって有効/無効のものがあるのでそれらを分けるためにあります。
+/// </summary>
+[RequireComponent(typeof(UIDocument))]
+public class TitleUIManager : MonoBehaviour//ニコマル
+{
+    private VisualElement creditScreen;
+    void Start()
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        creditScreen = root.Q<VisualElement>("Credit_Scroller");
+        
+        //メインメニュー
+        root.Q<Button>("Button_Credit").clicked += () => SetHiddenCredit(false);
+        root.Q<Button>("Button_Soldier").clicked += LoadSoldeirScene;
+        root.Q<Button>("Button_Commander").clicked += LoadCommanderScene;
+
+        // クレジット画面
+        root.Q<Button>("Button_CloseCredit").clicked += () => SetHiddenCredit(true);
+    }
+    
+    private void LoadSoldeirScene()
+    {
+        SceneManager.LoadScene("Soldier");
+    }
+    
+    
+    private void LoadCommanderScene()
+    {
+        SceneManager.LoadScene("Commander");
+    }
+
+    private void SetHiddenCredit(bool isHidden = true)
+    {
+        if (isHidden)
+        {
+            creditScreen.AddToClassList("hidden");
+        }
+        else
+        {
+            creditScreen.RemoveFromClassList("hidden");
+        }
+    }
+}

@@ -22,8 +22,6 @@ public class TileController : MonoBehaviour
     private Subject<int> _onFlipped = new ();
     // 購買のみを公開
     public Observable<int> OnFlipped => _onFlipped;
-    public int defaultLayer;
-    public int selectedLayer;
     
     // 余りこの辺は持たせたくはないが今回は分かりやすさを重視ということで
     private int _tileId;
@@ -94,7 +92,6 @@ public class TileController : MonoBehaviour
     {
         // もし裏返していたら何もしない
         if(_tileState == TileState.Open) return;
-        _tileObject.layer = isSelected ? selectedLayer : defaultLayer;
         selectObj.SetActive(isSelected);
     }
     

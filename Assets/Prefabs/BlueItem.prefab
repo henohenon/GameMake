@@ -273,6 +273,12 @@ TextMesh:
     type: 3}
   m_PrefabInstance: {fileID: 5619144248844611244}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2301276158518081240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5914620032062871668, guid: ffac905825482a247aaec95c6988a1cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5619144248844611244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3965711214998769795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8859210188797197871, guid: ffac905825482a247aaec95c6988a1cb,
@@ -299,8 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 74212258069330725}
   selectObj: {fileID: 3965711214998769795}
-  defaultLayer: 0
-  selectedLayer: 6
+  openObj: {fileID: 2301276158518081240}
   iconRenderer: {fileID: 251377506015984048}
 --- !u!4 &5866397654471545871 stripped
 Transform:

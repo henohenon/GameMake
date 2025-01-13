@@ -11,8 +11,9 @@ public class TileController : MonoBehaviour
     [SerializeField]
     private TextMesh textMesh;
     [SerializeField] private GameObject selectObj;
+    [SerializeField] private GameObject openObj;
 
-    protected AudioSource _audioSourse;
+    protected AudioSource AudioSource;
 
     private TileState _tileState;
     private GameObject _tileObject;
@@ -29,7 +30,7 @@ public class TileController : MonoBehaviour
     
     private void Start()
     {
-        _audioSourse = GetComponent<AudioSource>();
+        AudioSource = GetComponent<AudioSource>();
         selectObj.SetActive(false);
     }
     
@@ -59,6 +60,8 @@ public class TileController : MonoBehaviour
         _tileObject.SetActive(false);
         // 選択を消す
         selectObj.SetActive(false);
+        // 開いた時のオブジェクトを表示
+        openObj.SetActive(true);
         // イベントを発行
         _onFlipped.OnNext(_tileId);
 
@@ -102,8 +105,8 @@ public class TileController : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        _audioSourse.clip= clip;
-        _audioSourse.Play();
+        AudioSource.clip= clip;
+        AudioSource.Play();
     }
 
     public void FadeInNumbText()

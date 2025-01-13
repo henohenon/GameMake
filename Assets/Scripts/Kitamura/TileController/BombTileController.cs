@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(AudioSource))]
 public class BombTileController : TileController
 {
-    [SerializeField] private GameObject bombObject;
     [SerializeField] private GameObject explosionObject;
     [SerializeField] private Collider damageCollider;
     [SerializeField] private AudioClip alertAudio;
@@ -27,7 +26,6 @@ public class BombTileController : TileController
         if (baseResult)
         {
             Explosion();
-            bombObject.SetActive(true);
         }
 
         return baseResult;

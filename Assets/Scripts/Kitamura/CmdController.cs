@@ -44,10 +44,10 @@ public class CmdController : MonoBehaviour
         CreateNewLine();
     }
 
-    private void Exec()
+    private async void Exec()
     {
         var input = _currentTextField.text;
-        ExecuteCommand(input);
+        await ExecuteCommand(input);
         
         CreateNewLine();
     }
@@ -59,7 +59,7 @@ public class CmdController : MonoBehaviour
     private const string LsPattern = @"^ls(\s+.+)$";
     private const string CatPattern = @"^cat\s+(.+)$";
 
-    private void ExecuteCommand(string command)
+    private async UniTask ExecuteCommand(string command)
     {
         var mscMatch = Regex.Match(command, MscPattern);
         if (mscMatch.Success)
@@ -67,7 +67,8 @@ public class CmdController : MonoBehaviour
             var mscText = mscMatch.Groups[1].Value;
             if (uint.TryParse(mscText, out uint result))
             {
-                RecreateView(result);
+                
+                await RecreateView(result);
             }
             else
             {

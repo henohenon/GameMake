@@ -26,6 +26,8 @@ public class CmdController : MonoBehaviour
     private TextField _currentTextField = null;
     private VisualElement _root;
     
+    private bool _waitingExec = false;
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -47,7 +49,9 @@ public class CmdController : MonoBehaviour
     private async void Exec()
     {
         var input = _currentTextField.text;
+        _waitingExec = true;
         await ExecuteCommand(input);
+        _waitingExec = false;
         
         CreateNewLine();
     }
@@ -112,8 +116,15 @@ public class CmdController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (_currentTextField != null)
+        if (_waitingExec)
         {
+            _root.Focus();
+        }
+        else if (_currentTextField != null)
+        {
+            var textInput = _currentTextField.Q<VisualElement>("unity-text-input");
+            textInput.Focus();
+
             Debug.Log(_currentTextField.cursorPosition);
         }
 

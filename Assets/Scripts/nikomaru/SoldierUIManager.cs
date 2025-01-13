@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEditor.ShaderGraph;
 
 
 /// <summary>
@@ -21,8 +22,14 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     private Label _Timer;
     private Label _clearText;
     private string _textEdit;
-    private int maxLogCount = 6;       // 最大ログ数
-    private float logLifetime = 5f;     // ログが消えるまでの時間（秒）
+    private int _maxLogCount = 6;       // 最大ログ数
+    private float _logLifetime = 5f;     // ログが消えるまでの時間（秒）
+    private Color  _customRed = new Color(1.0f, 0f, 0.27f, 1.0f);
+    private Color _customBlue = new Color(0f, 0.63f, 0.6f, 1.0f);
+    private Color _customGreen = new Color(0.6f, 1.0f, 0.53f, 1.0f);
+
+    //var itemRateInfo = gameRateAsset.itemRateAsset.blueItemRate.GetItemRateInfo(blueResultItem.itemType);
+    //Debug.Log(itemRateInfo.description);
 
     void Start()
     {
@@ -92,19 +99,32 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _clearText.text = _textEdit;
     }
 
-    public void AddLog(string text)
+    public void AddLog(string text, ColorType colorType)
     {
         // 新しいログを作成
         var logLabel = new Label(text);
         _logBox.Add(logLabel);
 
         // 最大ログ数を超えたら古いログを削除
-        if (_logBox.childCount > maxLogCount)
+        if (_logBox.childCount > _maxLogCount)
         {
             _logBox.RemoveAt(0);
         }
         // 一定時間後にログを削除する Coroutine を開始
-        StartCoroutine(RemoveLogAfterTime(logLabel, logLifetime));
+        StartCoroutine(RemoveLogAfterTime(logLabel, _logLifetime));
+
+        switch (colorType)
+        {
+            case ColorType.Red:
+                logLabel.style.color = new StyleColor(_customRed);
+                break;
+            case ColorType.Blue:
+                logLabel.style.color = new StyleColor(_customBlue);
+                break;
+            case ColorType.Green:
+                logLabel.style.color = new StyleColor(_customGreen);
+                break;
+        }
     }
     private IEnumerator RemoveLogAfterTime(Label logLabel, float delay)
     {
@@ -178,6 +198,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
                 Debug.Log("SetBackground failed.");
                 break;
         }
+
         
     }
 
@@ -188,5 +209,12 @@ public enum InPlayScreenType
 {
     GameClear,
     GameOver
+}
+
+public enum ColorType
+{
+    Red,
+    Blue,
+    Green
 }
 

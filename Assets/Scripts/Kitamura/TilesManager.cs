@@ -149,7 +149,7 @@ public class TilesManager : MonoBehaviour
         // タイルが爆弾出ないとき
         if (tileTile.TileType != TileType.Bomb)
         {
-            Log.AddLog("Safe");
+            Log.AddLog("That tile is safe!", ColorType.Blue);
             ComboTimer();
             _comboCount++;
             var soundCount = _comboCount < flipAudios.Length ? _comboCount : flipAudios.Length - 1;
@@ -193,7 +193,7 @@ public class TilesManager : MonoBehaviour
             }
         } else
         {
-            Log.AddLog("It's Bomb!!");
+            Log.AddLog("It's Bomb!!", ColorType.Red);
         }
         //CheckForOnlyBombs();
     }

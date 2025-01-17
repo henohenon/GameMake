@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEditor.ShaderGraph;
+using Scriptable;
 
 
 /// <summary>
@@ -27,9 +28,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     private Color  _customRed = new Color(1.0f, 0f, 0.27f, 1.0f);
     private Color _customBlue = new Color(0f, 0.63f, 0.6f, 1.0f);
     private Color _customGreen = new Color(0.6f, 1.0f, 0.53f, 1.0f);
-
-    //var itemRateInfo = gameRateAsset.itemRateAsset.blueItemRate.GetItemRateInfo(blueResultItem.itemType);
-    //Debug.Log(itemRateInfo.description);
+    [SerializeField] private GameRateAsset gameRateAsset;
 
     void Start()
     {
@@ -112,7 +111,11 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         }
         // 一定時間後にログを削除する Coroutine を開始
         StartCoroutine(RemoveLogAfterTime(logLabel, _logLifetime));
+        
+        //var itemRateInfo = gameRateAsset.itemRateAsset.blueItemRate.GetItemRateInfo(blueResultItem.itemType);
+        //Debug.Log(itemRateInfo.description);
 
+        //文字の色を指定
         switch (colorType)
         {
             case ColorType.Red:

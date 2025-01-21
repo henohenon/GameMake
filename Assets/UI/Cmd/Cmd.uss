@@ -42,8 +42,11 @@
 .unity-text-element {
     white-space: normal;
     color: white;
-    -unity-font: url("../../DotGothic16-Regular.ttf");
-    -unity-font-definition: url("../../DotGothic16-Regular.ttf");
+    -unity-font: url("project://database/Assets/DotGothic16-Regular.ttf?fileID=12800000&guid=040d005825a374b4b878e5a9a4ff456c&type=3#DotGothic16-Regular");
+    -unity-font-definition: url("project://database/Assets/DotGothic16-Regular.ttf?fileID=12800000&guid=040d005825a374b4b878e5a9a4ff456c&type=3#DotGothic16-Regular");
+    margin: 0;
+    padding: 0;
+    -unity-paragraph-spacing: -30px;
 }
 
 .unity-base-text-field__input {
@@ -54,7 +57,9 @@
     border-bottom-color: rgba(0, 0, 0, 0);
     min-width: 0;
     flex-grow: 1;
-    --unity-cursor-color:white;
+    --unity-cursor-color: white;
+    margin: 0;
+    padding: 0;
 }
 
 .unity-text-element--inner-input-field-component {

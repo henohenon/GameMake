@@ -197,10 +197,8 @@ public class CmdController : MonoBehaviour
     
     public void WriteMap(VisualElement mapContainer, MapRateAsset rate, MapInfo map, bool rightToLeft = false, bool bottomToTop = true)
     {
-        // タイルコンテナーを生成
-        var tileContainer = new VisualElement();
-        mapContainer.Add(tileContainer);
-        tileContainer.AddToClassList("tile-map");
+        // マップ用のラベルを作成
+        var textMap = new Label();
         // マップのデータに沿ってタイルを生成
         for (int i = 0; i < map.Tiles.Length; i++)
         {
@@ -215,21 +213,26 @@ public class CmdController : MonoBehaviour
                 tileIndex = MapTileCalc.GetInvertYId(tileIndex, map.MapLength);
             }
             
-            // タイルのテンプレートを複製
-            var tile = new VisualElement();
-            tile.AddToClassList("tile");
-            // idからタイルの名前を設定
-            tile.name = $"Tile_{tileIndex}";
             // idのタイルの情報を取得
             var tileInfo = rate.tileRateInfos[map.Tiles[tileIndex]];
-            // タイルコンテナーに追加
-            tileContainer.Add(tile);
             // 爆弾なら赤にする
             if (tileInfo.tileType == TileType.Bomb)
             {
-                tile.AddToClassList("red");
+                textMap.text += "<color=red>{!}</color>";
+            }
+            else
+            {
+                textMap.text += "[ ]";
+            }
+            
+            // 一行終わったなら改行
+            if ((i+1) % map.MapLength.Width == 0)
+            {
+                textMap.text += "\n";
             }
         }
+
+        mapContainer.Add(textMap);
     }
     private string GetItemInfoStr(ItemInfo info, ItemRateAsset rate)
     {

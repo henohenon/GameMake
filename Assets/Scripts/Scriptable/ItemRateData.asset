@@ -36,18 +36,32 @@ MonoBehaviour:
       itemType: 9
       description: "\u8DB3\u97F3\u304C\u4E0B\u99C4\u306B\u306A\u308B"
     itemIcons:
-    - {fileID: 21300000, guid: 728ae7600d7e6324d86d1a0741fde95d, type: 3}
-    - {fileID: 21300000, guid: 2be7ef67b01c5ea4f9aa2bad09647f5e, type: 3}
-    - {fileID: 21300000, guid: 762c4a91f48d42c418915f3b657c2fd5, type: 3}
-    - {fileID: 21300000, guid: 217fbd1aa6a541049902d8e2698d1247, type: 3}
-    - {fileID: 21300000, guid: c6a40815f735c4d44968dde8f371128b, type: 3}
-    - {fileID: 21300000, guid: 71623dee29f9aa344b5520197774322a, type: 3}
-    - {fileID: 21300000, guid: 04f542ed3e29c6a45b5e618125bce515, type: 3}
-    - {fileID: 21300000, guid: 3de67d32261b6834eb83720abf8e8611, type: 3}
-    - {fileID: 21300000, guid: 6ed3d3928a6f04747a6e2e150011dfff, type: 3}
-    - {fileID: 21300000, guid: 47543f35a48d61f44b5a789d9c24573b, type: 3}
-    - {fileID: 21300000, guid: f1e9c91863979f94396e92c7cf292b5a, type: 3}
-    - {fileID: 21300000, guid: 5c4de0b8e7735104b93896a35be7077c, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 728ae7600d7e6324d86d1a0741fde95d, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 6e8686e7172623e41a7bd79d5e865688, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 2be7ef67b01c5ea4f9aa2bad09647f5e, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 6e8686e7172623e41a7bd79d5e865688, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 762c4a91f48d42c418915f3b657c2fd5, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: c84eee43fb1519944ab5794414cc0ede, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 217fbd1aa6a541049902d8e2698d1247, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: a127c4991c1e6c34daea5fae3c5ed464, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: c6a40815f735c4d44968dde8f371128b, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 2dcd29b843a6bda45932c8fda5212591, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 71623dee29f9aa344b5520197774322a, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: ccb8a48d0a90ee94f88ac622076a3443, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 213bb826451360241961acddfdce3b71, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: b6f33410eb5b5c14c94699cdbee0366e, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 04f542ed3e29c6a45b5e618125bce515, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: b7f654cb346a4bf41b675a6012f8286f, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 3de67d32261b6834eb83720abf8e8611, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 2cb2e110cc493eb4780e0df5acc6112b, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 6ed3d3928a6f04747a6e2e150011dfff, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 60a5e34d54d59b040bd1b9f14e6b3a91, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 47543f35a48d61f44b5a789d9c24573b, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 4ebf597646622294491fe623103ebee5, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: f1e9c91863979f94396e92c7cf292b5a, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 3215cb91cefde2d41a469bae2bf593f3, type: 3}
+    - itemIconBlack: {fileID: 21300000, guid: 5c4de0b8e7735104b93896a35be7077c, type: 3}
+      itemIconWhite: {fileID: 21300000, guid: 1ef1693e6a93bf74ca17552dbf644213, type: 3}
     maxItemCount: 5
     minItemCount: 2
   yellowItemRate:

@@ -41,12 +41,19 @@ namespace Scriptable
     public class BlueItemRate: ItemRateBase
     {
         // パズルのアイコンの情報
-        public Sprite[] itemIcons;
+        public ItemIcons[] itemIcons;
 
         [Header("アイテムの数")] public int maxItemCount = 7;
         public int minItemCount = 5;
     }
 
+    [Serializable]
+    public class ItemIcons
+    {
+        public Sprite itemIconBlack;
+        public Sprite itemIconWhite;
+    }
+    
     [Serializable]
     public class YellowItemRate: ItemRateBase
     {
@@ -99,12 +106,12 @@ namespace Scriptable
     [Serializable]
     public class BlueResultItem
     {
-        public Sprite itemIcon;
+        public ItemIcons itemIcon;
         public ItemType itemType;
 
-        public BlueResultItem(Sprite itemIcon, ItemType itemType)
+        public BlueResultItem(ItemIcons itemIcons, ItemType itemType)
         {
-            this.itemIcon = itemIcon;
+            this.itemIcon = itemIcons;
             this.itemType = itemType;
         }
     }

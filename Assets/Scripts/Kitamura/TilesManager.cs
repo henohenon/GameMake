@@ -96,11 +96,11 @@ public class TilesManager : MonoBehaviour
                     var blueInstance = Instantiate(prefab);
                     var itemInfo = _itemInfo.GetRandomBlueItem();
                     Debug.Log(itemInfo.itemIcon);
-                    blueInstance.SetItemIcon(itemInfo.itemIcon);
+                    blueInstance.SetItemIcon(itemInfo.itemIcon.itemIconBlack);
                     // めくられたらアイテムを追加
                     blueInstance.OnFlipped.Subscribe(_ =>
                     {
-                        _itemStackManager.AddItem(itemInfo.itemType, itemInfo.itemIcon);
+                        _itemStackManager.AddItem(itemInfo.itemType, itemInfo.itemIcon.itemIconBlack);
                     });
                     instance = blueInstance;
                     break;

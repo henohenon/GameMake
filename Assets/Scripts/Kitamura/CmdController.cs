@@ -182,10 +182,9 @@ public class CmdController : MonoBehaviour
             itemRow.AddToClassList("itemRow");
             
             var itemIcon = new VisualElement();
-            itemIcon.style.backgroundImage = blueResultItem.itemIcon.texture;
+            itemIcon.style.backgroundImage = blueResultItem.itemIcon.itemIconWhite.texture;
             itemIcon.AddToClassList("itemIcon");
             var itemRateInfo = gameRateAsset.itemRateAsset.blueItemRate.GetItemRateInfo(blueResultItem.itemType);
-            Debug.Log(itemRateInfo.description);
             var itemInfo = new Label(itemRateInfo.description);
             itemInfo.AddToClassList("itemInfo");
             itemRow.Add(itemIcon);
@@ -215,6 +214,7 @@ public class CmdController : MonoBehaviour
             
             // idのタイルの情報を取得
             var tileInfo = rate.tileRateInfos[map.Tiles[tileIndex]];
+            textMap.text += "|＞\n|\n";
             // 爆弾なら赤にする
             if (tileInfo.tileType == TileType.Bomb)
             {

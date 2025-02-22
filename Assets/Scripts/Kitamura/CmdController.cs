@@ -198,6 +198,7 @@ public class CmdController : MonoBehaviour
     {
         // マップ用のラベルを作成
         var textMap = new Label();
+        
         // マップのデータに沿ってタイルを生成
         for (int i = 0; i < map.Tiles.Length; i++)
         {
@@ -214,7 +215,6 @@ public class CmdController : MonoBehaviour
             
             // idのタイルの情報を取得
             var tileInfo = rate.tileRateInfos[map.Tiles[tileIndex]];
-            textMap.text += "|＞\n|\n";
             // 爆弾なら赤にする
             if (tileInfo.tileType == TileType.Bomb)
             {
@@ -231,6 +231,7 @@ public class CmdController : MonoBehaviour
                 textMap.text += "\n";
             }
         }
+        textMap.text += "           =====\n";
 
         mapContainer.Add(textMap);
     }

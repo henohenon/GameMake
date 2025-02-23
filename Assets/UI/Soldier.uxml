@@ -1,0 +1,49 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Clear" src="project://database/Assets/UI/Clear.uxml?fileID=9197481963319205126&amp;guid=771a3303e5e457a48a00e855c50e8709&amp;type=3#Clear" />
+    <ui:Template name="GameOver" src="project://database/Assets/UI/GameOver.uxml?fileID=9197481963319205126&amp;guid=0cffb1c9076699c4f943d83aceece10e&amp;type=3#GameOver" />
+    <Style src="project://database/Assets/UI/Soldier.uss?fileID=7433441132597879392&amp;guid=8a215d156f0adbb44b25b76f456a5bee&amp;type=3#Soldier" />
+    <Style src="project://database/Assets/UI%20Toolkit/Style/ItemBox.uss?fileID=7433441132597879392&amp;guid=e90d76b315e915b438c54c4063d80e76&amp;type=3#ItemBox" />
+    <ui:VisualElement name="InPlayScene" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
+            <ui:VisualElement name="TimeAndId">
+                <ui:VisualElement style="width: 200px; height: 75px; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; flex-direction: row; align-items: flex-end; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                    <ui:Label tabindex="-1" text="ID:" style="font-size: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: italic;" />
+                    <ui:Label text="XXXX" name="ShareIDText" style="font-size: 60px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="XX:XX:XX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimerText" style="width: 200px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 20px;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
+                <ui:VisualElement class="ItemBox">
+                    <ui:VisualElement name="ItemIcon0" class="itemIcon" style="background-image: url(&quot;project://database/Assets/Images/Icons/white/flag_white.png?fileID=21300000&amp;guid=4526cf3dc2185f94ab552f5dcc61b772&amp;type=3#flag_white&quot;); -unity-background-scale-mode: scale-to-fit;">
+                        <ui:VisualElement class="itemSelectTriangle" />
+                    </ui:VisualElement>
+                    <ui:Label text="&lt;font-weight=&quot;900&quot;&gt;1&lt;/font-weight&gt;" enable-rich-text="true" class="itemNumb" />
+                </ui:VisualElement>
+                <ui:VisualElement class="ItemBox">
+                    <ui:VisualElement name="ItemIcon1" class="itemIcon">
+                        <ui:VisualElement class="itemSelectTriangle" />
+                    </ui:VisualElement>
+                    <ui:Label text="2" class="itemNumb" />
+                </ui:VisualElement>
+                <ui:VisualElement class="ItemBox">
+                    <ui:VisualElement name="ItemIcon2" class="itemIcon">
+                        <ui:VisualElement class="itemSelectTriangle" />
+                    </ui:VisualElement>
+                    <ui:Label text="3" class="itemNumb" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="LogBox" tabindex="1" style="width: 312px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="align-items: flex-end; flex-grow: 1; justify-content: flex-end;">
+            <ui:VisualElement style="align-items: center; margin-bottom: 3px;">
+                <ui:VisualElement style="flex-direction: row; top: 4px;">
+                    <ui:Label tabindex="-1" text="open tile" parse-escape-sequences="true" display-tooltip-when-elided="true" style="border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;" />
+                    <ui:Label tabindex="-1" text="use item" parse-escape-sequences="true" display-tooltip-when-elided="true" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="width: 100px; height: 50px; background-image: url(&quot;project://database/Assets/Images/Frame%20(2).png?fileID=21300000&amp;guid=2d15f7894eef8714e815fe30299acfbf&amp;type=3#Frame (2)&quot;); -unity-background-scale-mode: scale-to-fit;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Instance template="Clear" name="Clear" class="hidden" style="position: absolute; width: 941px; height: 546px;" />
+    <ui:Instance template="GameOver" name="GameOver" class="hidden" style="position: absolute; width: 942px; height: 546px;" />
+</ui:UXML>

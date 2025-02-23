@@ -1,11 +1,50 @@
 .ItemBox {
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    border-top-width: 2px;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-    background-color: rgba(45, 45, 45, 0.41);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    width: 105px;
+    height: 105px;
+    margin-right: 5px;
+    margin-left: 35px;
+}
+
+.itemNumb {
+    position: absolute;
+    font-size: 50px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    top: -20px;
+    left: -32.5px;
+}
+
+.itemIcon {
+    -unity-background-scale-mode: scale-to-fit;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    flex-grow: 1;
+}
+
+.itemSelectTriangle {
+    position: absolute;
+    background-image: url("project://database/Assets/Images/Triangle.png?fileID=21300000&guid=6cc12d6f40bf0fc498a9cdd3bd85854c&type=3#Triangle");
+    height: 25px;
+    width: 50px;
+    bottom: -20px;
+    align-self: center;
+    display: none;
+}
+
+
+/* iconよりbox側にactiveつけるべきだが実装上単純な法を選択 */
+.itemIcon.active .itemSelectTriangle{
+    display: flex;
 }

@@ -10,7 +10,7 @@
         <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" />
         <ui:Button text="How to Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Tutorial" class="ActionButton" />
     </ui:VisualElement>
-    <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Credit" class="ActionButton" style="width: 120px;" />
+    <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Credit" class="ActionButton" style="width: 120px; font-size: 23px;" />
     <ui:ScrollView name="Credit_Scroller" class="hidden" style="position: absolute; flex-grow: 1; width: 961px; height: 588px; top: -24px; display: none;">
         <ui:Instance template="Credit" name="Credit_Screen" style="position: absolute; width: 100%; height: 100%;" />
     </ui:ScrollView>

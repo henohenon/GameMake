@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using LitMotion;
+using LitMotion.Extensions;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -13,45 +15,49 @@ using Scriptable;
 [RequireComponent(typeof(UIDocument))]
 public class SoldierUIManager : MonoBehaviour//ニコマル
 {
-    private VisualElement _clearScreen;
+    private VisualElement _root;
+    private VisualElement _gameClearScreen;
     private VisualElement _gameOverScreen;
     private VisualElement _logBox;
     private List<VisualElement> _itemIcons;
     private Label _idLabel;
-    private Label _Timer;
-    private Label _clearText;
-    private string _textEdit;
-    private int _maxLogCount = 6;       // 最大ログ数
-    private float _logLifetime = 5f;     // ログが消えるまでの時間（秒）
+    private Label _timer;
+    private Label _clearLabel;
+    
     private Color  _customRed = new Color(1.0f, 0f, 0.27f, 1.0f);
     private Color _customBlue = new Color(0f, 0.63f, 0.6f, 1.0f);
     private Color _customGreen = new Color(0.6f, 1.0f, 0.53f, 1.0f);
+    private readonly int maxLogCount = 6;       // 最大ログ数
+    private readonly float logLifetime = 5f;     // ログが消えるまでの時間（秒）
     [SerializeField] private GameRateAsset gameRateAsset;
 
     void Start()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-        _clearScreen = root.Q<VisualElement>("Clear");
-        _gameOverScreen = root.Q<VisualElement>("GameOver");
-        _logBox = root.Q<VisualElement>("LogBox");
-        _idLabel = root.Q<Label>("ShareIDText");
-        _Timer = root.Q<Label>("TimerText");
-        _clearText = root.Q<Label>("Text_ClearTime");
+        _root = GetComponent<UIDocument>().rootVisualElement;
+        _gameClearScreen = _root.Q<VisualElement>("GameClear");
+        _gameOverScreen = _root.Q<VisualElement>("GameOver");
+        _logBox = _root.Q<VisualElement>("LogBox");
+        _idLabel = _root.Q<Label>("ShareIDText");
+        _timer = _root.Q<Label>("TimerText");
+        _clearLabel = _root.Q<Label>("Text_Clear");
         _itemIcons = new ()
         {
-            root.Q<VisualElement>("ItemIcon0"),
-            root.Q<VisualElement>("ItemIcon1"),
-            root.Q<VisualElement>("ItemIcon2")
+            _root.Q<VisualElement>("ItemIcon0"),
+            _root.Q<VisualElement>("ItemIcon1"),
+            _root.Q<VisualElement>("ItemIcon2")
         };
 
         //FlagのUI追加
         //_ItemBox_0.style.backgroundImage = new StyleBackground(Resources.Load<Texture2D>());
 
         //クリア
-        root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
+        _root.Q<Button>("Button_ClearToNextGame").clicked += ReLoadGameScene;
+        _root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
 
         // ゲームオーバー
-        root.Q<Button>("Button_GameoverToMenu").clicked += LoadTitleScene;
+        _root.Q<Button>("Button_GameoverToNextGame").clicked += ReLoadGameScene;
+        _root.Q<Button>("Button_GameoverToMenu").clicked += LoadTitleScene;
+
     }
 
     public void SetShareID(uint seed)
@@ -63,6 +69,11 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     {
         SceneManager.LoadScene("TitleScene");
     }
+    
+    private void ReLoadGameScene()
+    {
+        SceneManager.LoadScene("Soldier");
+    }
 
     // TODO: コールバックからにしたい
     public void SetPopupHidden(InPlayScreenType type, bool isHidden = true)
@@ -71,10 +82,15 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         switch (type)
         {
             case InPlayScreenType.GameClear:
-                screen = _clearScreen;
+                screen = _gameClearScreen;
+                _root.AddToClassList("gameClear");
+                LMotion.String.Create128Bytes("", "MISSION  COMPLETE", 2f)
+                    .WithScrambleChars(ScrambleMode.Uppercase)
+                    .BindToText(_clearLabel);
                 break;
             case InPlayScreenType.GameOver:
                 screen = _gameOverScreen;
+                _root.AddToClassList("gameOver");
                 break;
             default:
                 Debug.LogError("Screen does not found");
@@ -94,9 +110,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     //
     public void UpdateTimer(string CurrentTime)
     {
-        _Timer.text = CurrentTime;
-        _textEdit = "Clear  Time " + CurrentTime;
-        _clearText.text = _textEdit;
+        _timer.text = CurrentTime;
     }
 
     public void AddLog(string text, ColorType colorType)
@@ -106,27 +120,24 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _logBox.Add(logLabel);
 
         // 最大ログ数を超えたら古いログを削除
-        if (_logBox.childCount > _maxLogCount)
+        if (_logBox.childCount > maxLogCount)
         {
             _logBox.RemoveAt(0);
         }
         // 一定時間後にログを削除する Coroutine を開始
-        StartCoroutine(RemoveLogAfterTime(logLabel, _logLifetime));
+        StartCoroutine(RemoveLogAfterTime(logLabel, logLifetime));
         
-        //var itemRateInfo = gameRateAsset.itemRateAsset.blueItemRate.GetItemRateInfo(blueResultItem.itemType);
-        //Debug.Log(itemRateInfo.description);
-
         //文字の色を指定
         switch (colorType)
         {
             case ColorType.Red:
-                logLabel.style.color = new StyleColor(_customRed);
+                logLabel.AddToClassList("logRed");
                 break;
             case ColorType.Blue:
-                logLabel.style.color = new StyleColor(_customBlue);
+                logLabel.AddToClassList("logBlue");
                 break;
             case ColorType.Green:
-                logLabel.style.color = new StyleColor(_customGreen);
+                logLabel.AddToClassList("logGreen");
                 break;
         }
     }

@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Style/SoldierGameEndPopup.uss?fileID=7433441132597879392&amp;guid=6590123bb3fc1c84db1fa73d62a9fb98&amp;type=3#SoldierGameEndPopup" />
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-items: center; justify-content: space-between;">
+    <ui:VisualElement style="flex-grow: 1; justify-content: space-between; align-items: center;">
         <ui:VisualElement />
-        <ui:Label text="MISSION  FAILED" class="gameEndText" />
+        <ui:Label name="Text_Clear" text="MISSION  COMPLETE" class="gameEndText" />
         <ui:VisualElement style="margin-bottom: 75px;">
-            <ui:Button text="Next  Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_GameoverToNextGame" class="ActionButton dark" />
-            <ui:Button text="Back  to  Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_GameoverToMenu" class="ActionButton dark" />
+            <ui:Button text="Next  Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_ClearToNextGame" class="ActionButton" />
+            <ui:Button text="Back  to  Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_ClearToMenu" class="ActionButton" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

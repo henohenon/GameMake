@@ -38,7 +38,6 @@ public class ItemStackManager : MonoBehaviour
             stackNumbInputs[i].action.started += _ => OnInputNumber(index);
             stackNumbInputs[i].action.Enable();
         }
-        soldirUIManager.SetSelect(0);
         
         // アイテム使用の入力
         useItemInput.action.started += _ => UseItem(_selectingStackIndex);

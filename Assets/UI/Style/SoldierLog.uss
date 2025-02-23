@@ -1,0 +1,9 @@
+.logRed{
+    color: var(--red-color);
+}
+.logBlue{
+    color: var(--blue-color);
+}
+.logGreen{
+    color: var(--green-color);
+}

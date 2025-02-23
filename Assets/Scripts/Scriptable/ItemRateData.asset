@@ -48,8 +48,6 @@ MonoBehaviour:
       itemIconWhite: {fileID: 21300000, guid: 2dcd29b843a6bda45932c8fda5212591, type: 3}
     - itemIconBlack: {fileID: 21300000, guid: 71623dee29f9aa344b5520197774322a, type: 3}
       itemIconWhite: {fileID: 21300000, guid: ccb8a48d0a90ee94f88ac622076a3443, type: 3}
-    - itemIconBlack: {fileID: 21300000, guid: 213bb826451360241961acddfdce3b71, type: 3}
-      itemIconWhite: {fileID: 21300000, guid: b6f33410eb5b5c14c94699cdbee0366e, type: 3}
     - itemIconBlack: {fileID: 21300000, guid: 04f542ed3e29c6a45b5e618125bce515, type: 3}
       itemIconWhite: {fileID: 21300000, guid: b7f654cb346a4bf41b675a6012f8286f, type: 3}
     - itemIconBlack: {fileID: 21300000, guid: 3de67d32261b6834eb83720abf8e8611, type: 3}

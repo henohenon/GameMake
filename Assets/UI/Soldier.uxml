@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Clear" src="project://database/Assets/UI/Clear.uxml?fileID=9197481963319205126&amp;guid=771a3303e5e457a48a00e855c50e8709&amp;type=3#Clear" />
+    <ui:Template name="Clear" src="project://database/Assets/UI/GameClear.uxml?fileID=9197481963319205126&amp;guid=771a3303e5e457a48a00e855c50e8709&amp;type=3#GameClear" />
     <ui:Template name="GameOver" src="project://database/Assets/UI/GameOver.uxml?fileID=9197481963319205126&amp;guid=0cffb1c9076699c4f943d83aceece10e&amp;type=3#GameOver" />
-    <Style src="project://database/Assets/UI/Soldier.uss?fileID=7433441132597879392&amp;guid=8a215d156f0adbb44b25b76f456a5bee&amp;type=3#Soldier" />
-    <Style src="project://database/Assets/UI%20Toolkit/Style/ItemBox.uss?fileID=7433441132597879392&amp;guid=e90d76b315e915b438c54c4063d80e76&amp;type=3#ItemBox" />
+    <Style src="project://database/Assets/UI/Style/Soldier.uss?fileID=7433441132597879392&amp;guid=8a215d156f0adbb44b25b76f456a5bee&amp;type=3#Soldier" />
+    <Style src="project://database/Assets/UI/Style/ItemBox.uss?fileID=7433441132597879392&amp;guid=e90d76b315e915b438c54c4063d80e76&amp;type=3#ItemBox" />
+    <Style src="project://database/Assets/UI/Style/SoldierLog.uss?fileID=7433441132597879392&amp;guid=70c691146fae3af49862db158bfe9385&amp;type=3#SoldierLog" />
     <ui:VisualElement name="InPlayScene" style="flex-grow: 1;">
         <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
             <ui:VisualElement name="TimeAndId">
@@ -14,7 +15,7 @@
             </ui:VisualElement>
             <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
                 <ui:VisualElement class="ItemBox">
-                    <ui:VisualElement name="ItemIcon0" class="itemIcon" style="background-image: url(&quot;project://database/Assets/Images/Icons/white/flag_white.png?fileID=21300000&amp;guid=4526cf3dc2185f94ab552f5dcc61b772&amp;type=3#flag_white&quot;); -unity-background-scale-mode: scale-to-fit;">
+                    <ui:VisualElement name="ItemIcon0" class="itemIcon active" style="background-image: url(&quot;project://database/Assets/Images/Icons/white/flag_white.png?fileID=21300000&amp;guid=4526cf3dc2185f94ab552f5dcc61b772&amp;type=3#flag_white&quot;); -unity-background-scale-mode: scale-to-fit;">
                         <ui:VisualElement class="itemSelectTriangle" />
                     </ui:VisualElement>
                     <ui:Label text="&lt;font-weight=&quot;900&quot;&gt;1&lt;/font-weight&gt;" enable-rich-text="true" class="itemNumb" />
@@ -40,10 +41,10 @@
                     <ui:Label tabindex="-1" text="open tile" parse-escape-sequences="true" display-tooltip-when-elided="true" style="border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;" />
                     <ui:Label tabindex="-1" text="use item" parse-escape-sequences="true" display-tooltip-when-elided="true" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; padding-top: 2px; padding-right: 2px; padding-bottom: 2px; padding-left: 2px;" />
                 </ui:VisualElement>
-                <ui:VisualElement style="width: 100px; height: 50px; background-image: url(&quot;project://database/Assets/Images/Frame%20(2).png?fileID=21300000&amp;guid=2d15f7894eef8714e815fe30299acfbf&amp;type=3#Frame (2)&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:VisualElement style="width: 100px; height: 50px; background-image: url(&quot;project://database/Assets/Images/Mouse.png?fileID=21300000&amp;guid=2d15f7894eef8714e815fe30299acfbf&amp;type=3#Mouse&quot;); -unity-background-scale-mode: scale-to-fit;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Instance template="Clear" name="Clear" class="hidden" style="position: absolute; width: 941px; height: 546px;" />
-    <ui:Instance template="GameOver" name="GameOver" class="hidden" style="position: absolute; width: 942px; height: 546px;" />
+    <ui:Instance template="Clear" name="GameClear" class="hidden" />
+    <ui:Instance template="GameOver" name="GameOver" class="hidden" />
 </ui:UXML>

@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Button = UnityEngine.UIElements.Button;
 
 
 /// <summary>

@@ -152,7 +152,7 @@ namespace Scriptable
 
     public enum PurplePuzzleCalcType
     {
-        TryAngle, // 三角形
+        Triangle, // 三角形
         Square, // 四角形
         Hexagon, // 六角形
     }

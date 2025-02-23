@@ -38,6 +38,7 @@ public class ItemStackManager : MonoBehaviour
             stackNumbInputs[i].action.started += _ => OnInputNumber(index);
             stackNumbInputs[i].action.Enable();
         }
+        soldirUIManager.SetSelect(0);
         
         // アイテム使用の入力
         useItemInput.action.started += _ => UseItem(_selectingStackIndex);
@@ -45,6 +46,7 @@ public class ItemStackManager : MonoBehaviour
         // アイテム捨てるの入力
         removeItemInput.action.started += _ => RemoveItem(_selectingStackIndex);
         removeItemInput.action.Enable();
+        
     }
 
     private void OnInputNumber(int numb)

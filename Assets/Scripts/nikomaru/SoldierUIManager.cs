@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -15,9 +16,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     private VisualElement _clearScreen;
     private VisualElement _gameOverScreen;
     private VisualElement _logBox;
-    private VisualElement _ItemBox_0;
-    private VisualElement _ItemBox_1;
-    private VisualElement _ItemBox_2;
+    private List<VisualElement> _itemIcons;
     private Label _idLabel;
     private Label _Timer;
     private Label _clearText;
@@ -38,9 +37,12 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _idLabel = root.Q<Label>("ShareIDText");
         _Timer = root.Q<Label>("TimerText");
         _clearText = root.Q<Label>("Text_ClearTime");
-        _ItemBox_0 = root.Q<VisualElement>("ItemBox0");
-        _ItemBox_1 = root.Q<VisualElement>("ItemBox1");
-        _ItemBox_2 = root.Q<VisualElement>("ItemBox2");
+        _itemIcons = new ()
+        {
+            root.Q<VisualElement>("ItemIcon0"),
+            root.Q<VisualElement>("ItemIcon1"),
+            root.Q<VisualElement>("ItemIcon2")
+        };
 
         //FlagのUI追加
         //_ItemBox_0.style.backgroundImage = new StyleBackground(Resources.Load<Texture2D>());
@@ -140,71 +142,22 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     }
 
 
-    public void SetItemIcon(ItemType type, int num, Sprite Icon)
+    public void SetItemIcon(ItemType type, int num, Sprite icon)
     {
-
-        switch (num)
-        {
-            case 1:
-                _ItemBox_1.style.backgroundImage = new StyleBackground(Icon);
-                break;
-
-            case 2:
-                _ItemBox_2.style.backgroundImage = new StyleBackground(Icon);
-                break;
-
-            default:
-                Debug.Log("SetIcon failed.");
-                break;
-        }
+        _itemIcons[num].style.backgroundImage = new StyleBackground(icon);
     }
 
     public void RemoveItemIcon(int num)
     {
-        switch (num)
-        {
-            case 1:
-                _ItemBox_1.style.backgroundImage = new StyleBackground();
-                break;
-
-            case 2:
-                _ItemBox_2.style.backgroundImage = new StyleBackground();
-                break;
-
-            default:
-                Debug.Log("SetIcon failed.");
-                break;
-        }
+        _itemIcons[num].style.backgroundImage = new StyleBackground();
     }
-
+    
     public void SetSelect(int num)
     {
-        _ItemBox_0.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.41f));
-        _ItemBox_1.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.41f));
-        _ItemBox_2.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.41f));
-        
-        switch (num)
-        {
-            case 0:
-                _ItemBox_0.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.9f));
-                break;
-            case 1:
-                _ItemBox_1.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.9f));
-                break;
-
-            case 2:
-                _ItemBox_2.style.backgroundColor = new StyleColor(new Color(0.17f, 0.17f, 0.17f, 0.9f));
-                break;
-
-            default:
-                Debug.Log("SetBackground failed.");
-                break;
-        }
-
-        
+        // iconsよりbox側にactiveつけるべきだが実装上単純な法を選択
+        _itemIcons.ForEach(icon => icon.RemoveFromClassList("active"));
+        _itemIcons[num].AddToClassList("active");
     }
-
-
 }
 
 public enum InPlayScreenType

@@ -11,21 +11,22 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UIDocument))]
 public class TitleUIManager : MonoBehaviour//ニコマル
 {
-    private VisualElement _creditScreen;
+    private VisualElement _titleWindows;
     private TutorialUIManager _tutorialManager;
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        _creditScreen = root.Q<VisualElement>("Credit_Scroller");
+        _titleWindows = root.Q<VisualElement>("titleWindows");
         var tutorialPopup = root.Q<VisualElement>("Tutorial_Popup");
 
         _tutorialManager = new TutorialUIManager(tutorialPopup);
-        
-        root.Q<Button>("Button_Credit").clicked += () => SetHiddenCredit(false);
+
         root.Q<Button>("Button_Soldier").clicked += LoadSoldeirScene;
         root.Q<Button>("Button_Commander").clicked += LoadCommanderScene;
-        root.Q<Button>("Button_Tutorial").clicked += _tutorialManager.OpenTutorial;
-        root.Q<Button>("Button_CloseCredit").clicked += () => SetHiddenCredit(true);
+        root.Q<Button>("Button_CreditToTitle").clicked += MoveToTitle;
+        root.Q<Button>("Button_TitleToCredit").clicked += MoveToCredit;
+        root.Q<Button>("Button_TutorialToTitle").clicked += MoveToTitle;
+        root.Q<Button>("Button_TitleToTutorial").clicked += MoveToTutorial;
     }
     
     private void LoadSoldeirScene()
@@ -38,17 +39,20 @@ public class TitleUIManager : MonoBehaviour//ニコマル
         SceneManager.LoadScene("Commander");
     }
 
-
-    private void SetHiddenCredit(bool isHidden = true)
+    private void MoveToTitle()
     {
-        if (isHidden)
-        {
-            _creditScreen.AddToClassList("hidden");
-        }
-        else
-        {
-            _creditScreen.RemoveFromClassList("hidden");
-        }
+        _titleWindows.ClearClassList();
+        _titleWindows.AddToClassList("middle");
+    }
+    private void MoveToTutorial()
+    {
+        _titleWindows.ClearClassList();
+        _titleWindows.AddToClassList("right");
+    }
+    private void MoveToCredit()
+    {
+        _titleWindows.ClearClassList();
+        _titleWindows.AddToClassList("left");
     }
 }
 
@@ -61,7 +65,6 @@ public partial class TutorialUIManager
     {
         _root = root;
 
-        _root.Q<Button>("closeButton").clicked += CloseTutorial;
         _root.Q<Button>("leftButton").clicked += PreviousTutorial;
         _root.Q<Button>("rightButton").clicked += NextTutorial;
 
@@ -82,16 +85,6 @@ public partial class TutorialUIManager
         };
         
         UpdateTutorialDisplay();
-    }
-    
-    public void OpenTutorial()
-    {
-        // クラス指定がベストだが今更冗長かなで直接スタイル変更
-        _root.style.display = DisplayStyle.Flex;
-    }
-    private void CloseTutorial()
-    {
-        _root.style.display = DisplayStyle.None;
     }
     private void NextTutorial()
     {

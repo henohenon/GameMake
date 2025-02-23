@@ -27,3 +27,43 @@
 #background.active {
     background-color: rgb(0, 0, 0);
 }
+
+#titleWindows.middle {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    font-size: 36px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    left: -100%;
+}
+
+#titleWindows.left {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    font-size: 36px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    left: 0;
+}
+
+#titleWindows.right {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    font-size: 36px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    left: -200%;
+}
+
+.ActionButton.MoveButton {
+    font-size: 24px;
+}

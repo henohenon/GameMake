@@ -42,7 +42,7 @@
     white-space: normal;
     color: white;
     -unity-font: url("project://database/Assets/DotGothic16-Regular.ttf?fileID=12800000&guid=040d005825a374b4b878e5a9a4ff456c&type=3#DotGothic16-Regular");
-    -unity-font-definition: url("project://database/Assets/DotGothic16-Regular%20SDF.asset?fileID=11400000&amp;guid=bb8a887e4cbf3fa4f89dcc85cd8c252a&amp;type=2#DotGothic16-Regular SDF");
+    -unity-font-definition: url("project://database/Assets/DotGothic16-Regular.asset?fileID=11400000&amp;guid=7128fd8ff890ac04f9645a362c5f7cb1&amp;type=2#DotGothic16-Regular");
     margin: 0;
     padding: 0;
     -unity-paragraph-spacing: -30px;

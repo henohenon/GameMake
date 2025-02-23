@@ -18,6 +18,15 @@
       },
       "hash": "f7df4966aa30482fb739148aba2bc7bc672dfaf6"
     },
+    "com.annulusgames.lit-motion.animation": {
+      "version": "https://github.com/yn01-dev/LitMotion.git?path=src/LitMotion/Assets/LitMotion.Animation",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.annulusgames.lit-motion": "2.0.0"
+      },
+      "hash": "43fd32bc885ea007986756706c062b9082103894"
+    },
     "com.annulusgames.random-extensions.unity": {
       "version": "https://github.com/AnnulusGames/RandomExtensions.git?path=src/RandomExtensions.Unity/Assets/RandomExtensions.Unity",
       "depth": 0,

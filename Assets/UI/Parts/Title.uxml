@@ -1,17 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Credit" src="project://database/Assets/UI/Credit.uxml?fileID=9197481963319205126&amp;guid=87ba22ddfdd8511429dd92816f683486&amp;type=3#Credit" />
     <ui:Template name="TutorialPopup" src="project://database/Assets/UI/Parts/TutorialPopup.uxml?fileID=9197481963319205126&amp;guid=08c7a91d40f77044eb413958da86b435&amp;type=3#TutorialPopup" />
-    <Style src="project://database/Assets/UI%20Toolkit/Style.uss?fileID=7433441132597879392&amp;guid=2a969dc04022472458dd7b5cd0cfd6f3&amp;type=3#Style" />
-    <Style src="project://database/Assets/UI/TileMaps.uss?fileID=7433441132597879392&amp;guid=99a21d114640eed4d9745a423bf4a267&amp;type=3#TileMaps" />
+    <Style src="project://database/Assets/UI/Style/Title.uss?fileID=7433441132597879392&amp;guid=41b710dafa7e4f34abbea24b86e4a10e&amp;type=3#Title" />
+    <ui:VisualElement name="background" picking-mode="Ignore" style="position: absolute; width: 100%; height: 100%; transition-property: background-color; transition-duration: 2s;" />
     <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_HighScore" style="color: rgb(255, 255, 255); -unity-text-align: upper-right; font-size: 20px;" />
-    <ui:Label tabindex="-1" text="Multi Sweepers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Title" style="color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-align: upper-center; font-size: 90px; margin-top: 74px;" />
-    <ui:VisualElement name="ButtonList" style="flex-grow: 1; display: flex; margin-top: 130px;">
-        <ui:Button text="Play as Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Soldier" class="ActionButton" style="-unity-font-style: bold;" />
-        <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" style="-unity-font-style: bold;" />
-        <ui:Button text="How to Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Tutorial" class="ActionButton" style="font-size: 25px; -unity-font-style: bold;" />
-        <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Credit" class="ActionButton" style="width: 120px; font-size: 17px;" />
+    <ui:Label tabindex="-1" text="Multi Sweepers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Title" style="color: rgb(255, 255, 255); -unity-text-align: upper-center; font-size: 90px; margin-top: 74px; text-shadow: 2px 3px 0 rgb(0, 0, 0);" />
+    <ui:VisualElement name="ButtonList" style="flex-grow: 1; display: flex; justify-content: center;">
+        <ui:Button text="Play as Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Soldier" class="ActionButton" />
+        <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" />
+        <ui:Button text="How to Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Tutorial" class="ActionButton" />
     </ui:VisualElement>
-    <ui:ScrollView name="Credit_Scroller" class="hidden" style="position: absolute; flex-grow: 1; width: 961px; height: 588px; top: -24px;">
+    <ui:Button text="Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Credit" class="ActionButton" style="width: 120px;" />
+    <ui:ScrollView name="Credit_Scroller" class="hidden" style="position: absolute; flex-grow: 1; width: 961px; height: 588px; top: -24px; display: none;">
         <ui:Instance template="Credit" name="Credit_Screen" style="position: absolute; width: 100%; height: 100%;" />
     </ui:ScrollView>
     <ui:Instance template="TutorialPopup" name="Tutorial_Popup" style="position: absolute; width: 100%; height: 100%; display: none;" />

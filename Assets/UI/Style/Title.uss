@@ -1,0 +1,29 @@
+.ActionButton {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    font-size: 36px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+}
+
+.ActionButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+:root {
+    -unity-font: url("project://database/Assets/ZenOldMincho-Bold.ttf?fileID=12800000&guid=b8e4f192efa31d34ba020c1f768a857e&type=3#ZenOldMincho-Bold");
+    -unity-font-definition: url("project://database/Assets/ZenOldMincho-Bold%20SDF.asset?fileID=11400000&guid=220775673abf2df40bbee25357555139&type=2#ZenOldMincho-Bold SDF");
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+}
+
+#background {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#background.active {
+    background-color: rgb(0, 0, 0);
+}

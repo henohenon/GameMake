@@ -15,6 +15,7 @@ public class SoldierGameManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private TimerManager TimerManager;
     [SerializeField] private SoldierGameSoundManager soundManager;
+    [SerializeField] private ItemStackManager itemStackManager;
     
     private void Start()
     {
@@ -49,17 +50,17 @@ public class SoldierGameManager : MonoBehaviour
         playerController.SetCameraLock(false);
         soldierUIManager.SetPopupHidden(InPlayScreenType.GameClear,false);
         TimerManager._Running = false;
+        itemStackManager.enabled = false;
     }
 
     [Button]
     private void GameOver()
     {
-        Debug.Log("GameOver");
         playerController.DeadPose();
         playerController.SetCameraLock(false);
         soldierUIManager.SetPopupHidden(InPlayScreenType.GameOver,false);
         TimerManager._Running = false;
-        Debug.Log(TimerManager._Running);
+        itemStackManager.enabled = false;
     }
     
     private uint GenerateSeed()

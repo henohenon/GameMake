@@ -101,8 +101,8 @@ public class ItemStackManager : MonoBehaviour
         if (itemType != ItemType.Flag)
         {
             itemStack[_selectingStackIndex] = ItemType.Empty;
+            soldirUIManager.RemoveItemIcon(_selectingStackIndex);
         }
-        soldirUIManager.RemoveItemIcon(_selectingStackIndex);
     }
 
     private void OnDisable()

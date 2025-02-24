@@ -23,6 +23,11 @@ public class TitleUIManager : MonoBehaviour//ニコマル
     private Button _titleToTutorialsButton;
     private Slider _volumeSlider;
     
+    [SerializeField]
+    private AudioSource clickSound;
+    [SerializeField]
+    private AudioSource sliderSound;
+    
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -45,38 +50,44 @@ public class TitleUIManager : MonoBehaviour//ニコマル
         _titleToTutorialsButton.clicked += MoveToTutorial;
         _volumeSlider = root.Q<Slider>("volumeSlider");
         _volumeSlider.RegisterValueChangedCallback(VolumeSliderChanged);
-        _volumeSlider.value = AudioListener.volume;
+        _volumeSlider.SetValueWithoutNotify(AudioListener.volume);
     }
 
     private void VolumeSliderChanged(ChangeEvent<float> e)
     {
         AudioListener.volume = e.newValue;
+        sliderSound.PlayDelayed(0.3f);
     }
     
     private void LoadSoldeirScene()
     {
         SceneManager.LoadScene("Soldier");
+        clickSound.Play();
     }
     
     private void LoadCommanderScene()
     {
         SceneManager.LoadScene("Commander");
+        clickSound.Play();
     }
 
     private void MoveToTitle()
     {
         _titleWindows.ClearClassList();
         _titleWindows.AddToClassList("middle");
+        clickSound.Play();
     }
     private void MoveToTutorial()
     {
         _titleWindows.ClearClassList();
         _titleWindows.AddToClassList("right");
+        clickSound.Play();
     }
     private void MoveToCredit()
     {
         _titleWindows.ClearClassList();
         _titleWindows.AddToClassList("left");
+        clickSound.Play();
     }
 
     private void OnDestroy()

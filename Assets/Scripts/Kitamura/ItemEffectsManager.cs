@@ -84,7 +84,7 @@ public class ItemEffectsManager : MonoBehaviour
                 {
                     selectingTile.ToggleFlag(flagPrefab);
                 }
-                    break;
+                break;
             }
             case ItemType.SpeedUp:
             {
@@ -95,7 +95,7 @@ public class ItemEffectsManager : MonoBehaviour
             case ItemType.SpeedDown:
             {
                 // 移動速度-2
-                _playerController.AddMoveSpeedNumb(-1f);
+                _playerController.AddMoveSpeedNumb(-0.3f);
                 break;
             }
             case ItemType.changefootsteps:

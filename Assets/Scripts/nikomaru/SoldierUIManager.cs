@@ -30,6 +30,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
     private readonly int maxLogCount = 6;       // 最大ログ数
     private readonly float logLifetime = 5f;     // ログが消えるまでの時間（秒）
     [SerializeField] private GameRateAsset gameRateAsset;
+    [SerializeField] private AudioSource clickSound;
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         _root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
         _root.Q<Button>("Button_Share").clicked += () =>
         {
+            clickSound.Play();
             naichilab.UnityRoomTweet.Tweet("multi-sweeper", $"MISSION  COMPLETE!\nTime. {_timer.text}, Soldier. {StaticValues.deathCount:D3}");
         };
         
@@ -71,11 +73,13 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
 
     private void LoadTitleScene()
     {
+        clickSound.Play();
         SceneManager.LoadScene("TitleScene");
     }
     
     private void ReLoadGameScene()
     {
+        clickSound.Play();
         SceneManager.LoadScene("Soldier");
     }
 

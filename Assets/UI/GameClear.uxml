@@ -4,6 +4,7 @@
         <ui:VisualElement />
         <ui:Label name="Text_Clear" text="MISSION  COMPLETE" class="gameEndText" />
         <ui:VisualElement style="margin-bottom: 75px;">
+            <ui:Button text="Share" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Share" class="ActionButton" />
             <ui:Button text="Next  Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_ClearToNextGame" class="ActionButton" />
             <ui:Button text="Back  to  Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_ClearToMenu" class="ActionButton" />
         </ui:VisualElement>

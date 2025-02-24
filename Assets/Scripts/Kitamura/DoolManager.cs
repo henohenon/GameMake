@@ -2,20 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoolManager : MonoBehaviour
+public static class StaticValues
 {
-    private static DoolManager instance;
-    
-    private void Awake()
-    { 
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public static int deathCount = 0;
 }

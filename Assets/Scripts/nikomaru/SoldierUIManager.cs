@@ -53,7 +53,11 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
         //クリア
         _root.Q<Button>("Button_ClearToNextGame").clicked += ReLoadGameScene;
         _root.Q<Button>("Button_ClearToMenu").clicked += LoadTitleScene;
-
+        _root.Q<Button>("Button_Share").clicked += () =>
+        {
+            naichilab.UnityRoomTweet.Tweet("multi-sweeper", $"MISSION  COMPLETE!\nTime. {_timer.text}, Soldier. {StaticValues.deathCount:D3}");
+        };
+        
         // ゲームオーバー
         _root.Q<Button>("Button_GameoverToNextGame").clicked += ReLoadGameScene;
         _root.Q<Button>("Button_GameoverToMenu").clicked += LoadTitleScene;
@@ -91,6 +95,7 @@ public class SoldierUIManager : MonoBehaviour//ニコマル
             case InPlayScreenType.GameOver:
                 screen = _gameOverScreen;
                 _root.AddToClassList("gameOver");
+                StaticValues.deathCount++;
                 break;
             default:
                 Debug.LogError("Screen does not found");

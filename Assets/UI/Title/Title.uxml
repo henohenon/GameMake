@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Credit" src="project://database/Assets/UI/Credit.uxml?fileID=9197481963319205126&amp;guid=87ba22ddfdd8511429dd92816f683486&amp;type=3#Credit" />
-    <ui:Template name="TutorialPopup" src="project://database/Assets/UI/Parts/TutorialPopup.uxml?fileID=9197481963319205126&amp;guid=08c7a91d40f77044eb413958da86b435&amp;type=3#TutorialPopup" />
+    <ui:Template name="TutorialPopup" src="project://database/Assets/UI/Title/TutorialPopup.uxml?fileID=9197481963319205126&amp;guid=08c7a91d40f77044eb413958da86b435&amp;type=3#TutorialPopup" />
     <Style src="project://database/Assets/UI/Style/Title.uss?fileID=7433441132597879392&amp;guid=41b710dafa7e4f34abbea24b86e4a10e&amp;type=3#Title" />
     <ui:VisualElement name="titleWindows" class="middle" style="height: 100%; width: 300%; transition-property: background-color, left; transition-duration: 0.2s, 0.2s; transition-timing-function: ease, ease; transition-delay: 0s, 0s; flex-direction: row;">
         <ui:VisualElement style="flex-basis: 100%;">
@@ -16,6 +16,10 @@
             <ui:VisualElement name="ButtonList" style="flex-grow: 1; display: flex; justify-content: center;">
                 <ui:Button text="Play as Soldier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Soldier" class="ActionButton" />
                 <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" />
+                <ui:VisualElement style="align-items: center; flex-direction: row; justify-content: center;">
+                    <ui:VisualElement style="background-image: url(&quot;project://database/Assets/Images/Volume.png?fileID=21300000&amp;guid=a6d0deee1f95dab4c95ff6b3ab0da484&amp;type=3#Volume&quot;); width: 25px; height: 25px; right: 10px;" />
+                    <ui:Slider high-value="1" show-input-field="false" name="volumeSlider" style="width: 300px;" />
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
                 <ui:Button text="&lt; Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TitleToCredit" class="ActionButton MoveButton" style="min-width: 200px; width: 15%; -unity-text-align: middle-left;" />

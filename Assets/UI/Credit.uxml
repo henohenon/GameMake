@@ -7,7 +7,7 @@
         <ui:Label tabindex="-1" text="あ&#10;Kana&#10;ちいかわを守る&#10;へのへのん&#10;ニコマル" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_CreaterName" class="Text" />
         <ui:Label tabindex="-1" text="-Special Thanks-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Paragraph_2" class="Text" style="font-size: 30px;" />
         <ui:Label tabindex="-1" text="サクヤ&#10;ヒライ" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_SpecialThanksName" class="Text" />
-        <ui:Label tabindex="-1" text="-Asset-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Paragraph_3" class="Text" style="font-size: 30px;" />
-        <ui:Label tabindex="-1" text="aaaaaaaaaaaaaaaaaaa" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_AssetName" class="Text" />
+        <ui:Label tabindex="-1" text="-Supported By-" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_Paragraph_3" class="Text" style="font-size: 30px;" />
+        <ui:Label tabindex="-1" text="作るっちゃん" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text_AssetName" class="Text" />
     </ui:VisualElement>
 </ui:UXML>

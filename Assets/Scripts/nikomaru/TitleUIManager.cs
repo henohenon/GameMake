@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,15 @@ public class TitleUIManager : MonoBehaviour//ニコマル
 {
     private VisualElement _titleWindows;
     private TutorialUIManager _tutorialManager;
+    
+    private Button _soldierButton;
+    private Button _commanderButton;
+    private Button _creditToTitleButton;
+    private Button _titleToCreditsButton;
+    private Button _tutorialToTitleButton;
+    private Button _titleToTutorialsButton;
+    private Slider _volumeSlider;
+    
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -21,12 +31,26 @@ public class TitleUIManager : MonoBehaviour//ニコマル
 
         _tutorialManager = new TutorialUIManager(tutorialPopup);
 
-        root.Q<Button>("Button_Soldier").clicked += LoadSoldeirScene;
-        root.Q<Button>("Button_Commander").clicked += LoadCommanderScene;
-        root.Q<Button>("Button_CreditToTitle").clicked += MoveToTitle;
-        root.Q<Button>("Button_TitleToCredit").clicked += MoveToCredit;
-        root.Q<Button>("Button_TutorialToTitle").clicked += MoveToTitle;
-        root.Q<Button>("Button_TitleToTutorial").clicked += MoveToTutorial;
+        _soldierButton = root.Q<Button>("Button_Soldier");
+        _soldierButton.clicked += LoadSoldeirScene;
+        _commanderButton = root.Q<Button>("Button_Commander");
+        _commanderButton.clicked += LoadCommanderScene;
+        _creditToTitleButton = root.Q<Button>("Button_CreditToTitle");
+        _creditToTitleButton.clicked += MoveToTitle;
+        _titleToCreditsButton = root.Q<Button>("Button_TitleToCredit");
+        _titleToCreditsButton.clicked += MoveToCredit;
+        _tutorialToTitleButton = root.Q<Button>("Button_TutorialToTitle");
+        _tutorialToTitleButton.clicked += MoveToTitle;
+        _titleToTutorialsButton = root.Q<Button>("Button_TitleToTutorial");
+        _titleToTutorialsButton.clicked += MoveToTutorial;
+        _volumeSlider = root.Q<Slider>("volumeSlider");
+        _volumeSlider.RegisterValueChangedCallback(VolumeSliderChanged);
+        _volumeSlider.value = AudioListener.volume;
+    }
+
+    private void VolumeSliderChanged(ChangeEvent<float> e)
+    {
+        AudioListener.volume = e.newValue;
     }
     
     private void LoadSoldeirScene()
@@ -53,6 +77,17 @@ public class TitleUIManager : MonoBehaviour//ニコマル
     {
         _titleWindows.ClearClassList();
         _titleWindows.AddToClassList("left");
+    }
+
+    private void OnDestroy()
+    {
+        _soldierButton.clicked -= LoadSoldeirScene;
+        _commanderButton.clicked -= LoadCommanderScene;
+        _creditToTitleButton.clicked -= MoveToTitle;
+        _titleToCreditsButton.clicked -= MoveToCredit;
+        _tutorialToTitleButton.clicked -= MoveToTitle;
+        _titleToTutorialsButton.clicked -= MoveToTutorial;
+        _volumeSlider.UnregisterValueChangedCallback(VolumeSliderChanged);
     }
 }
 

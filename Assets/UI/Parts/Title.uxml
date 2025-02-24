@@ -7,7 +7,7 @@
             <ui:ScrollView name="Credit_Scroller" class="hidden" style="flex-basis: 100%;">
                 <ui:Instance template="Credit" name="Credit_Screen" />
             </ui:ScrollView>
-            <ui:Button text="Title &gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_CreditToTitle" class="ActionButton MoveButton" style="position: absolute; right: 0; bottom: 0;" />
+            <ui:Button text="Title &gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_CreditToTitle" class="ActionButton MoveButton" style="position: absolute; right: 0; bottom: 0; min-width: 200px; width: 15%; -unity-text-align: middle-right;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-basis: 100%;">
             <ui:VisualElement name="background" picking-mode="Ignore" style="position: absolute; width: 100%; height: 100%; transition-property: background-color; transition-duration: 2s;" />
@@ -18,8 +18,8 @@
                 <ui:Button text="Play as Commander" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_Commander" class="ActionButton" />
             </ui:VisualElement>
             <ui:VisualElement style="flex-direction: row; justify-content: space-between;">
-                <ui:Button text="&lt; Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TitleToCredit" class="ActionButton MoveButton" />
-                <ui:Button text="How to Play &gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TitleToTutorial" class="ActionButton MoveButton" />
+                <ui:Button text="&lt; Credit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TitleToCredit" class="ActionButton MoveButton" style="min-width: 200px; width: 15%; -unity-text-align: middle-left;" />
+                <ui:Button text="How to Play &gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TitleToTutorial" class="ActionButton MoveButton" style="width: 15%; min-width: 200px; -unity-text-align: middle-right;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Instance template="TutorialPopup" name="Tutorial_Popup" style="flex-basis: 100%;" />

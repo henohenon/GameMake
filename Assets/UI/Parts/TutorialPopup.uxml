@@ -1,26 +1,25 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="width: 100%; height: 100%; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;">
-        <ui:Button text="&lt; Title" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TutorialToTitle" class="ActionButton MoveButton" style="position: absolute; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); bottom: 0; left: 0;" />
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-            <ui:Button text="&lt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" class="ActionButton" style="font-size: 25px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
-            <ui:VisualElement style="flex-grow: 1;">
-                <ui:VisualElement name="firstTutorial" style="position: absolute; width: 100%; height: 100%; display: none;">
-                    <ui:Label tabindex="-1" text="Game  Start" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; -unity-font-style: bold; font-size: 24px;" />
-                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/Tutorial/gameStartTutorial.png?fileID=21300000&amp;guid=9f1610bcc06e6514592d0b3b6c95d689&amp;type=3#gameStartTutorial&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="二人で協力プレイ！&#10;ソルジャー画面のIDをコマンダー画面で「msc &quot;id&quot;」で入力" style="-unity-text-align: upper-center;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="secondTutorial" style="position: absolute; width: 100%; height: 100%; display: none;">
-                    <ui:Label tabindex="-1" text="Open All Tiles" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; -unity-font-style: bold; font-size: 24px;" />
-                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/Tutorial/mapTutorial.png?fileID=21300000&amp;guid=9a714c096b89a574d899ba3b5f3ceb82&amp;type=3#mapTutorial&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="周囲に何もないと複数枚のタイルが同時にめくれる&#10;うまくコミュニケーションをとってすべてのタイルをめくろう" style="-unity-text-align: upper-center;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="thirdTutorial" style="position: absolute; width: 100%; height: 100%; display: none;">
-                    <ui:Label tabindex="-1" text="Use Items" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; -unity-font-style: bold; font-size: 24px;" />
-                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/Tutorial/itemTutorial.png?fileID=21300000&amp;guid=dccb93ff31ef86b4c9424a6c2a89ed0e&amp;type=3#itemTutorial&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="タイルをめくるとアイテムゲット！&#10;うまく使ってゲームを有利に進めよう" style="-unity-text-align: upper-center;" />
-                </ui:VisualElement>
+    <ui:VisualElement style="width: 100%; height: 100%; padding-top: 30px; padding-right: 30px; padding-bottom: 30px; padding-left: 30px;">
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:VisualElement name="firstTutorial" style="position: absolute; width: 100%; height: 100%; display: flex;">
+                <ui:Label tabindex="-1" text="Game  Start" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 36px; -unity-text-align: upper-center;" />
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/Tutorial/GameStart.png?fileID=2800000&amp;guid=ac63d16dbe901ce4488dca7c7baecfb2&amp;type=3#GameStart&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="二人で協力プレイ！&#10;ソルジャー画面のIDをコマンダー画面で「msc &quot;id&quot;」で入力" style="-unity-text-align: upper-center; font-size: 16px;" />
             </ui:VisualElement>
-            <ui:Button text="&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" class="ActionButton" style="font-size: 25px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+            <ui:VisualElement name="secondTutorial" style="position: absolute; width: 100%; height: 100%; display: none;">
+                <ui:Label tabindex="-1" text="Open All Tiles" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 36px; -unity-text-align: upper-center;" />
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/Tutorial/OpenTiles.png?fileID=21300000&amp;guid=f5eeec11f75d6354e9a45c6358983b0b&amp;type=3#OpenTiles&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="周囲に何もないと複数枚のタイルが同時にめくれる&#10;うまくコミュニケーションをとってすべてのタイルをめくろう" style="-unity-text-align: upper-center; font-size: 16px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="thirdTutorial" style="position: absolute; width: 100%; height: 100%; display: none;">
+                <ui:Label tabindex="-1" text="Use Items" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 36px; -unity-text-align: upper-center;" />
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/Tutorial/UseItem.png?fileID=21300000&amp;guid=e3d66772a63e0584ca4cae03c2246e4d&amp;type=3#UseItem&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="タイルをめくるとアイテムゲット！&#10;うまく使ってゲームを有利に進めよう" style="-unity-text-align: upper-center; font-size: 16px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="position: absolute; width: 100%; height: 100%; justify-content: space-between; flex-direction: row; top: 0; left: 0;">
+            <ui:Button text="&lt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="leftButton" class="ActionButton" style="font-size: 50px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 15%;" />
+            <ui:Button text="&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="rightButton" class="ActionButton" style="font-size: 50px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 15%;" />
         </ui:VisualElement>
         <ui:VisualElement style="justify-content: space-around; flex-direction: row;">
             <ui:VisualElement style="flex-direction: row; justify-content: space-between; width: 75px; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
@@ -29,5 +28,6 @@
                 <ui:VisualElement name="thirdSelect" style="width: 20px; height: 20px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%;" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Button text="&lt; Title" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_TutorialToTitle" class="ActionButton MoveButton" style="position: absolute; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); bottom: 0; left: 0; width: 15%; -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; min-width: 200px;" />
     </ui:VisualElement>
 </ui:UXML>

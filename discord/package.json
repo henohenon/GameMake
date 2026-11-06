@@ -1,0 +1,16 @@
+{
+  "name": "multisweeper-discord",
+  "private": true,
+  "description": "Discord Activity packaging for MultiSweeper (Unity WebGL)",
+  "scripts": {
+    "build": "esbuild src/bridge.js --bundle --minify --format=iife --target=es2020 --outfile=../Assets/WebGLTemplates/Discord/TemplateData/discord-bridge.js",
+    "split-dist": "node scripts/prepare.mjs",
+    "dev": "wrangler dev",
+    "deploy": "node scripts/prepare.mjs && wrangler deploy"
+  },
+  "devDependencies": {
+    "@discord/embedded-app-sdk": "2.5.0",
+    "esbuild": "0.28.2",
+    "wrangler": "4.158.0"
+  }
+}

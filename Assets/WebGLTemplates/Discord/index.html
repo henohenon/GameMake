@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no">
+    <title>{{{ PRODUCT_NAME }}}</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <!-- Build settings for TemplateData/main.js (data only; no inline script so the Discord CSP stays happy). -->
+    <script type="application/json" id="unity-build-config">
+      {
+        "loaderUrl": "Build/{{{ LOADER_FILENAME }}}",
+        "dataUrl": "Build/{{{ DATA_FILENAME }}}",
+        "frameworkUrl": "Build/{{{ FRAMEWORK_FILENAME }}}",
+        "codeUrl": "Build/{{{ CODE_FILENAME }}}",
+        "streamingAssetsUrl": "StreamingAssets",
+        "companyName": {{{ JSON.stringify(COMPANY_NAME) }}},
+        "productName": {{{ JSON.stringify(PRODUCT_NAME) }}},
+        "productVersion": {{{ JSON.stringify(PRODUCT_VERSION) }}},
+        "width": {{{ WIDTH }}},
+        "height": {{{ HEIGHT }}}
+      }
+    </script>
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+    </div>
+    <div id="loading">
+      <div id="loading-title">{{{ PRODUCT_NAME }}}</div>
+      <div id="loading-bar"><div id="loading-bar-fill"></div></div>
+      <div id="loading-text">読み込み中…</div>
+    </div>
+    <div id="banner"></div>
+    <script src="TemplateData/discord-bridge.js"></script>
+    <script src="TemplateData/main.js"></script>
+  </body>
+</html>

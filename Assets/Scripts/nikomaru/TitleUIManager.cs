@@ -30,6 +30,15 @@ public class TitleUIManager : MonoBehaviour//ニコマル
     
     void Start()
     {
+        // 兵士が共有した Activity リンクから起動したら、タイトルを飛ばして指揮官画面へ
+        var launchSeed = DiscordBridge.TakeLaunchSeed();
+        if (launchSeed.HasValue)
+        {
+            DiscordBridge.PendingCommanderSeed = launchSeed;
+            SceneManager.LoadScene("Commander");
+            return;
+        }
+
         var root = GetComponent<UIDocument>().rootVisualElement;
         _titleWindows = root.Q<VisualElement>("titleWindows");
         var tutorialPopup = root.Q<VisualElement>("Tutorial_Popup");

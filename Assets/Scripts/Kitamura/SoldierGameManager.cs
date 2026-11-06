@@ -27,6 +27,8 @@ public class SoldierGameManager : MonoBehaviour
         
         // uiにシード値を表記
         soldierUIManager.SetShareID(seed);
+        // Discord Activity 内なら、指揮官を呼ぶ共有画面を出す（それ以外では何もしない）
+        DiscordBridge.ShareSeed(seed);
         // ゲーム情報などからマップの生成
         tilesManager.Generate3dMap(gameRateAsset.mapRateAsset, gameInfo);
 

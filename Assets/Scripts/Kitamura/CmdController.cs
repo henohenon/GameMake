@@ -42,7 +42,24 @@ public class CmdController : MonoBehaviour
         _root = rootElement.Q<VisualElement>("unity-content-container");
         
         _root.Add(helperTreeView.CloneTree());
-        
+
+        CreateNewLine();
+
+        // 兵士の共有リンクから来たら、msc <seed> を打った状態で即表示する
+        if (DiscordBridge.PendingCommanderSeed is uint seed)
+        {
+            DiscordBridge.PendingCommanderSeed = null;
+            _currentTextField.value = $"msc {seed}";
+            ExecInstant(seed);
+        }
+    }
+
+    private async void ExecInstant(uint seed)
+    {
+        _waitingExec = true;
+        await RecreateView(seed, instant: true);
+        _waitingExec = false;
+
         CreateNewLine();
     }
 
@@ -135,7 +152,7 @@ public class CmdController : MonoBehaviour
     }
 
     private const int mapLength = 9;
-    private async UniTask RecreateView(uint seed)
+    private async UniTask RecreateView(uint seed, bool instant = false)
     {
         // データの生成
         var gameInfo = new GameInfo(gameRateAsset, mapLength, seed);
@@ -150,15 +167,19 @@ public class CmdController : MonoBehaviour
         // マップ配列シャッフル
         maps = maps.Shuffle().ToArray();
      
-        var generateRoot = new VisualElement();
-        _root.Add(generateRoot);
-        var loadingText = new Label("...loading");
-        generateRoot.Add(loadingText);
-        await UniTask.WaitForSeconds(0.5f);
-        loadingText.text = "...searching";
-        await UniTask.WaitForSeconds(0.75f);
-        
-        generateRoot.Remove(loadingText);
+        // 読み込み演出（共有リンクからの自動表示では省略）
+        if (!instant)
+        {
+            var generateRoot = new VisualElement();
+            _root.Add(generateRoot);
+            var loadingText = new Label("...loading");
+            generateRoot.Add(loadingText);
+            await UniTask.WaitForSeconds(0.5f);
+            loadingText.text = "...searching";
+            await UniTask.WaitForSeconds(0.75f);
+
+            generateRoot.Remove(loadingText);
+        }
 
 
         var mapText = new Label("三つのうち一つがホンモノのマップです");
